@@ -341,8 +341,7 @@
         }
     </style>
 </head>
-<body>
-
+<body>	
 <div id="lightbox" class="lightbox" onclick="closeLightbox()">
     <span class="lightbox-close" onclick="closeLightbox()">&times;</span>
     <img id="lightbox-img" src="data:image/svg+xml,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%20width='800'%20height='600'%20viewBox='0%200%20800%20600'%3E%3Crect%20width='800'%20height='600'%20fill='%23333'/%3E%3C/svg%3E" alt="Büyütülmüş görsel">
@@ -351,13 +350,39 @@
 <main>
 <div id="wrapper">
    <div id="sidebar">
-    <div class="search-box-side">
-        <!-- Listenin Başladığı Yer -->
-        <div style="display:flex; flex-direction:column; gap:0.5rem; padding:0.2rem 0;">
-            
-            
-</div>
-	   </div> 
+    <div>
+   
+	   </div>
+	               <!-- ▼▼▼ BANNER - EDİTÖRDEN'İN ÜSTÜNDE ▼▼▼ -->
+        <style>
+        #top-banner-card img{width:100%;height:auto;border-radius:12px;display:block}
+        #top-banner-card .banner-sub{font-size:0.7rem;color:#6c7a91;font-style:italic;text-align:center;margin:0.5rem 0 0.8rem}
+        #top-banner-card .banner-title{font-size:1rem;font-weight:700;color:#1e293b;border-left:4px solid #2c5f8a;padding-left:0.8rem;margin-bottom:0.5rem;line-height:1.35}
+        #top-banner-card .banner-text{font-size:0.72rem;line-height:1.5;color:#4a5568}
+        #top-banner-card .banner-text p{margin-bottom:0.4rem}
+        #top-banner-card .banner-text p:last-child{margin-bottom:0}
+        #top-banner-card .banner-highlight{color:#2c5f8a;font-weight:700}
+        body.dark-mode #top-banner-card .banner-sub{color:#94a3b8}
+        body.dark-mode #top-banner-card .banner-title{color:#f1f5f9}
+        body.dark-mode #top-banner-card .banner-text{color:#cbd5e1}
+        body.dark-mode #top-banner-card .banner-highlight{color:#60a5fa}
+        </style>
+        <div class="sidebar-card" id="top-banner-card">
+            <img src="images/ayse-ayhan.png" alt="Ayşe Mine ve Ayhan Acı">
+            <div class="banner-sub">Ayşe Mine - Ayhan Acı</div>
+            <h2 class="banner-title">Ayşe Mine, Ayhan Acı’nın konuğu oluyor! Zamansız şarkılarla geçmişe müzikal bir yolculuğa çıkıyoruz.</h2>
+            <div class="banner-text">
+                <p><strong>Ayşe Mine,</strong> 13 yaşında Radife Erten'den ilk müzik derslerini alan Ayşe Mine; Muzaffer Birtan, İsmail Akdeniz, Özcan Korkut ve Melahat Pars gibi isimlerden de eğitim görmüştür. Üsküdar Musiki Cemiyeti'ne devam eden sanatçı, babasının mesleği sebebiyle "Yorgancının Kızı" unvanıyla da anılmıştır.</p>
+                <p>1977'de çıkardığı Demek Ki Öyle / Sıkı Fıkı 45'liğiyle liste başı olan Mine, 1978'de ilk kez televizyona çıktığı gece geniş kitlelerce tanınmıştır. Aynı yıl Hey dergisi okurları tarafından "Yılın Ümit Veren Şarkıcısı" seçilmiş ve Altın Kelebek Ödülü'nü kazanmıştır.</p>
+                <p>Müzik kariyerine pop ve Türk sanat müziğiyle başlayan sanatçı, 1980'lerde arabesk müziğe yönelmiştir. Erkek Milleti ve Yemin mi Ettin şarkılarıyla büyük ün kazanmış, Erkek Milleti plağıyla Altın Long Play Ödülü'nün sahibi olmuştur.</p>
+                <p>1982'de yayımlanan O Gün Gelmesin albümü 1 milyon satış barajını aşmış; albümdeki Neredesin Ey Talih ve Günün Birinde eserleri büyük ses getirmiştir. Başka assolistlerin kadrosunda yer almayı reddeden Ayşe Mine, doğrudan assolist olarak Çakıl, Altınnal ve İzmir Maksim gibi dönemin en prestijli gazinolarında sahne almıştır.</p>
+                <p>90'lı yıllarda Bir Sen Kaldın albümüyle yılın en çok satanları arasına giren sanatçı, dijital platformlarda 1 milyon dinlenmeyi aşan Yakalım Gemileri şarkısıyla da Altın Plak Ödülü almıştır.</p>
+                <p>Oyunculuk da yapan Ayşe Mine, 1986'da Murat Soydan ile Erkek Milleti sinema filminde; 1994'te ise Meral Zeren ve Sadettin Erbil gibi isimlerle Mutlugiller dizisinde başrol oynamıştır.</p>
+               <p style="margin-top:0.6rem;"><a href="https://vom-blog.com/radyo" target="_blank" rel="noopener noreferrer" class="banner-highlight" style="text-decoration:underline;">18 EYLÜL CUMA SAAT 21.00'de VOM RADYO'DA</a></p>
+            </div>
+        </div>
+        <!-- ▲▲▲ BANNER - EDİTÖRDEN'İN ÜSTÜNDE ▲▲▲ -->
+	   
         <div class="sidebar-card">
             <h2><i class="fas fa-pen-fancy"></i> Editörden</h2>
             <div class="editor-image">
@@ -404,6 +429,7 @@ fotoğrafta tanıdık bir bakış bulmanız dileğiyle.
         <i class="fas fa-arrow-right"></i>
     </a>
 </div>
+	   
 <div class="sidebar-card">
     <h2><i class="fas fa-video"></i> Kamera</h2>
     <a href="kamera.html" target="_blank" class="radio-link-btn camera-btn">
