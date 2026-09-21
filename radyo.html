@@ -941,8 +941,13 @@ function sendChatMessage() {
     
     // ✅ YENİ EKLENEN KISIM (isim engelleme)
     const YASAKLI_ISIMLER = ["", "misafir", "guest", "anonim", "anonymous", "isimsiz"];
-    if (!username || YASAKLI_ISIMLER.includes(username.toLowerCase().trim())) {
-        alert("❌ Bu kullanıcı adı geçersiz! Lütfen geçerli bir isim girin.");
+    const SADECE_HARF_KURALI = /^[a-zA-ZğüşıöçĞÜŞİÖÇ\s]{2,20}$/;
+
+    if (!username || 
+        YASAKLI_ISIMLER.includes(username.toLowerCase().trim()) || 
+        !SADECE_HARF_KURALI.test(username)) {
+        alert("❌ Lütfen sadece adınızı yazın! (Nokta, sembol, rakam veya anlamsız karakterler kabul edilmez)");
+        chatUsername?.focus();
         return; // Mesaj GÖNDERİLMEZ
     }
     // ✅ KONTROL BİTTİ
