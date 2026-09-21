@@ -939,14 +939,26 @@ function sendChatMessage() {
     const message = chatInput?.value.trim();
     if (!message) return;
     
-    // ✅ YENİ EKLENEN KISIM (isim engelleme)
-    const YASAKLI_ISIMLER = ["", "misafir", "guest", "anonim", "anonymous", "isimsiz"];
+   // ✅ YENİ EKLENEN KISIM (Gelişmiş Gerçek İsim Kontrolü)
+    const temizIsim = username.toLowerCase().trim();
     const SADECE_HARF_KURALI = /^[a-zA-ZğüşıöçĞÜŞİÖÇ\s]{2,20}$/;
+    
+    // 1. Bilinen sahte ve trol isimler
+    const YASAKLI_ISIMLER = [
+        "", "misafir", "guest", "anonim", "anonymous", "isimsiz", 
+        "kimse", "biri", "deneme", "test", "admin", "moderator", 
+        "radyo", "yayinci", "dj", "asdasd", "qwerty", "dinleyici", "user"
+    ];
 
-    if (!username || 
-        YASAKLI_ISIMLER.includes(username.toLowerCase().trim()) || 
-        !SADECE_HARF_KURALI.test(username)) {
-        alert("❌ Lütfen sadece adınızı yazın! (Nokta, sembol, rakam veya anlamsız karakterler kabul edilmez)");
+    // 2. Kontroller:
+    const yasakliMi = YASAKLI_ISIMLER.some(yasak => temizIsim.includes(yasak));
+    const harfUygunMu = SADECE_HARF_KURALI.test(username);
+    const sesliHarfVarMi = /[aeıioöuü]/.test(temizIsim); // 'dfgh' gibi sessiz harf sallamalarını eler
+    const ayniHarfTekrari = /(.)\1{2,}/.test(temizIsim); // 'aaaa', 'zzzz' gibi tekrarları eler
+    const sessizYigilmasi = /[bcçdfgğhjklmnprsştvyz]{4,}/.test(temizIsim); // Arka arkaya 4 sessiz harf engeller
+
+    if (!username || yasakliMi || !harfUygunMu || !sesliHarfVarMi || ayniHarfTekrari || sessizYigilmasi) {
+        alert("❌ Lütfen sadece gerçek adınızı yazın! (Nokta, sembol, sahte isimler veya anlamsız rastgele harfler kabul edilmez)");
         chatUsername?.focus();
         return; // Mesaj GÖNDERİLMEZ
     }
