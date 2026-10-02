@@ -1,0 +1,2114 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=yes">
+    <title>VOM-VOMITORIUM Blog Culture & Arts | Numéro 5 | Art Numérique, Littérature et Radio</title>
+    <meta name="description" content="Blog Culture & Arts VOM-VOMITORIUM. Art numérique, web radio, écrits originaux, littérature, cinéma, photographie et contenus culturels actuels.">
+    <meta name="keywords" content="blog VOM-VOMITORIUM, publication VOM-VOMITORIUM, culture arts VOM-VOMITORIUM, écrits d'auteurs, art numérique, web radio VOM-VOMITORIUM, blog littéraire, magazine d'art, culture arts, auteurs actuels">
+    <meta name="googlebot" content="index, follow">
+    <meta name="robots" content="index, follow, max-image-preview:large">
+    <meta name="author" content="VOM PUBLISHING">
+    <meta name="theme-color" content="#1a2a3a">
+    <link rel="canonical" href="https://vom-blog.com/index5.html">
+
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://vom-blog.com/index5.html">
+    <meta property="og:title" content="Blog Culture & Arts VOM-VOMITORIUM - Numéro 5">
+    <meta property="og:description" content="Art numérique, web radio, écrits originaux, littérature, cinéma, photographie et contenus culturels actuels.">
+    <meta property="og:image" content="https://vom-blog.com/images/editor-2.png">
+    <meta property="og:image:width" content="1200">
+    <meta property="og:image:height" content="630">
+    <meta property="og:locale" content="fr_FR">
+    <meta property="og:site_name" content="Blog Culture & Arts VOM-VOMITORIUM">
+
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Blog Culture & Arts VOM-VOMITORIUM - Numéro 5">
+    <meta name="twitter:description" content="Art numérique, web radio, écrits originaux, littérature, cinéma, photographie et contenus culturels actuels.">
+    <meta name="twitter:image" content="https://vom-blog.com/images/editor-2.png">
+
+
+    <link rel="icon" type="image/png" sizes="16x16" href="https://vom-blog.com/favicon-16x16.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="https://vom-blog.com/favicon-32x32.png">
+    <link rel="apple-touch-icon" sizes="180x180" href="https://vom-blog.com/apple-touch-icon.png">
+    <link rel="shortcut icon" href="https://vom-blog.com/favicon.ico">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="preload" href="https://fonts.googleapis.com/css2?family=Source+Sans+3:wght@400;600;700&display=swap" as="style" onload="this.onload=null;this.rel='stylesheet'">
+    <noscript><link href="https://fonts.googleapis.com/css2?family=Source+Sans+3:wght@400;600;700&display=swap" rel="stylesheet"></noscript>
+
+    <link rel="preload" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+    <noscript><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"></noscript>
+
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "Blog",
+        "name": "Blog Culture & Arts VOM-VOMITORIUM",
+        "description": "Art numérique, web radio, écrits originaux, littérature, cinéma, photographie et contenus culturels actuels.",
+        "url": "https://vom-blog.com/index5.html",
+        "publisher": {
+            "@type": "Organization",
+            "name": "VOM PUBLISHING",
+            "logo": {
+                "@type": "ImageObject",
+                "url": "https://vom-blog.com/favicon-32x32.png"
+            }
+        },
+        "inLanguage": "fr"
+    }
+    </script>
+
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "Organization",
+        "name": "VOM PUBLISHING",
+        "url": "https://vom-blog.com/",
+        "logo": "https://vom-blog.com/favicon-32x32.png",
+        "sameAs": [
+            "https://www.instagram.com/vom_oyun/"
+        ]
+    }
+    </script>
+
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "BreadcrumbList",
+        "itemListElement": [
+            {
+                "@type": "ListItem",
+                "position": 1,
+                "name": "Accueil",
+                "item": "https://vom-blog.com/index5.html"
+            }
+        ]
+    }
+    </script>
+
+    <script data-cfasync="false" src="https://www.gstatic.com/firebasejs/11.0.0/firebase-app-compat.js"></script>
+    <script data-cfasync="false" src="https://www.gstatic.com/firebasejs/11.0.0/firebase-firestore-compat.js"></script>
+
+    <style>
+        *{margin:0;padding:0;box-sizing:border-box}
+        body{background:#f0f2f5;font-family:'Source Sans 3',system-ui,sans-serif;color:#1a1e24;line-height:1.5}
+        html{scroll-behavior:smooth}
+        
+        body.dark-mode{background:#121826;color:#e2e8f0}
+        body.dark-mode .sidebar-card,body.dark-mode .search-box-side,body.dark-mode .post,body.dark-mode .contact-bottom,body.dark-mode #header{background:#1e293b;border-color:#334155}
+        body.dark-mode .title h2 a,body.dark-mode .post p,body.dark-mode .meta,body.dark-mode .button,body.dark-mode .stats a{color:#cbd5e1}
+        body.dark-mode .button{background:#334155}
+        body.dark-mode .search-input-side{background:#334155;border-color:#475569;color:#f1f5f9}
+        body.dark-mode .comment-item{background:#0f172a}
+        body.dark-mode .editor-note{background:#2d3a4e;border-left-color:#f5b042;color:#e2e8f0}
+        body.dark-mode .editor-note p{color:#cbd5e1}
+        body.dark-mode #header h1 a{color:#f1f5f9;background:none}
+        body.dark-mode .author .name{color:#ffffff !important; font-weight:600}
+        body.dark-mode .meta a.author{color:#ffffff !important}
+        
+        #wrapper{max-width:1300px;margin:0 auto;padding:0.75rem;display:flex;flex-direction:column;gap:1rem}
+        @media (min-width:992px){
+            #wrapper{flex-direction:row;align-items:flex-start;padding:1.5rem;gap:1.5rem}
+            #main{flex:2.2;min-width:0;order:2}
+            #sidebar{flex:1;min-width:280px;position:sticky;top:1rem;order:1}
+        }
+        @media (max-width:991px){#wrapper{flex-direction:column}#main{order:2}#sidebar{order:1}}
+        
+        #header{background:white;border-radius:16px;padding:0.8rem 1rem;margin-bottom:1rem;display:flex;flex-direction:column;gap:0.8rem;border:1px solid #e5e9f0}
+        @media (min-width:480px){#header{flex-direction:row;justify-content:space-between;align-items:center;padding:1rem 1.5rem}}
+        #header h1 a{font-size:2rem;font-weight:900;text-decoration:none;background:linear-gradient(135deg,#1a2a3a,#2c3e66);background-clip:text;color:transparent}
+        
+        .issue-number{font-size:0.8rem;font-weight:500;background:#eef2f6;padding:0.2rem 0.6rem;border-radius:30px;color:#2c5f8a;margin-left:12px}
+        .links ul{display:flex;flex-wrap:wrap;gap:1rem;list-style:none;align-items:center}
+        .links a{text-decoration:none;color:#4a5568;font-weight:500;font-size:0.9rem;cursor:pointer}
+        .links a:hover{color:#2c5f8a}
+        
+        .dark-mode-toggle{background:#f1f5f9;border:1px solid #e2e8f0;border-radius:40px;padding:0.25rem 0.8rem;font-size:0.7rem;cursor:pointer;color:#475569}
+        
+        .sidebar-card,.search-box-side{background:white;border-radius:20px;padding:1.2rem;margin-bottom:1.2rem;border:1px solid #eef2f6}
+        .sidebar-card h2{font-size:1.2rem;font-weight:700;margin-bottom:0.8rem;display:flex;align-items:center;gap:0.5rem;color:#1e293b;border-left:4px solid #2c5f8a;padding-left:0.8rem}
+        
+        .editor-image{margin-bottom:1rem;border-radius:16px;overflow:hidden}
+        .editor-image img{width:100%;height:auto;display:block}
+        
+        .editor-note{background:#fef9e6;border-left:4px solid #f5b042;padding:0.8rem;border-radius:12px}
+        .editor-note p{font-size:0.85rem;color:#4a5568;margin-bottom:0.5rem}
+        .editor-date{font-size:0.7rem;color:#888}
+        
+        .lightbox{display:none;position:fixed;top:0;left:0;width:100%;height:100%;background:rgba(0,0,0,0.9);z-index:9999;cursor:pointer;justify-content:center;align-items:center}
+        .lightbox img{max-width:90%;max-height:90%;object-fit:contain;border-radius:8px}
+        .lightbox.show{display:flex}
+        .lightbox-close{position:absolute;top:20px;right:35px;color:#fff;font-size:40px;font-weight:bold;cursor:pointer}
+        .clickable-img{cursor:pointer;transition:opacity 0.3s}
+        .clickable-img:hover{opacity:0.9}
+        
+        .search-input-group{display:flex;gap:0.5rem}
+        .search-input-side{flex:1;padding:0.7rem 1rem;border:1px solid #ddd;border-radius:40px;outline:none;font-size:0.85rem}
+        .search-input-side:focus{border-color:#2c5f8a}
+        .search-btn-side{background:#2c5f8a;border:none;color:white;width:42px;height:42px;border-radius:50%;cursor:pointer}
+        
+        .radio-link-btn{display:flex;align-items:center;justify-content:space-between;background:linear-gradient(135deg,#1e2a3a,#2c3e66);padding:1rem 1.2rem;border-radius:40px;text-decoration:none;color:white;margin:0.8rem 0;font-weight:600}
+        .radio-link-btn:hover{transform:translateY(-2px)}
+        .radio-link-btn span{display:flex;align-items:center;gap:0.6rem}
+        
+        .video-card-link{display:block;position:relative;background:#000;border-radius:16px;overflow:hidden;margin:0.8rem 0}
+        .video-card-link img{width:100%;display:block}
+        .play-icon-video{position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);background:rgba(0,0,0,0.6);width:50px;height:50px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:1.8rem;color:white}
+        
+        .post{background:white;border-radius:20px;margin-bottom:1.2rem;padding:1rem;border:1px solid #eef2f6}
+        @media (min-width:768px){.post{padding:2rem;margin-bottom:2rem}}
+        .post header{display:flex;flex-direction:column;gap:0.5rem;margin-bottom:1rem}
+        @media (min-width:480px){.post header{flex-direction:row;justify-content:space-between;align-items:flex-start}}
+        .title h2{font-size:1.3rem;font-weight:700;margin:0}
+        @media (min-width:768px){.title h2{font-size:1.8rem}}
+        .title h2 a{text-decoration:none;color:#1e293b}
+        .meta{font-size:0.75rem;color:#6c7a91}
+        .author{display:flex;align-items:center;gap:0.5rem;text-decoration:none;color:#334155}
+        .author img{width:56px;height:56px;border-radius:50%;object-fit:cover}
+        .image.featured{margin:0.8rem 0;border-radius:16px;overflow:hidden}
+        .image.featured img{width:100%;height:auto;display:block}
+        .post p{color:#2d3e50;margin:0.8rem 0;font-size:0.9rem}
+        
+        .post-footer{display:flex;flex-direction:column;gap:0.8rem;margin-top:1rem;padding-top:0.8rem;border-top:1px solid #edf2f7}
+        @media (min-width:480px){.post-footer{flex-direction:row;justify-content:space-between;align-items:center}}
+        .button{background:#f1f5f9;padding:0.5rem 1.2rem;border-radius:40px;text-decoration:none;font-weight:600;font-size:0.8rem;color:#1f2a44;display:inline-block;cursor:pointer;border:none}
+        .stats{display:flex;gap:1rem;list-style:none}
+        .stats a{text-decoration:none;color:#6b7a8a;font-size:0.85rem;cursor:pointer}
+        
+        .comments-section{margin-top:1rem;padding-top:0.8rem;border-top:1px solid #eef2f6;display:none}
+        .comments-title{font-size:0.85rem;font-weight:600;color:#475569;margin-bottom:0.5rem}
+        .comments-list{max-height:300px;overflow-y:auto;margin-bottom:0.8rem}
+        .comment-item{background:#f8fafc;padding:0.6rem 2rem 0.6rem 0.6rem;border-radius:12px;margin-bottom:0.5rem;font-size:0.75rem;position:relative}
+        .delete-btn{position:absolute;right:6px;top:50%;transform:translateY(-50%);background:#e33b3b;color:white;border:none;border-radius:50%;width:22px;height:22px;font-size:0.7rem;cursor:pointer;display:none;align-items:center;justify-content:center}
+        .comment-item:hover .delete-btn{display:flex}
+        .add-comment-form{display:flex;flex-direction:column;gap:0.5rem}
+        .comment-input,.comment-text{padding:0.5rem 0.8rem;border:1px solid #e2e8f0;border-radius:30px;font-size:0.8rem;outline:none}
+        .comment-text{border-radius:16px;resize:vertical}
+        .submit-comment{background:#2c5f8a;color:white;border:none;border-radius:30px;padding:0.5rem 1rem;font-size:0.75rem;font-weight:600;cursor:pointer}
+        
+        .full-post-content{display:none;margin-top:1rem;padding-top:1rem;border-top:1px solid #eef2f6}
+        .full-post-content.show{display:block}
+        
+        .contact-bottom{background:white;border-radius:20px;padding:1.2rem;margin-top:1rem;border:1px solid #eef2f6}
+        .contact-bottom h2{font-size:1.2rem;font-weight:700;margin-bottom:0.8rem;display:flex;align-items:center;gap:0.5rem;color:#1e293b;border-left:4px solid #2c5f8a;padding-left:0.8rem}
+        .contact-email{display:inline-block;background:#f1f5f9;padding:0.5rem 1rem;border-radius:30px;text-decoration:none;color:#2c5f8a;font-weight:600;font-size:0.8rem}
+        .site-footer{text-align:center;padding:1rem 0;font-size:0.7rem;color:#6c86a3;border-top:1px solid #eef2f6;margin-top:1rem}
+        .icons{display:flex;justify-content:center;gap:1.5rem;margin-bottom:0.8rem}
+        .icons a{font-size:1.5rem;color:#4a5568}
+        
+        .old-posts-link{margin-top:1rem;padding-top:0.5rem;text-align:right;border-top:1px dashed #e2e8f0}
+        .old-posts-link a{font-size:0.75rem;color:#2c5f8a;text-decoration:none}
+        
+        @keyframes fadeInUp{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:translateY(0)}}
+        .post{animation:fadeInUp 0.3s ease}
+        
+        @media (max-width: 550px) {
+            .contact-bottom p {font-size: 0.7rem;line-height: 1.4;}
+        }
+
+        .contact-form {
+            margin: 1.5rem 0;
+            padding: 1.5rem;
+            background: #f8fafc;
+            border-radius: 16px;
+            border: 1px solid #eef2f6;
+        }
+
+        body.dark-mode .contact-form {
+            background: #1e293b;
+            border-color: #334155;
+        }
+
+        .contact-form .form-group {
+            margin-bottom: 1.2rem;
+        }
+
+        .contact-form label {
+            display: block;
+            font-weight: 600;
+            font-size: 0.85rem;
+            color: #1e293b;
+            margin-bottom: 0.4rem;
+        }
+
+        body.dark-mode .contact-form label {
+            color: #e2e8f0;
+        }
+
+        .contact-form input,
+        .contact-form textarea {
+            width: 100%;
+            padding: 0.8rem 1rem;
+            border: 2px solid #e2e8f0;
+            border-radius: 12px;
+            font-size: 0.9rem;
+            font-family: 'Source Sans 3', system-ui, sans-serif;
+            background: white;
+            color: #1a1e24;
+            transition: border-color 0.3s ease, box-shadow 0.3s ease;
+            outline: none;
+        }
+
+        body.dark-mode .contact-form input,
+        body.dark-mode .contact-form textarea {
+            background: #0f172a;
+            border-color: #475569;
+            color: #f1f5f9;
+        }
+
+        .contact-form input:focus,
+        .contact-form textarea:focus {
+            border-color: #2c5f8a;
+            box-shadow: 0 0 0 3px rgba(44, 95, 138, 0.15);
+        }
+
+        body.dark-mode .contact-form input:focus,
+        body.dark-mode .contact-form textarea:focus {
+            border-color: #60a5fa;
+            box-shadow: 0 0 0 3px rgba(96, 165, 250, 0.15);
+        }
+
+        .contact-form textarea {
+            resize: vertical;
+            min-height: 100px;
+        }
+
+        .contact-form .submit-btn {
+            background: linear-gradient(135deg, #2c5f8a, #1a3a5a);
+            color: white;
+            border: none;
+            padding: 0.9rem 2rem;
+            border-radius: 40px;
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: transform 0.2s ease, box-shadow 0.2s ease;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.7rem;
+            width: 100%;
+            justify-content: center;
+        }
+
+        .contact-form .submit-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 15px rgba(44, 95, 138, 0.3);
+        }
+
+        .contact-form .submit-btn i {
+            font-size: 1.1rem;
+        }
+
+        body.dark-mode .contact-form .submit-btn {
+            background: linear-gradient(135deg, #1e293b, #0f172a);
+        }
+
+        body.dark-mode .contact-form .submit-btn:hover {
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.4);
+        }
+
+        .contact-form .form-note {
+            font-size: 0.8rem;
+            color: #6c7a91;
+            margin-top: 0.5rem;
+            text-align: center;
+        }
+
+        body.dark-mode .contact-form .form-note {
+            color: #94a3b8;
+        }
+
+        .contact-form .success-message {
+            display: none;
+            background: #d4edda;
+            color: #155724;
+            padding: 1rem;
+            border-radius: 12px;
+            text-align: center;
+            font-weight: 600;
+            margin-top: 1rem;
+        }
+
+        body.dark-mode .contact-form .success-message {
+            background: #1a3a2a;
+            color: #8fdfa8;
+        }
+
+        .contact-form .success-message.show {
+            display: block;
+        }
+    </style>
+</head>
+<body>	
+<div id="lightbox" class="lightbox" onclick="closeLightbox()">
+    <span class="lightbox-close" onclick="closeLightbox()">&times;</span>
+    <img id="lightbox-img" src="data:image/svg+xml,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%20width='800'%20height='600'%20viewBox='0%200%20800%20600'%3E%3Crect%20width='800'%20height='600'%20fill='%23333'/%3E%3C/svg%3E" alt="Image agrandie">
+</div>
+
+<main>
+<div id="wrapper">
+   <div id="sidebar">
+    <div>
+   
+	   </div>
+	               <!-- ▼▼▼ BANNIÈRE - AU-DESSUS DE LA NOTE DE L'ÉDITEUR ▼▼▼ -->
+        <style>
+        #top-banner-card img{width:100%;height:auto;border-radius:12px;display:block}
+        #top-banner-card .banner-sub{font-size:0.7rem;color:#6c7a91;font-style:italic;text-align:center;margin:0.5rem 0 0.8rem}
+        #top-banner-card .banner-title{font-size:1rem;font-weight:700;color:#1e293b;border-left:4px solid #2c5f8a;padding-left:0.8rem;margin-bottom:0.5rem;line-height:1.35}
+        #top-banner-card .banner-text{font-size:0.72rem;line-height:1.5;color:#4a5568}
+        #top-banner-card .banner-text p{margin-bottom:0.4rem}
+        #top-banner-card .banner-text p:last-child{margin-bottom:0}
+        #top-banner-card .banner-highlight{color:#2c5f8a;font-weight:700}
+        body.dark-mode #top-banner-card .banner-sub{color:#94a3b8}
+        body.dark-mode #top-banner-card .banner-title{color:#f1f5f9}
+        body.dark-mode #top-banner-card .banner-text{color:#cbd5e1}
+        body.dark-mode #top-banner-card .banner-highlight{color:#60a5fa}
+        </style>
+       
+	   
+        <div class="sidebar-card">
+            <h2><i class="fas fa-pen-fancy"></i> De la Rédaction</h2>
+            <div class="editor-image">
+                <img src="https://vom-blog.com/images/editor-5.png" alt="Éditeur" width="600" height="300" loading="lazy" style="border-radius:12px; width:100%; height:auto;">
+            </div>
+            <div class="editor-note">
+                <p><strong>🎙️ Bienvenue au Numéro 5 du Blog VOM !</strong></p>
+                <p>En préparant le Numéro 5, nous avons pensé à flâner dans les rues de la ville, à nous rapprocher des histoires des gens, à nous demander ce qu'une clé laissée par le passé pourrait bien ouvrir, et comment une danse peut devenir un tournant dans la vie d'une personne. Parfois, nous avons cherché le bonheur non pas dans de grandes réponses, mais dans les petits moments silencieux qui traversent la vie.
+                <br><br>
+                Les écrits de ce numéro avancent dans des directions différentes. Ils visitent la vie quotidienne d'Istanbul, le passé de chacun, les traces laissées par la mémoire, et les espaces ouverts par l'art et la musique. Mais ils partagent tous une approche commune : la poursuite d'un sens. Celui d'une personne, d'un souvenir, d'une question, d'une image, ou d'un petit signe dont nous ne connaissons pas encore la signification...
+                <br><br>
+                Peut-être le voyage est-il exactement cela : non pas le lieu où nous arrivons, mais la façon dont ce que nous rencontrons en chemin nous transforme. Comme des oiseaux s'envolant de l'arbre littéraire dont les racines plongent profondément dans le passé, certaines histoires nous emportent loin des lieux familiers vers d'autres significations.
+                Dans le cinquième numéro du Blog VOM, partez sur votre propre chemin. Certains écrits peuvent vous emmener dans une rue familière, d'autres dans votre passé, et d'autres encore dans un endroit que vous n'auriez jamais imaginé.
+                <br><br>
+                Le Blog VOM continue d'être une halte indépendante pour ceux qui veulent lire l'art, la littérature et la vie sans se presser. Avec le souhait que vous trouviez une part de nous dans chaque ligne et un regard familier dans chaque photographie.
+                <br><br>
+                Bonne lecture.</p>
+                <div class="editor-date"><i class="fas fa-calendar-alt"></i> OCTOBRE 2026 - VOM-VOMITORIUM</div>
+            </div>
+        </div>
+        <div class="sidebar-card">
+            <h2><i class="fas fa-headphones"></i> Radio</h2>
+            <a href="radyo.html" target="_blank" class="radio-link-btn"><span><i class="fas fa-play-circle"></i> Ouvrir VOM Radio</span><i class="fas fa-arrow-right"></i></a>
+        </div>
+       <div class="sidebar-card">
+    <h2><i class="fas fa-comments"></i> Discussion</h2>
+    <a href="sohbet.html" target="_blank" class="radio-link-btn">
+        <span><i class="fas fa-comment-dots"></i> Ouvrir VOM Discussion</span>
+        <i class="fas fa-arrow-right"></i>
+    </a>
+</div>
+	   
+<div class="sidebar-card">
+    <h2><i class="fas fa-video"></i> Caméra</h2>
+    <a href="kamera.html" target="_blank" class="radio-link-btn camera-btn">
+        <span><i class="fas fa-camera"></i> Ouvrir la Caméra et Se Connecter</span>
+        <i class="fas fa-arrow-right"></i>
+    </a>
+</div>
+   <div class="sidebar-card">
+    <h2><i class="fas fa-video"></i> VOM PROMO</h2>
+    <a href="https://www.youtube.com/shorts/o2Fck4sYl4Y" target="_blank" rel="noopener noreferrer" class="video-card-link">
+        <img src="images/vom kapak.png" alt="VOM Promo" width="400" height="225" loading="lazy">
+        <div class="play-icon-video"><i class="fas fa-play"></i></div>
+    </a>
+</div>
+    </div>
+
+    <div id="main">
+    <header id="header">
+        <h1>
+            <a href="#" id="resetHomeLink">VOMblog.</a>
+            <span style="position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip: rect(0, 0, 0, 0); border: 0;">
+                VOM-VOMITORIUM : Art Numérique, Littérature et Blog Culturel
+            </span>
+            <span style="display:inline-flex; align-items:center; gap:0.5rem; margin-left:12px; vertical-align:middle;">
+                <span class="issue-number" style="margin-left:0;">Numéro 5</span>
+                <a href="index-eng.html" target="_blank" title="English Version" style="display:inline-flex; align-items:center; gap:0.3rem; font-size:0.75rem; text-decoration:none; background:#eef2f6; padding:0.2rem 0.6rem; border-radius:30px; color:#2c5f8a; font-weight:600;">
+                    <img src="https://flagcdn.com/20x15/gb.png" alt="English" width="20" height="15" style="border-radius:2px; display:inline-block;">
+                    ENG
+                </a>
+                <a href="index.html" target="_blank" title="Türkçe Sürüm" style="display:inline-flex; align-items:center; gap:0.3rem; font-size:0.75rem; text-decoration:none; background:#eef2f6; padding:0.2rem 0.6rem; border-radius:30px; color:#2c5f8a; font-weight:600;">
+                    <img src="https://flagcdn.com/20x15/tr.png" alt="Türkçe" width="20" height="15" style="border-radius:2px; display:inline-block;">
+                    TR
+                </a>
+            </span>
+        </h1>
+            <nav class="links">
+                <ul>
+                    <li><a href="#" id="resetHomeLinkBtn">Accueil</a></li>
+                    <li><a href="#" id="contactNavLink">Contact</a></li>
+                    <li><button class="dark-mode-toggle" id="darkModeToggle" aria-label="Mode Sombre"><i class="fas fa-moon"></i> Mode Sombre</button></li>
+                </ul>
+            </nav>
+        </header>
+        
+        <div id="postsContainer">
+            <!-- ============================================ -->
+            <!-- POST 52 - Siret (ancien ID:24) -->
+            <!-- ============================================ -->
+            <article class="post" data-post-id="52" itemscope itemtype="https://schema.org/BlogPosting">
+                <script type="application/ld+json">
+                {
+                    "@context": "https://schema.org",
+                    "@type": "Article",
+                    "headline": "Siret",
+                    "description": "Femme et Amour",
+                    "author": {
+                        "@type": "Person",
+                        "name": "Ferzen Soydemir"
+                    },
+                    "datePublished": "2026-08-03",
+                    "dateModified": "2026-08-03",
+                    "image": "https://vom-blog.com/images/FE-2.png",
+                    "url": "https://vom-blog.com/#post-52",
+                    "mainEntityOfPage": {
+                        "@type": "WebPage",
+                        "@id": "https://vom-blog.com/#post-52"
+                    },
+                    "publisher": {
+                        "@type": "Organization",
+                        "name": "VOM PUBLISHING",
+                        "logo": {
+                            "@type": "ImageObject",
+                            "url": "https://vom-blog.com/favicon-32x32.png"
+                        }
+                    },
+                    "keywords": "amour, relation, émotion, femme, Ferzen Soydemir",
+                    "inLanguage": "fr"
+                }
+                </script>
+                <header>
+                    <div class="title">
+                        <h2 itemprop="headline"><a href="#post-52" class="post-title-link">J'ai une plainte !</a></h2>
+                        <p itemprop="description">Femme et Amour</p>
+                    </div>
+                    <div class="meta">
+                        <span class="post-date" itemprop="datePublished" content="2026-08-03">2 octobre 2026</span>
+                        <a href="#post-52" class="author" itemprop="author" itemscope itemtype="https://schema.org/Person">
+                            <span class="name" itemprop="name">Ferzen Soydemir</span>
+                            <img src="https://vom-blog.com/images/ferzen.png" alt="Avatar de Ferzen Soydemir" width="56" height="56" loading="lazy" onerror="this.src='https://randomuser.me/api/portraits/women/1.jpg'">
+                        </a>
+                    </div>
+                </header>
+                <a href="#post-52" class="image featured clickable-img" data-img="https://vom-blog.com/images/FE-5.png" itemprop="image"><img src="https://vom-blog.com/images/FE-5.png" alt="Femme et Amour" width="800" height="450" fetchpriority="high"></a>
+                <p itemprop="articleBody">J'ai une plainte, à qui vais-je confier mes peines ? Parfois je me sens comme prise dans un piège. Dois-je le dire à l'eau, le raconter aux étoiles, épancher mon cœur dans les chansons… Je ne me sens pas mal, ce sont eux qui me font me sentir mal. La rudesse et l'étrangeté des gens, de mes proches, m'inquiètent.
+<br><br>
+Serait-ce que je ne peux pas grandir ?</p>
+                <div class="full-post-content" id="full-52"><p class="full-text">                
+Pourquoi sommes-nous devenus ainsi et quand ? Nous sommes devenus égoïstes à une grande vitesse… Nous avons préféré avoir peur de tout, nous nous sommes cachés en plein jour. Sans donner sa chance à l'autre, nous avons appris à l'accuser.
+<br><br>
+Pourquoi nous battons-nous avant même de pouvoir parler, qui nous a appris cela ? Quand je questionne, je me juge aussi, mais hélas, cela aussi est devenu une mode que nous semblons devoir suivre. Du plus petit au plus grand, en nous regardant, en murmurant, nous vivons avec une sorte de nonchalance, un mécontentement. Comme si nous étions les meilleurs, les plus parfaits, les plus justes... Nous ne pouvons dire stop à aucune négativité. Car c'est la psychologie de la foule ; là où certains vont, ceux derrière suivent. Devons-nous ? Jamais... Pourtant ne devrions-nous pas être comme les couleurs et les plantes d'un jardin, reflétant différentes beautés ?
+<br><br>    
+Tout le monde se ressemble tellement. Qu'est-il arrivé à la différence ? Est-ce une précipitation, le fait de toujours ne pas pouvoir rattraper les choses, les plaintes, les insatisfactions, la mentalité du « c'est bien sans, tant pis » qui nous rend passifs ? Qu'est-il arrivé à la tolérance, à la fidélité, aux souvenirs, aux promesses, aux amours, aux sacrifices ? Qu'est-il arrivé à nous ? Pas de réponse... N'y en a-t-il pas ? Ou ne pouvons-nous pas répondre ?
+<br><br>
+Est-ce si difficile de partager un verre de thé, un simit, une bouchée de fromage ? Ne pouvons-nous pas réaliser que s'éloigner des gens apporte le malheur ? En paroles, ça va... « Partager multiplie », « Je suis avec toi quand tu veux », « Il faut parler »... Alors pourquoi ne partages-tu pas ? Pourquoi ne pouvons-nous pas parler ? J'appelle cela des paroles en l'air.
+<br><br>
+Nous devrions recevoir les gens… Les traiter bien… Partager les joies et les problèmes et les connaître. Rien de ce que nous ne pouvons pas partager n'a de valeur. Le miracle est de pouvoir devenir « nous », pas « je ». Vivre est très précieux. Tellement que nous ne pouvons pas le laisser au destin avec l'absence d'amour et l'irresponsabilité...
+<br><br>
+J'ai jeté du haut d'une falaise certains de mes amis avec qui je marchais main dans la main. Eh bien, ils le méritaient. Et ensuite je ne les ai pas retirés de l'endroit où ils sont tombés. Ils sont encore là et contents de leur vie, en ce qui me concerne. Parce qu'ils n'ont pas changé, ils n'ont pas pu changer. Car ils vivent pour eux-mêmes. Je suis du côté de l'honnêteté. Je pense que je devrais mûrir et calmer mon cœur. Parfois je m'attriste et je râle ; si mon cœur est brisé, je peux le réparer moi-même. En fait, à mesure que la vie le met à l'épreuve, le cœur s'apaisera aussi et consentira à certaines choses. Mais je ne parle pas de résignation. Pourquoi devrais-je me rendre alors que je peux être moi-même ? Pourquoi devrais-je devenir ordinaire alors que je peux être différent ?					
+<br><br>
+Tout en savourant le plaisir d'être ensemble et de partager, je sais que le bonheur sera avec moi.
+<br><br>
+Cette pensée, tout en me réjouissant, me différencie aussi. Je lis, j'écoute, j'essaie de comprendre. Je cherche encore les moyens de mûrir. Savez-vous combien il y a de façons d'essayer de trouver ? Oh, combien je me suis plainte, n'est-ce pas ? Parfois le malheur m'envahit. Mais puissiez-vous être exilés vers les beautés, les bontés et le bonheur, d'accord ?..</p></div>
+                <div class="post-footer">
+                    <ul class="actions"><li><a href="#post-52" class="button read-more-btn" data-id="52">Lire la suite</a></li></ul>
+                    <ul class="stats"><li class="comment-toggle" data-post="52"><a href="#post-52"><i class="fas fa-comment"></i> Commentaires (<span class="comment-count">0</span>)</a></li></ul>
+                </div>
+                <div class="comments-section" id="comments-section-52">
+                    <div class="comments-title">Commentaires (<span class="comment-count-display">0</span>)</div>
+                    <div class="comments-list" id="comments-list-52"></div>
+                    <div class="add-comment-form">
+                        <input type="text" class="comment-input" id="comment-name-52" placeholder="Votre nom">
+                        <textarea class="comment-text" id="comment-text-52" placeholder="Écrivez votre commentaire..." rows="2"></textarea>
+                        <button class="submit-comment" data-post="52">Envoyer</button>
+                    </div>
+                </div>
+                <div class="old-posts-link"><a href="index4.html" target="_blank"><i class="fas fa-archive"></i> Anciens Articles</a></div>
+            </article>
+
+            <!-- ============================================ -->
+            <!-- POST 53 - Tangolar (NOUVEAU) -->
+            <!-- ============================================ -->
+            <article class="post" data-post-id="53" itemscope itemtype="https://schema.org/BlogPosting">
+                <script type="application/ld+json">
+                {
+                    "@context": "https://schema.org",
+                    "@type": "Article",
+                    "headline": "Tangos",
+                    "description": "De la plume de Nilüfer Gürler",
+                    "author": {
+                        "@type": "Person",
+                        "name": "Nilüfer Gürler"
+                    },
+                    "datePublished": "2026-10-01",
+                    "dateModified": "2026-10-01",
+                    "image": "https://vom-blog.com/images/nil-2.png",
+                    "url": "https://vom-blog.com/#post-53",
+                    "mainEntityOfPage": {
+                        "@type": "WebPage",
+                        "@id": "https://vom-blog.com/#post-53"
+                    },
+                    "publisher": {
+                        "@type": "Organization",
+                        "name": "VOM PUBLISHING",
+                        "logo": {
+                            "@type": "ImageObject",
+                            "url": "https://vom-blog.com/favicon-32x32.png"
+                        }
+                    },
+                    "keywords": "tango, danse, musique, Nilüfer Gürler, passion",
+                    "inLanguage": "fr"
+                }
+                </script>
+                <header>
+                    <div class="title">
+                        <h2 itemprop="headline"><a href="#post-53" class="post-title-link">La Cumparsita</a></h2>
+                        <p itemprop="description">Expériences Mémorables</p>
+                    </div>
+                    <div class="meta">
+                        <span class="post-date" itemprop="datePublished" content="2026-10-01">2 octobre 2026</span>
+                        <a href="#post-53" class="author" itemprop="author" itemscope itemtype="https://schema.org/Person">
+                            <span class="name" itemprop="name">Nilüfer Gürler</span>
+                            <img src="https://vom-blog.com/images/nil.png" alt="Avatar de Nilüfer Gürler" width="56" height="56" loading="lazy" onerror="this.src='https://randomuser.me/api/portraits/women/8.jpg'">
+                        </a>
+                    </div>
+                </header>
+                <a href="#post-53" class="image featured clickable-img" data-img="https://vom-blog.com/images/Nilufer-1.png" itemprop="image"><img src="https://vom-blog.com/images/Nilufer-1.png" alt="Tangos" width="800" height="450" loading="lazy"></a>
+                <p itemprop="articleBody">C'était un jour de juin qui embrasait tout autour. Cela faisait 6 mois que le divorce avait été finalisé. J'étais épuisée par ce que j'avais traversé et par les aspérités restantes à gérer. 
+                <br><br>
+                Le samedi, j'allais et venais pour faire mes courses. Je ne sais pas quand le feu est passé au rouge ni quand j'ai freiné. Tout ce que je sais, c'est que des vagues de colère montant de mon cœur et frappant mon cerveau avaient envahi tout mon corps. Même avec ma ceinture attachée, j'étais si en colère que j'aurais pu m'envoler par le pare-brise comme frappée par un tsunami.
+                <br><br>
+               Mon amie au téléphone, de sa voix calme coulant comme du miel, me disait : « Tu as traversé beaucoup de choses, peut-être que la thérapie t'aiderait. » Quand j'ai levé les yeux de mes mains agrippant le volant comme des étaux, les jointures blanches, et rencontré mon visage dans le rétroviseur, j'ai dit : « Mon amie a raison, j'ai besoin de me calmer un peu. »</p>
+                <div class="full-post-content" id="full-53"><p class="full-text">
+                Quand mon regard s'est de nouveau fixé sur le feu qui ne passait pas au vert, j'ai vu l'immense inscription sur le bâtiment à ma droite : « Cours de danse gratuits - Qu'attendez-vous pour rejoindre ? » Et le feu est passé au vert comme s'il attendait que je voie cette annonce. J'ai appuyé sur l'accélérateur et j'ai plongé dans le petit parking sur la rampe à droite, en disant à mon amie au téléphone : « Je commence la thérapie maintenant. » Au moment où le téléphone a raccroché, j'avais déjà garé la voiture.
+                <br><br>
+               En me regardant dans le rétroviseur pour me reprendre, j'ai dit : « La dernière fois que j'ai pris un cours de danse, j'avais 7 ans. » Nous avions une professeure de ballet, après c'est le vide...
+                <br><br>
+                Il m'a fallu une minute pour entrer dans le studio de danse au deuxième étage. Les immenses fenêtres s'étendant du haut plafond jusqu'au sol apportaient la belle vue de l'Hudson River à l'intérieur. Il y avait 3-4 personnes dans le lieu, portant des chemises blanches et des pantalons noirs, manifestement danseurs par leur allure athlétique. Le studio était assez bondé. Des groupes d'hommes et de femmes s'étaient rassemblés autour de tables, près de la réception, et certains devant le bar à café à l'arrière.
+                <br><br>
+                L'attention de tous s'est tournée vers les deux couples qui sont entrés sur la piste à ce moment-là. Une magnifique mélodie de tango s'élevant des puissants haut-parleurs a rempli mes oreilles qui venaient juste de palpiter à cause de la crise de colère.
+				<br><br>	
+				Une fois, j'avais regardé ma tante ajouter du sirop chaud et abondant sur une assiette oubliée de kadayif sec dans le placard, ramenant miraculeusement la pâtisserie séchée à un état comestible. À ce moment-là, quelque chose en moi aussi a été sauvé de la poubelle ! Les conversations bruyantes ont ralenti et les couples au milieu ont commencé à danser lentement et sans prétention. En regardant ces belles personnes qui ne se concentraient que sur leur partenaire comme si personne d'autre n'existait sur le sol en bois sombre poli, je me suis vue debout gauchement dans les immenses miroirs. Que faisais-je ici ? J'ai conclu que je devais partir immédiatement. Je pleurais.<br><br>
+				Une voix masculine avec un accent russe derrière moi a dit : « Pas de fuite. » Je me souviens m'être tournée vers la voix et avoir dit timidement : « Je ne sais vraiment pas pourquoi je suis venue », « Mes chaussures ne conviennent pas de toute façon », « Je n'ai jamais montré le moindre intérêt pour le tango de ma vie » et « D'ailleurs, je suis vieille maintenant, la danse ne s'apprend pas à cet âge, je devrais vraiment partir. »
+				<br><br>
+				Le jeune homme debout devant moi, les mains tendues et les yeux pleins de sens, m'a dit en souriant qu'il ne voulait que 5 minutes de moi. Pendant ce temps, je fermerais les yeux et tiendrais ses mains ; ensemble nous ferions droite, gauche, avant et arrière. C'était tout. Si je le souhaitais, nous pourrions même essayer là où nous étions, presque au seuil de la porte. Et il a complété ses paroles avec cette fameuse phrase que je ne pourrais plus jamais éviter d'entendre : « Si tu n'as pas oublié comment marcher, tu peux aussi danser le tango. »	
+				<br><br>
+				Et mon voyage dans le tango a commencé ce jour-là.
+				<br><br>
+				J'ai commencé à lire pour comprendre les caractéristiques du tango argentin. J'ai appris que c'est une danse basée sur une forte communication entre partenaires, avec l'improvisation au cœur. J'ai commencé à écouter du tango constamment. Le bandonéon m'a particulièrement beaucoup touchée.
+				<br><br>	
+				Puis les tangos turcs que j'écoutais enfant me sont revenus à l'esprit. Et j'ai appris que le mouvement tango qui a commencé dans les années 1900 est devenu l'un des genres qui se sont le plus rapidement adaptés à l'identité musicale de la Turquie moderne durant cette période avec la proclamation de la République. J'ai eu la chance de rencontrer Metin Yazır, l'un de ceux qui ont allumé la mèche de ce mouvement en revenant au pays en 1997 et en fondant les premières communautés de tango à Istanbul, à New York en 2023. Nous avons même un bref moment de tango ensemble dans le cours collectif auquel j'ai participé. Ainsi, aujourd'hui Istanbul ; après Buenos Aires, est devenue le centre de tango le plus important au monde où le plus de milongas sont organisées et qui accueille des festivals internationaux.	
+				<br><br>
+				Convaincue qu'il était temps de vivre les milongas de Buenos Aires et d'Istanbul en 2023, j'ai participé à deux magnifiques festivals dans deux villes. Maintenant j'étais moi aussi une « Tanguera ».	
+				<br><br>
+				Avant de terminer l'histoire du tango, qui est un tournant dans ma vie, je voudrais aussi partager l'histoire d'un morceau dont je suis sûre qu'il est à 100% dans la mémoire de vous tous.
+				<br><br>
+				En 1916, l'étudiant en architecture de 18 ans Gerardo Matos Rodríguez compose une marche pour le carnaval étudiant à Montevideo. Il n'a pas d'éducation musicale ; il joue la mélodie au piano avec un seul doigt pour que ses amis l'écoutent. Le célèbre chef d'orchestre Roberto Firpo, à qui il partage la composition, développe la mélodie avec un rythme de tango, et l'œuvre est jouée pour la première fois à La Giralda à Montevideo. Le jeune compositeur vend les droits de cette œuvre, qui deviendra mondialement célèbre à l'avenir, pour seulement 20 pesos parce qu'il a besoin d'argent.
+				<br><br>
+				Un peu plus tard, La Cumparsita oubliée devient mondialement célèbre du jour au lendemain lorsqu'elle est chantée dans sa nouvelle forme par Carlos Gardel, considéré comme le dieu du tango, en 1924. Matos Rodríguez apprend à Paris que sa propre composition parcourt le monde et qu'il n'en tire aucune part. De plus, les paroles de Pascual Contursi et Enrique Maroni ont été écrites sans permission. Le procès qui a duré des années pour récupérer ses droits se conclut en 1948, peu avant sa mort, et une grande partie des revenus de droits d'auteur est laissée aux héritiers du compositeur. Un demi-siècle plus tard, en 1998, l'Uruguay déclare La Cumparsita comme hymne culturel et populaire du pays.	
+				<br><br>
+				Les milongas du monde entier se terminent avec La Cumparsita. En Turquie, elle s'est installée comme la première musique de danse aux mariages.	
+				<br><br>	
+				Ce doit être l'une des petites plaisanteries que l'univers envoie que mon sauveur tango me fasse vivre le mariage et le divorce à chaque La Cumparsita. Dans les milongas, quand le dernier signal arrive, j'écoute pour l'instant, ayant enlevé mes chaussures de tango, sans que les yeux de personne ne croisent les miens. Un jour je danserai sans préparation, sans réfléchir, comme cela vient de l'intérieur. Ce jour-là, le dilemme avec La Cumparsita sera aussi résolu.</p></div>
+                <div class="post-footer">
+                    <ul class="actions"><li><a href="#post-53" class="button read-more-btn" data-id="53">Lire la suite</a></li></ul>
+                    <ul class="stats"><li class="comment-toggle" data-post="53"><a href="#post-53"><i class="fas fa-comment"></i> Commentaires (<span class="comment-count">0</span>)</a></li></ul>
+                </div>
+                <div class="comments-section" id="comments-section-53">
+                    <div class="comments-title">Commentaires (<span class="comment-count-display">0</span>)</div>
+                    <div class="comments-list" id="comments-list-53"></div>
+                    <div class="add-comment-form">
+                        <input type="text" class="comment-input" id="comment-name-53" placeholder="Votre nom">
+                        <textarea class="comment-text" id="comment-text-53" placeholder="Écrivez votre commentaire..." rows="2"></textarea>
+                        <button class="submit-comment" data-post="53">Envoyer</button>
+                    </div>
+                </div>
+                <div class="old-posts-link"><a href="index4.html" target="_blank"><i class="fas fa-archive"></i> Anciens Articles</a></div>
+            </article>
+
+            <!-- ============================================ -->
+            <!-- POST 54 - Un autre Istanbul (ancien ID:25) -->
+            <!-- ============================================ -->
+            <article class="post" data-post-id="54" itemscope itemtype="https://schema.org/BlogPosting">
+                <script type="application/ld+json">
+                {
+                    "@context": "https://schema.org",
+                    "@type": "Article",
+                    "headline": "Un autre Istanbul",
+                    "description": "Zeyrek et sa texture historique",
+                    "author": {
+                        "@type": "Person",
+                        "name": "Ahmet Sinan Sarıkaya"
+                    },
+                    "datePublished": "2026-08-03",
+                    "dateModified": "2026-08-03",
+                    "image": "https://vom-blog.com/images/AH-2.png",
+                    "url": "https://vom-blog.com/#post-54",
+                    "mainEntityOfPage": {
+                        "@type": "WebPage",
+                        "@id": "https://vom-blog.com/#post-54"
+                    },
+                    "publisher": {
+                        "@type": "Organization",
+                        "name": "VOM PUBLISHING",
+                        "logo": {
+                            "@type": "ImageObject",
+                            "url": "https://vom-blog.com/favicon-32x32.png"
+                        }
+                    },
+                    "keywords": "Istanbul, Zeyrek, histoire, culture, Ahmet Sinan Sarıkaya",
+                    "inLanguage": "fr"
+                }
+                </script>
+                <header>
+                    <div class="title">
+                        <h2 itemprop="headline"><a href="#post-54" class="post-title-link">Les différentes identités d'Istanbul...</a></h2>
+                        <p itemprop="description">Un autre Istanbul</p>
+                    </div>
+                    <div class="meta">
+                        <span class="post-date" itemprop="datePublished" content="2026-08-03">2 octobre 2026</span>
+                        <a href="#post-54" class="author" itemprop="author" itemscope itemtype="https://schema.org/Person">
+                            <span class="name" itemprop="name">Ahmet Sinan Sarıkaya</span>
+                            <img src="https://vom-blog.com/images/ahmet.png" alt="Avatar de Ahmet Sinan Sarıkaya" width="56" height="56" loading="lazy" onerror="this.src='https://randomuser.me/api/portraits/men/1.jpg'">
+                        </a>
+                    </div>
+                </header>
+                <a href="#post-54" class="image featured clickable-img" data-img="https://vom-blog.com/images/AH-5.png" itemprop="image"><img src="https://vom-blog.com/images/AH-5.png" alt="Un autre Istanbul - Zeyrek et sa texture historique" width="800" height="450" loading="lazy"></a>
+                <p itemprop="articleBody">Alors que mes yeux parcouraient les environs, me demandant quoi photographier aujourd'hui. Les vendeurs de rue ont attiré mon attention. Je les ai examinés mais je n'arrivais pas à former la photo dans mon esprit. J'ai erré un peu plus mais je n'ai pas pu trouver de moment racontant une histoire. Comme je commençais à marcher vers Küçükpazar et que je faisais des plans dans mon esprit sur des compositions photographiques tournant en rond, en veillant à ce que les queues de 40 renards ne se touchent pas, j'ai salué des connaissances autour, pris de leurs nouvelles, et continué mon chemin. 
+                <br><br>
+             Je regardais les gens, et l'expression du visage, la façon de marcher et de parler de chacun commençaient de plus en plus à attirer mon attention. Je me demandais quelles histoires ils pouvaient avoir. Je devais m'asseoir quelque part et faire un plan. Je me suis assis dans l'un des cafés sur mon chemin et j'ai commandé un thé. Après la première gorgée, j'ai salué Ali abi, dont vous voyez la photo, assis à ma gauche.</p>
+                <div class="full-post-content" id="full-54"><p class="full-text">Il a pris une profonde bouffée de sa cigarette et a commencé ses paroles par -que faire ici-. 
+                <br><br>
+                Pendant qu'il parlait, j'ai commencé à l'écouter, et je me suis même levé de ma place et assis à sa table. Son thé était fini, et sans qu'il le remarque, je lui ai commandé un thé. Il parlait de l'amour parental et du respect filial. 
+                <br><br>
+               Il se plaignait surtout de la nouvelle génération actuelle. Il s'est arrêté un instant, a allumé une autre cigarette, et fixant ses yeux au loin, a parlé du labeur et de la sueur. -J'ai passé soixante-dix ans, j'ai fait beaucoup de métiers, et maintenant je travaille aussi dans les marchés- a-t-il dit, prenant une autre bouffée de sa cigarette. Il m'a rappelé le vers du poème d'Ahmed Arif « Nous ne sommes pas seuls » : **le premier souffle arrive comme Hızır, la cigarette enveloppée à Cibali…**
+			<br><br>	
+				Il avait tellement raison dans ce qu'il racontait. Il a vécu, vu, expérimenté, et continue de vivre. -Personne n'aime aucun métier- a-t-il poursuivi. Il s'est adressé à la nouvelle génération dont il se plaignait :
+			<br><br>
+			- Vous êtes crus, faites-vous cuire, puis gagnez de l'expérience, puis devenez maître, puis réclamez les droits de votre labeur, ne mangez les droits de personne et ne laissez pas manger vos droits-.
+			<br><br>
+			Avait-il tort dans ce qu'il disait ? Je ne pense pas…</p></div>
+                <div class="post-footer">
+                    <ul class="actions"><li><a href="#post-54" class="button read-more-btn" data-id="54">Lire la suite</a></li></ul>
+                    <ul class="stats"><li class="comment-toggle" data-post="54"><a href="#post-54"><i class="fas fa-comment"></i> Commentaires (<span class="comment-count">0</span>)</a></li></ul>
+                </div>
+                <div class="comments-section" id="comments-section-54">
+                    <div class="comments-title">Commentaires (<span class="comment-count-display">0</span>)</div>
+                    <div class="comments-list" id="comments-list-54"></div>
+                    <div class="add-comment-form">
+                        <input type="text" class="comment-input" id="comment-name-54" placeholder="Votre nom">
+                        <textarea class="comment-text" id="comment-text-54" placeholder="Écrivez votre commentaire..." rows="2"></textarea>
+                        <button class="submit-comment" data-post="54">Envoyer</button>
+                    </div>
+                </div>
+                <div class="old-posts-link"><a href="index4.html" target="_blank"><i class="fas fa-archive"></i> Anciens Articles</a></div>
+            </article>
+
+            <!-- ============================================ -->
+            <!-- POST 55 - Retour (ancien ID:26) -->
+            <!-- ============================================ -->
+            <article class="post" data-post-id="55" itemscope itemtype="https://schema.org/BlogPosting">
+                <script type="application/ld+json">
+                {
+                    "@context": "https://schema.org",
+                    "@type": "Article",
+                    "headline": "Retour",
+                    "description": "Une Histoire de Ville - Deux Villes Une Femme",
+                    "author": {
+                        "@type": "Person",
+                        "name": "Fatma Altun"
+                    },
+                    "datePublished": "2026-08-03",
+                    "dateModified": "2026-08-03",
+                    "image": "https://vom-blog.com/images/fatma-resim_2.png",
+                    "url": "https://vom-blog.com/#post-55",
+                    "mainEntityOfPage": {
+                        "@type": "WebPage",
+                        "@id": "https://vom-blog.com/#post-55"
+                    },
+                    "publisher": {
+                        "@type": "Organization",
+                        "name": "VOM PUBLISHING",
+                        "logo": {
+                            "@type": "ImageObject",
+                            "url": "https://vom-blog.com/favicon-32x32.png"
+                        }
+                    },
+                    "keywords": "ville, femme, retour, Fatma Altun, littérature",
+                    "inLanguage": "fr"
+                }
+                </script>
+                <header>
+                    <div class="title">
+                        <h2 itemprop="headline"><a href="#post-55" class="post-title-link">Le Journal Provincial d'une Gemme Imparfaite</a><br></h2>
+                        <p itemprop="description">Deux Villes Une Femme</p>
+                    </div>
+                    <div class="meta">
+                        <span class="post-date" itemprop="datePublished" content="2026-08-03">2 octobre 2026</span>
+                        <a href="#post-55" class="author" itemprop="author" itemscope itemtype="https://schema.org/Person">
+                            <span class="name" itemprop="name">Fatma Altun</span>
+                            <img src="https://vom-blog.com/images/fatma-1.png" alt="Avatar de Fatma Altun" width="56" height="56" loading="lazy" onerror="this.src='https://randomuser.me/api/portraits/women/2.jpg'">
+                        </a>
+                    </div>
+                </header>
+                <a href="#post-55" class="image featured clickable-img" data-img="https://vom-blog.com/images/fatma-resim_5.png" itemprop="image"><img src="https://vom-blog.com/images/fatma-resim_5.png" alt="Deux Villes Une Femme" width="800" height="450" loading="lazy"></a>
+                <p itemprop="articleBody"><strong>Elle n'était pas arrivée depuis longtemps. Pourtant, discuter avec le monsieur de la boulangerie où elle s'arrêtait en revenant de ses promenades matinales semblait idéal pour la « liste des nouvelles habitudes ». Le seul commerce ouvert à ces heures était le café. Comme il venait de préparer le thé, il proposait généralement du café à la place. Il ne le laissait pas passer, il guettait littéralement la route pour ne pas la manquer. Car il était curieux de savoir qui elle était et pourquoi elle était ici… Elle ne voudrait pas boire du thé à une heure si matinale, mais les simits venant du voisin d'en face du café ne se passaient pas sans thé. Un café nature avant de rentrer chez elle était le poli sur son esprit ouvert tout au long de la promenade. Le simit chaud qu'elle mangeait par-dessus ne faisait pas que nourrir son estomac. Profiter de cette étroite rue pavée avant que les pas ne commencent faisait du bien. Ses conversations avec le cafetier et le boulanger étaient un bonus à son plaisir. Bientôt l'épicier et les autres commerces ouvriraient un par un. La quincaillerie était la dernière à ouvrir ses volets. Cela faisait cinq semaines qu'elle était venue. Elle n'avait pas encore pu compléter les manques de la maison, mais ils ne devraient pas être si importants à l'esprit, elle ne se souciait plus autant des manques qu'avant... Aux heures où tout le monde partait au travail ou à l'école, elle appréciait rentrer chez elle, pour une fois. Elle pouvait en profiter encore un peu.</strong><br><br>
+« Tu as écrit ton nouvel article ? » demanda le boulanger. Il était devenu un suiveur assidu depuis le jour où elle avait dit qu'elle écrivait un blog. « Oui. Je le téléchargerai quand je rentrerai, vous pourrez le lire. En fait, laissez-moi me lever doucement… » comme elle disait cela, le boulanger, remarquant qu'elle mettait la main dans sa poche pour payer, l'arrêta de la main. « Oh ma fille, qu'as-tu fait ? Les thés sont d'Ali, les simits sont de moi. La merveilleuse conversation était de toi aussi. Tu nous endetterais, ne fais pas ça… » sourit-il. « La quincaillerie n'a pas rouvert. Sa femme est retombée malade. Entre l'hôpital et tout, l'homme est misérable. Écris les manques, je les prendrai chez lui quand il viendra. Tu pourras les récupérer chez moi demain matin en passant. » dit-il. Il était impossible de ne pas être reconnaissante pour cette merveilleuse offre. La liste était prête. Elle la sortit de sa poche et la tendit à l'homme. « Merci, c'est très apprécié. » dit-elle d'un air embarrassé. Son estomac était plein. Le premier café de la journée était bu, la conversation avait eu lieu, son esprit était vidé. Il ne restait plus qu'à rentrer chez elle et partager ce qu'elle avait écrit. Le reste, plus tard…
+<br><br>    
+LA GEMME CONTROVERSÉE : L'HUMAIN
+(La Gemme Imparfaite d'un Voyage Parfait)
+</p> 
+                <div class="full-post-content" id="full-55"><p class="full-text"><em>Si tu penses que tu es en retard quand les autres accélèrent, et que tu as pris le mauvais chemin quand tu as changé de direction, tu peux dire « hélas » mais personne n'entend cet appel. Parce que tu n'es pas le seul passager de ce voyage appelé la vie. Tu es celui qui marchera sur son propre chemin. Tu es celui au volant, et celui sur le siège passager… Même le contrôleur, c'est toi…</em><br><br>
+Qui es-tu ?
+<br><br>
+L'humain...
+<br><br>
+Qu'était l'humain ?
+<br><br>
+Nouvelle route, nouvelle vie… Le temps fait tout oublier, se réveiller dans un nouvel endroit… Même s'il n'oublie pas, il est certain que tu ne te souviendras pas souvent. Des points de vue philosophique, biologique et psychologique ; le seul être qui tente de donner un sens à lui-même et à l'univers. Un être impuissant qui a besoin de beaucoup de choses pour cela et doit faire face à beaucoup de choses…
+<br><br>
+Le mot humain, linguistiquement, a une connexion racine directe avec les concepts de nisyan (oubli) et d'ünsiyet (familiarité).
+<br><br>
+Nisyan, c'est-à-dire oublier ; au niveau conceptuel représente la relation imparfaite de l'humain avec le temps et son propre esprit. Pas une simple perte de mémoire, mais un état existentiel.
+<br><br>
+Ünsiyet signifie s'habituer et établir des liens ; conceptuellement, il exprime le potentiel de l'humain à surmonter la solitude, à établir des relations avec l'autre et à s'adapter à l'environnement.
+<br><br>
+Nisyan et ünsiyet, l'oubli et le lien, sont les deux mécanismes psychologiques et existentiels fondamentaux qui font d'un humain un humain. Les relations humaines sont comme les fondations et les fenêtres d'un bâtiment ; l'une protège l'humain vers l'intérieur, l'autre ouvre au monde extérieur. Nisyan est peut-être oublier les fardeaux excessifs sur nos dos dans les bagages lors de ce voyage terrestre. Ünsiyet est croiser le regard d'autres passagers que nous ne connaissons pas aux haltes sur le chemin et prendre un thé chaud.
+<br><br>
+Comme il est étrange qu'un humain ; sachant tout mais choisissant d'oublier, symbolisant venir dans un monde pour se souvenir plus tard, ait toujours besoin de cette connaissance qu'il connaît mais a oubliée par son nom. C'est pourquoi l'amour existe. Il te murmure que ce dont tu as besoin n'est qu'en toi pour faire face aux choses. Pour faire face à toi-même et à tout le reste, il te dit « aime-toi et connais-toi ! »
+<br><br>
+Connaître et aimer… Peu importe lequel tu mets en premier. Tu dois vivre l'unité de connaître et d'aimer, d'aimer et de connaître, et construire ta vie en conséquence. Et tu dois commencer cela en t'aimant toi-même et en te connaissant toi-même. Cet amour n'est pas comme aimer le fromage, et connaître n'est pas comme savoir marcher. Tu dois comprendre l'Arkhe de la question.
+<br><br>
+Qu'était l'Arkhe ?
+<br><br>
+Dans la philosophie grecque antique, il signifie « commencement », « cause première » et « substance primaire » ; le concept cru être la substance sous-jacente à tout, dont l'univers et tout dérive.
+<br><br>
+...quelque chose de probable est mentionné. Et loin d'être exposé à cette chose, juste en étant présenté à elle en tant que concept, nous sommes témoins qu'elle nous fait cela… Donc nous changeons. Plus précisément, nous nous transformons.
+<br><br>
+Quelles sont ces choses ?
+Quelles sont ces choses ?
+<br><br>
+Les philosophes grecs anciens se demandaient aussi ce premier point de départ du voyage existentiel, c'est-à-dire sa première carte, et proposaient différentes substances pour l'« Arkhe ».
+<br><br>
+Par exemple, Thalès a dit : « L'Arkhe est l'eau. » Il a soutenu que le fondement de tout est l'eau parce que la vie est humide et dépendante de l'eau. Il n'a pas entièrement tort. Surtout dans cette chaleur… Mais ça ne suffit pas…
+<br><br>
+Pas assez, alors Anaximène a dit : « L'Arkhe est l'air. » Il a défendu l'air comme l'élément pouvant tout expliquer par la relation entre souffle et substance. Eh bien, il n'a pas tort non plus. Imaginez ne pas pouvoir respirer…
+<br><br>
+Puis Anaximandre est venu et a dit : « L'Arkhe est l'Apeiron. » Si vous demandez ce que c'est ; la substance primaire illimitée, indéfinie et infinie… Une déclaration ouverte. Pensez et pensez, pouvez-vous en sortir si vous pouvez.
+<br><br>
+Heureusement, Héraclite est venu à notre secours et a dit : « L'Arkhe est le feu. » Vous savez que le feu, dans de nombreuses disciplines, représente non seulement le destructeur mais aussi l'étincelle nécessaire à la ré-existence par la suite. Donc le feu est le symbole du changement et du devenir constants dans l'univers.
+<br><br>
+Venons au point principal ; la chose dans laquelle tout cela se manifestera, prouvera son existence. Ici Empédocle entre et dit : « L'Arkhe est quatre éléments fondamentaux : eau, air, terre et feu. » Les quatre éléments sont aussi mon préféré.
+<br><br>
+Au fait, il y a aussi Démocrite qui parle de cela. Bien qu'il dise : « L'Arkhe est l'atome, le plus petit élément indivisible », je continue mon chemin avec les quatre éléments. Je laisse la fission de l'atome aux scientifiques.
+<br><br>
+Quand Empédocle a combiné les arguments des autres philosophes et a avancé l'idée d'Arkhe multiple, et a dit « terre, air, eau, feu, ce sont les quatre racines », il a en fait planté une graine dans le monde de la connaissance. Selon sa « Théorie des Quatre Éléments » qu'il a développée, « Ces éléments ne disparaissent pas et ne se transforment pas en un nouvel élément… » a-t-il renforcé son argument en disant. Il y a une autre défense d'Empédocle que j'admire : Selon lui, la force qui rassemble les éléments est l'Amour, et la force qui les sépare est la Haine…
+<br><br>
+Selon moi aussi, l'amour est l'action la plus nécessaire et la haine est une émotion extraordinairement inutile…
+
+
+
+<br><br>
+Cette théorie est le premier pas de l'idée que les substances sont composées d'éléments. Les propriétés des éléments d'Aristote, les états actuels de la matière - c'est-à-dire solide, liquide, gaz et plasma (que je n'ai pas entièrement compris) forment la base de la théorie.
+<br><br>
+Venons au cinquième élément... Dans l'Antiquité, pour expliquer le ciel et les étoiles, ils ont voulu ajouter cette connaissance à la liste comme si c'était une gemme. Ce concept qu'Aristote a apporté à la philosophie ; l'Éther, connu sous le nom d'« Esir »… Selon la philosophie grecque antique, le cinquième élément au-delà des quatre éléments sur terre ; formant le ciel et le royaume divin, « Quinta Essentia »… Ce concept a été utilisé pour expliquer la structure parfaite et immuable du ciel, des étoiles et des planètes tandis que la terre change constamment.
+<br><br>
+Ou, comme dit dans le film de Cem Yılmaz, le cinquième élément n'est jamais une planche. Mais maintenant que j'y pense... Il doit y avoir eu ceux qui ont demandé, comme moi, « Le cinquième élément pourrait-il être l'humain ? » Car l'humain pourrait être une merveilleuse gemme créée pour ce monde. Mais dans ce cas, l'humain ne devrait-il pas être immuable, ne pas se transformer en autre chose ? Je pense que c'est la condition pour que quelque chose soit « Arkhe ».
+<br><br>
+En tant qu'être, l'humain est variable et ne peut pas être Arkhe, mais en tant que concept, nous pouvons dire qu'il est immuable. Pensez-y, depuis le premier jour, vous aussi verrez l'immuabilité de l'humain. Vous direz : « S'il changeait, il ne serait pas humain. » Sans plonger trop profondément, je veux clore le sujet ici. Je crois que ceux qui parleront et discuteront de ces questions ont besoin de connaissance et d'amour. J'ai certainement de l'amour, mais je ne peux pas prétendre avoir assez de connaissance. Pour l'instant, mon voyage continue. C'est pourquoi je me tais ici. Sinon, nous pourrions devoir laisser la scène à la haine. Par haine, je veux dire en tant que concept… Comme débattre… Je sais que là où il y a une connaissance incomplète, il y aura ceux qui voudront la compléter, ainsi que ceux qui n'acceptent pas cette connaissance et veulent la changer. Et le débat commencera…
+<br><br>
+Qu'était le débat ?
+<br><br>
+En tant que concept, débattre ; c'était se concentrer sur la définition, le sens et les limites fondamentales d'un sujet, en laissant de côté ses détails quotidiens ou temporaires. Ce processus consiste à examiner le contexte mental et théorique plutôt que l'événement lui-même, et à déchiffrer ce que les mots et les idées signifient. Il se réfère à aller à l'essence pour traiter les idées abstraites derrière les événements ou situations, pas les événements eux-mêmes. Il aide à tracer des limites pour clarifier ce qu'un mot ou une idée inclut et n'inclut pas. Il vérifie si nous tirons des significations différentes du même mot. En fait, il prévient les désaccords en empêchant les gens de parler différemment du même sujet. Il décompose les problèmes complexes en parties plus compréhensibles et clarifie la pensée. Il fournit un terrain pour l'établissement de nouvelles théories et permet le développement.
+<br><br>
+Malgré toute cette description, la perception quotidienne du débat est très différente. Elle implique la bagarre et le conflit, une course pour avoir raison, les attaques personnelles, les menaces relationnelles, et crée littéralement une situation gagnant-perdant.
+<br><br>
+Alors quelle méthode peut être suivie pour briser cette perception ? Nous pouvons transformer le débat d'une bagarre en un échange de cartes entre deux voyageurs explorant deux géographies différentes. Pour cela, nous devons changer notre feuille de route.
+<br><br>
+Par exemple, je changerais d'abord mon état d'esprit au départ. Le but n'est pas d'avoir raison en chemin, mais de trouver la vérité au bout du chemin. Bref, d'être heureux… Je garderais ma curiosité, j'écouterais mon compagnon de voyage non pas pour l'éliminer, mais pour comprendre la vue qu'il voit. Le virage le plus dangereux est la gestion de l'ego. Au lieu de dire « Tu es sur le mauvais chemin », je chercherais un sentier commun en disant « Je regarde cette vue depuis cette colline. » Contrôler l'envie d'avoir raison et la colère est le plus difficile pour les parties dans un débat. Attention ! Dans de telles situations, je suis souvent tombé de raison à tort. Je réorganise immédiatement mon langage de communication, j'essaie d'adoucir l'environnement et de construire des ponts avec des questions.
+<br><br>
+En conséquence, le débat devrait être vu non pas comme une guerre mais comme un voyage de découverte. Que les gens vivent des différences d'opinion n'est pas une menace mais une opportunité de se rapprocher de la vérité, je pense. Pour résumer, un vrai débat est celui où les deux parties reviennent d'un voyage ayant appris quelque chose de nouveau.
+<br><br>
+Au fait, comment sommes-nous arrivés à ce sujet, vous souvenez-vous ? De cette émotion qui transforme un débat en bagarre ; c'est-à-dire de la haine… Maintenant laissez-moi rapidement conclure le sujet et le fermer, et dispersons-nous sans incident. Après tout, nous sommes humains et nous avons des affaires mondaines, il est tard…
+<br><br>
+L'humain est comme une petite copie de ce voyage universel. Tout comme la terre, l'air, l'eau et le feu forment le monde ; nisyan et ünsiyet sont les éléments spirituels de l'humain. Empédocle dit que la force qui rassemble les éléments est l'Amour, et la force qui les sépare est la Haine. L'humain est exactement cela : En établissant l'ünsiyet, c'est-à-dire en se connectant avec d'autres âmes par l'amour, révèle cette force unificatrice sur le chemin. Mais quand il est pris dans le vortex du nisyan ; oublie ses paroles, ses valeurs et son essence, c'est alors que les éléments se séparent les uns des autres et une dispersion spirituelle, une déviation de la route commence. Peut-être être humain ; est le cinquième élément lui-même oscillant entre se disperser sur les routes avec notre côté oubliant et se réunir au même arrêt avec notre côté aimant et liant. Ou l'humain est-il une partie imparfaite de cette gemme parfaite ?
+<br><br>
+Que votre chemin soit ouvert, que votre amour soit éternel. Bonne nuit et je vous souhaite de bons voyages dans la vie.
+<br><br>					
+..............	
+<br><br>
+Alors que le texte défilait à l'écran, elle a appuyé sur le bouton « Publier ». Avec la fenêtre de confirmation familière qui est apparue, elle a pris une profonde respiration et a lentement baissé le couvercle de son ordinateur portable.
+<br><br>
+Le silence de la campagne qui a soudainement rempli la pièce a doucement enveloppé la confusion philosophique qui venait de déborder du clavier. Elle s'est détendue sur son siège et a regardé par la fenêtre. Appuyant son front contre le verre frais, elle a regardé le vert et les couleurs pâles du ciel qui le couvrait. « Il va encore pleuvoir… » a-t-elle pensé. Ici, il n'y avait pas les egos, les néons ou les bagarres pour avoir raison de la métropole bruyante qu'elle avait laissée derrière. Il n'y avait que l'harmonie parfaite des éléments entre eux. Même si la liste des manques était encore dans la poche du boulanger et que la maison du village n'était pas encore complète, son âme était plus complète qu'elle ne l'avait été depuis longtemps.
+<br><br>
+Regardant son reflet dans la fenêtre, elle a chuchoté : « Peut-être que le cinquième élément est ici. Dans l'oubli et le recommencement... »
+		
+		
+		
+		
+					</p></div>
+                <div class="post-footer">
+                    <ul class="actions"><li><a href="#post-55" class="button read-more-btn" data-id="55">Lire la suite</a></li></ul>
+                    <ul class="stats"><li class="comment-toggle" data-post="55"><a href="#post-55"><i class="fas fa-comment"></i> Commentaires (<span class="comment-count">0</span>)</a></li></ul>
+                </div>
+                <div class="comments-section" id="comments-section-55">
+                    <div class="comments-title">Commentaires (<span class="comment-count-display">0</span>)</div>
+                    <div class="comments-list" id="comments-list-55"></div>
+                    <div class="add-comment-form">
+                        <input type="text" class="comment-input" id="comment-name-55" placeholder="Votre nom">
+                        <textarea class="comment-text" id="comment-text-55" placeholder="Écrivez votre commentaire..." rows="2"></textarea>
+                        <button class="submit-comment" data-post="55">Envoyer</button>
+                    </div>
+                </div>
+                <div class="old-posts-link"><a href="index4.html" target="_blank"><i class="fas fa-archive"></i> Anciens Articles</a></div>
+            </article>
+
+            <!-- ============================================ -->
+            <!-- POST 56 - En vivant Adana (ancien ID:27) -->
+            <!-- ============================================ -->
+            <article class="post" data-post-id="56" itemscope itemtype="https://schema.org/BlogPosting">
+                <script type="application/ld+json">
+                {
+                    "@context": "https://schema.org",
+                    "@type": "Article",
+                    "headline": "En vivant Adana",
+                    "description": "À travers les yeux et les mots de Begüm",
+                    "author": {
+                        "@type": "Person",
+                        "name": "Begüm Özüer"
+                    },
+                    "datePublished": "2026-08-03",
+                    "dateModified": "2026-08-03",
+                    "image": "https://vom-blog.com/images/BEG-2.png",
+                    "url": "https://vom-blog.com/#post-56",
+                    "mainEntityOfPage": {
+                        "@type": "WebPage",
+                        "@id": "https://vom-blog.com/#post-56"
+                    },
+                    "publisher": {
+                        "@type": "Organization",
+                        "name": "VOM PUBLISHING",
+                        "logo": {
+                            "@type": "ImageObject",
+                            "url": "https://vom-blog.com/favicon-32x32.png"
+                        }
+                    },
+                    "keywords": "Adana, nourriture, culture, Begüm Özüer, voyage",
+                    "inLanguage": "fr"
+                }
+                </script>
+                <header>
+                    <div class="title">
+                        <h2 itemprop="headline"><a href="#post-56" class="post-title-link">En visitant Adana et ses environs</a></h2>
+                        <p itemprop="description">À travers les yeux et les mots de Begüm</p>
+                    </div>
+                    <div class="meta">
+                        <span class="post-date" itemprop="datePublished" content="2026-08-03">2 octobre 2026</span>
+                        <a href="#post-56" class="author" itemprop="author" itemscope itemtype="https://schema.org/Person">
+                            <span class="name" itemprop="name">Begüm Özüer</span>
+                            <img src="https://vom-blog.com/images/begum.png" alt="Avatar de Begüm Özüer" width="56" height="56" loading="lazy" onerror="this.src='https://randomuser.me/api/portraits/women/3.jpg'">
+                        </a>
+                    </div>
+                </header>
+                <a href="#post-56" class="image featured clickable-img" data-img="https://vom-blog.com/images/BEG-5.png" itemprop="image"><img src="https://vom-blog.com/images/BEG-5.png" alt="À travers les yeux de Begüm" width="800" height="450" loading="lazy"></a>
+                <p itemprop="articleBody">Bonjour, Adana un peu plus, ce n'est pas facile, il y a 2 ans d'expérience vécue et c'est Adana, voir, entendre et vivre quelque chose de nouveau chaque jour. Nous avons visité, mangé et bu à Adana, maintenant sortons un peu d'Adana, par exemple Tarsus.
+<br><br>
+J'avais vu Tarsus dans une série télévisée il y a de nombreuses années, des maisons restaurées et une très belle rue et place. Bien sûr, il n'était pas possible de ne pas aller à Tarsus en vivant à Adana, et comme les réseaux sociaux suivent où vous êtes, toutes les informations à ce sujet tombent immédiatement devant vous. Nous sommes allés à Tarsus de nombreuses fois, nous voulions emmener chaque invité qui venait.
+<br><br>
+Il y a un collège américain à Tarsus, je ne sais pas si vous le savez ? Il a été fondé en 1888 par des missionnaires sous le nom de St. Paul's Institute, étant la ville natale de Saint Paul de Tarse (St. Paul) dans la foi chrétienne a fait de la région un centre d'attraction pour les missionnaires protestants américains, et Tarsus a une place très importante dans l'histoire chrétienne.</p>
+                <div class="full-post-content" id="full-56"><p class="full-text">Par conséquent, Tarsus abrite de nombreux artefacts historiques.
+<br><br>
+Vous commencez à visiter Tarsus en entrant par la Porte de Cléopâtre, et à l'entrée il y a une carte qui vous indique l'itinéraire à suivre dans l'ordre et à pied, je pense que c'est un très beau travail.
+<br><br>
+Ensuite, l'église Saint-Paul, une église dans un beau jardin restauré, si vous êtes fatigué, reposez-vous un peu sous les arbres de son jardin, puis la Grande Mosquée de Tarsus avec une tour d'horloge, vous pouvez vous asseoir et vous reposer dans son jardin et boire du kaynar ou votre café spécial.
+<br><br>
+Sortez de la mosquée et tournez à gauche, vous êtes accueilli par le Kırkkaşık Bedesten restauré, à l'intérieur se trouvent des boutiques vendant des souvenirs, toutes détenues par des femmes, c'est très agréable, les commerçants qui vous accueillent avec un visage souriant et vous offrent des douceurs chaudes.
+<br><br>
+Nous avons parcouru le bazar, maintenant continuons à visiter et les vieilles maisons de Tarsus, certaines des maisons sont restaurées et sont devenues des hôtels, d'autres continuent d'être restaurées mais la plupart sont dans un état un peu mauvais, j'espère que toutes seront restaurées et qu'un très beau vieux Tarsus émergera.
+<br><br>
+Il y a une place que j'ai vue dans la série, asseyez-vous là et sentez comme si vous étiez dans la Rome antique.
+<br><br>
+Continuons à marcher et le Puits de Saint-Paul apparaît dans un jardin, l'entrée est carte de musée ou payante, l'eau est dite guérissante, le jardin est beau et vous pouvez voir les anciens vestiges sur le sol inférieur à travers la surface vitrée.
+<br><br>
+D'ici nous marchons à nouveau vers le centre et voyons la route romaine antique, elle est clôturée, nous avons eu du mal à la trouver, en fait c'est une courte route parmi les ruines en plein milieu de la ville.
+<br><br>
+Aussi l'un des endroits importants de la ville, la Mosquée Makam-ı Danyal, c'est une mosquée construite à côté du tombeau du Prophète Daniel, lors des fouilles pour une structure supplémentaire, des structures de la période romaine ont émergé, elles ont été protégées en construisant une terrasse en verre au-dessus et vous pouvez visiter ici, et la Mosquée est toujours en usage.
+<br><br>
+Disons cela pour l'instant, que ce ne soit pas trop long à lire, parce que nous n'avons pas encore abordé le sujet de la nourriture à Tarsus, laissons cela pour le mois prochain.
+</p></div>
+                <div class="post-footer">
+                    <ul class="actions"><li><a href="#post-56" class="button read-more-btn" data-id="56">Lire la suite</a></li></ul>
+                    <ul class="stats"><li class="comment-toggle" data-post="56"><a href="#post-56"><i class="fas fa-comment"></i> Commentaires (<span class="comment-count">0</span>)</a></li></ul>
+                </div>
+                <div class="comments-section" id="comments-section-56">
+                    <div class="comments-title">Commentaires (<span class="comment-count-display">0</span>)</div>
+                    <div class="comments-list" id="comments-list-56"></div>
+                    <div class="add-comment-form">
+                        <input type="text" class="comment-input" id="comment-name-56" placeholder="Votre nom">
+                        <textarea class="comment-text" id="comment-text-56" placeholder="Écrivez votre commentaire..." rows="2"></textarea>
+                        <button class="submit-comment" data-post="56">Envoyer</button>
+                    </div>
+                </div>
+                <div class="old-posts-link"><a href="index4.html" target="_blank"><i class="fas fa-archive"></i> Anciens Articles</a></div>
+            </article>
+
+            <!-- ============================================ -->
+            <!-- POST 57 - Être en harmonie (ancien ID:28) -->
+            <!-- ============================================ -->
+            <article class="post" data-post-id="57" itemscope itemtype="https://schema.org/BlogPosting">
+                <script type="application/ld+json">
+                {
+                    "@context": "https://schema.org",
+                    "@type": "Article",
+                    "headline": "Être en harmonie",
+                    "description": "Ceux qui regardent dans la même direction",
+                    "author": {
+                        "@type": "Person",
+                        "name": "Elif Biçer"
+                    },
+                    "datePublished": "2026-08-03",
+                    "dateModified": "2026-08-03",
+                    "image": "https://vom-blog.com/images/ELF_2.png",
+                    "url": "https://vom-blog.com/#post-57",
+                    "mainEntityOfPage": {
+                        "@type": "WebPage",
+                        "@id": "https://vom-blog.com/#post-57"
+                    },
+                    "publisher": {
+                        "@type": "Organization",
+                        "name": "VOM PUBLISHING",
+                        "logo": {
+                            "@type": "ImageObject",
+                            "url": "https://vom-blog.com/favicon-32x32.png"
+                        }
+                    },
+                    "keywords": "art, mosaïque, peinture, Elif Biçer, créativité",
+                    "inLanguage": "fr"
+                }
+                </script>
+                <header>
+                    <div class="title">
+                        <h2 itemprop="headline"><a href="#post-57" class="post-title-link">Bracelets en plastique</a></h2>
+                        <p itemprop="description">Ceux qui regardent dans la même direction</p>
+                    </div>
+                    <div class="meta">
+                        <span class="post-date" itemprop="datePublished" content="2026-08-03">2 octobre 2026</span>
+                        <a href="#post-57" class="author" itemprop="author" itemscope itemtype="https://schema.org/Person">
+                            <span class="name" itemprop="name">Elif Biçer</span>
+                            <img src="https://vom-blog.com/images/elif.png" alt="Avatar de Elif Biçer" width="56" height="56" loading="lazy" onerror="this.src='https://randomuser.me/api/portraits/women/4.jpg'">
+                        </a>
+                    </div>
+                </header>
+                <a href="#post-57" class="image featured clickable-img" data-img="https://vom-blog.com/images/ELF_5.png" itemprop="image"><img src="https://vom-blog.com/images/ELF_5.png" alt="Ceux qui regardent dans la même direction" width="800" height="450" loading="lazy"></a>
+                <p itemprop="articleBody">La petite fille regardait le monde avec l'innocence de l'enfance. Son petit cœur battait de joie aux contes que lui racontait son grand-père ; elle se parait des bracelets et bagues en plastique colorés qu'il apportait, et ajoutait de la joie à sa joie avec le son des bonbons coq siffleurs. Même si la poudre de pois chiches qui descendait dans sa trachée provoquait des quintes de toux, elle éclatait ensuite de rire comme si rien ne s'était passé. Elle n'avait aucune pensée autre que le jeu. 
+                <br><br>
+Quand elle est arrivée à l'âge scolaire, elle a commencé à remarquer certaines choses. La mère et le père de tout le monde venaient à l'école, parlaient aux professeurs, amenaient et repartaient leurs enfants. Son compagnon était toujours son grand-père. Les concepts de mère et de père lui étaient étrangers. Elle ne les voyait que pendant les vacances d'été, brièvement. Son petit cœur était consolé par les cadeaux envoyés de l'étranger. Ou les chocolats, jouets et vêtements qu'ils apportaient quand ils venaient en permission suffisaient à la rendre heureuse.</p>
+                <div class="full-post-content" id="full-57"><p class="full-text">Au fil des années et en grandissant, les cadeaux ne l'excitaient plus autant. Des vides infranchissables s'étaient formés dans son petit cœur. À mesure que ses partages avec ses amis augmentaient, une amère nostalgie qui apparaissait en elle se faisait sentir. Les sentiments d'amour et de confiance attendaient affamés en elle. La jalousie et la colère avaient depuis longtemps atteint la satiété… La vie professionnelle l'a encore plus mûrie. À mesure qu'elle devenait plus consciente, elle a commencé à se questionner : « Qui suis-je ? Où suis-je ? » Elle faisait constamment des comparaisons dans son esprit, mais elle a réalisé que ce n'étaient que des jeux de l'esprit. Sans abandonner, elle a cherché des solutions, cru qu'elle trouverait une issue. À mesure qu'elle commençait à affronter ses erreurs et à faire la paix avec elles, à se montrer de la compassion, sa douleur diminuait.
+<br><br>
+Cette amère nostalgie en elle a été remplacée par un profond éveil. Elle avait vu en vivant comment même les blessures les plus profondes finissent par se cicatriser, comment les plus grands ressentiments étaient laissés derrière. Chaque petit sourire qu'elle créait sur les visages des gens devenait une racine qu'elle plantait dans sa propre âme. Maintenant, quand elle regardait en arrière, il n'y avait pas de peur dans les yeux de cette petite fille, mais une acceptation sereine. Parce qu'elle savait ; parfois une personne germe de là où elle est le plus brisée, et se sent vraiment en sécurité en embrassant son propre cœur.
+<br><br>					
+Bien sûr… À ce moment-là, elle a pris les mains de cette petite fille en elle et a chuchoté aux profondeurs de son âme : <em>« Tu es très précieuse dans chaque état du tien et tu es maintenant complètement en sécurité. »</em></p></div>
+                <div class="post-footer">
+                    <ul class="actions"><li><a href="#post-57" class="button read-more-btn" data-id="57">Lire la suite</a></li></ul>
+                    <ul class="stats"><li class="comment-toggle" data-post="57"><a href="#post-57"><i class="fas fa-comment"></i> Commentaires (<span class="comment-count">0</span>)</a></li></ul>
+                </div>
+                <div class="comments-section" id="comments-section-57">
+                    <div class="comments-title">Commentaires (<span class="comment-count-display">0</span>)</div>
+                    <div class="comments-list" id="comments-list-57"></div>
+                    <div class="add-comment-form">
+                        <input type="text" class="comment-input" id="comment-name-57" placeholder="Votre nom">
+                        <textarea class="comment-text" id="comment-text-57" placeholder="Écrivez votre commentaire..." rows="2"></textarea>
+                        <button class="submit-comment" data-post="57">Envoyer</button>
+                    </div>
+                </div>
+                <div class="old-posts-link"><a href="index4.html" target="_blank"><i class="fas fa-archive"></i> Anciens Articles</a></div>
+            </article>
+
+            <!-- ============================================ -->
+            <!-- POST 58 - Ceux qui disparaissent (ancien ID:29) -->
+            <!-- ============================================ -->
+            <article class="post" data-post-id="58" itemscope itemtype="https://schema.org/BlogPosting">
+                <script type="application/ld+json">
+                {
+                    "@context": "https://schema.org",
+                    "@type": "Article",
+                    "headline": "Ceux qui disparaissent",
+                    "description": "Voix, Visages, Rues",
+                    "author": {
+                        "@type": "Person",
+                        "name": "Fuat Durutaş"
+                    },
+                    "datePublished": "2026-08-03",
+                    "dateModified": "2026-08-03",
+                    "image": "https://vom-blog.com/images/FU-2.png",
+                    "url": "https://vom-blog.com/#post-58",
+                    "mainEntityOfPage": {
+                        "@type": "WebPage",
+                        "@id": "https://vom-blog.com/#post-58"
+                    },
+                    "publisher": {
+                        "@type": "Organization",
+                        "name": "VOM PUBLISHING",
+                        "logo": {
+                            "@type": "ImageObject",
+                            "url": "https://vom-blog.com/favicon-32x32.png"
+                        }
+                    },
+                    "keywords": "ferry, quai, Istanbul, Fuat Durutaş, nostalgie",
+                    "inLanguage": "fr"
+                }
+                </script>
+                <header>
+                    <div class="title">
+                        <h2 itemprop="headline"><a href="#post-58" class="post-title-link">Ferries, Quais</a></h2>
+                        <p itemprop="description">Voix, Visages, Rues</p>
+                  </div>
+                    <div class="meta">
+                        <span class="post-date" itemprop="datePublished" content="2026-08-03">2 octobre 2026</span>
+                        <a href="#post-58" class="author" itemprop="author" itemscope itemtype="https://schema.org/Person">
+                            <span class="name" itemprop="name">Fuat Durutaş</span>
+                            <img src="https://vom-blog.com/images/fuat.png" alt="Avatar de Fuat Durutaş" width="56" height="56" loading="lazy" onerror="this.src='https://randomuser.me/api/portraits/men/3.jpg'">
+                        </a>
+                    </div>
+                </header>
+                <a href="#post-58" class="image featured clickable-img" data-img="https://vom-blog.com/images/FU-5.png" itemprop="image"><img src="https://vom-blog.com/images/FU-5.png" alt="Voix, Visages, Rues" width="800" height="450" loading="lazy"></a>
+                <p itemprop="articleBody">Comprendre la valeur quand on l'a perdue, la nostalgie, et quand on comprend et qu'on a la nostalgie, ne pas pouvoir atteindre. C'est une longue histoire des ferries et des quais de mon Istanbul s'étendant à Şirket-i Hayriye, aux Entreprises Maritimes Turques et aux Lignes de la Ville. 
+<br><br>
+Ce sera un peu comme raconter un conte, mais comme je ne l'ai pas vécu, j'ai décidé d'exprimer d'abord ce que j'ai entendu, puis ce que j'ai vécu. Selon ce que mes aînés m'ont raconté, Şirket-i Hayriye était une société pionnière ayant la particularité d'être la première société anonyme établie avec l'approbation d'Abdülmecid au début des années 1850. L'une de ses raisons était qu'elle appliquait le système de comptabilité en partie double dans sa comptabilité. Chers lecteurs, en tant que personne exerçant la profession de comptable, je ne vous expliquerai pas le système de comptabilité en partie double, ne vous inquiétez pas. Şirket-i Hayriye a été achetée par l'État en 1945 et transférée aux Lignes de la Ville. Bien qu'elle fonctionne actuellement sous le nom de Lignes de la Ville, les Entreprises Maritimes Turques sont intervenues entre-temps.</p>
+                <div class="full-post-content" id="full-58"><p class="full-text">Quelle était la mission de Şirket-i Hayriye ? Relier le Bosphore et Istanbul dans l'Istanbul de cette époque. Quand on pense à la situation actuelle, cela ne semble-t-il pas si absurde ? Imaginez, il n'y avait pas de route terrestre du Bosphore de Sarıyer à Beşiktaş. Un mouvement très intelligent a été fait et les gens vivant sur le Bosphore ont embrassé le centre d'Istanbul via la voie maritime. À cette époque, chaque ferry avait un numéro. 48 de ces ferries étaient à roues latérales. Comme Sezen Aksu l'a aussi chanté dans sa chanson, c'est aussi un fait que parmi les ferries allant à l'île, il y avait des roues latérales.
+<br><br>
+Les ferries opérant sur le Bosphore étaient appelés ferries mendiants. Ils partaient du pont de Galata en zigzag et atteignaient Beykoz en trois heures. Divers dialogues s'étaient formés parmi le peuple à ce sujet :
+<br><br>
+En montant sur le ferry depuis le pont, la vieille femme demande au porteur : 
+<br><br>
+-	« Cher fils, ce n'est pas le ferry mendiant, n'est-ce pas ? » 
+<br><br>
+-	« Non, madame grand-mère, direct à Kandilli ! »
+<br><br>
+-	La femme qui est allée rendre visite à sa fille à Beykoz grogne : « Je suis sur la mer depuis trois heures pleines, c'est un ferry mendiant, la seule chose que nous n'avons pas faite est de mendier aux quais des riches demeures ! »
+<br><br>					
+-	La mariée se plaint de sa belle-mère : « Madame ferry mendiant. Une fois qu'il sort dans la rue, il ne rentre pas à la maison sans frapper aux heurtoirs de quarante portes ! »					
+<br><br>
+Le premier ferry que j'ai rencontré dans mon enfance était Kanlıca. Il allait faire son premier voyage avec des invités, et nous allions être l'un de ces invités. Nous l'avons été, mais ce fut une union triste. Parce que j'avais laissé mon seau et ma pelle sur le ferry. Depuis, chaque fois que je monte sur ce ferry, je me suis toujours souvenu de mon seau et de ma pelle.				
+<br><br>
+Dans ma jeunesse, les ferries et les quais étaient comme des biens importants des gens vivant à Istanbul. Chaque ferry et chaque quai contenait des histoires distinctes, des expériences vécues distinctes. Les passagers réguliers des ferries du matin et du soir étaient généralement les mêmes personnes, ils se liaient avec le temps, et ils avaient des conversations profondes soit lors des voyages du matin soit du soir. On pouvait lire dans leurs yeux qu'ils attendaient presque que ce moment arrive chaque jour.    					
+<br><br>
+Il y avait aussi une distinction de classe comme luxe, 1ère et 2ème classe jusqu'au début des années 1980. La classe luxe était au rez-de-chaussée et à la poupe du ferry. Elle était meublée de meubles composés de quatre chaises et d'une table. Comme l'espace était limité, des passagers qui ne se connaissaient pas pouvaient s'asseoir à la même table. Parfois il y avait ceux qui se saluaient, parfois discutaient, parfois même vivaient des amours qui menaient au mariage. Quand vous regardiez à l'intérieur, vous compreniez que cette classe était composée d'une strate aux meilleurs moyens financiers. Comment le saviez-vous ? Du fait qu'ils payaient un supplément pour la classe luxe. Après le départ du ferry, le contrôleur entrait dans la classe luxe, émettait des billets et collectait l'argent.  
+<br><br>
+La différence entre la 1ère et la 2ème classe se comprenait par les sièges. La 1ère classe se comprenait par l'éponge recouverte de similicuir, la 2ème classe par les sièges en bois… Toutes les différences de classe ont été abolies au début des années 1980.
+La seule chose sans différence entre les classes était que fumer, le symbole de statut du passé, était autorisé. Pour une raison quelconque, personne ne se plaignait de la fumée à l'époque. C'était traité comme si c'était normal, jeunes et vieux étaient exposés à cette fumée…
+<br><br>
+Aujourd'hui, nous avons très peu de ferries qui peuvent venir du passé au présent. Parmi les ferries appelés express à l'époque, Dolmabahçe, Fenerbahçe et Paşabahçe, seul Paşabahçe est debout et en état de marche. Dolmabahçe a été démantelé et mis à la ferraille à Aliağa en 1994, et Fenerbahçe est exposé au musée Rahmi Koç. Il serait possible de reconnaître ces ferries que j'ai mentionnés sans lire leurs noms en regardant leurs cheminées. Ils avaient des cheminées plus grandes et plus rondes que les autres ferries. En raison de leur vitesse, ils travaillaient sur les lignes des Îles, Yalova et Çınarcık.  					
+<br><br>
+Si je nomme les ferries qui ont laissé une marque dans le passé ; Suvat, Ülev, Turan Emeksiz, İhsan Kalmaz et bien sûr Kanlıca… 
+<br><br>
+Nos ferries à voitures, maintenant appelés ferries, sont nos valeurs qui portent encore le fardeau d'Istanbul. Avant la construction du premier pont, il y avait deux itinéraires reliant les deux rives. Pour les véhicules privés Kabataş-Üsküdar, pour les bus et camions Sirkeci-Harem. Pour ceux vivant sur la rive européenne et voulant aller à un endroit sur la rive anatolienne ou vice versa, l'épreuve commençait depuis le début. 
+<br><br>
+Les itinéraires des ferries étaient indiqués comme sur la photographie au début de mon article, faisant souvent se demander si c'était correct. Parce que c'est une main humaine après tout, et si l'officiel ne l'avait pas changé ? 					
+<br><br>					
+Quant aux quais ; bien que nous ayons dit au revoir aux ferries qui ont terminé leur vie, les quais servent encore, même si ce n'est pas pareil. Parmi ceux-ci, les quais des lignes les plus utilisées Karaköy-Kadıköy et Karaköy-Haydarpaşa étaient. Après les heures du matin, cette ligne faisait des voyages conjoints comme Karaköy-Haydarpaşa-Kadıköy jusqu'aux heures de travail du soir. Maintenant Haydarpaşa est hors service et la ligne fonctionne maintenant comme un voyage circulaire Kadıköy-Karaköy-Eminönü… À l'époque où Haydarpaşa était actif, sa mission portait à la fois un esprit différent, romantique, et un contenant de nombreux souvenirs amers et doux. Des gens perplexes avec des valises en bois, ceux qui sont venus faire leur service militaire, des enseignants nouvellement nommés, le public d'Istanbul habitué à l'agitation de la ville. Tous ensemble, un mélange.  					
+<br><br>					
+Le vieux pont de Galata a aussi accueilli des ferries sur ses flotteurs, se balançant d'avant en arrière. Plus tard, quand le pont ne pouvait plus porter son fardeau, les ferries n'ont pas non plus été autorisés à accoster. En fait, à la suite d'un incendie qui a éclaté dans un restaurant, il a terminé sa vie, attristant nos cœurs, nous laissant vivre avec nos souvenirs.
+<br><br>					
+Je suis sûr qu'Istanbul a beaucoup plus de quais, de ferries et d'amours qui en ont été témoins à raconter. 
+Dans notre vie restante, avec le souhait que nous vivions toutes les beautés que nous n'avons pas pu vivre, et vivions chaque chose d'Istanbul que nous avons oublié de vivre, ou n'avons pas pu voir, n'avons pas pu découvrir…</p></div>
+                <div class="post-footer">
+                    <ul class="actions"><li><a href="#post-58" class="button read-more-btn" data-id="58">Lire la suite</a></li></ul>
+                    <ul class="stats"><li class="comment-toggle" data-post="58"><a href="#post-58"><i class="fas fa-comment"></i> Commentaires (<span class="comment-count">0</span>)</a></li></ul>
+                </div>
+                <div class="comments-section" id="comments-section-58">
+                    <div class="comments-title">Commentaires (<span class="comment-count-display">0</span>)</div>
+                    <div class="comments-list" id="comments-list-58"></div>
+                    <div class="add-comment-form">
+                        <input type="text" class="comment-input" id="comment-name-58" placeholder="Votre nom">
+                        <textarea class="comment-text" id="comment-text-58" placeholder="Écrivez votre commentaire..." rows="2"></textarea>
+                        <button class="submit-comment" data-post="58">Envoyer</button>
+                    </div>
+                </div>
+                <div class="old-posts-link"><a href="index4.html" target="_blank"><i class="fas fa-archive"></i> Anciens Articles</a></div>
+            </article>
+
+            <!-- ============================================ -->
+            <!-- POST 59 - Conversation avec les nuages (ancien ID:30) -->
+            <!-- ============================================ -->
+            <article class="post" data-post-id="59" itemscope itemtype="https://schema.org/BlogPosting">
+                <script type="application/ld+json">
+                {
+                    "@context": "https://schema.org",
+                    "@type": "Article",
+                    "headline": "Je n'abandonnerai pas",
+                    "description": "La Sonorité des Mots",
+                    "author": {
+                        "@type": "Person",
+                        "name": "Özlem Tüm"
+                    },
+                    "datePublished": "2026-08-03",
+                    "dateModified": "2026-08-03",
+                    "image": "https://vom-blog.com/images/oz-2.png",
+                    "url": "https://vom-blog.com/#post-59",
+                    "mainEntityOfPage": {
+                        "@type": "WebPage",
+                        "@id": "https://vom-blog.com/#post-59"
+                    },
+                    "publisher": {
+                        "@type": "Organization",
+                        "name": "VOM PUBLISHING",
+                        "logo": {
+                            "@type": "ImageObject",
+                            "url": "https://vom-blog.com/favicon-32x32.png"
+                        }
+                    },
+                    "keywords": "Istanbul, amour, ville, Özlem Tüm, poésie",
+                    "inLanguage": "fr"
+                }
+                </script>
+                <header>
+                    <div class="title">
+                        <h2 itemprop="headline"><a href="#post-59" class="post-title-link">Je n'abandonnerai pas </a></h2>
+                        <p itemprop="description">La Sonorité des Mots</p>
+                    </div>
+                    <div class="meta">
+                        <span class="post-date" itemprop="datePublished" content="2026-08-03">2 octobre 2026</span>
+                        <a href="#post-59" class="author" itemprop="author" itemscope itemtype="https://schema.org/Person">
+                            <span class="name" itemprop="name">Özlem Tüm</span>
+                            <img src="https://vom-blog.com/images/ozlem.png" alt="Avatar de Özlem Tüm" width="56" height="56" loading="lazy" onerror="this.src='https://randomuser.me/api/portraits/women/5.jpg'">
+                        </a>
+                    </div>
+                </header>
+                <a href="#post-59" class="image featured clickable-img" data-img="https://vom-blog.com/images/oz-5.png" itemprop="image"><img src="https://vom-blog.com/images/oz-5.png" alt="La Sonorité des Mots" width="800" height="450" loading="lazy"></a>
+                <p itemprop="articleBody">Si Istanbul avait une voix, quel genre de voix serait-ce ?
+				<br><br>
+La première chose qui me vient à l'esprit est le son des mouettes.
+<br><br>
+Je respire le parfum d'Istanbul.
+L'odeur d'algues…
+<br><br>
+Imaginez une fille de neuf ans. Elle est venue d'Ankara. Elle rencontre la mer pour la première fois. Elle regarde la mer et respire l'odeur d'algues.
+<br><br>
+Peut-être que mon lien avec Istanbul a commencé à ce moment précis.
+<br><br>
+Istanbul est une ville généreuse. Hospitalière. Elle semble prête à accepter tous ceux qui viennent. Mais soudain, elle vous fait sentir sa propre identité ; elle disperse et jette ce qu'elle ne veut pas. C'est une ville courageuse.
+<br><br>
+Je t'aime beaucoup.
+<br><br>
+Marcher sur le Bosphore qui relie deux continents, le plaisir du ferry… J'aime l'aventure gustative qu'elle me laisse en déchirant le simit chaud avec mes mains et en sirotant du thé à côté.
+<br><br>
+Si tu n'étais pas aussi généreuse, y aurait-il autant de richesse ?
+<br><br>
+Ton histoire… Ta situation géographique… Ta valeur sur terre… Les civilisations établies… Les pays, les gens, les vies dont tu as été témoin…
+<br><br>
+Tout s'est accumulé en toi.
+<br><br>
+J'aime ta posture qui remet les gens à leur place, ta façon de secouer et jeter tout ce que tu n'acceptes pas, ton identité fière.
+<br><br>
+Je te remercie pour tout ce que tu m'as appris.</p>
+                <div class="full-post-content" id="full-59"><p class="full-text"><br><br>
+De mes neuf ans à cet âge, tu m'as ouvert tes bras.
+<br><br>
+Et je n'ai jamais abandonné t'aimer.
+<br><br>
+J'aime beaucoup ta voix, ton odeur, ton image, ton toucher.
+<br><br>
+Et je sais ;
+<br><br>
+Je n'abandonnerai pas t'aimer.</p></div>
+                <div class="post-footer">
+                    <ul class="actions"><li><a href="#post-59" class="button read-more-btn" data-id="59">Lire la suite</a></li></ul>
+                    <ul class="stats"><li class="comment-toggle" data-post="59"><a href="#post-59"><i class="fas fa-comment"></i> Commentaires (<span class="comment-count">0</span>)</a></li></ul>
+                </div>
+                <div class="comments-section" id="comments-section-59">
+                    <div class="comments-title">Commentaires (<span class="comment-count-display">0</span>)</div>
+                    <div class="comments-list" id="comments-list-59"></div>
+                    <div class="add-comment-form">
+                        <input type="text" class="comment-input" id="comment-name-59" placeholder="Votre nom">
+                        <textarea class="comment-text" id="comment-text-59" placeholder="Écrivez votre commentaire..." rows="2"></textarea>
+                        <button class="submit-comment" data-post="59">Envoyer</button>
+                    </div>
+                </div>
+                <div class="old-posts-link"><a href="index4.html" target="_blank"><i class="fas fa-archive"></i> Anciens Articles</a></div>
+            </article>
+
+            <!-- ============================================ -->
+            <!-- POST 60 - Mémoire (ancien ID:31) -->
+            <!-- ============================================ -->
+            <article class="post" data-post-id="60" itemscope itemtype="https://schema.org/BlogPosting">
+                <script type="application/ld+json">
+                {
+                    "@context": "https://schema.org",
+                    "@type": "Article",
+                    "headline": "Bonheur",
+                    "description": "L'Esprit du Temps",
+                    "author": {
+                        "@type": "Person",
+                        "name": "Dr. Funda Çar"
+                    },
+                    "datePublished": "2026-08-03",
+                    "dateModified": "2026-08-03",
+                    "image": "https://vom-blog.com/images/FUN-2.png",
+                    "url": "https://vom-blog.com/#post-60",
+                    "mainEntityOfPage": {
+                        "@type": "WebPage",
+                        "@id": "https://vom-blog.com/#post-60"
+                    },
+                    "publisher": {
+                        "@type": "Organization",
+                        "name": "VOM PUBLISHING",
+                        "logo": {
+                            "@type": "ImageObject",
+                            "url": "https://vom-blog.com/favicon-32x32.png"
+                        }
+                    },
+                    "keywords": "bonheur, émotion, vie, Funda Çar, psychologie",
+                    "inLanguage": "fr"
+                }
+                </script>
+                <header>
+                    <div class="title">
+                        <h2 itemprop="headline"><a href="#post-60" class="post-title-link">Bonheur</a></h2>
+                        <p itemprop="description">L'Esprit du Temps</p>
+                    </div>
+                    <div class="meta">
+                        <span class="post-date" itemprop="datePublished" content="2026-08-03">2 octobre 2026</span>
+                        <a href="#post-60" class="author" itemprop="author" itemscope itemtype="https://schema.org/Person">
+                            <span class="name" itemprop="name">Dr. Funda Çar</span>
+                            <img src="https://vom-blog.com/images/funda.png" alt="Avatar de Dr. Funda Çar" width="56" height="56" loading="lazy" onerror="this.src='https://randomuser.me/api/portraits/women/6.jpg'">
+                        </a>
+                    </div>
+                </header>
+                <a href="#post-60" class="image featured clickable-img" data-img="https://vom-blog.com/images/FUN-5.png" itemprop="image"><img src="https://vom-blog.com/images/FUN-5.png" alt="L'Esprit du Temps" width="1408" height="768" loading="lazy"></a>
+                <p itemprop="articleBody">
+
+Le bonheur, se sentir heureux, est-ce une imposition de notre époque ? Parce qu'il y a une illusion chez l'être humain que tout dans le monde, même dans l'univers, semble exister pour servir le bonheur humain. Les autres êtres vivants ne vivent pas pour cela, mais les humains devraient toujours être heureux... Or, beaucoup de gens ne peuvent même pas définir le bonheur à leur manière.
+<br><br>
+Il peut certainement y avoir autant de recettes de bonheur que de personnes.
+<br><br>
+Vraiment, quels moments de la vie peuvent être une source de bonheur ?</p>
+                <div class="full-post-content" id="full-60"><p class="full-text"><br><br>
+Ce premier moment où un bébé tète le sein de sa mère...
+<br><br>
+Se réveiller dans son lit confortable avec les mélodies à peine perceptibles du piano venant d'en bas, traversant le plafond du voisin...
+<br><br>
+Marcher, avancer sur une route où les arbres forment presque un passage...
+<br><br>
+Sentir l'odeur de la mer dans ses poumons alors que le soleil se couche de là où il est, avec du sable chaud et humide sous ses pieds...
+<br><br>
+Un soir d'été, vous êtes sur un transat sur le sable avec un verre à la main ; une lune cramoisie se lève comme un feu au milieu de la mer...
+<br><br>
+Vous êtes au bord de la mer ; la mer est calme comme un lac, cette magnifique lumière du ciel a frappé la mer et se reflète. À côté de vous, il y a quelqu'un avec qui vous partagez ce moment, à qui vous dites « Quel beau moment ! », que vous aimez beaucoup ; votre ami, votre enfant, votre famille...
+<br><br>
+Vous avancez en caressant les eaux, l'eau salée pique votre nez, vous entendez votre souffle ; vous êtes mêlé à la mer...
+<br><br>
+Vous marchez dehors quand tout est couvert de neige, respirant avec la magnifique propreté de l'air ; le silence du temps neigeux tout autour...
+<br><br>
+Pourraient-ils être quelques moments de bonheur ?</p></div>
+                <div class="post-footer">
+                    <ul class="actions"><li><a href="#post-60" class="button read-more-btn" data-id="60">Lire la suite</a></li></ul>
+                    <ul class="stats"><li class="comment-toggle" data-post="60"><a href="#post-60"><i class="fas fa-comment"></i> Commentaires (<span class="comment-count">0</span>)</a></li></ul>
+                </div>
+                <div class="comments-section" id="comments-section-60">
+                    <div class="comments-title">Commentaires (<span class="comment-count-display">0</span>)</div>
+                    <div class="comments-list" id="comments-list-60"></div>
+                    <div class="add-comment-form">
+                        <input type="text" class="comment-input" id="comment-name-60" placeholder="Votre nom">
+                        <textarea class="comment-text" id="comment-text-60" placeholder="Écrivez votre commentaire..." rows="2"></textarea>
+                        <button class="submit-comment" data-post="60">Envoyer</button>
+                    </div>
+                </div>
+                <div class="old-posts-link"><a href="index4.html" target="_blank"><i class="fas fa-archive"></i> Anciens Articles</a></div>
+            </article>
+
+            <!-- ============================================ -->
+            <!-- POST 61 - Trésor (ancien ID:32) -->
+            <!-- ============================================ -->
+            <article class="post" data-post-id="61" itemscope itemtype="https://schema.org/BlogPosting">
+                <script type="application/ld+json">
+                {
+                    "@context": "https://schema.org",
+                    "@type": "Article",
+                    "headline": "Trésor",
+                    "description": "ce",
+                    "author": {
+                        "@type": "Person",
+                        "name": "Hatice Sarıkaya"
+                    },
+                    "datePublished": "2026-08-03",
+                    "dateModified": "2026-08-03",
+                    "image": "https://vom-blog.com/images/hat-2.png",
+                    "url": "https://vom-blog.com/#post-61",
+                    "mainEntityOfPage": {
+                        "@type": "WebPage",
+                        "@id": "https://vom-blog.com/#post-61"
+                    },
+                    "publisher": {
+                        "@type": "Organization",
+                        "name": "VOM PUBLISHING",
+                        "logo": {
+                            "@type": "ImageObject",
+                            "url": "https://vom-blog.com/favicon-32x32.png"
+                        }
+                    },
+                    "keywords": "temps, valeur, souvenir, Hatice Sarıkaya, vie",
+                    "inLanguage": "fr"
+                }
+                </script>
+                <header>
+                    <div class="title">
+                        <h2 itemprop="headline"><a href="#post-61" class="post-title-link">Trésor</a></h2>
+                        <p itemprop="description">ce</p>
+                    </div>
+                    <div class="meta">
+                        <span class="post-date" itemprop="datePublished" content="2026-08-03">2 octobre 2026</span>
+                        <a href="#post-61" class="author" itemprop="author" itemscope itemtype="https://schema.org/Person">
+                            <span class="name" itemprop="name">Hatice Sarıkaya</span>
+                            <img src="https://vom-blog.com/images/hatice.png" alt="Avatar de Hatice Sarıkaya" width="56" height="56" loading="lazy" onerror="this.src='https://randomuser.me/api/portraits/women/7.jpg'">
+                        </a>
+                    </div>
+                </header>
+                <a href="#post-61" class="image featured clickable-img" data-img="https://vom-blog.com/images/HAT-5.png" itemprop="image"><img src="https://vom-blog.com/images/HAT-5.png" alt="ce" width="800" height="450" loading="lazy"></a>
+                <p itemprop="articleBody">
+Vous avez sûrement dû en croiser différentes versions quelque part, ou peut-être l'avez-vous vécu ; l'homme âgé ne renonce jamais à parler à sa femme atteinte d'Alzheimer, à faire ensemble les choses qu'elle « aimait autrefois », à lui consacrer du temps. Un témoin de tout cela dit « ..pourquoi » « elle ne se souvient pas que tu es son mari, ni même de ton nom.. elle oubliera ce que tu as fait aujourd'hui dans un instant.. » l'homme répond « Je me souviens. Je sais qu'elle est ma femme et que je l'aime. N'est-ce pas suffisant ? » Je ne sais pas si c'est durable dans la vie réelle. Pouvoir continuer à parler, à consacrer du temps non pas parce qu'on y est obligé mais parce qu'on aime même si elle ne se souvient pas, ne peut pas donner de sens...
+<br><br>
+Je m'incline avec respect devant ces personnes précieuses qui peuvent faire cela, le maintenir. Dans la relation parent-enfant, la communication peut devenir encore plus difficile, même sembler inutile. Vous êtes un enfant, vous avez votre travail, votre conjoint, vos enfants, votre vie qui s'écoule. Vous trouvez un endroit où ils sont en sécurité, vous suivez leur santé, vous prenez soin d'eux ou trouvez quelqu'un pour fournir les soins. Vous faites tout ce qui peut être fait parfaitement, mais vous n'avez même pas un court moment pour parler à un parent qui ne se souvient même pas de votre nom, ou cela vous fait mal et vous arrêtez de parler. Ce n'est jamais quelque chose à reprocher ou à mépriser. Que ce soit par amour ou par obligation, si vous prenez la responsabilité, vous méritez un grand merci. Comment vous utilisez votre temps est à votre disposition.
+<br><br>
+J'ai étendu l'introduction, j'en suis consciente, venons au fait ; notre sujet n'est pas Alzheimer ni communiquer. Notre sujet est le temps. Pas le temps passé, le temps futur, le temps qui est un remède à la douleur, qui coule comme l'eau ou ne passe jamais. Votre temps ; le temps dont vous décidez comment le dépenser ou comment l'utiliser. Disons que vous avez rencontré quelqu'un et que vous voulez qu'il fasse partie de votre vie. Que faites-vous ? Revenons un peu en arrière ; six mois, six ans, vingt-six ans, 46 ans, quand que vous ayez vécu.. Qu'avez-vous fait ? Vous travaillez, vous essayez de quitter le travail plus tôt. Un café où vous traînez pour lire un livre, boire un café devient un « lieu » où vous allez avec lui/elle. Une gare, un arrêt, un bâtiment/place central devient votre lieu de rencontre, vous n'avez pas besoin de prononcer le nom du lieu, vous dites « je suis à l'endroit ».</p>
+                <div class="full-post-content" id="full-61"><p class="full-text">Le quartier où vous vous êtes rencontrés, la date ont une signification particulière pour vous. Vous créez des occasions de le/la voir plus souvent et plus longtemps, tellement que vous mettez même de côté vos occupations préférées pendant un moment. Vous vous intéressez à son travail, ses occupations, ses passe-temps. Vous découvrez de nouveaux endroits ensemble. Avant qu'une rencontre ne se termine, vous planifiez la suivante. Vous achetez des cadeaux, vous facilitez sa vie. Quoi que de bon ou de mauvais vous arrive, vous voulez immédiatement le partager avec lui/elle. Votre mère est-elle malade, votre maison est-elle en démolition, votre frère/sœur a-t-il/elle obtenu la section qu'il/elle voulait, avez-vous été promu, avez-vous appris une blague très drôle, avez-vous fait une farce à un ami.. vous voulez le/la lui dire en premier. Votre journée commence avec lui/elle, se termine avec lui/elle. Vous faites tout cela pour maintenir la relation, l'approfondir, ou parce que vous en avez envie, parce que vous l'aimez, la relation continue, s'approfondit. 
+<br><br>
+Disons que vous avez fondé une plateforme, un collectif, une fondation ou un club pour gagner de l'argent ou pour la responsabilité sociale, pour ouvrir un espace où les gens peuvent s'exprimer, peut-être pour le besoin des gens qui sont encore seuls parmi cette multitude de foules et de possibilités d'être vus, d'être entendus, en dernière analyse la raison n'est pas très importante. Vous contactez des gens pour créer et développer cette formation, vous soutenez et travaillez pour qu'ils produisent des produits, services, œuvres. Si même une seule personne se sent mieux qu'avant dans ce processus, vous devenez heureux. Les exemples peuvent être multipliés ; renforcer votre communication avec votre enfant, guérir une blessure dans le corps ou l'âme, lire le livre que votre ami a écrit, visiter un artiste, un professionnel qui a accompli de grandes choses dans son domaine, montrer qu'ils ne sont pas oubliés, les honorer.. Vous faites tout cela en épargnant de votre temps, le temps dont vous décidez comment le dépenser ou comment l'utiliser. 
+<br><br>
+Les gens dépensent effort, labeur, argent pour voir de la valeur et/ou pour montrer qu'ils valorisent. Je pense que la chose la plus précieuse qui puisse être faite pour guérir, développer, faire grandir, honorer quelque chose est de lui consacrer du temps. Le cadeau le plus précieux que vous puissiez offrir à quelqu'un est votre temps passé avec lui/elle. Si j'ai été l'instrument pour vous faire arrêter et réfléchir sur pour qui, où, comment vous utilisez votre temps, combien je suis heureuse.
+<br><br>
+Avec le souhait que vous dépensiez votre trésor le plus précieux pour des personnes et des occupations qui vous font du bien et ajoutent de la valeur à votre vie..
+<br><br>
+ce</p></div>
+                <div class="post-footer">
+                    <ul class="actions"><li><a href="#post-61" class="button read-more-btn" data-id="61">Lire la suite</a></li></ul>
+                    <ul class="stats"><li class="comment-toggle" data-post="61"><a href="#post-61"><i class="fas fa-comment"></i> Commentaires (<span class="comment-count">0</span>)</a></li></ul>
+                </div>
+                <div class="comments-section" id="comments-section-61">
+                    <div class="comments-title">Commentaires (<span class="comment-count-display">0</span>)</div>
+                    <div class="comments-list" id="comments-list-61"></div>
+                    <div class="add-comment-form">
+                        <input type="text" class="comment-input" id="comment-name-61" placeholder="Votre nom">
+                        <textarea class="comment-text" id="comment-text-61" placeholder="Écrivez votre commentaire..." rows="2"></textarea>
+                        <button class="submit-comment" data-post="61">Envoyer</button>
+                    </div>
+                </div>
+                <div class="old-posts-link"><a href="index4.html" target="_blank"><i class="fas fa-archive"></i> Anciens Articles</a></div>
+            </article>
+
+            <!-- ============================================ -->
+            <!-- POST 62 - Douleur (ancien ID:33) -->
+            <!-- ============================================ -->
+            <article class="post" data-post-id="62" itemscope itemtype="https://schema.org/BlogPosting">
+                <script type="application/ld+json">
+                {
+                    "@context": "https://schema.org",
+                    "@type": "Article",
+                    "headline": "Douleur",
+                    "description": "De la plume de Münire",
+                    "author": {
+                        "@type": "Person",
+                        "name": "Münire Özgencan"
+                    },
+                    "datePublished": "2026-08-03",
+                    "dateModified": "2026-08-03",
+                    "image": "https://vom-blog.com/images/M-2.png",
+                    "url": "https://vom-blog.com/#post-62",
+                    "mainEntityOfPage": {
+                        "@type": "WebPage",
+                        "@id": "https://vom-blog.com/#post-62"
+                    },
+                    "publisher": {
+                        "@type": "Organization",
+                        "name": "VOM PUBLISHING",
+                        "logo": {
+                            "@type": "ImageObject",
+                            "url": "https://vom-blog.com/favicon-32x32.png"
+                        }
+                    },
+                    "keywords": "mémoire, famille, Münire Özgencan, retour",
+                    "inLanguage": "fr"
+                }
+                </script>
+                <header>
+                    <div class="title">
+                        <h2 itemprop="headline"><a href="#post-62" class="post-title-link">Douleur</a></h2>
+                        <p itemprop="description">De la plume de Münire</p>
+                    </div>
+                    <div class="meta">
+                        <span class="post-date" itemprop="datePublished" content="2026-08-03">2 octobre 2026</span>
+                        <a href="#post-62" class="author" itemprop="author" itemscope itemtype="https://schema.org/Person">
+                            <span class="name" itemprop="name">Münire Özgencan</span>
+                            <img src="https://vom-blog.com/images/münire.png" alt="Avatar de Münire Özgencan" width="56" height="56" loading="lazy" onerror="this.src='https://randomuser.me/api/portraits/men/4.jpg'">
+                        </a>
+                    </div>
+                </header>
+                <a href="#post-62" class="image featured clickable-img" data-img="https://vom-blog.com/images/M-5.png" itemprop="image"><img src="https://vom-blog.com/images/M-5.png" alt="De la plume de Münire" width="800" height="450" loading="lazy"></a>
+                <p itemprop="articleBody">Quand je suis entrée dans la rue où se trouvait la maison, il était presque soir. Combien d'années s'étaient écoulées depuis que j'avais quitté cette ville. Quinze, vingt. Je ne me souviens pas. La rue avait beaucoup changé. Il y a maintenant un marché là où se trouvait la boutique de Nalbur Kemal. La boulangerie est devenue un café. Ma mère est une femme têtue. Après la mort de mon père, elle n'a pas donné la maison à l'entrepreneur. Seules notre maison et celle de l'épicier Hayri sont restées des anciennes. La fenêtre de la cuisine à l'étage inférieur est ouverte. L'odeur de friture vient. La friture mixte de ma mère. Je ferme les yeux.</p>
+                <div class="full-post-content" id="full-62"><p class="full-text"> Entre les cris de mon père et les sanglots de ma mère, je tire la porte et quitte la maison. Je reste dans la rue avec une valise remplie de quelques-uns de mes vêtements et livres. Je passe la nuit chez mon amie Belma. Je ne suis pas allée à l'enterrement de mon père. Il l'avait légué, pour que je ne vienne pas. J'ai vécu à l'étranger avec cette douleur de conscience à chaque moment. Maintenant je charge le blâme sur le temps et je sonne à la porte...</p></div>
+                <div class="post-footer">
+                    <ul class="actions"><li><a href="#post-62" class="button read-more-btn" data-id="62">Lire la suite</a></li></ul>
+                    <ul class="stats"><li class="comment-toggle" data-post="62"><a href="#post-62"><i class="fas fa-comment"></i> Commentaires (<span class="comment-count">0</span>)</a></li></ul>
+                </div>
+                <div class="comments-section" id="comments-section-62">
+                    <div class="comments-title">Commentaires (<span class="comment-count-display">0</span>)</div>
+                    <div class="comments-list" id="comments-list-62"></div>
+                    <div class="add-comment-form">
+                        <input type="text" class="comment-input" id="comment-name-62" placeholder="Votre nom">
+                        <textarea class="comment-text" id="comment-text-62" placeholder="Écrivez votre commentaire..." rows="2"></textarea>
+                        <button class="submit-comment" data-post="62">Envoyer</button>
+                    </div>
+                </div>
+                <div class="old-posts-link"><a href="index4.html" target="_blank"><i class="fas fa-archive"></i> Anciens Articles</a></div>
+            </article>
+
+            <!-- ============================================ -->
+            <!-- POST 63 - Anatomie de la chute (ancien ID:34) -->
+            <!-- ============================================ -->
+            <article class="post" data-post-id="63" itemscope itemtype="https://schema.org/BlogPosting">
+                <script type="application/ld+json">
+                {
+                    "@context": "https://schema.org",
+                    "@type": "Article",
+                    "headline": "Je rapporte du ciel !",
+                    "description": "De Zülay",
+                    "author": {
+                        "@type": "Person",
+                        "name": "Zülay Güçlü"
+                    },
+                    "datePublished": "2026-08-03",
+                    "dateModified": "2026-08-03",
+                    "image": "https://vom-blog.com/images/Zul-2.png",
+                    "url": "https://vom-blog.com/#post-63",
+                    "mainEntityOfPage": {
+                        "@type": "WebPage",
+                        "@id": "https://vom-blog.com/#post-63"
+                    },
+                    "publisher": {
+                        "@type": "Organization",
+                        "name": "VOM PUBLISHING",
+                        "logo": {
+                            "@type": "ImageObject",
+                            "url": "https://vom-blog.com/favicon-32x32.png"
+                        }
+                    },
+                    "keywords": "perspective, distance, Zülay Güçlü, philosophie",
+                    "inLanguage": "fr"
+                }
+                </script>
+                <header>
+                  <div class="title">
+                    <h2 itemprop="headline"><a href="#post-63" class="post-title-link">Je rapporte du ciel !</a></h2>
+                      <p itemprop="description">De Zülay</p>
+                    </div>
+                    <div class="meta">
+                        <span class="post-date" itemprop="datePublished" content="2026-08-03">2 octobre 2026</span>
+                        <a href="#post-63" class="author" itemprop="author" itemscope itemtype="https://schema.org/Person">
+                            <span class="name" itemprop="name">Zülay Güçlü</span>
+                            <img src="https://vom-blog.com/images/zulay.png" alt="Avatar de Zülay Güçlü" width="56" height="56" loading="lazy" onerror="this.src='https://randomuser.me/api/portraits/lego/1.jpg'">
+                        </a>
+                    </div>
+                </header>
+                <a href="#post-63" class="image featured clickable-img" data-img="https://vom-blog.com/images/Zul-5.png" itemprop="image"><img src="https://vom-blog.com/images/Zul-5.png" alt="De Zülay" width="800" height="450" loading="lazy"></a>
+                <p itemprop="articleBody">Tout semble si petit de loin… N'est-ce pas ? Les gens, les maisons, les voitures, les objets… Mais surtout, les événements. Ils semblent si grands quand on est dedans. Parfois complexes, parfois précipités, parfois faciles, parfois impossibles à surmonter… 
+                <br><br>
+Nous nous laissons emporter par le flux de l'événement, nous nous perdons dans les détails, et en essayant de rattraper d'un point à un autre, nous ne pouvons pas voir le tableau d'ensemble. Alors que la solution se tient parfois tranquillement au milieu de toute cette confusion. Nous ne pouvons tout simplement pas la voir parce que nous la regardons de trop près. Quand j'ai réalisé cela, j'étais dans le ciel.</p>
+                <div class="full-post-content" id="full-63"><p class="full-text">J'étais dans une montgolfière. À mesure que je m'élevais, je voyais comment les choses que nous magnifions en bas devenaient indistinctes. Les maisons rétrécissaient, les voitures devenaient petites, les gens restaient aussi petits que des points. Les rues, les routes que nous pensions immenses en les traversant quelques instants auparavant, se transformaient en fines lignes vues d'en haut. Et à ce moment-là, j'ai remarqué autre chose : Les routes ne disparaissaient pas. Je ne pouvais tout simplement pas voir toute la route quand j'étais dedans. La vie n'est-elle pas un peu comme ça aussi ? Quand on est dans un événement, on ne voit que là où on est. 
+<br><br>
+L'obstacle devant nous, le mur à côté de nous, la tâche que nous devons rattraper, le mot que nous devons dire… Cela peut nous fatiguer. Alors que quand nous reculons un peu, nous réalisons qu'il y a une issue dans tout cela. Considérez une dispute. Une seule phrase dite sur le moment peut sembler la chose la plus importante du monde. La colère grandit en nous, les mots deviennent plus lourds. Nous voulons répondre immédiatement.    
+<br><br>
+Quelques heures, même quelques jours plus tard, quand nous regardons la même phrase, nous pensons la plupart du temps ceci : « Cela valait-il vraiment la peine de me contrarier autant pour cela ? » Le temps est aussi une sorte de distance. Peut-être la réalité se met-elle en place à mesure que nous nous éloignons. 
+<br><br>
+Cela ne signifie pas que les choses que nous vivons sont sans importance. Au contraire… Cela signifie mesurer l'événement plus précisément. S'éloigner n'est pas s'échapper. Reculer n'est pas abandonner. Parfois reculer est un petit espace que nous nous donnons pour pouvoir regarder d'un endroit plus correct. Parfois ce dont nous avons besoin dans la vie n'est pas une solution, mais de la distance.
+<br><br>
+Alors donc ; Puissiez-vous avoir assez de distance pour voir votre chemin, assez de patience pour rester sur le chemin, et assez de compagnons pour embellir votre chemin.</p></div>
+                <div class="post-footer">
+                    <ul class="actions"><li><a href="#post-63" class="button read-more-btn" data-id="63">Lire la suite</a></li></ul>
+                    <ul class="stats"><li class="comment-toggle" data-post="63"><a href="#post-63"><i class="fas fa-comment"></i> Commentaires (<span class="comment-count">0</span>)</a></li></ul>
+                </div>
+                <div class="comments-section" id="comments-section-63">
+                    <div class="comments-title">Commentaires (<span class="comment-count-display">0</span>)</div>
+                    <div class="comments-list" id="comments-list-63"></div>
+                    <div class="add-comment-form">
+                        <input type="text" class="comment-input" id="comment-name-63" placeholder="Votre nom">
+                        <textarea class="comment-text" id="comment-text-63" placeholder="Écrivez votre commentaire..." rows="2"></textarea>
+                        <button class="submit-comment" data-post="63">Envoyer</button>
+                    </div>
+                </div>
+                <div class="old-posts-link"><a href="index4.html" target="_blank"><i class="fas fa-archive"></i> Anciens Articles</a></div>
+            </article>
+
+            <!-- ============================================ -->
+            <!-- POST 64 - Les mathématiques de l'amour (ancien ID:35) -->
+            <!-- ============================================ -->
+          <article class="post" data-post-id="64" itemscope itemtype="https://schema.org/BlogPosting">
+                <script type="application/ld+json">
+                {
+                    "@context": "https://schema.org",
+                    "@type": "Article",
+                    "headline": "L'Élégance du hérisson",
+                    "description": "Parallaxe",
+                    "author": {
+                        "@type": "Person",
+                        "name": "Sevim Yücel"
+                    },
+                    "datePublished": "2026-08-03",
+                    "dateModified": "2026-08-03",
+                    "image": "https://vom-blog.com/images/SEV-2.png",
+                    "url": "https://vom-blog.com/#post-64",
+                    "mainEntityOfPage": {
+                        "@type": "WebPage",
+                        "@id": "https://vom-blog.com/#post-64"
+                    },
+                    "publisher": {
+                        "@type": "Organization",
+                        "name": "VOM PUBLISHING",
+                        "logo": {
+                            "@type": "ImageObject",
+                            "url": "https://vom-blog.com/favicon-32x32.png"
+                        }
+                    },
+                    "keywords": "livre, critique, Muriel Barbery, Sevim Yücel, littérature",
+                    "inLanguage": "fr"
+                }
+                </script>
+                <header>
+                  <div class="title">
+                    <h2 itemprop="headline"><a href="#post-64" class="post-title-link">L'Élégance du hérisson</a></h2>
+                      <p itemprop="description">Parallaxe</p>
+                    </div>
+                    <div class="meta">
+                        <span class="post-date" itemprop="datePublished" content="2026-08-03">2 octobre 2026</span>
+                        <a href="#post-64" class="author" itemprop="author" itemscope itemtype="https://schema.org/Person">
+                            <span class="name" itemprop="name">Sevim Yücel</span>
+                            <img src="https://vom-blog.com/images/sevim.png" alt="Avatar de Sevim Yücel" width="56" height="56" loading="lazy" onerror="this.src='https://randomuser.me/api/portraits/women/6.jpg'">
+                        </a>
+                    </div>
+                </header>
+                <a href="#post-64" class="image featured clickable-img" data-img="https://vom-blog.com/images/SEV-5.png" itemprop="image"><img src="https://vom-blog.com/images/SEV-5.png" alt="Sevim Yücel - Parallaxe" width="800" height="450" loading="lazy"></a>
+                <p itemprop="articleBody">Le personnage Renée dans le livre de Muriel Barbery « L'Élégance du hérisson » travaille comme concierge dans un immeuble parisien où vivent des aristocrates. Elle est tout à fait en dehors de la compréhension physiquement acceptée de la beauté, et elle n'est pas elle-même une femme satisfaite de son corps. C'est le cas depuis son enfance. En fait, quand elle a commencé l'école primaire, la compassion que son professeur lui a montrée est devenue l'une des premières choses qui l'ont affectée dans sa vie. 
+                  <br><br>
+                  Quand elle a appris à lire, Renée s'est ouvert un autre espace. Elle a commencé à construire le monde dans lequel elle ne pouvait pas exister visuellement en lisant et en apprenant. Elle ne peut pas recevoir beaucoup d'éducation ; après avoir terminé l'école primaire, elle est retirée de l'école pour aider sa famille avec les travaux ménagers et dans les champs. Mais parce qu'elle a une fois rencontré la lecture, elle lit tout ce qui lui tombe sous la main. Elle va à la bibliothèque, examine des livres dans différents domaines, et au fil du temps se construit un grand monde commençant par la littérature. Cet intérêt s'étend plus tard à d'autres domaines de l'art comme la musique, le cinéma, le théâtre et la peinture. Bien que Renée semble être une concierge ordinaire de l'extérieur, dans son propre monde, elle se transforme en une véritable intellectuelle.</p>
+                <div class="full-post-content" id="full-64"><p class="full-text">Un autre personnage vivant dans l'immeuble est « Paloma », douze ans, fille d'un père qui a été député et ministre. Malgré son âge, son intelligence et sa perception sont extrêmement développées. Les événements autour d'elle, sa famille et sa vie scolaire lui semblent dénués de sens et superficiels. Elle questionne le sens de la vie, a un grand intérêt pour la philosophie et vit une profonde solitude. Par conséquent, elle aussi choisit d'être invisible, comme Renée.
+                    <br><br>
+                  Renée, d'autre part, ne partage son accumulation intellectuelle avec personne. Elle se retire dans son propre monde pour éviter d'attirer l'attention des gens. Elle ne parle pas beaucoup aux gens, elle fait juste son travail et essaie de ne pas attirer l'attention par ce qu'elle dit ou écrit. Dans un sens, tout comme un hérisson, elle fait de ses piquants un château pour elle-même.
+                    <br><br>
+                   En fait, il y a une situation similaire dans notre vie quotidienne. Quand nous allons au restaurant, nous ne regardons la plupart du temps pas attentivement le visage du serveur ; quand nous montons dans un véhicule, nous ne nous demandons pas qui est le chauffeur. Nous identifions souvent les gens par le travail qu'ils font. Renée n'est aussi qu'une concierge aux yeux de la société. Alors qu'à l'intérieur d'elle, il y a un monde intellectuel extrêmement riche que personne ne connaît.
+                    <br><br>
+                   Les chemins de Renée et Paloma commencent à se croiser à ce point. Un jour, Paloma voit un livre de philosophie qui tombe du sac de courses de Renée et remarque qu'il y a une contradiction entre ce qu'elle sait d'elle et ce qu'elle voit. Cependant, le vrai changement commence quand le réalisateur japonais Kakuro Ozu emménage dans l'immeuble.
+                    <br><br>
+                   Quand Ozu rencontre Renée, il réalise qu'une phrase qu'elle dit est la première phrase d'« Anna Karénine » et continue la phrase. Ainsi, Renée rencontre pour la première fois quelqu'un qui peut vraiment répondre à son propre monde. Paloma devient aussi la troisième partie de cette relation.
+                    <br><br>
+                    L'histoire de ces trois personnes qui regardent la vie sous différents angles est l'un des aspects les plus impressionnants du livre. Parce que « L'Élégance du hérisson » nous rappelle que nous ne devrions pas regarder les gens seulement par ce que nous voyons de l'extérieur. L'apparence, l'âge ou le travail d'une personne ne suffisent pas à raconter son monde intérieur.
+					<br><br>
+					Quand j'ai pris le livre pour la première fois, c'est pourquoi son titre a attiré mon attention : « L'Élégance du hérisson ». À première vue, cela semble être deux mots que nous ne pourrions jamais mettre côte à côte. Alors que nous n'avons pas besoin de voir la vie comme seulement noir et blanc, mais de pouvoir remarquer toutes les tonalités entre les deux. Oui, un hérisson a aussi de l'élégance ; et même une profondeur d'élégance que nous ne pourrions jamais deviner à première vue.
+					<br><br>
+					« L'Élégance du hérisson » est un livre qui suggère de regarder la vie sous un autre angle. Bien que certaines parties soient assez philosophiques, c'est une œuvre qui vaut la peine d'être lue pour ceux qui veulent regarder les gens et le monde en dehors de l'habituel.
+					<br><br>
+					L'Élégance du hérisson. Éditions Kırmızı Kedi. 320 pages.</p></div>
+                <div class="post-footer">
+                    <ul class="actions"><li><a href="#post-64" class="button read-more-btn" data-id="64">Lire la suite</a></li></ul>
+                    <ul class="stats"><li class="comment-toggle" data-post="64"><a href="#post-64"><i class="fas fa-comment"></i> Commentaires (<span class="comment-count">0</span>)</a></li></ul>
+                </div>
+                <div class="comments-section" id="comments-section-64">
+                    <div class="comments-title">Commentaires (<span class="comment-count-display">0</span>)</div>
+                    <div class="comments-list" id="comments-list-64"></div>
+                    <div class="add-comment-form">
+                        <input type="text" class="comment-input" id="comment-name-64" placeholder="Votre nom">
+                        <textarea class="comment-text" id="comment-text-64" placeholder="Écrivez votre commentaire..." rows="2"></textarea>
+                        <button class="submit-comment" data-post="64">Envoyer</button>
+                    </div>
+                </div>
+                <div class="old-posts-link"><a href="index4.html" target="_blank"><i class="fas fa-archive"></i> Anciens Articles</a></div>
+            </article>
+
+            <!-- ============================================ -->
+            <!-- POST 65 - Pourquoi un pot se fissure-t-il ? (ancien ID:36) -->
+            <!-- ============================================ -->
+            <article class="post" data-post-id="65" itemscope itemtype="https://schema.org/BlogPosting">
+                <script type="application/ld+json">
+                {
+                    "@context": "https://schema.org",
+                    "@type": "Article",
+                    "headline": "Clé",
+                    "description": "L'Histoire des Petites Choses (Essais sur les détails négligés de la vie)",
+                    "author": {
+                        "@type": "Person",
+                        "name": "Fulya Yılmaz"
+                    },
+                    "datePublished": "2026-08-03",
+                    "dateModified": "2026-08-03",
+                    "image": "https://vom-blog.com/images/yeni-post-36.png",
+                    "url": "https://vom-blog.com/#post-65",
+                    "mainEntityOfPage": {
+                        "@type": "WebPage",
+                        "@id": "https://vom-blog.com/#post-65"
+                    },
+                    "publisher": {
+                        "@type": "Organization",
+                        "name": "VOM PUBLISHING",
+                        "logo": {
+                            "@type": "ImageObject",
+                            "url": "https://vom-blog.com/favicon-32x32.png"
+                        }
+                    },
+                    "keywords": "clé, mémoire, Fulya Yılmaz, essai, histoire",
+                    "inLanguage": "fr"
+                }
+                </script>
+                <header>
+                    <div class="title">
+                        <h2 itemprop="headline"><a href="#post-65" class="post-title-link">Clé</a></h2>
+                        <p itemprop="description">L'Histoire des Petites Choses <em>(Essais sur les détails négligés de la vie)</em></p>
+                    </div>
+                    <div class="meta">
+                        <span class="post-date" itemprop="datePublished" content="2026-08-03">2 octobre 2026</span>
+                        <a href="#post-65" class="author" itemprop="author" itemscope itemtype="https://schema.org/Person">
+                            <span class="name" itemprop="name">Fulya Yılmaz</span>
+                            <img src="https://vom-blog.com/images/fulya.png" alt="Avatar de Fulya Yılmaz" width="56" height="56" loading="lazy" onerror="this.src='https://randomuser.me/api/portraits/women/6.jpg'">
+                        </a>
+                    </div>
+                </header>
+                <a href="#post-65" class="image featured clickable-img" data-img="https://vom-blog.com/images/FULYA-5.png" itemprop="image"><img src="https://vom-blog.com/images/FULYA-5.png" alt="L'Histoire des Petites Choses" width="800" height="450" loading="lazy"></a>
+                <p itemprop="articleBody">Sur la table de cuisine de la vieille maison en pierre à deux étages dans l'une des ruelles éloignées et étroites de Bodrum, cette clé était posée. À l'intérieur du bol en porcelaine au motif de citron hérité de sa mère, parmi les pièces de monnaie. Elle était lourde. C'était une clé coulée en laiton, à la pointe rugueuse, aux dents complexes. Sur son anneau, il y avait un motif incurvé propre aux vieilles clés. Les lignes ressemblant à de fines branches s'entrelaçaient autour du petit trou ovale au centre.</p>
+                <div class="full-post-content" id="full-65"><p class="full-text">Le bol semblait ne jamais avoir bougé de sa place depuis son enfance. Meltem posa les sacs d'olives qu'elle avait achetés au marché sur le comptoir. Elle suspendit le chiffon jaune qu'elle tenait à la main au bord de l'évier. La fatigue de la journée s'était posée sur ses fines épaules. Elle voulait faire un café et se reposer un peu.
+<br><br>
+Elle mit la cezve sur le feu.
+<br><br>
+Depuis qu'elle avait laissé Istanbul derrière elle et était revenue dans cette maison où elle était née et avait grandi, dans le mutisme froid et familier de ces murs de pierre, c'était la première fois qu'elle regardait la table aussi attentivement. Quand elle s'était réfugiée ici après s'être épuisée et avoir coupé tous ses liens, elle pensait que ces pièces épaisses à l'odeur de chaux la protégeraient. Alors que peu importe où une personne s'échappe, elle porte ses fractures dans sa poche de manteau.
+<br><br>
+Alors que le café gonflait lentement, une odeur sombre se répandit dans la cuisine. Le regard de Meltem se déplaça vers la table.
+<br><br>
+Le bol.
+<br><br>
+Les pièces.
+<br><br>
+Et la clé se tenant parmi eux.
+<br><br>
+La première semaine de son retour, elle avait essayé cette clé sur toutes les serrures de la maison avec une obstination enfantine, comme si elle cherchait quelque chose qu'elle avait perdu. La lourde serrure en acier de la porte d'entrée, le verrou en bois ouvrant sur le jardin arrière, la trappe du grenier, le cadenas rouillé du débarras…
+<br><br>
+Elle n'avait convenu à aucune d'elles.
+<br><br>
+La clé n'appartenait à aucune des serrures de cette maison ; tout comme Meltem ne pouvait plus appartenir à ce nid sûr de son enfance, à ces vieux jours paisibles.
+<br><br>
+Ça n'a pas marché.
+<br><br>
+Finalement, elle l'a remise là où elle l'avait prise..
+<br><br>
+Elle était là depuis ce jour.
+<br><br>
+Les premiers jours, elle se demandait d'où elle venait chaque fois qu'elle la voyait. Peut-être était-elle restée des premiers propriétaires de la maison. Peut-être était-ce la clé d'une porte qui n'existe plus, d'un coffre jeté, d'une serrure changée il y a des années. Peut-être était-ce quelque chose de beaucoup plus simple. Elle était tombée de la poche de quelqu'un, avait été trouvée et rangée quelque part.
+<br><br>
+D'un endroit à un autre. Finalement à son endroit actuel. Meltem versa le café dans la tasse et se rendit au salon. Elle s'installa sur le bord du fauteuil dans le coin. Elle posa la tasse sur la petite table d'appoint. Dehors il y avait du vent. Les feuilles roses arrachées au bougainvillier dérivaient sur les pierres, les branches séchées de mélisse se frottaient les unes contre les autres. Le soir descendait lentement sur le jardin. Cette saison de Bodrum avait un air qui tirait une personne en elle-même, ouvrait de vieux comptes. Elle aussi retrouvait chaque déception dont elle s'était échappée, l'absence de son père, dans cette pièce sombre rendue déserte à nouveau.					
+<br><br>
+Le café dans sa main avait depuis longtemps refroidi. Son esprit dériva vers la cuisine à nouveau. Pas seulement vers le bol. Vers la clé. Elle se leva. Elle tendit la main et prit la clé. Elle était froide.
+<br><br>
+La fine patine dessus laissa une odeur familière de métal sur ses doigts. Tout en tournant la clé dans sa main, elle regarda sa surface avec l'attention immobile propre aux personnes cherchant des traces invisibles derrière de vieux objets. Il n'y avait aucune trace autre que le motif. Pas une lettre, un chiffre, une rayure…
+<br><br>
+Rien. Pourquoi une personne garderait-elle une telle clé ? L'air humide de la fin de l'automne s'infiltrait par la fenêtre ouverte, remplissant la pièce en s'imprégnant dans les cadres en bois. Cette odeur fraîche et lourde lui rappela l'automne où son père était mort.			
+<br><br>
+En vidant les poches de sa veste et les tiroirs de sa table de nuit, elle avait trouvé des clés de tailles diverses enfilées sur une cordelette, dont on ne savait quelles serrures elles ouvraient. Son père était un homme sévère, taciturne, qui gardait toujours ses émotions sous clé. Peut-être c'est pourquoi il y avait un lien invisible entre lui et les clés. Ces clés n'ouvraient ni la porte de cette maison ni les tiroirs de la vieille boutique de la ville.
+<br><br>
+Pourtant elle ne les avait pas jetées. Meltem n'y avait pas prêté attention alors. Parce qu'elle n'avait pas trouvé le temps de questionner les silences de son père dans la précipitation de la vie. Maintenant, en regardant la clé dans sa main, elle pensait aux clés de son père. C'étaient de petits morceaux de métal d'époques différentes, différents les uns des autres. Certains avaient les dents usées, certains avaient les anneaux obscurcis. Son père n'avait jamais expliqué pourquoi il les gardait.
+<br><br>
+Peut-être lui aussi avait-il depuis longtemps oublié à quelles portes elles appartenaient. Peut-être ces clés étaient précieuses non pas parce qu'elles ouvraient un endroit maintenant, mais simplement parce qu'elles étaient témoins de ce passé qu'elles protégeaient autrefois. Son père avait caché dans ses tiroirs non pas les secrets derrière les serrures, mais la jeunesse qu'il avait traversée par ces portes.
+<br><br>
+Meltem serra un peu plus la clé dans sa paume. Dehors, le vent avait forci. La dernière lumière bleue s'infiltrant par la fenêtre frappait le bol en porcelaine sur la table en bois. Alors que les premières ombres du soir se répandaient lentement sur le plâtre rugueux du mur, elle remit la clé à sa place, à côté des pièces.					
+<br><br>
+Un son métallique sec et solide résonna dans la pièce. Les autres pièces dans le bol tintèrent légèrement, puis la cuisine retomba dans son profond silence. Dehors, le lampadaire s'alluma avec une lumière jaune. La lumière frappa le mur opposé de la maison en pierre et laissa une tache pâle sur la vitre de la fenêtre. Meltem regarda la clé dans le bol encore un moment. L'odeur métallique restant sur ses doigts, les dents rugueuses et la froideur du laiton obscurci... La porte à laquelle elle appartenait devait avoir été depuis longtemps démolie, sa serrure changée, ou restée sous un tas de décombres. Pourtant la clé semblait se tenir là comme si elle avait survécu à ce à quoi elle appartenait. Avec l'allure digne d'avoir autrefois gardé un endroit, un souvenir sous clé...
+<br><br>
+Meltem tendit la main et éteignit la lumière.					
+<br><br>
+La clé, et la vieille paix qu'elle cherchait dans la maison de son père, restèrent dans l'obscurité.</p></div>
+                <div class="post-footer">
+                    <ul class="actions"><li><a href="#post-65" class="button read-more-btn" data-id="65">Lire la suite</a></li></ul>
+                    <ul class="stats"><li class="comment-toggle" data-post="65"><a href="#post-65"><i class="fas fa-comment"></i> Commentaires (<span class="comment-count">0</span>)</a></li></ul>
+                </div>
+                <div class="comments-section" id="comments-section-65">
+                    <div class="comments-title">Commentaires (<span class="comment-count-display">0</span>)</div>
+                    <div class="comments-list" id="comments-list-65"></div>
+                    <div class="add-comment-form">
+                        <input type="text" class="comment-input" id="comment-name-65" placeholder="Votre nom">
+                        <textarea class="comment-text" id="comment-text-65" placeholder="Écrivez votre commentaire..." rows="2"></textarea>
+                        <button class="submit-comment" data-post="65">Envoyer</button>
+                    </div>
+                </div>
+                <div class="old-posts-link"><a href="index4.html" target="_blank"><i class="fas fa-archive"></i> Anciens Articles</a></div>
+            </article>
+
+            <!-- ============================================ -->
+            <!-- POST 66 - NOUVEAU POST (ancien ID:37) -->
+            <!-- ============================================ -->
+            <article class="post" data-post-id="66" itemscope itemtype="https://schema.org/BlogPosting">
+                <script type="application/ld+json">
+                {
+                    "@context": "https://schema.org",
+                    "@type": "Article",
+                    "headline": "À Suivre : L I",
+                    "description": "Façons de Voir",
+                    "author": {
+                        "@type": "Person",
+                        "name": "Gürhan Yücel"
+                    },
+                    "datePublished": "2026-08-03",
+                    "dateModified": "2026-08-03",
+                    "image": "https://vom-blog.com/images/yeni-post-37.png",
+                    "url": "https://vom-blog.com/#post-66",
+                    "mainEntityOfPage": {
+                        "@type": "WebPage",
+                        "@id": "https://vom-blog.com/#post-66"
+                    },
+                    "publisher": {
+                        "@type": "Organization",
+                        "name": "VOM PUBLISHING",
+                        "logo": {
+                            "@type": "ImageObject",
+                            "url": "https://vom-blog.com/favicon-32x32.png"
+                        }
+                    },
+                    "keywords": "histoire, mystère, Istanbul, Gürhan Yücel, série",
+                    "inLanguage": "fr"
+                }
+                </script>
+                <header>
+                    <div class="title">
+                        <h2 itemprop="headline"><a href="#post-66" class="post-title-link">À Suivre : L I</a></h2>
+                        <p itemprop="description">Façons de Voir</p>
+                    </div>
+                    <div class="meta">
+                        <span class="post-date" itemprop="datePublished" content="2026-08-03">2 octobre 2026</span>
+                        <a href="#post-66" class="author" itemprop="author" itemscope itemtype="https://schema.org/Person">
+                            <span class="name" itemprop="name">Gürhan Yücel</span>
+                        <img src="https://vom-blog.com/images/gur.png" alt="Gürhan Yücel" width="56" height="56" loading="lazy" onerror="this.src='https://randomuser.me/api/portraits/men/5.jpg'">
+                        </a>
+                    </div>
+                </header>
+                <a href="#post-66" class="image featured clickable-img" data-img="https://vom-blog.com/images/Gur-5.png" itemprop="image"><img src="https://vom-blog.com/images/Gur-5.png" alt="Façons de Voir" width="800" height="450" loading="lazy"></a>
+                <p itemprop="articleBody">CHAPITRE 5 : LE SCEAU DU GARDIEN
+					<br><br>
+Dans les couloirs labyrinthiques du Grand Bazar, le grondement que la pluie faisait sur les vieilles voûtes résonnait. La trace à Florence m'avait traîné ici, au cœur de la ville antique. La boutique du collectionneur était dans le coin le plus reculé du bazar ; c'était comme si elle était gelée dans le temps avec ses étagères, ses vitres poussiéreuses et son argenterie.
+                <br><br>
+Le vieil homme assis en face de moi tenait la bague en argent vers la lumière. Il parlait à voix basse :
+« ...Cette nuit-là, les frères ont livré le dépôt à quatre murs. Le cinquième mur n'a jamais été construit... »
+<br><br>
+Sa voix semblait porter le secret des siècles.</p>
+                <div class="full-post-content" id="full-66"><p class="full-text">J'ai regardé le sceau sur la bague qu'il tendait. Le serpent se mordant la queue, c'est-à-dire Ouroboros, était divisé en quatre parties égales. Mon esprit est allé un instant à cet étranger que j'avais rencontré sur le ferry ; ce sceau fugace dessiné à l'encre invisible... Le sceau sur cette bague était plus dur, plus souverain que celui-là.
+<br><br>
+« Regarde attentivement, » dit le collectionneur, pointant du doigt les lettres effacées. « Sigillum Custodis. Le Sceau du Gardien. »
+<br><br>                    
+Serpent et clé... Un passage caché dans un cycle sans fin. En 1204, quand Constantinople était en flammes avec l'invasion latine, qu'est-ce que cette communauté n'avait pas pu faire sortir de la ville ? Où l'avaient-ils caché, à la vue de tous mais inaccessible à quiconque ?
+<br><br>
+Des structures magnifiques comme Sainte-Sophie ou Chora étaient trop sous les yeux du public pour ce secret. Le vrai mystère devait être caché dans les veines de la ville.
+<br><br>
+« Les gens cherchent Sainte-Sophie. Alors que les empereurs cachaient leurs secrets non pas dans Sainte-Sophie, mais dans le palais de Boukoléon. »
+<br><br>                    
+Boukoléon était la partie du Grand Palais s'ouvrant sur la Marmara. Le port privé des empereurs n'était pas utilisé seulement pour les cérémonies ; les coffres apportés des archives d'État étaient aussi chargés directement sur les navires d'ici la nuit. Bien qu'Anna Comnène ne mentionne pas directement Boukoléon dans une section de son œuvre Alexiade, elle décrit en détail les quais privés du palais impérial s'ouvrant sur la mer. Le palais n'était pas seulement un lieu pour vivre ; il était conçu pour être abandonné sans être vu si nécessaire.
+<br><br>
+Le collectionneur continua, agrandissant la photo sur mon téléphone :
+<br><br>
+« Regarde le pli vertical droit de la bande d'inscription. Ces taches brunes ne sont pas des fissures formées au hasard ; ce sont les traces de vieilles lettres. Quelqu'un a gratté le texte ici avec beaucoup de méticulosité. Ils ont délibérément laissé seulement les lettres 'L.I.', c'est-à-dire ce 'monogramme clé'. »
+<br><br>
+En prenant une gorgée de mon thé, un frisson m'a enveloppé. Ces lettres ne pouvaient pas être juste le début d'une devise. Elles ne pointaient pas vers un concept, mais vers un lieu.
+<br><br>
+« Si c'est une clé de chiffrement, » murmurai-je, « L.I. pourrait indiquer un numéro de page, une coordonnée, ou l'ordre dans lequel les sceaux sont lus. »
+<br><br>
+Comme Alpha et Omega, le monogramme de Jésus ; premier et dernier... Si les deux lettres à Florence sont le début, dans quel coin sombre du monde étaient les trois parties restantes ? Ou plus effrayant, ces parties n'avaient-elles en fait jamais quitté Istanbul ?
+<br><br>
+Alors que le collectionneur remettait la bague dans sa boîte, il me regarda dans les yeux :
+<br><br>
+« La ville ouvre son secret non seulement à ceux qui savent la voir, mais à ceux qui osent s'y perdre. »
+<br><br>
+Dehors, la pluie ne cessait pas. Alors que les lourdes portes en fer du Grand Bazar se fermaient, je savais que mon seul indice était deux lettres et un serpent en quatre parties. L.I. n'était pas juste un début ; c'était le premier pas d'un silence durant depuis des siècles. Le dépôt était fragmenté, la carte distribuée. Maintenant quelqu'un m'invitait à un échiquier pour réunir ce sombre héritage.
+<br><br>
+De qui étais-je le coup ? Plus important encore, quel était le cinquième mur ?
+<br><br>
+<em>À suivre...</em> </p></div>
+                <div class="post-footer">
+                    <ul class="actions"><li><a href="#post-66" class="button read-more-btn" data-id="66">Lire la suite</a></li></ul>
+                    <ul class="stats"><li class="comment-toggle" data-post="66"><a href="#post-66"><i class="fas fa-comment"></i> Commentaires (<span class="comment-count">0</span>)</a></li></ul>
+                </div>
+                <div class="comments-section" id="comments-section-66">
+                    <div class="comments-title">Commentaires (<span class="comment-count-display">0</span>)</div>
+                    <div class="comments-list" id="comments-list-66"></div>
+                    <div class="add-comment-form">
+                        <input type="text" class="comment-input" id="comment-name-66" placeholder="Votre nom">
+                        <textarea class="comment-text" id="comment-text-66" placeholder="Écrivez votre commentaire..." rows="2"></textarea>
+                        <button class="submit-comment" data-post="66">Envoyer</button>
+                    </div>
+                </div>
+                <div class="old-posts-link"><a href="index4.html" target="_blank"><i class="fas fa-archive"></i> Anciens Articles</a></div>
+            </article>
+
+        </div>
+
+        <!-- SECTION CONTACT -->
+        <div class="contact-bottom" id="contactSection">
+            <h2>VOM VOMITORIUM</h2>
+            <p>Il est composé d'un groupe d'écrivains et d'amoureux de l'art qui croient au pouvoir de l'art et au rôle de la culture dans le changement social. Les membres de la communauté produisent des œuvres axées sur l'expérience humaine en combinant leurs talents dans la littérature, le théâtre, la musique, la peinture et d'autres branches artistiques. Le groupe, qui n'a pas de but commercial, offre une plateforme qui encourage la liberté artistique tout en adhérant aux valeurs républicaines.
+            <br><br>
+            VOM VOMITORIUM vise à atteindre un large public avec différents événements. C'est une communauté qui tente de créer une richesse culturelle et artistique à la fois par ses productions artistiques et ses interactions sociales.
+            <br><br>
+            Le mot VOMITORIUM a été utilisé pour la première fois par l'écrivain romain Macrobe au 4ème siècle après J.-C. Ce terme a été utilisé pour décrire les passages qui permettaient aux spectateurs de sortir rapidement de leurs sièges dans les amphithéâtres. De même, VOM vise à être un passage qui permet aux amoureux de l'art de rencontrer l'art rapidement et efficacement.
+            <br><br></p>
+
+<script>
+function sendEmail() {
+    var user = "vomitarium";
+    var domain = "proton.me";
+    window.location.href = "mailto:" + user + "@" + domain;
+}
+</script>
+
+            <div class="site-footer" style="text-align:center !important;">
+                <div style="display: flex; justify-content: center; align-items: center; gap: 1.5rem; margin-bottom: 0.5rem;">
+                    <a href="#" onclick="sendEmail(); return false;" 
+                       style="color: #2c5f8a; text-decoration: none; font-weight: 600; font-size: 0.9rem; transition: color 0.3s ease; cursor: pointer;"
+                       onmouseover="this.style.color='#6c86a3'"
+                       onmouseout="this.style.color='#2c5f8a'">
+                       <i class="fas fa-envelope"></i> Contact
+                    </a>
+                    <a href="https://www.instagram.com/vom_oyun/" target="_blank" rel="noopener noreferrer" aria-label="Instagram" 
+                       style="color: #4a5568; font-size: 1.5rem; transition: color 0.3s ease;"
+                       onmouseover="this.style.color='#6c86a3'"
+                       onmouseout="this.style.color='#4a5568'">
+                       <i class="fab fa-instagram"></i>
+                    </a>
+                </div>
+                <p style="text-align:center !important; font-size:0.7rem; color:#6c86a3; margin:0; padding:0;">© 2026 VOM PUBLISHING | Design : VOM | Tous Droits Réservés.</p>
+            </div>
+        </div>
+    </div>
+</div>
+</main>
+
+<script>
+    // ============================================
+    // FIREBASE - NUMÉRO 5 (ENTRE 52-66)
+    // ============================================
+    const firebaseConfig = {
+        apiKey: "AIzaSyCp-NfSJmRSTAAWrNla5tH2OY9wMr87mFA",
+        authDomain: "vom-yayin.firebaseapp.com",
+        databaseURL: "https://vom-yayin-default-rtdb.europe-west1.firebasedatabase.app",
+        projectId: "vom-yayin",
+        storageBucket: "vom-yayin.firebasestorage.app",
+        messagingSenderId: "93785669208",
+        appId: "1:93785669208:web:ecccf7c03aa3ad6117d42d"
+    };
+
+    // Initialiser Firebase
+    if (typeof firebase !== 'undefined') {
+        if (!firebase.apps.length) {
+            firebase.initializeApp(firebaseConfig);
+        }
+        const db = firebase.firestore();
+
+        function escapeHtml(str) {
+            if (!str) return '';
+            return str.replace(/[&<>]/g, function(m) {
+                if (m === '&') return '&amp;';
+                if (m === '<') return '&lt;';
+                if (m === '>') return '&gt;';
+                return m;
+            });
+        }
+
+        function formatDate(date) {
+            if (!date) return '';
+            let d = date.toDate ? date.toDate() : new Date(date);
+            return d.toLocaleDateString('fr-FR') + ' ' + d.toLocaleTimeString('fr-FR', {hour: '2-digit', minute:'2-digit'});
+        }
+
+        const isBot = /bot|googlebot|crawler|spider|robot|crawling/i.test(navigator.userAgent);
+
+        // ============================================
+        // CHARGER LES COMMENTAIRES
+        // ============================================
+        window.loadComments = function(postId) {
+            const commentsRef = db.collection('comments').doc('post_' + postId).collection('allComments');
+            const listDiv = document.getElementById('comments-list-' + postId);
+            const countDisplay = document.querySelector('#comments-section-' + postId + ' .comment-count-display');
+            const toggleCount = document.querySelector('.comment-toggle[data-post="' + postId + '"] .comment-count');
+
+            const processSnapshot = (snapshot) => {
+                const count = snapshot.size;
+                if (toggleCount) toggleCount.innerText = count;
+                if (countDisplay) countDisplay.innerText = count;
+                if (!listDiv) return;
+
+                if (count === 0) {
+                    listDiv.innerHTML = '<div style="padding:0.5rem; text-align:center; color:#888;">Pas encore de commentaires. Soyez le premier à commenter !</div>';
+                    return;
+                }
+
+                let html = '';
+                snapshot.forEach(function(doc) {
+                    const comment = doc.data();
+                    html += '<div class="comment-item">';
+                    html += '<strong>' + escapeHtml(comment.author || 'Visiteur') + '</strong>: ' + escapeHtml(comment.text || '');
+                    if (comment.createdAt) {
+                        html += '<div style="font-size:0.6rem; color:#aaa; margin-top:4px;">' + formatDate(comment.createdAt) + '</div>';
+                    }
+                    html += '<button class="delete-btn" data-post="' + postId + '" data-id="' + doc.id + '"><i class="fas fa-trash"></i></button>';
+                    html += '</div>';
+                });
+                listDiv.innerHTML = html;
+                
+                listDiv.querySelectorAll('.delete-btn').forEach(function(btn) {
+                    btn.addEventListener('click', function(e) {
+                        e.stopPropagation();
+                        const pwd = prompt("Entrez le mot de passe pour supprimer le commentaire :");
+                        if (pwd === "vom2026") {
+                            db.collection('comments').doc('post_' + postId).collection('allComments').doc(this.dataset.id).delete();
+                        } else if (pwd !== null) {
+                            alert("Mot de passe incorrect !");
+                        }
+                    });
+                });
+            };
+
+            if (isBot) {
+                commentsRef.orderBy('createdAt', 'desc').get().then(processSnapshot).catch(() => {});
+            } else {
+                commentsRef.orderBy('createdAt', 'desc').onSnapshot(processSnapshot, (error) => {
+                    console.warn('Erreur d\'écoute des commentaires :', error);
+                });
+            }
+        };
+
+        // ============================================
+        // SOUMETTRE UN COMMENTAIRE
+        // ============================================
+        document.querySelectorAll('.submit-comment').forEach(function(btn) {
+            btn.addEventListener('click', function() {
+                const pid = this.dataset.post;
+                const nameInp = document.getElementById('comment-name-' + pid);
+                const textInp = document.getElementById('comment-text-' + pid);
+                
+                if (!textInp || !textInp.value.trim()) {
+                    alert('Veuillez écrire un commentaire.');
+                    return;
+                }
+                
+                const author = nameInp ? nameInp.value.trim() : '';
+                const text = textInp.value.trim();
+
+                db.collection('comments').doc('post_' + pid).collection('allComments').add({
+                    author: author || "Visiteur",
+                    text: text,
+                    createdAt: firebase.firestore.FieldValue.serverTimestamp()
+                }).then(() => {
+                    if(nameInp) nameInp.value = '';
+                    if(textInp) textInp.value = '';
+                    alert('✅ Votre commentaire a été soumis avec succès !');
+                }).catch((error) => {
+                    console.error('❌ Erreur de soumission du commentaire :', error);
+                    alert('❌ Une erreur est survenue lors de la soumission de votre commentaire. Veuillez réessayer.');
+                });
+            });
+        });
+
+        // Charger les commentaires pour tous les posts (ID : 52-66)
+        for (let i = 52; i <= 66; i++) {
+            window.loadComments(i);
+        }
+
+        console.log("✅ Système de commentaires Firebase (Numéro 5) initialisé avec succès.");
+    } else {
+        console.warn("❌ SDK Firebase pas encore chargé.");
+        for (let i = 52; i <= 66; i++) {
+            const tc = document.querySelector('.comment-toggle[data-post="' + i + '"] .comment-count');
+            if (tc) tc.innerText = '0';
+        }
+    }
+
+    // ============================================
+    // MODE SOMBRE
+    // ============================================
+    const darkModeToggle = document.getElementById('darkModeToggle');
+    if (darkModeToggle) {
+        if (localStorage.getItem('theme') === 'dark') {
+            document.body.classList.add('dark-mode');
+            darkModeToggle.innerHTML = '<i class="fas fa-sun"></i> Mode Clair';
+        }
+        darkModeToggle.addEventListener('click', () => {
+            document.body.classList.toggle('dark-mode');
+            if (document.body.classList.contains('dark-mode')) {
+                localStorage.setItem('theme', 'dark');
+                darkModeToggle.innerHTML = '<i class="fas fa-sun"></i> Mode Clair';
+            } else {
+                localStorage.setItem('theme', 'light');
+                darkModeToggle.innerHTML = '<i class="fas fa-moon"></i> Mode Sombre';
+            }
+        });
+    }
+
+    // ============================================
+    // BOUTONS "LIRE LA SUITE"
+    // ============================================
+    document.querySelectorAll('.read-more-btn').forEach(function(btn) {
+        btn.addEventListener('click', function(e) {
+            e.preventDefault();
+            const id = this.dataset.id;
+            const fullDiv = document.getElementById('full-' + id);
+            if (fullDiv) {
+                fullDiv.classList.toggle('show');
+                this.innerText = fullDiv.classList.contains('show') ? 'Voir Moins' : 'Lire la suite';
+            }
+        });
+    });
+
+    // ============================================
+    // BASCULER LE PANNEAU DE COMMENTAIRES
+    // ============================================
+    document.querySelectorAll('.comment-toggle').forEach(function(toggle) {
+        toggle.addEventListener('click', function(e) {
+            e.preventDefault();
+            const pid = this.dataset.post;
+            const sec = document.getElementById('comments-section-' + pid);
+            if (sec) {
+                sec.style.display = (sec.style.display === 'block') ? 'none' : 'block';
+            }
+        });
+    });
+
+    // ============================================
+    // LIGHTBOX
+    // ============================================
+    const lightbox = document.getElementById('lightbox');
+    const lightboxImg = document.getElementById('lightbox-img');
+    window.closeLightbox = function() { if(lightbox) lightbox.classList.remove('show'); document.body.style.overflow = ''; };
+    
+    document.querySelectorAll('.clickable-img').forEach(function(el) {
+        el.addEventListener('click', function(e) {
+            e.preventDefault();
+            const img = this.querySelector('img');
+            if (img && img.src && lightboxImg && lightbox) {
+                lightboxImg.src = img.src;
+                lightbox.classList.add('show');
+                document.body.style.overflow = 'hidden';
+            }
+        });
+    });
+
+    // ============================================
+    // RECHERCHE
+    // ============================================
+    const searchInput = document.getElementById('searchInputSide');
+    const searchBtn = document.getElementById('searchBtnSide');
+    function doSearch() {
+        const q = searchInput ? searchInput.value.trim() : '';
+        if(q) window.open('https://www.google.com/search?q=' + encodeURIComponent(q), '_blank');
+    }
+    if(searchBtn) searchBtn.addEventListener('click', doSearch);
+    if(searchInput) searchInput.addEventListener('keypress', function(e) { if(e.key === 'Enter') doSearch(); });
+
+    document.getElementById('contactNavLink')?.addEventListener('click', function(e) {
+        e.preventDefault();
+        document.getElementById('contactSection')?.scrollIntoView({ behavior: 'smooth' });
+    });
+</script>
+</body>
+</html>
