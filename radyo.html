@@ -5,29 +5,21 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=yes, viewport-fit=cover">
     <title>VOM-VOMITORIUM Kültür Sanat Blogu | VOM-VOMITORIUM - Dijital Sanat, Edebiyat ve Radyo</title>
     <meta name="description" content="VOM-VOMITORIUM Kültür Sanat Blogu. Dijital sanat, web radyo, özgün yazılar, edebiyat, sinema, fotoğrafçılık ve güncel kültürel içerikler..">
-    <meta name="keywords" content="VOM Radyo, VOM-VOMITORIUM  blog, VOM-VOMITORIUM  yayın, VOM-VOMITORIUM  kültür sanat, yazar yazıları, dijital sanat, web radyo, edebiyat blogu, sanat dergisi, kültür sanat, güncel yazarlar">
+    <meta name="keywords" content="VOM Radyo, VOM-VOMITORIUM blog, VOM-VOMITORIUM yayın, VOM-VOMITORIUM kültür sanat, yazar yazıları, dijital sanat, web radyo, edebiyat blogu, sanat dergisi, kültür sanat, güncel yazarlar">
     <meta name="author" content="VOM-VOMITORIUM Kültür Sanat">
     <link rel="canonical" href="https://vom-blog.com/radyo.html/">
-    
     <link rel="icon" type="image/png" sizes="16x16" href="favicon-16x16.png">
     <link rel="icon" type="image/png" sizes="32x32" href="favicon-32x32.png">
     <link rel="apple-touch-icon" sizes="180x180" href="apple-touch-icon.png">
     <link rel="shortcut icon" href="favicon.ico">
-    
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link rel="preconnect" href="https://cdnjs.cloudflare.com">
-    
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap&subset=latin" rel="preload" as="style" onload="this.onload=null;this.rel='stylesheet'">
     <noscript><link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap&subset=latin" rel="stylesheet"></noscript>
-    
     <link rel="preload" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
     <noscript><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"></noscript>
-    
     <style>
-        /* ----------------------------- */
-        /* TÜM STİL KODLARINIZ AYNEN */
-        /* ----------------------------- */
         * { margin: 0; padding: 0; box-sizing: border-box; }
         body {
             background: linear-gradient(145deg, #d9dce5 0%, #c2c6d1 100%);
@@ -86,7 +78,6 @@
             100% { opacity: 0.8;}
         }
         .live-badge:not(.offline) { animation: pulseLive 1.2s infinite; }
-        
         .song-info-panel {
             background: #0a0c12;
             border-radius: 2rem;
@@ -249,8 +240,6 @@
             margin-top: 1.5rem;
             color: #2e3b4e;
         }
-        
-        /* Chat Popup - Düzeltildi */
         .chat-popup {
             display: none;
             position: fixed;
@@ -269,11 +258,7 @@
             max-height: 85vh;
         }
         @media (max-width: 768px) {
-            .chat-popup {
-                width: 95vw;
-                max-width: 95vw;
-                max-height: 90vh;
-            }
+            .chat-popup { width: 95vw; max-width: 95vw; max-height: 90vh; }
         }
         .chat-popup.active { display: flex; animation: fadeInUp 0.3s ease; }
         @keyframes fadeInUp {
@@ -290,11 +275,7 @@
             flex-shrink: 0;
         }
         .chat-title { display: flex; align-items: center; gap: 8px; font-weight: 600; }
-        .admin-buttons {
-            display: flex;
-            gap: 8px;
-            align-items: center;
-        }
+        .admin-buttons { display: flex; gap: 8px; align-items: center; }
         .clear-all-btn {
             background: #e33b3b;
             color: white;
@@ -320,8 +301,6 @@
             border-radius: 50%;
         }
         .chat-close:hover { background: rgba(255,255,255,0.2); }
-        
-        /* CHAT MESSAGES - FIX: en alta kayma */
         .chat-messages {
             flex: 1;
             overflow-y: auto;
@@ -334,16 +313,6 @@
             max-height: 50vh;
             -webkit-overflow-scrolling: touch;
         }
-        /* Mesajları en alta iten flex yapısı */
-        .chat-messages-wrapper {
-            display: flex;
-            flex-direction: column;
-            min-height: 100%;
-        }
-        .chat-messages-spacer {
-            flex: 1;
-        }
-        
         .chat-message {
             max-width: 80%;
             padding: 8px 12px;
@@ -357,20 +326,9 @@
         .chat-message-username { font-weight: 700; font-size: 0.7rem; color: #075E54; margin-bottom: 2px; }
         .chat-message-time { font-size: 0.6rem; color: #999; margin-top: 0.2rem; text-align: right; display: flex; align-items: center; justify-content: flex-end; gap: 4px; }
         .chat-system { text-align: center; font-size: 0.7rem; color: #666; margin: 0.3rem 0; }
-        
-        /* Çift tik stili */
-        .read-receipt {
-            font-size: 0.7rem;
-            color: #4fc3f7;
-            margin-left: 4px;
-        }
-        .read-receipt.delivered {
-            color: #4fc3f7;
-        }
-        .read-receipt.read {
-            color: #34b7f1;
-        }
-        
+        .read-receipt { font-size: 0.7rem; color: #4fc3f7; margin-left: 4px; }
+        .read-receipt.delivered { color: #4fc3f7; }
+        .read-receipt.read { color: #34b7f1; }
         .chat-input-area {
             display: flex;
             flex-direction: column;
@@ -388,9 +346,6 @@
             font-size: 16px;
             outline: none;
             font-family: inherit;
-        }
-        @media (max-width: 768px) {
-            .chat-input-area input, .chat-input-area textarea { font-size: 16px; }
         }
         .chat-input-area textarea { resize: none; }
         .chat-input-area button {
@@ -422,9 +377,7 @@
             z-index: 10000;
         }
         .chat-overlay.active { display: block; }
-        
         main { display: block; }
-        
         @media (max-width: 550px) {
             .radio-container { padding: 1.2rem; }
             .ctrl-btn { width: 55px; height: 55px; font-size: 1.5rem; }
@@ -439,10 +392,10 @@
 <body>
     <main class="radio-container" id="radioContainer">
         <div class="radio-header">
-    <h1 class="station-name" style="font-size: 1.9rem; margin: 0; display: flex; align-items: center; gap: 0.6rem;">
-        <i class="fas fa-broadcast-tower"></i> 
-        <span>VOM RADYO</span>
-    </h1>
+            <h1 class="station-name" style="font-size: 1.9rem; margin: 0; display: flex; align-items: center; gap: 0.6rem;">
+                <i class="fas fa-broadcast-tower"></i> 
+                <span>VOM RADYO</span>
+            </h1>
             <div class="live-badge" id="liveBadge">YAYIN YOK</div>
         </div>
         <div class="song-info-panel">
@@ -513,7 +466,6 @@
     import { initializeApp } from 'https://www.gstatic.com/firebasejs/10.8.0/firebase-app.js';
     import { getDatabase, ref, push, onChildAdded, remove, set, onValue } from 'https://www.gstatic.com/firebasejs/10.8.0/firebase-database.js';
 
-    // --- FIREBASE YAPILANDIRMASI ---
     const firebaseConfig = {
         apiKey: "AIzaSyCp-NfSJmRSTAAWrNla5tH2OY9wMr87mFA",
         authDomain: "vom-yayin.firebaseapp.com",
@@ -526,10 +478,8 @@
     const app = initializeApp(firebaseConfig);
     const rtdb = getDatabase(app);
     const messagesRef = ref(rtdb, 'messages');
-    // Okundu bilgisi için ayrı bir referans
     const readReceiptsRef = ref(rtdb, 'readReceipts');
 
-    // --- RADYO VE SAYFA ELEMANLARI ---
     const STREAM_URL = "https://radyo.vomyayin.dpdns.org/vomyayin";
     const STATUS_URL = "https://radyo.vomyayin.dpdns.org/status-json.xsl";
     
@@ -566,14 +516,12 @@
     let eqBars = [];
     let reconnectAttempt = 0;
     let statusCheckInterval = null;
-    // Oturum ID - her kullanıcı için benzersiz
+
     const sessionId = localStorage.getItem('vom_session_id') || 'user_' + Date.now() + '_' + Math.random().toString(36).substr(2, 6);
     localStorage.setItem('vom_session_id', sessionId);
 
-    // --- ADMIN ŞİFRE (Kod İçinde) ---
     const ADMIN_PASSWORD = "vomadmin202";
 
-    // --- Admin butonunu göster/gizle ---
     function updateAdminButton() {
         if (clearAllChatBtn) {
             const currentUser = chatUsername?.value.trim() || '';
@@ -581,56 +529,34 @@
         }
     }
 
-    // --- TÜM SOHBETİ SİL ---
     window.clearAllChatMessages = function() {
         const currentUser = chatUsername?.value.trim() || '';
-        if (currentUser !== 'admin') {
-            alert("Bu işlem için admin yetkisi gerekiyor.");
-            return;
-        }
+        if (currentUser !== 'admin') { alert("Bu işlem için admin yetkisi gerekiyor."); return; }
         const pwd = prompt("Admin şifresi:");
         if (pwd === ADMIN_PASSWORD) {
             if (confirm("DİKKAT: Tüm sohbet geçmişini kalıcı olarak silmek istediğinize emin misiniz?")) {
-                remove(messagesRef)
-                    .then(() => {
-                        alert("✅ Sohbet geçmişi başarıyla sıfırlandı!");
-                        if (chatMessagesDiv) {
-                            chatMessagesDiv.innerHTML = '<div class="chat-system">💬 Sohbet geçmişi temizlendi.</div>';
-                        }
-                    })
-                    .catch((err) => alert("❌ Silme hatası: " + err.message));
+                remove(messagesRef).then(() => {
+                    alert("✅ Sohbet geçmişi başarıyla sıfırlandı!");
+                    if (chatMessagesDiv) chatMessagesDiv.innerHTML = '<div class="chat-system">💬 Sohbet geçmişi temizlendi.</div>';
+                }).catch((err) => alert("❌ Silme hatası: " + err.message));
             }
-        } else if (pwd !== null) {
-            alert("❌ Şifre yanlış!");
-        }
+        } else if (pwd !== null) { alert("❌ Şifre yanlış!"); }
     };
 
-    // --- TEK MESAJ SİL ---
     window.deleteChatMessage = function(messageId) {
         const currentUser = chatUsername?.value.trim() || '';
-        if (currentUser !== 'admin') {
-            alert("Bu işlem için admin yetkisi gerekiyor.");
-            return;
-        }
+        if (currentUser !== 'admin') { alert("Bu işlem için admin yetkisi gerekiyor."); return; }
         const pwd = prompt("Admin şifresi:");
         if (pwd === ADMIN_PASSWORD) {
-            remove(ref(rtdb, `messages/${messageId}`))
-                .then(() => console.log("Mesaj silindi"))
-                .catch(() => alert("Silinemedi"));
-        } else if (pwd !== null) {
-            alert("Şifre yanlış!");
-        }
+            remove(ref(rtdb, `messages/${messageId}`)).then(() => console.log("Mesaj silindi")).catch(() => alert("Silinemedi"));
+        } else if (pwd !== null) { alert("Şifre yanlış!"); }
     };
 
-    // --- OKUNDU BİLDİRİMİ GÖNDER ---
     function markMessageAsRead(messageId) {
         if (!messageId) return;
-        // Bu mesajı okuyan kullanıcıyı kaydet
-        set(ref(rtdb, `readReceipts/${messageId}/${sessionId}`), true)
-            .catch(() => {});
+        set(ref(rtdb, `readReceipts/${messageId}/${sessionId}`), true).catch(() => {});
     }
 
-    // --- DİĞER FONKSİYONLAR (RADYO) ---
     async function fetchListenerCount() {
         if (!isLiveActive) return;
         try {
@@ -666,9 +592,7 @@
                 return;
             }
             if(eqBars.length) {
-                eqBars.forEach(bar => {
-                    bar.style.height = `${6 + Math.floor(Math.random() * 28)}px`;
-                });
+                eqBars.forEach(bar => { bar.style.height = `${6 + Math.floor(Math.random() * 28)}px`; });
             }
             eqAnimationId = requestAnimationFrame(animateEQ);
         }
@@ -695,12 +619,8 @@
                     const lastTrack = trackList[trackList.length - 1];
                     if (lastTrack?.title && lastTrack.title !== "null") {
                         const parts = lastTrack.title.split(" - ");
-                        if (parts.length >= 2) {
-                            currentArtist = parts[0].trim();
-                            currentTitle = parts.slice(1).join(" - ").trim();
-                        } else {
-                            currentTitle = lastTrack.title.trim();
-                        }
+                        if (parts.length >= 2) { currentArtist = parts[0].trim(); currentTitle = parts.slice(1).join(" - ").trim(); }
+                        else { currentTitle = lastTrack.title.trim(); }
                     }
                 }
             }
@@ -708,22 +628,14 @@
                 const icyTitle = data.icestats.source.metadata["x_icy_title"];
                 if (icyTitle && icyTitle !== "null") {
                     const parts = icyTitle.split(" - ");
-                    if (parts.length >= 2) {
-                        currentArtist = parts[0].trim();
-                        currentTitle = parts.slice(1).join(" - ").trim();
-                    } else {
-                        currentTitle = icyTitle.trim();
-                    }
+                    if (parts.length >= 2) { currentArtist = parts[0].trim(); currentTitle = parts.slice(1).join(" - ").trim(); }
+                    else { currentTitle = icyTitle.trim(); }
                 }
             }
             if (!currentTitle && data.icestats?.source?.title && data.icestats.source.title !== "null") {
                 const parts = data.icestats.source.title.split(" - ");
-                if (parts.length >= 2) {
-                    currentArtist = parts[0].trim();
-                    currentTitle = parts.slice(1).join(" - ").trim();
-                } else {
-                    currentTitle = data.icestats.source.title.trim();
-                }
+                if (parts.length >= 2) { currentArtist = parts[0].trim(); currentTitle = parts.slice(1).join(" - ").trim(); }
+                else { currentTitle = data.icestats.source.title.trim(); }
             }
             if (currentTitle && currentTitle !== "") {
                 const displayText = currentArtist ? `${currentArtist} - ${currentTitle}` : currentTitle;
@@ -748,12 +660,8 @@
             const source = data.icestats?.source;
             let hasSource = false;
             if (source) {
-                if (source.listeners !== undefined || source.title !== null || source.playlist?.trackList?.length > 0) {
-                    hasSource = true;
-                }
-                if (!hasSource && source.server_type === "audio/mpeg") {
-                    hasSource = true;
-                }
+                if (source.listeners !== undefined || source.title !== null || source.playlist?.trackList?.length > 0) hasSource = true;
+                if (!hasSource && source.server_type === "audio/mpeg") hasSource = true;
             }
             if (hasSource) {
                 if (!isLiveActive) {
@@ -767,11 +675,7 @@
                 }
             } else {
                 if (isLiveActive || isPlaying) {
-                    if (isPlaying) {
-                        audio.pause();
-                        isPlaying = false;
-                        playPauseIcon.className = "fas fa-play";
-                    }
+                    if (isPlaying) { audio.pause(); isPlaying = false; playPauseIcon.className = "fas fa-play"; }
                     isLiveActive = false;
                     liveBadge.classList.add("offline");
                     liveBadge.innerText = "YAYIN YOK";
@@ -779,28 +683,21 @@
                     if (chatButtonSide) chatButtonSide.classList.add("offline");
                     const chatStatusDiv = document.getElementById('chatStatus');
                     if (chatStatusDiv) chatStatusDiv.innerText = "Yayın aktif değil, sohbet kapalı.";
-                    
                     remove(messagesRef).catch(err => console.error("Chat temizlenemedi:", err));
                     remove(readReceiptsRef).catch(err => console.error("Okundu bilgileri temizlenemedi:", err));
-                    
                     if (metadataInterval) clearInterval(metadataInterval);
                     if (listenerInterval) clearInterval(listenerInterval);
                     if (eqAnimationId) cancelAnimationFrame(eqAnimationId);
                     eqAnimationId = null;
                     if (eqBars.length) eqBars.forEach(bar => bar.style.height = '6px');
                     if (listenerNumberSpan) listenerNumberSpan.innerText = "0";
-                    
                     marqueeSpan.innerHTML = `<span><i class="fas fa-music"></i> Yayın Bekleniyor</span><span><i class="fas fa-music"></i> Yayın Bekleniyor</span>`;
                     if(subArtistSpan) subArtistSpan.innerText = "VOM RADYO";
                 }
             }
         } catch(e) {
             if (isLiveActive || isPlaying) {
-                if (isPlaying) {
-                    audio.pause();
-                    isPlaying = false;
-                    playPauseIcon.className = "fas fa-play";
-                }
+                if (isPlaying) { audio.pause(); isPlaying = false; playPauseIcon.className = "fas fa-play"; }
                 isLiveActive = false;
                 liveBadge.classList.add("offline");
                 liveBadge.innerText = "BAĞLANTI YOK";
@@ -817,11 +714,7 @@
     function attemptReconnect() {
         if (!isPlaying) return;
         reconnectAttempt++;
-        if (reconnectAttempt > 3) { 
-            if (chatButtonSide) chatButtonSide.classList.add("offline");
-            reconnectAttempt = 0; 
-            return; 
-        }
+        if (reconnectAttempt > 3) { if (chatButtonSide) chatButtonSide.classList.add("offline"); reconnectAttempt = 0; return; }
         streamStatusSpan.innerText = `🔄 Yeniden bağlanıyor (${reconnectAttempt}/3)...`;
         setTimeout(() => { if (isPlaying) { audio.load(); audio.play().catch(() => {}); } }, 2000);
     }
@@ -831,11 +724,8 @@
         audio.addEventListener('stalled', () => { if (isPlaying && isLiveActive && audio.readyState < 2) attemptReconnect(); });
         audio.addEventListener('canplay', () => { audio.volume = parseFloat(volumeSlider.value); });
         audio.addEventListener('playing', () => { 
-            startMetadataUpdater(); 
-            startListenerUpdater(); 
-            if(!eqAnimationId) initEqualizer(); 
-            reconnectAttempt = 0;
-            streamStatusSpan.innerText = "🔴 Canlı yayın";
+            startMetadataUpdater(); startListenerUpdater(); if(!eqAnimationId) initEqualizer(); 
+            reconnectAttempt = 0; streamStatusSpan.innerText = "🔴 Canlı yayın";
         });
         audio.addEventListener('pause', () => { 
             if (metadataInterval) clearInterval(metadataInterval); 
@@ -847,20 +737,14 @@
     }
     
     function playRadio() {
-        if (!isLiveActive) {
-            alert("📻 Yayın şu anda aktif değil.");
-            return;
-        }
+        if (!isLiveActive) { alert("📻 Yayın şu anda aktif değil."); return; }
         audio.play().then(() => {
             isPlaying = true;
             playPauseIcon.className = "fas fa-pause";
             initEqualizer();
             startListenerUpdater();
             startMetadataUpdater();
-        }).catch((err) => { 
-            console.error("Play hatası:", err);
-            alert("Yayın bağlantısı kurulamadı."); 
-        });
+        }).catch((err) => { console.error("Play hatası:", err); alert("Yayın bağlantısı kurulamadı."); });
     }
     
     function pauseRadio() {
@@ -903,7 +787,6 @@
     checkStreamStatus();
     statusCheckInterval = setInterval(checkStreamStatus, 30000);
     
-    // --- CHAT MESAJLAŞMA ---
     const escapeHtmlChat = (str) => { if(!str) return ''; return str.replace(/[&<>]/g, m => ({ '&':'&amp;', '<':'&lt;', '>':'&gt;' }[m])); };
     
     chatButtonSide?.addEventListener('click', (e) => {
@@ -913,9 +796,7 @@
             chatOverlay.classList.add('active');
             document.body.style.overflow = 'hidden';
             updateAdminButton();
-        } else { 
-            alert("Sohbet sadece canlı yayında açıktır."); 
-        }
+        } else { alert("Sohbet sadece canlı yayında açıktır."); }
     });
     
     chatCloseBtn?.addEventListener('click', () => {
@@ -930,112 +811,63 @@
         document.body.style.overflow = '';
     });
     
-function sendChatMessage() {
-    if (!isLiveActive) { 
-        alert("Sohbet sadece canlı yayında açıktır."); 
-        return; 
+    // ✅ İSİM KONTROLÜ TAMAMEN KALDIRILDI
+    function sendChatMessage() {
+        if (!isLiveActive) { alert("Sohbet sadece canlı yayında açıktır."); return; }
+        const username = chatUsername?.value.trim();
+        const message = chatInput?.value.trim();
+        if (!message) return;
+        const finalUsername = (username || 'Anonim').substring(0, 20);
+        push(messagesRef, { 
+            username: finalUsername, 
+            message: message.substring(0, 500), 
+            timestamp: Date.now(),
+            senderId: sessionId
+        }).then(() => { if(chatInput) chatInput.value = ''; }).catch(() => {});
     }
-    const username = chatUsername?.value.trim();
-    const message = chatInput?.value.trim();
-    if (!message) return;
-    
-   // ✅ YENİ EKLENEN KISIM (Gelişmiş Gerçek İsim Kontrolü)
-    const temizIsim = username.toLowerCase().trim();
-    const SADECE_HARF_KURALI = /^[a-zA-ZğüşıöçĞÜŞİÖÇ\s]{2,20}$/;
-    
-    // 1. Bilinen sahte ve trol isimler
-    const YASAKLI_ISIMLER = [
-        "", "misafir", "guest", "anonim", "anonymous", "isimsiz", 
-        "kimse", "biri", "deneme", "test", "admin", "moderator", 
-        "radyo", "yayinci", "dj", "asdasd", "qwerty", "dinleyici", "user"
-    ];
 
-    // 2. Kontroller:
-    const yasakliMi = YASAKLI_ISIMLER.some(yasak => temizIsim.includes(yasak));
-    const harfUygunMu = SADECE_HARF_KURALI.test(username);
-    const sesliHarfVarMi = /[aeıioöuü]/.test(temizIsim); // 'dfgh' gibi sessiz harf sallamalarını eler
-    const ayniHarfTekrari = /(.)\1{2,}/.test(temizIsim); // 'aaaa', 'zzzz' gibi tekrarları eler
-    const sessizYigilmasi = /[bcçdfgğhjklmnprsştvyz]{4,}/.test(temizIsim); // Arka arkaya 4 sessiz harf engeller
-
-    if (!username || yasakliMi || !harfUygunMu || !sesliHarfVarMi || ayniHarfTekrari || sessizYigilmasi) {
-        alert("❌ Lütfen sadece gerçek adınızı yazın! (Nokta, sembol, sahte isimler veya anlamsız rastgele harfler kabul edilmez)");
-        chatUsername?.focus();
-        return; // Mesaj GÖNDERİLMEZ
-    }
-    // ✅ KONTROL BİTTİ
-    
-    const finalUsername = username.substring(0, 20);
-    push(messagesRef, { 
-        username: finalUsername, 
-        message: message.substring(0, 500), 
-        timestamp: Date.now(),
-        senderId: sessionId
-    }).then(() => { if(chatInput) chatInput.value = ''; }).catch(() => {});
-}
-
-    // --- MESAJ GELDİĞİNDE OKUNDU İŞARETLE ---
     function markAllMessagesAsRead() {
-        // Chat açıkken tüm mesajları okundu olarak işaretle
         if (!isLiveActive || !chatPopup.classList.contains('active')) return;
         const messageElements = chatMessagesDiv.querySelectorAll('.chat-message:not(.sent)');
         messageElements.forEach(el => {
             const msgId = el.dataset.messageId;
-            if (msgId) {
-                markMessageAsRead(msgId);
-            }
+            if (msgId) markMessageAsRead(msgId);
         });
     }
 
-    // Her 3 saniyede bir okundu bildirimi gönder
-    let readInterval = setInterval(markAllMessagesAsRead, 3000);
+    setInterval(markAllMessagesAsRead, 3000);
     
-    // --- YENİ MESAJ DİNLEYİCİSİ (Okundu bilgisi ile) ---
     onChildAdded(messagesRef, (snapshot) => {
         if (!isLiveActive || !chatMessagesDiv) return;
         const data = snapshot.val();
         if (!data?.message) return;
-        
         const messageId = snapshot.key;
         const currentUser = chatUsername?.value.trim() || '';
         const messageSender = data.username || 'Anonim';
         const isSelf = (data.senderId === sessionId);
         const timeStr = data.timestamp ? new Date(data.timestamp).toLocaleTimeString('tr-TR', { hour: '2-digit', minute: '2-digit' }) : '';
-        
         const div = document.createElement('div');
         div.className = isSelf ? 'chat-message sent' : 'chat-message received';
         div.id = `msg-${messageId}`;
         div.dataset.messageId = messageId;
-        
-        // Okundu bilgisi için placeholder
         let readHtml = '';
-        if (isSelf) {
-            // Gönderen kişi için çift tik gösterimi
-            readHtml = `<span class="read-receipt delivered" id="read-${messageId}">✓✓</span>`;
-        }
-        
+        if (isSelf) readHtml = `<span class="read-receipt delivered" id="read-${messageId}">✓✓</span>`;
         div.innerHTML = `<div class="chat-message-username">${escapeHtmlChat(messageSender)}</div>${escapeHtmlChat(data.message)}<div class="chat-message-time">${timeStr} ${readHtml}</div>`;
-        
         if (currentUser === 'admin' && !isSelf) {
             div.innerHTML += `<button onclick="window.deleteChatMessage('${messageId}')" style="margin-left:8px; background:#e33b3b; border:none; border-radius:50%; width:22px; height:22px; cursor:pointer; color:white; font-size:10px;">🗑</button>`;
         }
-        
         chatMessagesDiv.appendChild(div);
         chatMessagesDiv.scrollTop = chatMessagesDiv.scrollHeight;
         while (chatMessagesDiv.children.length > 150) chatMessagesDiv.removeChild(chatMessagesDiv.firstChild);
-        
-        // Eğer bu mesaj benim değilse ve sohbet açıksa okundu işaretle
         if (!isSelf && chatPopup.classList.contains('active')) {
             setTimeout(() => markMessageAsRead(messageId), 500);
         }
     });
 
-    // --- OKUNDU BİLGİLERİNİ DİNLE ---
     onValue(readReceiptsRef, (snapshot) => {
         if (!isLiveActive) return;
         const data = snapshot.val();
         if (!data) return;
-        
-        // Her mesaj için kaç kişi okuduğunu kontrol et
         document.querySelectorAll('.chat-message.sent').forEach(el => {
             const msgId = el.dataset.messageId;
             if (!msgId) return;
@@ -1044,13 +876,8 @@ function sendChatMessage() {
                 const readerCount = Object.keys(readers).length;
                 const receiptEl = el.querySelector('.read-receipt');
                 if (receiptEl) {
-                    if (readerCount > 1) {
-                        receiptEl.className = 'read-receipt read';
-                        receiptEl.textContent = '✓✓';
-                    } else if (readerCount === 1) {
-                        receiptEl.className = 'read-receipt delivered';
-                        receiptEl.textContent = '✓✓';
-                    }
+                    if (readerCount > 1) { receiptEl.className = 'read-receipt read'; receiptEl.textContent = '✓✓'; }
+                    else if (readerCount === 1) { receiptEl.className = 'read-receipt delivered'; receiptEl.textContent = '✓✓'; }
                 }
             }
         });
