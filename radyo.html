@@ -516,6 +516,7 @@
     let eqBars = [];
     let reconnectAttempt = 0;
     let statusCheckInterval = null;
+    let chatListenerStarted = false;
 
     const sessionId = localStorage.getItem('vom_session_id') || 'user_' + Date.now() + '_' + Math.random().toString(36).substr(2, 6);
     localStorage.setItem('vom_session_id', sessionId);
@@ -647,9 +648,12 @@
         } catch(e) {}
     }
     
+    // ✅ DÜZELTME 1: Metadata 2 sn → 8 sn (Icecast CPU rahatlar)
     function startMetadataUpdater() {
         if (metadataInterval) clearInterval(metadataInterval);
-        metadataInterval = setInterval(() => { if (isPlaying && isLiveActive) fetchMetadata(); }, 2000);
+        metadataInterval = setInterval(() => { 
+            if (isPlaying && isLiveActive) fetchMetadata(); 
+        }, 8000);
         if (isLiveActive) fetchMetadata();
     }
     
@@ -683,8 +687,9 @@
                     if (chatButtonSide) chatButtonSide.classList.add("offline");
                     const chatStatusDiv = document.getElementById('chatStatus');
                     if (chatStatusDiv) chatStatusDiv.innerText = "Yayın aktif değil, sohbet kapalı.";
-                    remove(messagesRef).catch(err => console.error("Chat temizlenemedi:", err));
-                    remove(readReceiptsRef).catch(err => console.error("Okundu bilgileri temizlenemedi:", err));
+                    
+                    // ✅ DÜZELTME 2: Otomatik mesaj silme KALDIRILDI — mesajlar kalıcı
+                    
                     if (metadataInterval) clearInterval(metadataInterval);
                     if (listenerInterval) clearInterval(listenerInterval);
                     if (eqAnimationId) cancelAnimationFrame(eqAnimationId);
@@ -705,8 +710,7 @@
                 if (chatButtonSide) chatButtonSide.classList.add("offline");
                 const chatStatusDiv = document.getElementById('chatStatus');
                 if (chatStatusDiv) chatStatusDiv.innerText = "Sunucu bağlantısı yok.";
-                remove(messagesRef).catch(() => {});
-                remove(readReceiptsRef).catch(() => {});
+                // ✅ Otomatik mesaj silme YOK
             }
         }
     }
@@ -736,15 +740,20 @@
         });
     }
     
+    // ✅ DÜZELTME 3: Cache bypass — canlı sese doğrudan bağlan
     function playRadio() {
         if (!isLiveActive) { alert("📻 Yayın şu anda aktif değil."); return; }
+        audio.src = STREAM_URL + "?live=" + Date.now();
         audio.play().then(() => {
             isPlaying = true;
             playPauseIcon.className = "fas fa-pause";
             initEqualizer();
             startListenerUpdater();
             startMetadataUpdater();
-        }).catch((err) => { console.error("Play hatası:", err); alert("Yayın bağlantısı kurulamadı."); });
+        }).catch((err) => { 
+            console.error("Play hatası:", err); 
+            alert("Yayın bağlantısı kurulamadı."); 
+        });
     }
     
     function pauseRadio() {
@@ -785,7 +794,8 @@
     initEqualizer();
     
     checkStreamStatus();
-    statusCheckInterval = setInterval(checkStreamStatus, 30000);
+    // ✅ DÜZELTME 4: Status kontrolü 30 sn → 60 sn (Icecast rahatlar)
+    statusCheckInterval = setInterval(checkStreamStatus, 60000);
     
     const escapeHtmlChat = (str) => { if(!str) return ''; return str.replace(/[&<>]/g, m => ({ '&':'&amp;', '<':'&lt;', '>':'&gt;' }[m])); };
     
@@ -796,6 +806,7 @@
             chatOverlay.classList.add('active');
             document.body.style.overflow = 'hidden';
             updateAdminButton();
+            loadExistingMessages();
         } else { alert("Sohbet sadece canlı yayında açıktır."); }
     });
     
@@ -811,7 +822,7 @@
         document.body.style.overflow = '';
     });
     
-    // ✅ İSİM KONTROLÜ TAMAMEN KALDIRILDI
+    // ✅ İsim kontrolü YOK — herkes istediği ismi yazar
     function sendChatMessage() {
         if (!isLiveActive) { alert("Sohbet sadece canlı yayında açıktır."); return; }
         const username = chatUsername?.value.trim();
@@ -837,31 +848,68 @@
 
     setInterval(markAllMessagesAsRead, 3000);
     
-    onChildAdded(messagesRef, (snapshot) => {
-        if (!isLiveActive || !chatMessagesDiv) return;
-        const data = snapshot.val();
-        if (!data?.message) return;
-        const messageId = snapshot.key;
+    // ✅ Mesaj çizim fonksiyonu (tekrar kullanılabilir)
+    function renderMessage(messageId, data) {
+        if (!chatMessagesDiv) return;
+        if (document.getElementById(`msg-${messageId}`)) return;
+        
         const currentUser = chatUsername?.value.trim() || '';
         const messageSender = data.username || 'Anonim';
         const isSelf = (data.senderId === sessionId);
         const timeStr = data.timestamp ? new Date(data.timestamp).toLocaleTimeString('tr-TR', { hour: '2-digit', minute: '2-digit' }) : '';
+        
         const div = document.createElement('div');
         div.className = isSelf ? 'chat-message sent' : 'chat-message received';
         div.id = `msg-${messageId}`;
         div.dataset.messageId = messageId;
+        
         let readHtml = '';
         if (isSelf) readHtml = `<span class="read-receipt delivered" id="read-${messageId}">✓✓</span>`;
+        
         div.innerHTML = `<div class="chat-message-username">${escapeHtmlChat(messageSender)}</div>${escapeHtmlChat(data.message)}<div class="chat-message-time">${timeStr} ${readHtml}</div>`;
+        
         if (currentUser === 'admin' && !isSelf) {
             div.innerHTML += `<button onclick="window.deleteChatMessage('${messageId}')" style="margin-left:8px; background:#e33b3b; border:none; border-radius:50%; width:22px; height:22px; cursor:pointer; color:white; font-size:10px;">🗑</button>`;
         }
+        
         chatMessagesDiv.appendChild(div);
         chatMessagesDiv.scrollTop = chatMessagesDiv.scrollHeight;
         while (chatMessagesDiv.children.length > 150) chatMessagesDiv.removeChild(chatMessagesDiv.firstChild);
+        
         if (!isSelf && chatPopup.classList.contains('active')) {
             setTimeout(() => markMessageAsRead(messageId), 500);
         }
+    }
+    
+    // ✅ DÜZELTME 5: Eski mesajları yükle — sohbet açılınca tüm geçmiş gelir
+    function loadExistingMessages() {
+        if (!chatMessagesDiv) return;
+        onValue(messagesRef, (snapshot) => {
+            if (!isLiveActive) return;
+            const data = snapshot.val();
+            
+            chatMessagesDiv.innerHTML = '';
+            
+            if (!data) {
+                chatMessagesDiv.innerHTML = '<div class="chat-system">💬 Henüz mesaj yok.</div>';
+                return;
+            }
+            
+            const sorted = Object.entries(data)
+                .map(([id, val]) => ({ id, ...val }))
+                .sort((a, b) => (a.timestamp || 0) - (b.timestamp || 0));
+            
+            sorted.forEach(msg => renderMessage(msg.id, msg));
+            chatMessagesDiv.scrollTop = chatMessagesDiv.scrollHeight;
+        });
+    }
+    
+    // ✅ DÜZELTME 6: Yeni mesajları canlı dinle
+    onChildAdded(messagesRef, (snapshot) => {
+        if (!isLiveActive) return;
+        const data = snapshot.val();
+        if (!data?.message) return;
+        renderMessage(snapshot.key, data);
     });
 
     onValue(readReceiptsRef, (snapshot) => {
@@ -895,7 +943,14 @@
     });
     updateAdminButton();
     
-    setInterval(() => { if (!isLiveActive && chatPopup.classList.contains('active')) { chatPopup.classList.remove('active'); chatOverlay.classList.remove('active'); document.body.style.overflow = ''; } }, 1000);
+    // ✅ DÜZELTME 7: Yayın kesilince sohbet penceresi otomatik kapanır (mesajlar silinmez)
+    setInterval(() => { 
+        if (!isLiveActive && chatPopup.classList.contains('active')) { 
+            chatPopup.classList.remove('active'); 
+            chatOverlay.classList.remove('active'); 
+            document.body.style.overflow = ''; 
+        } 
+    }, 1000);
 </script>
 </body>
 </html>
