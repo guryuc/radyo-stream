@@ -1,0 +1,1358 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=yes">
+    <title>VOM-VOMITORIUM Culture - Arts Blog | Issue 6 | Digital Art, Literature and Radio</title>
+    <meta name="description" content="VOM-VOMITORIUM Culture & Arts Blog. Digital art, web radio, original writings, literature, cinema, photography and current cultural content.">
+    <meta name="keywords" content="VOM-VOMITORIUM blog, VOM-VOMITORIUM publication, VOM-VOMITORIUM culture arts, author writings, digital art, VOM-VOMITORIUM web radio, literature blog, art magazine, culture arts, current authors">
+    <meta name="googlebot" content="index, follow">
+    <meta name="robots" content="index, follow, max-image-preview:large">
+    <meta name="author" content="VOM PUBLISHING">
+    <meta name="theme-color" content="#1a2a3a">
+    <link rel="canonical" href="https://vom-blog.com/index6-eng.html">
+
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://vom-blog.com/index6-eng.html">
+    <meta property="og:title" content="VOM-VOMITORIUM Culture & Arts Blog - Issue 6">
+    <meta property="og:description" content="Digital art, web radio, original writings, literature, cinema, photography and current cultural content.">
+    <meta property="og:image" content="https://vom-blog.com/images/editor-2.png">
+    <meta property="og:image:width" content="1200">
+    <meta property="og:image:height" content="630">
+    <meta property="og:locale" content="en_US">
+    <meta property="og:site_name" content="VOM-VOMITORIUM Culture & Arts Blog">
+
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="VOM-VOMITORIUM Culture & Arts Blog - Issue 6">
+    <meta name="twitter:description" content="Digital art, web radio, original writings, literature, cinema, photography and current cultural content.">
+    <meta name="twitter:image" content="https://vom-blog.com/images/editor-2.png">
+
+    <link rel="icon" type="image/png" sizes="16x16" href="https://vom-blog.com/favicon-16x16.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="https://vom-blog.com/favicon-32x32.png">
+    <link rel="apple-touch-icon" sizes="180x180" href="https://vom-blog.com/apple-touch-icon.png">
+    <link rel="shortcut icon" href="https://vom-blog.com/favicon.ico">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="preload" href="https://fonts.googleapis.com/css2?family=Source+Sans+3:wght@400;600;700&display=swap" as="style" onload="this.onload=null;this.rel='stylesheet'">
+    <noscript><link href="https://fonts.googleapis.com/css2?family=Source+Sans+3:wght@400;600;700&display=swap" rel="stylesheet"></noscript>
+
+    <link rel="preload" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+    <noscript><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"></noscript>
+
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "Blog",
+        "name": "VOM-VOMITORIUM Culture & Arts Blog",
+        "description": "Digital art, web radio, original writings, literature, cinema, photography and current cultural content.",
+        "url": "https://vom-blog.com/index6-eng.html",
+        "publisher": {
+            "@type": "Organization",
+            "name": "VOM PUBLISHING",
+            "logo": { "@type": "ImageObject", "url": "https://vom-blog.com/favicon-32x32.png" }
+        },
+        "inLanguage": "en"
+    }
+    </script>
+
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "Organization",
+        "name": "VOM PUBLISHING",
+        "url": "https://vom-blog.com/",
+        "logo": "https://vom-blog.com/favicon-32x32.png",
+        "sameAs": [ "https://www.instagram.com/vom_oyun/" ]
+    }
+    </script>
+
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "BreadcrumbList",
+        "itemListElement": [ { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://vom-blog.com/index6-eng.html" } ]
+    }
+    </script>
+
+    <script data-cfasync="false" src="https://www.gstatic.com/firebasejs/11.0.0/firebase-app-compat.js"></script>
+    <script data-cfasync="false" src="https://www.gstatic.com/firebasejs/11.0.0/firebase-firestore-compat.js"></script>
+
+    <style>
+        *{margin:0;padding:0;box-sizing:border-box}
+        body{background:#f0f2f5;font-family:'Source Sans 3',system-ui,sans-serif;color:#1a1e24;line-height:1.5}
+        html{scroll-behavior:smooth}
+        body.dark-mode{background:#121826;color:#e2e8f0}
+        body.dark-mode .sidebar-card,body.dark-mode .search-box-side,body.dark-mode .post,body.dark-mode .contact-bottom,body.dark-mode #header{background:#1e293b;border-color:#334155}
+        body.dark-mode .title h2 a,body.dark-mode .post p,body.dark-mode .meta,body.dark-mode .button,body.dark-mode .stats a{color:#cbd5e1}
+        body.dark-mode .button{background:#334155}
+        body.dark-mode .search-input-side{background:#334155;border-color:#475569;color:#f1f5f9}
+        body.dark-mode .comment-item{background:#0f172a}
+        body.dark-mode .editor-note{background:#2d3a4e;border-left-color:#f5b042;color:#e2e8f0}
+        body.dark-mode .editor-note p{color:#cbd5e1}
+        body.dark-mode #header h1 a{color:#f1f5f9;background:none}
+        body.dark-mode .author .name{color:#ffffff !important; font-weight:600}
+        body.dark-mode .meta a.author{color:#ffffff !important}
+        #wrapper{max-width:1300px;margin:0 auto;padding:0.75rem;display:flex;flex-direction:column;gap:1rem}
+        @media (min-width:992px){#wrapper{flex-direction:row;align-items:flex-start;padding:1.5rem;gap:1.5rem}#main{flex:2.2;min-width:0;order:2}#sidebar{flex:1;min-width:280px;position:sticky;top:1rem;order:1}}
+        @media (max-width:991px){#wrapper{flex-direction:column}#main{order:2}#sidebar{order:1}}
+        #header{background:white;border-radius:16px;padding:0.8rem 1rem;margin-bottom:1rem;display:flex;flex-direction:column;gap:0.8rem;border:1px solid #e5e9f0}
+        @media (min-width:480px){#header{flex-direction:row;justify-content:space-between;align-items:center;padding:1rem 1.5rem}}
+        #header h1 a{font-size:2rem;font-weight:900;text-decoration:none;background:linear-gradient(135deg,#1a2a3a,#2c3e66);background-clip:text;color:transparent}
+        .issue-number{font-size:0.8rem;font-weight:500;background:#eef2f6;padding:0.2rem 0.6rem;border-radius:30px;color:#2c5f8a;margin-left:12px}
+        .links ul{display:flex;flex-wrap:wrap;gap:1rem;list-style:none;align-items:center}
+        .links a{text-decoration:none;color:#4a5568;font-weight:500;font-size:0.9rem;cursor:pointer}
+        .links a:hover{color:#2c5f8a}
+        .dark-mode-toggle{background:#f1f5f9;border:1px solid #e2e8f0;border-radius:40px;padding:0.25rem 0.8rem;font-size:0.7rem;cursor:pointer;color:#475569}
+        .sidebar-card,.search-box-side{background:white;border-radius:20px;padding:1.2rem;margin-bottom:1.2rem;border:1px solid #eef2f6}
+        .sidebar-card h2{font-size:1.2rem;font-weight:700;margin-bottom:0.8rem;display:flex;align-items:center;gap:0.5rem;color:#1e293b;border-left:4px solid #2c5f8a;padding-left:0.8rem}
+        .editor-image{margin-bottom:1rem;border-radius:16px;overflow:hidden}
+        .editor-image img{width:100%;height:auto;display:block}
+        .editor-note{background:#fef9e6;border-left:4px solid #f5b042;padding:0.8rem;border-radius:12px}
+        .editor-note p{font-size:0.85rem;color:#4a5568;margin-bottom:0.5rem}
+        .editor-date{font-size:0.7rem;color:#888}
+        .lightbox{display:none;position:fixed;top:0;left:0;width:100%;height:100%;background:rgba(0,0,0,0.9);z-index:9999;cursor:pointer;justify-content:center;align-items:center}
+        .lightbox img{max-width:90%;max-height:90%;object-fit:contain;border-radius:8px}
+        .lightbox.show{display:flex}
+        .lightbox-close{position:absolute;top:20px;right:35px;color:#fff;font-size:40px;font-weight:bold;cursor:pointer}
+        .clickable-img{cursor:pointer;transition:opacity 0.3s}
+        .clickable-img:hover{opacity:0.9}
+        .search-input-group{display:flex;gap:0.5rem}
+        .search-input-side{flex:1;padding:0.7rem 1rem;border:1px solid #ddd;border-radius:40px;outline:none;font-size:0.85rem}
+        .search-input-side:focus{border-color:#2c5f8a}
+        .search-btn-side{background:#2c5f8a;border:none;color:white;width:42px;height:42px;border-radius:50%;cursor:pointer}
+        .radio-link-btn{display:flex;align-items:center;justify-content:space-between;background:linear-gradient(135deg,#1e2a3a,#2c3e66);padding:1rem 1.2rem;border-radius:40px;text-decoration:none;color:white;margin:0.8rem 0;font-weight:600}
+        .radio-link-btn:hover{transform:translateY(-2px)}
+        .radio-link-btn span{display:flex;align-items:center;gap:0.6rem}
+        .video-card-link{display:block;position:relative;background:#000;border-radius:16px;overflow:hidden;margin:0.8rem 0}
+        .video-card-link img{width:100%;display:block}
+        .play-icon-video{position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);background:rgba(0,0,0,0.6);width:50px;height:50px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:1.8rem;color:white}
+        .post{background:white;border-radius:20px;margin-bottom:1.2rem;padding:1rem;border:1px solid #eef2f6}
+        @media (min-width:768px){.post{padding:2rem;margin-bottom:2rem}}
+        .post header{display:flex;flex-direction:column;gap:0.5rem;margin-bottom:1rem}
+        @media (min-width:480px){.post header{flex-direction:row;justify-content:space-between;align-items:flex-start}}
+        .title h2{font-size:1.3rem;font-weight:700;margin:0}
+        @media (min-width:768px){.title h2{font-size:1.8rem}}
+        .title h2 a{text-decoration:none;color:#1e293b}
+        .meta{font-size:0.75rem;color:#6c7a91}
+        .author{display:flex;align-items:center;gap:0.5rem;text-decoration:none;color:#334155}
+        .author img{width:56px;height:56px;border-radius:50%;object-fit:cover}
+        .image.featured{margin:0.8rem 0;border-radius:16px;overflow:hidden}
+        .image.featured img{width:100%;height:auto;display:block}
+        .post p{color:#2d3e50;margin:0.8rem 0;font-size:0.9rem}
+        .post-footer{display:flex;flex-direction:column;gap:0.8rem;margin-top:1rem;padding-top:0.8rem;border-top:1px solid #edf2f7}
+        @media (min-width:480px){.post-footer{flex-direction:row;justify-content:space-between;align-items:center}}
+        .button{background:#f1f5f9;padding:0.5rem 1.2rem;border-radius:40px;text-decoration:none;font-weight:600;font-size:0.8rem;color:#1f2a44;display:inline-block;cursor:pointer;border:none}
+        .stats{display:flex;gap:1rem;list-style:none}
+        .stats a{text-decoration:none;color:#6b7a8a;font-size:0.85rem;cursor:pointer}
+        .comments-section{margin-top:1rem;padding-top:0.8rem;border-top:1px solid #eef2f6;display:none}
+        .comments-title{font-size:0.85rem;font-weight:600;color:#475569;margin-bottom:0.5rem}
+        .comments-list{max-height:300px;overflow-y:auto;margin-bottom:0.8rem}
+        .comment-item{background:#f8fafc;padding:0.6rem 2rem 0.6rem 0.6rem;border-radius:12px;margin-bottom:0.5rem;font-size:0.75rem;position:relative}
+        .delete-btn{position:absolute;right:6px;top:50%;transform:translateY(-50%);background:#e33b3b;color:white;border:none;border-radius:50%;width:22px;height:22px;font-size:0.7rem;cursor:pointer;display:none;align-items:center;justify-content:center}
+        .comment-item:hover .delete-btn{display:flex}
+        .add-comment-form{display:flex;flex-direction:column;gap:0.5rem}
+        .comment-input,.comment-text{padding:0.5rem 0.8rem;border:1px solid #e2e8f0;border-radius:30px;font-size:0.8rem;outline:none}
+        .comment-text{border-radius:16px;resize:vertical}
+        .submit-comment{background:#2c5f8a;color:white;border:none;border-radius:30px;padding:0.5rem 1rem;font-size:0.75rem;font-weight:600;cursor:pointer}
+        .full-post-content{display:none;margin-top:1rem;padding-top:1rem;border-top:1px solid #eef2f6}
+        .full-post-content.show{display:block}
+        .contact-bottom{background:white;border-radius:20px;padding:1.2rem;margin-top:1rem;border:1px solid #eef2f6}
+        .contact-bottom h2{font-size:1.2rem;font-weight:700;margin-bottom:0.8rem;display:flex;align-items:center;gap:0.5rem;color:#1e293b;border-left:4px solid #2c5f8a;padding-left:0.8rem}
+        .contact-email{display:inline-block;background:#f1f5f9;padding:0.5rem 1rem;border-radius:30px;text-decoration:none;color:#2c5f8a;font-weight:600;font-size:0.8rem}
+        .site-footer{text-align:center;padding:1rem 0;font-size:0.7rem;color:#6c86a3;border-top:1px solid #eef2f6;margin-top:1rem}
+        .icons{display:flex;justify-content:center;gap:1.5rem;margin-bottom:0.8rem}
+        .icons a{font-size:1.5rem;color:#4a5568}
+        .old-posts-link{margin-top:1rem;padding-top:0.5rem;text-align:right;border-top:1px dashed #e2e8f0}
+        .old-posts-link a{font-size:0.75rem;color:#2c5f8a;text-decoration:none}
+        @keyframes fadeInUp{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:translateY(0)}}
+        .post{animation:fadeInUp 0.3s ease}
+        @media (max-width: 550px) { .contact-bottom p {font-size: 0.7rem;line-height: 1.4;} }
+        .contact-form { margin: 1.5rem 0; padding: 1.5rem; background: #f8fafc; border-radius: 16px; border: 1px solid #eef2f6; }
+        body.dark-mode .contact-form { background: #1e293b; border-color: #334155; }
+        .contact-form .form-group { margin-bottom: 1.2rem; }
+        .contact-form label { display: block; font-weight: 600; font-size: 0.85rem; color: #1e293b; margin-bottom: 0.4rem; }
+        body.dark-mode .contact-form label { color: #e2e8f0; }
+        .contact-form input, .contact-form textarea { width: 100%; padding: 0.8rem 1rem; border: 2px solid #e2e8f0; border-radius: 12px; font-size: 0.9rem; font-family: 'Source Sans 3', system-ui, sans-serif; background: white; color: #1a1e24; transition: border-color 0.3s ease, box-shadow 0.3s ease; outline: none; }
+        body.dark-mode .contact-form input, body.dark-mode .contact-form textarea { background: #0f172a; border-color: #475569; color: #f1f5f9; }
+        .contact-form input:focus, .contact-form textarea:focus { border-color: #2c5f8a; box-shadow: 0 0 0 3px rgba(44, 95, 138, 0.15); }
+        body.dark-mode .contact-form input:focus, body.dark-mode .contact-form textarea:focus { border-color: #60a5fa; box-shadow: 0 0 0 3px rgba(96, 165, 250, 0.15); }
+        .contact-form textarea { resize: vertical; min-height: 100px; }
+        .contact-form .submit-btn { background: linear-gradient(135deg, #2c5f8a, #1a3a5a); color: white; border: none; padding: 0.9rem 2rem; border-radius: 40px; font-size: 1rem; font-weight: 600; cursor: pointer; transition: transform 0.2s ease, box-shadow 0.2s ease; display: inline-flex; align-items: center; gap: 0.7rem; width: 100%; justify-content: center; }
+        .contact-form .submit-btn:hover { transform: translateY(-2px); box-shadow: 0 4px 15px rgba(44, 95, 138, 0.3); }
+        .contact-form .submit-btn i { font-size: 1.1rem; }
+        body.dark-mode .contact-form .submit-btn { background: linear-gradient(135deg, #1e293b, #0f172a); }
+        body.dark-mode .contact-form .submit-btn:hover { box-shadow: 0 4px 15px rgba(0, 0, 0, 0.4); }
+        .contact-form .form-note { font-size: 0.8rem; color: #6c7a91; margin-top: 0.5rem; text-align: center; }
+        body.dark-mode .contact-form .form-note { color: #94a3b8; }
+        .contact-form .success-message { display: none; background: #d4edda; color: #155724; padding: 1rem; border-radius: 12px; text-align: center; font-weight: 600; margin-top: 1rem; }
+        body.dark-mode .contact-form .success-message { background: #1a3a2a; color: #8fdfa8; }
+        .contact-form .success-message.show { display: block; }
+    </style>
+</head>
+<body>
+<div id="lightbox" class="lightbox" onclick="closeLightbox()">
+    <span class="lightbox-close" onclick="closeLightbox()">&times;</span>
+    <img id="lightbox-img" src="data:image/svg+xml,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%20width='800'%20height='600'%20viewBox='0%200%20800%20600'%3E%3Crect%20width='800'%20height='600'%20fill='%23333'/%3E%3C/svg%3E" alt="Enlarged image">
+</div>
+
+<main>
+<div id="wrapper">
+   <div id="sidebar">
+    <div></div>
+        <style>
+        #top-banner-card img{width:100%;height:auto;border-radius:12px;display:block}
+        #top-banner-card .banner-sub{font-size:0.7rem;color:#6c7a91;font-style:italic;text-align:center;margin:0.5rem 0 0.8rem}
+        #top-banner-card .banner-title{font-size:1rem;font-weight:700;color:#1e293b;border-left:4px solid #2c5f8a;padding-left:0.8rem;margin-bottom:0.5rem;line-height:1.35}
+        #top-banner-card .banner-text{font-size:0.72rem;line-height:1.5;color:#4a5568}
+        #top-banner-card .banner-text p{margin-bottom:0.4rem}
+        #top-banner-card .banner-text p:last-child{margin-bottom:0}
+        #top-banner-card .banner-highlight{color:#2c5f8a;font-weight:700}
+        body.dark-mode #top-banner-card .banner-sub{color:#94a3b8}
+        body.dark-mode #top-banner-card .banner-title{color:#f1f5f9}
+        body.dark-mode #top-banner-card .banner-text{color:#cbd5e1}
+        body.dark-mode #top-banner-card .banner-highlight{color:#60a5fa}
+        </style>
+        <div class="sidebar-card">
+            <h2><i class="fas fa-pen-fancy"></i> From the Editor</h2>
+            <div class="editor-image">
+                <img src="https://vom-blog.com/images/editor-6.png" alt="Editor" width="600" height="300" loading="lazy" style="border-radius:12px; width:100%; height:auto;">
+            </div>
+            <div class="editor-note">
+                <p><strong>🎙️ Welcome to VOM Blog Issue 6!</strong></p>
+                <p>We are here again with a rich content in the sixth issue of VOM Blog. In the sixth issue of VOM Blog, we wander between past and present, between individual memories and collective memory, and between the paths human beings open for themselves in the face of changing life. The writings of this issue make us think not only about what we experience, but also about what we lose over time, what we continue to carry inside, and how we search for meaning anew in the face of change.
+                <br><br>
+                The refinements accumulated in the city's memory, the values that disappear, and the transforming ways of life make us question anew the bond human beings establish with the past. Personal memories and journeys remind us what it means sometimes to go far away and sometimes to return to ourselves. Observations filtered through daily life invite us to think about how time passes, how our choices shape us, and what we overlook in the small details of life.
+                <br><br>
+                In these contents ranging from human relationships to urban culture, from the traces of memory to the ups and downs of life, there is a common quest: How do we look at ourselves, our past and each other in a changing world? The fine line between losing and accepting, falling and rising again, leaving behind and remembering invites the reader to face their own experiences.
+                <br><br>
+               VOM Blog continues to open new spaces for thinking and feeling by addressing art, literature and life from different perspectives. With the wish that you find traces of your own memories in the pages of this issue, that you look at the familiar with another eye, and that you continue to think about what you read.
+                <br><br>
+                Enjoy your reading.</p>
+                <div class="editor-date"><i class="fas fa-calendar-alt"></i> NOVEMBER 2026 - VOM-VOMITORIUM</div>
+            </div>
+        </div>
+        <div class="sidebar-card">
+            <h2><i class="fas fa-headphones"></i> Radio</h2>
+            <a href="radyo.html" target="_blank" class="radio-link-btn"><span><i class="fas fa-play-circle"></i> Open VOM Radio</span><i class="fas fa-arrow-right"></i></a>
+        </div>
+       <div class="sidebar-card">
+    <h2><i class="fas fa-comments"></i> Chat</h2>
+    <a href="sohbet.html" target="_blank" class="radio-link-btn">
+        <span><i class="fas fa-comment-dots"></i> Open VOM Chat</span>
+        <i class="fas fa-arrow-right"></i>
+    </a>
+</div>
+<div class="sidebar-card">
+    <h2><i class="fas fa-video"></i> Camera</h2>
+    <a href="kamera.html" target="_blank" class="radio-link-btn camera-btn">
+        <span><i class="fas fa-camera"></i> Open Camera and Connect</span>
+        <i class="fas fa-arrow-right"></i>
+    </a>
+</div>
+   <div class="sidebar-card">
+    <h2><i class="fas fa-video"></i> VOM PROMO</h2>
+    <a href="https://www.youtube.com/shorts/o2Fck4sYl4Y" target="_blank" rel="noopener noreferrer" class="video-card-link">
+        <img src="images/vom kapak.png" alt="VOM Promo" width="400" height="225" loading="lazy">
+        <div class="play-icon-video"><i class="fas fa-play"></i></div>
+    </a>
+</div>
+    </div>
+
+    <div id="main">
+    <header id="header">
+        <h1>
+            <a href="#" id="resetHomeLink">VOMblog.</a>
+            <span style="position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip: rect(0, 0, 0, 0); border: 0;">
+                VOM-VOMITORIUM: Digital Art, Literature and Culture Blog
+            </span>
+            <span style="display:inline-flex; align-items:center; gap:0.5rem; margin-left:12px; vertical-align:middle; flex-wrap:wrap;">
+                <span class="issue-number" style="margin-left:0;">Issue 6</span>
+                <a href="index.html" target="_blank" title="Türkçe Sürüm" style="display:inline-flex; align-items:center; gap:0.3rem; font-size:0.75rem; text-decoration:none; background:#eef2f6; padding:0.2rem 0.6rem; border-radius:30px; color:#2c5f8a; font-weight:600;">
+                    <img src="https://flagcdn.com/20x15/tr.png" alt="Türkçe" width="20" height="15" style="border-radius:2px; display:inline-block;">
+                    TR
+                </a>
+                <a href="index6-fr.html" target="_blank" title="Version Française" style="display:inline-flex; align-items:center; gap:0.3rem; font-size:0.75rem; text-decoration:none; background:#eef2f6; padding:0.2rem 0.6rem; border-radius:30px; color:#2c5f8a; font-weight:600;">
+                    <img src="https://flagcdn.com/20x15/fr.png" alt="Français" width="20" height="15" style="border-radius:2px; display:inline-block;">
+                    FR
+                </a>
+            </span>
+        </h1>
+            <nav class="links">
+                <ul>
+                    <li><a href="#" id="resetHomeLinkBtn">Home</a></li>
+                    <li><a href="#" id="contactNavLink">Contact</a></li>
+                    <li><button class="dark-mode-toggle" id="darkModeToggle" aria-label="Dark Mode"><i class="fas fa-moon"></i> Dark Mode</button></li>
+                </ul>
+            </nav>
+        </header>
+
+        <div id="postsContainer">
+
+            <!-- POST 67 -->
+            <article class="post" data-post-id="67" itemscope itemtype="https://schema.org/BlogPosting">
+                <script type="application/ld+json">
+                { "@context": "https://schema.org", "@type": "Article", "headline": "Forgotten Elegance", "description": "Woman and Love", "author": { "@type": "Person", "name": "Ferzen Soydemir" }, "datePublished": "2026-11-01", "dateModified": "2026-11-01", "image": "https://vom-blog.com/images/FE-2.png", "url": "https://vom-blog.com/index6-eng.html#post-67", "mainEntityOfPage": { "@type": "WebPage", "@id": "https://vom-blog.com/index6-eng.html#post-67" }, "publisher": { "@type": "Organization", "name": "VOM PUBLISHING", "logo": { "@type": "ImageObject", "url": "https://vom-blog.com/favicon-32x32.png" } }, "keywords": "love, relationship, emotion, woman, Ferzen Soydemir", "inLanguage": "en" }
+                </script>
+                <header>
+                    <div class="title">
+                        <h2 itemprop="headline"><a href="#post-67" class="post-title-link">Forgotten Elegance</a></h2>
+                        <p itemprop="description">Woman and Love</p>
+                    </div>
+                    <div class="meta">
+                        <span class="post-date" itemprop="datePublished" content="2026-11-01">November 1, 2026</span>
+                        <a href="#post-67" class="author" itemprop="author" itemscope itemtype="https://schema.org/Person">
+                            <span class="name" itemprop="name">Ferzen Soydemir</span>
+                            <img src="https://vom-blog.com/images/ferzen.png" alt="Ferzen Soydemir avatar" width="56" height="56" loading="lazy" onerror="this.src='https://randomuser.me/api/portraits/women/1.jpg'">
+                        </a>
+                    </div>
+                </header>
+                <a href="#post-67" class="image featured clickable-img" data-img="https://vom-blog.com/images/FE-6.png" itemprop="image"><img src="https://vom-blog.com/images/FE-6.png" alt="Woman and Love" width="800" height="450" fetchpriority="high"></a>
+                <p itemprop="articleBody">This city, which I believe I have lost, was once the center of happiness, of manners, of nobility and of courtesy. Cities have their mysteries, their unhistorical formations, their wars, their conquests; they also have their customs, their traditions, their beauties and their insatiabilities... Living these to the full in the past was my happiness. Every city has a story, and thinking about it makes me feel good. Now I want to speak of the city of times that slipped through my fingers, that I could not hold onto. The old dignity, the reputation, the understanding, the loves and the embraces are no longer to be found in the people of this city, the pearl of the world, with its unique beauties.
+<br><br>
+The right to object is reserved, sir. This city has disappeared a little more each day before my eyes. Of course, it did not evaporate, it did not fly away, it did not collapse, it did not melt. But it went, it was lost somehow. Are you aware? We can no longer talk. Even when we speak, the words are in rebellion. We are narrowing our vocabulary, as it were. What is it to speak with three or five words? When we cannot convey what we mean... Yes, this city has received a lot of migration, it has changed a lot. I cannot bring myself to say it, but it has become provincial. The language has changed, the words have, the understandings too. This bothers me deeply.</p>
+                <div class="full-post-content" id="full-67"><p class="full-text">
+Let them come. Let them come, but whatever region they come from, let them not bring their customs. As they say: the aim should be not to live in Istanbul, but to keep Istanbul alive. When we say "Let them adapt to my city, let them learn my customs," let them not impose on me the necessity to adapt to them. This, I think, is the very essence of disappearance. Many years ago, there was an 8-15 ferry departing from Kadıköy that became the subject of songs. The inside of that ferry was quality itself. It was a ferry used by everyone going to work at that hour in the morning. People would sit in the places they had determined for themselves. Respect was so complete that we would not dare sit in anyone's place. I am speaking of a simple and silent rule of respect.
+<br><br>
+What else have we not lost in this city in similar fashion? Greetings, smiles, measured behaviors, courtesies... These were the symbols of social life. No doubt you live and keep these alive. I am speaking of the general situation. I am sure you are as complaining as I am. It is a dream, of course... I wish cities were like countries. Time has instilled this thought in me. If the people of every city were happy by living together, it would be, to my mind, very pleasant. I too would embrace my city more. Do you think I am thinking too utopically?
+<br><br>
+When a person thinks of themselves, they become a bit self-centered. As a result, I now live in a lost city that no one searches for anymore. I expect value, respect and understanding from the people in this city that has become ordinary despite its unique stories. I wait and I wait... Let them give me back this city where I was born. With its sea, its shores, its houses... With its customs and traditions, its elegant women and gentlemanly men, its children and their innocence... I will not say "what is past is past"; I will try to reflect, teach and keep alive the beauties.
+<br><br>
+They say to me, "Your fashion has passed." Do you think the fashion of good and beautiful things ever passes?</p></div>
+                <div class="post-footer">
+                    <ul class="actions"><li><a href="#post-67" class="button read-more-btn" data-id="67">Read More</a></li></ul>
+                    <ul class="stats"><li class="comment-toggle" data-post="67"><a href="#post-67"><i class="fas fa-comment"></i> Comments (<span class="comment-count">0</span>)</a></li></ul>
+                </div>
+                <div class="comments-section" id="comments-section-67">
+                    <div class="comments-title">Comments (<span class="comment-count-display">0</span>)</div>
+                    <div class="comments-list" id="comments-list-67"></div>
+                    <div class="add-comment-form">
+                        <input type="text" class="comment-input" id="comment-name-67" placeholder="Your name">
+                        <textarea class="comment-text" id="comment-text-67" placeholder="Write your comment..." rows="2"></textarea>
+                        <button class="submit-comment" data-post="67">Submit</button>
+                    </div>
+                </div>
+                <div class="old-posts-link"><a href="index5.html" target="_blank"><i class="fas fa-archive"></i> Old Posts</a></div>
+            </article>
+
+            <!-- POST 68 -->
+            <article class="post" data-post-id="68" itemscope itemtype="https://schema.org/BlogPosting">
+                <script type="application/ld+json">
+                { "@context": "https://schema.org", "@type": "Article", "headline": "Postcard", "description": "Memorable Experiences", "author": { "@type": "Person", "name": "Nilüfer Gürler" }, "datePublished": "2026-11-01", "dateModified": "2026-11-01", "image": "https://vom-blog.com/images/nil-2.png", "url": "https://vom-blog.com/index6-eng.html#post-68", "mainEntityOfPage": { "@type": "WebPage", "@id": "https://vom-blog.com/index6-eng.html#post-68" }, "publisher": { "@type": "Organization", "name": "VOM PUBLISHING", "logo": { "@type": "ImageObject", "url": "https://vom-blog.com/favicon-32x32.png" } }, "keywords": "memory, travel, New York, Nilüfer Gürler, nostalgia", "inLanguage": "en" }
+                </script>
+                <header>
+                    <div class="title">
+                        <h2 itemprop="headline"><a href="#post-68" class="post-title-link">Postcard</a></h2>
+                        <p itemprop="description">Memorable Experiences</p>
+                    </div>
+                    <div class="meta">
+                        <span class="post-date" itemprop="datePublished" content="2026-11-01">November 1, 2026</span>
+                        <a href="#post-68" class="author" itemprop="author" itemscope itemtype="https://schema.org/Person">
+                            <span class="name" itemprop="name">Nilüfer Gürler</span>
+                            <img src="https://vom-blog.com/images/nil.png" alt="Nilüfer Gürler avatar" width="56" height="56" loading="lazy" onerror="this.src='https://randomuser.me/api/portraits/women/8.jpg'">
+                        </a>
+                    </div>
+                </header>
+                <a href="#post-68" class="image featured clickable-img" data-img="https://vom-blog.com/images/Nilufer-2.png" itemprop="image"><img src="https://vom-blog.com/images/Nilufer-2.png" alt="Postcard" width="800" height="450" loading="lazy"></a>
+                <p itemprop="articleBody">Her plane had landed at JFK. When she looked up at the sky through the tiny window, it was hard to tell from which direction the day, still hidden behind the morning darkness, was blowing. As she said to herself, "I should check the weather," her gaze drifted to the careful, rhythmic movements of the ground attendant. With her tiny frame beneath the nose of the giant aircraft and her two bright red magic wands, the woman was guiding the huge plane that had just been roaring at 30,000 feet into its parking spot, docile as a lamb...
+                <br><br>
+               Inside the great bird that had shaken the dust of the long journey from its wings, the energy was at its peak! The 380 passengers, who had been cut off from what was happening outside for ten hours, were clinging to their phones like hungry babies to their mother's breast. A colorful mosaic of languages, a humming cloud of conversation had filled the interior of the plane. Among all these languages, her ears had caught a word or two of Turkish. In the city she lived in, at least three languages were spoken at any moment. Although Turkish was not one of them, her beautiful mother tongue would always rise to the surface like a drop of olive oil falling into water, wherever she was.
+                <br><br>
+               Yes; a male voice was explaining that he was filling out the customs forms and yes, that he had his passport in his hand, yes yes, that no matter how long the visa line was, his uncle would wait, of course, inshallah, of course he would call them back.</p>
+                <div class="full-post-content" id="full-68"><p class="full-text">
+                Suddenly she remembered her own first landing at JFK. That day, when she first looked out of the plane window, New York had a secret she did not yet know and had to keep tightly hidden. She had come to stay, not to visit. It would happen somehow, this much had already happened, and for now that was enough.
+                <br><br>
+               A great adventure that began with the ignorant courage of a youth left far behind... "Dad, is Brooklyn with one 'o' or two?" "Okay, I've filled out my form and put it between the visa pages..." She understood the excitement of the man she was overhearing very well.
+                <br><br>
+                She was a university student in Istanbul. Her father's financial situation had only covered the first year. When she realized she had to work to continue her education, one of her uncles, all of whom were engineers, found her a job alongside two of his friends, also engineers. The office was in Taksim, within walking distance of the girls' dormitory where she stayed in Nişantaşı.
+                <br><br>
+              She had two bosses at the office: two unpleasant men with receding hair, pot bellies, exhibiting all the characteristics of their forties.
+				<br><br>
+				The tastelessly furnished office needed to be opened, the phone answered, visitors received, notes taken, and the occasional letters typed. The black telephone on the desk was an old model, almost antique, with a receiver heavy enough to be used as a weapon in self-defense. The typewriter, which she barely knew how to use, was fortunately electric and a fairly new model.
+				<br><br>
+				After a while, she wanted to brighten up the little corner of her desk a bit. Hanging something on the wall would be good. With the mind she had at the time, she decided a map would be nice. "And I'll look at it and dream of traveling," she thought.
+				<br><br>
+				She had a huge world map in her hands that connected all the major airports where Pan Am flew in an arc shape with blue lines. She hung it nicely on the wall behind her desk.
+				<br><br>
+				Despite the disapproving looks of her first boss, whom she described at the time as "the old man" but who was actually only 45, she managed to keep her map. "What's the connection? Is this a travel agency?" her boss had grumbled.
+				<br><br>
+				One morning she was caught. While she was drawing the line between New York and Istanbul with a thick red marker and dreaming, her boss had stood behind her. "Ooo, so Istanbul-New York is red now? Vaaay, is our girl going to New York or something?" he had asked in a mocking voice. She immediately hid the pen behind her back and turned toward him. With a shy voice, saying "No, not yet," she wanted to disappear behind her desk. "One day, maybe," she said, turning back to the typewriter. For now, it was just one of the messages she had sent to the universe, that was all.
+				<br><br>
+				The man laughed with a somewhat unnecessary exaggeration. "I think you should improve your typing skills first to earn the money for your English lessons," he had walked toward his desk with a mocking air.
+				<br><br>
+				She had been very angry. When she thickened the line on the map a little more with the red marker before leaving the office that day, she had watched with pleasure as the paint went through the paper and stained the snow-white wall behind it, and her anger had eased a little.
+				<br><br>
+				Two years had passed since this heartbreak. She still hadn't learned English but had mastered the typewriter quite well. She had finished school and no longer had a reason to work. Very shortly afterward, by chance, her dreams came true. Her aunt in Brooklyn had invited her. Everything had gone well, she had gotten her visa. She was going!
+				<br><br>
+			She had set out, leaving everything behind, including the red stain on the wall. She had wanted to fly with Pan Am, but since her mother and father would not agree to send her alone and buying three Pan Am tickets would be too expensive, the three of them had flown together from Istanbul to JFK on one of Yugoslav Airlines' discounted flights.
+The flood of passengers inside the plane, with their hand luggage, their dogs and their children, had begun their parade toward the open door. She decided to wait, she was in no hurry anyway. The Turkish man passing by her was still very tense on the phone. She sent him a smile as he passed in front of her, but the man's excitement-filled eyes had passed without looking at her. Her smile hung in the air. When it was her turn to leave, she thanked the cabin crew, whose every state showed they had hit rock bottom in their energy reserves, and left the plane. Rolling her small hand suitcase and camera bag, she passed through the sleepy passengers waiting to board the plane that the arriving passengers had just vacated, and headed toward the passport control point.
+				<br><br>
+				45 years had passed since the day she first landed. Because of flights whose number she had forgotten, she had more or less experienced the changes the airport had undergone. The only thing that had not changed was the chaos in the environment. The number of shops without doors or walls, with their brightly lit signs that made the place echo, spilling their colorful goods into the corridors, had increased many times over.
+There was no need for her to understand the language the couple walking ahead of her was speaking. The woman was clearly caught in the spell of shopping and was not even paying attention to the man beside her tugging at her arm toward the exit. She couldn't help but laugh. They too had dragged her mother out like this when they got off the JAT. Her late mother had loved it, she would touch everything, whether she bought it or not. Her father had no tolerance at all for shopping talk.
+				<br><br>
+				In the passport control building, her turn had already come in the queue of citizens advancing quickly. As the sullen customs officer stamped her passport and said welcome home, her eyes, scanning the crowded "non-citizens" queue one last time, could not find the Turkish man who had taken her back to her youth at the speed of light.
+Half asleep, with thoughts still keeping alive the remnants of past memories in her head, she had jumped on the air train between Jamaica and JFK. The day was slowly dawning. When a baby screamed from somewhere near the back of the train, the train had arrived at her stop. With a familiar agility, she slipped down the stairs to the lower floor. Outside the station, she raised her hand to hail a yellow taxi that would take her to the city. Shortly afterward, she was making her way through the flood of sounds, buildings, traffic and people.
+45 minutes later, when the taxi headed into the tunnel passing under Park Avenue, the memories she had paused in her mind had started moving again.
+One day, for a reason she could not fully remember, she had found herself on Park Avenue. When she looked up and saw 200 Park Avenue rising with its 59 floors above Grand Central Station, she had stood rooted to the ground. Of course, there was no shortage of buildings in Manhattan, so what was special about this one? This building was the Pan Am Building! At the very top, in giant blue letters, it was almost calling out from the top of the city toward the south. Exactly three years had passed since that unpleasant memory in Taksim. Now she was looking at the building of the company that adorned her dreams.
+				<br><br>
+				Forgetting everything else, she had entered the lobby of the building with the bearing of a victorious athlete walking on the podium to receive a medal. She did not yet have a camera. To keep this magnificent lobby alive in her memories, she had decided to buy a postcard and slip it into her diary.
+After idling a little, she had become uncomfortable with the looks of the security guard at the door, and fearing that he might ask her something and she would not be able to answer since her English was not yet good, she had left the way she came, without drawing too much attention.
+					<br><br>
+The old Pan Am building she was now passing under belonged to MetLife. It had its name on top. Who had moved into that little office on La Martin Street, she wondered? What had happened to the red stain on the white wall? It must have been painted over long ago, she thought. That wall had been her confidant, the one with whom she shared her grand dreams silently, without ever mocking them.
+So be it, the building had changed hands, but the lived experiences had been inherited. Neither paints nor real estate agents could destroy the traces of those exact moments left in the past. As she closed the taxi door and released her sleepy body into the dense noise of the city, she noted in her mind: "I must find that postcard."</p></div>
+                <div class="post-footer">
+                    <ul class="actions"><li><a href="#post-68" class="button read-more-btn" data-id="68">Read More</a></li></ul>
+                    <ul class="stats"><li class="comment-toggle" data-post="68"><a href="#post-68"><i class="fas fa-comment"></i> Comments (<span class="comment-count">0</span>)</a></li></ul>
+                </div>
+                <div class="comments-section" id="comments-section-68">
+                    <div class="comments-title">Comments (<span class="comment-count-display">0</span>)</div>
+                    <div class="comments-list" id="comments-list-68"></div>
+                    <div class="add-comment-form">
+                        <input type="text" class="comment-input" id="comment-name-68" placeholder="Your name">
+                        <textarea class="comment-text" id="comment-text-68" placeholder="Write your comment..." rows="2"></textarea>
+                        <button class="submit-comment" data-post="68">Submit</button>
+                    </div>
+                </div>
+                <div class="old-posts-link"><a href="index5.html" target="_blank"><i class="fas fa-archive"></i> Old Posts</a></div>
+            </article>
+
+            <!-- POST 69 -->
+            <article class="post" data-post-id="69" itemscope itemtype="https://schema.org/BlogPosting">
+                <script type="application/ld+json">
+                { "@context": "https://schema.org", "@type": "Article", "headline": "Istanbul's Different Identities...", "description": "Another Istanbul", "author": { "@type": "Person", "name": "Ahmet Sinan Sarıkaya" }, "datePublished": "2026-11-01", "dateModified": "2026-11-01", "image": "https://vom-blog.com/images/AH-2.png", "url": "https://vom-blog.com/index6-eng.html#post-69", "mainEntityOfPage": { "@type": "WebPage", "@id": "https://vom-blog.com/index6-eng.html#post-69" }, "publisher": { "@type": "Organization", "name": "VOM PUBLISHING", "logo": { "@type": "ImageObject", "url": "https://vom-blog.com/favicon-32x32.png" } }, "keywords": "Istanbul, music, Fırat Başkale, culture, Ahmet Sinan Sarıkaya", "inLanguage": "en" }
+                </script>
+                <header>
+                    <div class="title">
+                        <h2 itemprop="headline"><a href="#post-69" class="post-title-link">Istanbul's Different Identities...</a></h2>
+                        <p itemprop="description">Another Istanbul</p>
+                    </div>
+                    <div class="meta">
+                        <span class="post-date" itemprop="datePublished" content="2026-11-01">November 1, 2026</span>
+                        <a href="#post-69" class="author" itemprop="author" itemscope itemtype="https://schema.org/Person">
+                            <span class="name" itemprop="name">Ahmet Sinan Sarıkaya</span>
+                            <img src="https://vom-blog.com/images/ahmet.png" alt="Ahmet Sinan Sarıkaya avatar" width="56" height="56" loading="lazy" onerror="this.src='https://randomuser.me/api/portraits/men/1.jpg'">
+                        </a>
+                    </div>
+                </header>
+                <a href="#post-69" class="image featured clickable-img" data-img="https://vom-blog.com/images/AH-6.png" itemprop="image"><img src="https://vom-blog.com/images/AH-6.png" alt="Another Istanbul" width="800" height="450" loading="lazy"></a>
+                <p itemprop="articleBody">Finishing a workday and to continue my photography project, I set off from Sanayi District by metro. While thinking on one hand "What will come my way?", on the other hand, with the planning of how to create and shoot the images I had conceived in my mind within the streets, I had arrived at the stop I was going to get off at. Getting off the vehicle, I started walking from the Golden Horn Bridge toward Küçükpazar.
+                <br><br>
+There were lots of people around, tourists visiting Istanbul from different geographies, different languages and human types. With a curious observation, I was trying to eavesdrop on what was being said. I was pricking up my ears to every voice with "Will it give me a photo story?" while on the other hand, I was in a back-and-forth in my head like "I wonder if I could catch a better moment further ahead?"</p>
+                <div class="full-post-content" id="full-69"><p class="full-text">While experiencing all this, the human voices in the street began to sound like music joining in universal communication. The voices were sometimes reggae, sometimes jazz, or a reflection of ethnic music belonging to their traditions. Suddenly, the words of Nina Simone, who said at a university of eighteen thousand people, "I won't sing my songs just for the three hundred black friends here," came to my mind. Indeed, jazz first started as ethnic, then became universal.
+                <br><br>
+                As I said, I continued on my way with the dream of "Could I catch a better moment further ahead?" I started walking the streets; while wandering with the thought of how and what to photograph, the songs of Muddy Waters, Joan Baez, Buena Vista Social Club, Goran Bregovic and many more were echoing in my head. In the end, I found myself in front of Ahmet Abi's coffee house. I ordered a tea and started chatting with familiar faces. While the conversations and greetings continued, I noticed someone I had never seen before to my left. I asked, nobody knew him.
+                <br><br>
+With the stance you see in the photo, the way he answered his ringing phone, and the felt jacket he was wearing, he was a different person. His tone of voice was very melodic, his style different from many of the people there. I greeted him by making eye contact. He began with "Hello, my friend"; the conversation deepened. At that very moment, he began to talk about his involvement with music. It was Fırat Başkale, by his known stage name. With the music he made, I understood that he established a connection with the world through the language of the geography he was born in.
+	<br><br>
+We talked about concerts, he told me about the music he made ethnically. He shared his views with me on this subject, explaining how he tried to interpret traditional music in Western norms, how he could transform it into something universal as in ethnic jazz form. He talked about his "Orient rock" experiments. It's easy to say, but a full 50 years of musical history lay behind him.
+<br><br>
+The steps I took with the thought "Could I catch a better moment further ahead?" had led me to an artist. Let Victor Hugo's words complete this evening: "Music expresses that which cannot be said and on which it is impossible to be silent."*
+<br><br>
+Thank you very much, Fırat Başkale...
+<br><br>
+*<em>The source of this famous saying by Victor Hugo, whose original French is "Ce qu'on ne peut dire et ce qu'on ne peut taire, la musique l'exprime.": Book: William Shakespeare (1864), Section: Second Book (Livre Deuxième - L'Art et la Science / Art and Science), Chapter I. Page: Although the page number varies according to the edition and translation, it appears on page 80 in the original 1864 French first edition (A. Lacroix, Verboeckhoven et Cie). (Note: Victor Hugo wrote this book in memory of the 300th anniversary of William Shakespeare's death; he shared his thoughts on literature, art, aesthetics and music in this work.)</em></p></div>
+                <div class="post-footer">
+                    <ul class="actions"><li><a href="#post-69" class="button read-more-btn" data-id="69">Read More</a></li></ul>
+                    <ul class="stats"><li class="comment-toggle" data-post="69"><a href="#post-69"><i class="fas fa-comment"></i> Comments (<span class="comment-count">0</span>)</a></li></ul>
+                </div>
+                <div class="comments-section" id="comments-section-69">
+                    <div class="comments-title">Comments (<span class="comment-count-display">0</span>)</div>
+                    <div class="comments-list" id="comments-list-69"></div>
+                    <div class="add-comment-form">
+                        <input type="text" class="comment-input" id="comment-name-69" placeholder="Your name">
+                        <textarea class="comment-text" id="comment-text-69" placeholder="Write your comment..." rows="2"></textarea>
+                        <button class="submit-comment" data-post="69">Submit</button>
+                    </div>
+                </div>
+                <div class="old-posts-link"><a href="index5.html" target="_blank"><i class="fas fa-archive"></i> Old Posts</a></div>
+            </article>
+
+            <!-- POST 70 -->
+            <article class="post" data-post-id="70" itemscope itemtype="https://schema.org/BlogPosting">
+                <script type="application/ld+json">
+                { "@context": "https://schema.org", "@type": "Article", "headline": "Hidden in the Mirror", "description": "Two Cities One Woman", "author": { "@type": "Person", "name": "Fatma Altun" }, "datePublished": "2026-11-01", "dateModified": "2026-11-01", "image": "https://vom-blog.com/images/fatma-resim_2.png", "url": "https://vom-blog.com/index6-eng.html#post-70", "mainEntityOfPage": { "@type": "WebPage", "@id": "https://vom-blog.com/index6-eng.html#post-70" }, "publisher": { "@type": "Organization", "name": "VOM PUBLISHING", "logo": { "@type": "ImageObject", "url": "https://vom-blog.com/favicon-32x32.png" } }, "keywords": "city, woman, return, Fatma Altun, literature", "inLanguage": "en" }
+                </script>
+                <header>
+                    <div class="title">
+                        <h2 itemprop="headline"><a href="#post-70" class="post-title-link">Hidden in the Mirror</a><br></h2>
+                        <p itemprop="description">Two Cities One Woman</p>
+                    </div>
+                    <div class="meta">
+                        <span class="post-date" itemprop="datePublished" content="2026-11-01">November 1, 2026</span>
+                        <a href="#post-70" class="author" itemprop="author" itemscope itemtype="https://schema.org/Person">
+                            <span class="name" itemprop="name">Fatma Altun</span>
+                            <img src="https://vom-blog.com/images/fatma-1.png" alt="Fatma Altun avatar" width="56" height="56" loading="lazy" onerror="this.src='https://randomuser.me/api/portraits/women/2.jpg'">
+                        </a>
+                    </div>
+                </header>
+                <a href="#post-70" class="image featured clickable-img" data-img="https://vom-blog.com/images/fatma-resim_6.png" itemprop="image"><img src="https://vom-blog.com/images/fatma-resim_6.png" alt="Two Cities One Woman" width="800" height="450" loading="lazy"></a>
+                <p itemprop="articleBody">As the first light of the day seeped through the trees, in the damp, moss-scented silence of the forest, only her timid footsteps echoed. On her walk to clear her mind as she did every morning, her feet had again dragged her to the familiar path. She sat on a rock and gently slipped into the small notebook she took from her pocket the tale the nature whispered to her. Since her childhood, she had invented tales, consoled herself. When she came here, she had decided; even if she didn't remember many of them, she would write those stories that were the legacy of her childhood. When the words ran out, the notebook went back into the pocket, the pen fell silent. Feeling the voices inside her calm down, she headed back home.
+				<br><br>
+When she stepped into the courtyard, it was not the usual absolute solitude that greeted her, but a pile of supplies unloaded from the town hardware store's veteran truck pulled up in front of the door. The hardware store owner had left the materials out in the open. Cement bags, wooden slats, renovation tools... In a geography where rain could fall at any moment, leaving such delicate goods out in the open was not wise. She silenced the voice cursing the hardware store owner by focusing her mind on the mess in front of her. Instead of carrying this load into the house, she thought of taking it to the two-story old structure rising at the other end of the garden. The lower floor of this structure, built on the steep slope of the land, had once been used as a barn; when viewed from the road level, it was at zero point. The hayloft on the upper floor, which her father had converted into a workshop for a period, could be entered level from the garden side. Carrying the goods there would be much easier.
+<br><br>
+Right next to the workshop was the woodshed, and behind it lay the family cemetery covered with damp leaves. All those areas needed to be cleaned, the weeds removed, but she had not yet touched them. The world of the dead could wait for now behind the renovation rush of the living. Still, out of respect for the ancestors lying there, she decided not to delay this work too long.
+</p>
+                <div class="full-post-content" id="full-70"><p class="full-text">Pushing the creaking wooden door, she entered her father's old workshop. The faint light filtering in made visible the dust particles floating in the air, the thick cobwebs that had taken up residence in the corners of the ceiling. While looking around to make room for the new tools, she was surprised by the order of that old equipment where time had frozen. Rusty saws hanging on the wall, screwdrivers, files lined up on the workbench, boxes full of nails of all sizes... Every object had been placed with a meticulous precision.
+After the bright and artificial glass tables of the high buildings and plazas in the city, this dusty workshop was like the naked face of reality. Her father had not even attended high school; officially he was a primary school graduate, but each time he would say, "I studied a full eleven years, I count as a high school graduate." He would talk at every opportunity about the quality of the education they had received back then; now she understood much better what her father meant. Though her father had grown up a bit mischievous, with an overly free spirit, since he was orphaned at a young age, still with his immense practical intelligence and hand skills that worked wonders, he was often referred to as a genius around him. Somehow he understood every job. There were those who claimed he could even make a human in his workshop if he had enough materials. He collected everything, wouldn't throw away even a small piece. He generally turned out to be right; what everyone called trash was treated as spare parts in this workshop and always came in useful.
+<br><br>
+While thinking about these, with a smile settling on her face, she began emptying the shelves behind the workbench. Among the shelves, she found a small mirror wedged in the corner, its frame falling apart. She remembered this too. Sometimes when her father shaved in the courtyard, he would put the mirror in front of a stone; he would proudly tell that it had passed from his grandfather to his father, and from his father to him. Once she had been caught using it without permission, and he had told her that the mirror passed from father to son. When he saw the strength and rightness of her objection, he said, "It can be yours when I die." No one ever spoke of the mirror again so that her father would never die. So he had hidden it here.
+<br><br>
+When she wiped the thick layer of dust on it with her fingertips, she saw that distant woman looking back at her from the mirror's secret. She stopped smiling… Just as she was about to put the mirror aside, a small yellowed piece of paper folded and wedged into the crack behind the wooden frame caught her attention. She pulled the paper out as if with tweezers. She recognized her father's angular, simple but masterful handwriting. Only these lines were scribbled: "A person weaves a cage for themselves everywhere, and then looks for the door to get out of it."
+<br><br>
+This simple sentence, in the silence of the workshop, opened a completely different door in her mind. She grabbed the mirror and the paper and rushed home. She sat at the desk she had placed by the window closest to the constantly burning stove in the kitchen. She opened her computer and began to write:
+"Italian thinker Emanuele Coccia, in his work Metamorphoses, says that human beings do not have a single and innate fixed essence, that life is actually a continuous process of form-changing, of 'migrating from shell to shell', and thus leaves a map on this path. Just like the cocoon a caterpillar weaves while transforming into a butterfly, the forms we put on to survive are not artificial lies, but an effort to seek a new existence.
+<br><br>
+The years spent in the air-conditioned, high-ceilinged plazas of big cities teach a person most of all to put on those armors. The clothes chosen while standing in front of the wardrobes after waking up at the crack of dawn are actually the costumes of that scene. A woman who puts her rubber shoes, whose laces she has replaced with satin ribbons to feminize them, under a masculine suit of black silk blend, plays her own theatre while walking through male-dominated corridors. When she unbuttons her jacket as she is about to sit at her desk, she is amused to see how a tiny bit of décolletage that spills out paralyzes the unauthorized and crude gazes around. This balance she establishes between masculinity and flamboyance is her captivity behind invisible bars. When society locks the woman in that cage, the woman learns to exist in her own cell with these games. But when she gets too used to those shells, the forms eventually stick to her skin.
+<br><br>
+When a person escapes those neon lights and takes refuge in a ruined hut; that's when the cocoon cracks. When she looks at the small mirror she found on a dusty workbench, what remains is not the woman in the plaza, but a bald-headed, pitch-black-eyed little girl looking at her from beyond the mirror. The only thing a person is left with is their own naked existence under the shed shells." As the text flowed on the screen, she pressed the "Publish" button. With the familiar confirmation window that appeared, she took a deep breath and slowly lowered the lid of her laptop.
+<br><br>
+Nisyan, that is, forgetting; at the conceptual level represents the flawed relationship of a human with time and its own mind. In the silence of the countryside that suddenly filled the room, her gaze drifted to the small mirror on the table and her father's old note. When she took the piece of paper in her hand again and turned it over, she realized that it was not an ordinary paper, that it had been torn not from a notebook, but from a much older book. The faint remnants of mysterious lines written in old letters at the edge of the paper could have belonged to one of the books in her grandfather's room that her father had entered without permission in his childhood. The unique library of her great-grandfather, full of books that were always talked about but of which not even a single witness remained, had never been found. When she asked her father, he had said, "My grandfather hid the books he guarded like his eyes when I last cleared out his room. Even I couldn't find them. I think he buried them." The manuscript was perhaps a piece of a page torn without knowing its value by mischievous childish hands from a precious book. This small paper that froze time was the first whisper that opened the door to a great mystery that everyone would pursue.</p></div>
+                <div class="post-footer">
+                    <ul class="actions"><li><a href="#post-70" class="button read-more-btn" data-id="70">Read More</a></li></ul>
+                    <ul class="stats"><li class="comment-toggle" data-post="70"><a href="#post-70"><i class="fas fa-comment"></i> Comments (<span class="comment-count">0</span>)</a></li></ul>
+                </div>
+                <div class="comments-section" id="comments-section-70">
+                    <div class="comments-title">Comments (<span class="comment-count-display">0</span>)</div>
+                    <div class="comments-list" id="comments-list-70"></div>
+                    <div class="add-comment-form">
+                        <input type="text" class="comment-input" id="comment-name-70" placeholder="Your name">
+                        <textarea class="comment-text" id="comment-text-70" placeholder="Write your comment..." rows="2"></textarea>
+                        <button class="submit-comment" data-post="70">Submit</button>
+                    </div>
+                </div>
+                <div class="old-posts-link"><a href="index5.html" target="_blank"><i class="fas fa-archive"></i> Old Posts</a></div>
+            </article>
+
+            <!-- POST 71 -->
+            <article class="post" data-post-id="71" itemscope itemtype="https://schema.org/BlogPosting">
+                <script type="application/ld+json">
+                { "@context": "https://schema.org", "@type": "Article", "headline": "While Touring Adana and Its Surroundings", "description": "Through Begüm's Eyes and Words", "author": { "@type": "Person", "name": "Begüm Özüer" }, "datePublished": "2026-11-01", "dateModified": "2026-11-01", "image": "https://vom-blog.com/images/BEG-2.png", "url": "https://vom-blog.com/index6-eng.html#post-71", "mainEntityOfPage": { "@type": "WebPage", "@id": "https://vom-blog.com/index6-eng.html#post-71" }, "publisher": { "@type": "Organization", "name": "VOM PUBLISHING", "logo": { "@type": "ImageObject", "url": "https://vom-blog.com/favicon-32x32.png" } }, "keywords": "Adana, food, culture, Begüm Özüer, travel", "inLanguage": "en" }
+                </script>
+                <header>
+                    <div class="title">
+                        <h2 itemprop="headline"><a href="#post-71" class="post-title-link">While Touring Adana and Its Surroundings</a></h2>
+                        <p itemprop="description">Through Begüm's Eyes and Words</p>
+                    </div>
+                    <div class="meta">
+                        <span class="post-date" itemprop="datePublished" content="2026-11-01">November 1, 2026</span>
+                        <a href="#post-71" class="author" itemprop="author" itemscope itemtype="https://schema.org/Person">
+                            <span class="name" itemprop="name">Begüm Özüer</span>
+                            <img src="https://vom-blog.com/images/begum.png" alt="Begüm Özüer avatar" width="56" height="56" loading="lazy" onerror="this.src='https://randomuser.me/api/portraits/women/3.jpg'">
+                        </a>
+                    </div>
+                </header>
+                <a href="#post-71" class="image featured clickable-img" data-img="https://vom-blog.com/images/BEG-6.png" itemprop="image"><img src="https://vom-blog.com/images/BEG-6.png" alt="Through Begüm's Eyes" width="800" height="450" loading="lazy"></a>
+                <p itemprop="articleBody">We toured Tarsus historically, saw it, now let's get into the mood of eating and drinking a little. Our country is an incredible geography in terms of food; in general, when you look at European countries, things like French cuisine, Italian cuisine etc. are mentioned about their cuisines, but when you look at the detail, you generally see meat, pasta, cheese; yes, it may be interesting because of the way it is cooked, but come on, try cooking a karnıyarık, an analı-kızlı soup, a stuffed grape leaves with olive oil, don't you?
+<br><br>
+That's why Gaziantep being a gastronomy center, Adana's kebabs, the breakfast of Van and Diyarbakır, every kind of dish made with anchovy in the Black Sea, kuymak etc., the article goes on and on like this. Now, where shall we start eating in Tarsus and of course Mersin?
+<br><br>
+When we first went to Adana, to the questions of acquaintances about where to eat what, what to see, they said have breakfast in Mersin with şıralı börek, we got the address and went. Of course I was going to try something new, so I ordered şıralı, and my husband ordered cheese börek, but I didn't know what şıralı was; the böreks came, and my börek was a sweet börek with syrup as you know, and since we are not Italian, having breakfast with sweet börek in the morning didn't seem very appealing to me, so I also ordered my good old cheese börek. And I couldn't tell whether it was the happiness or the fiasco of trying something new.</p>
+                <div class="full-post-content" id="full-71"><p class="full-text">Let's continue from Mersin; the famous ice cream maker Halil is known for his cezerye, although cezerye is now everywhere, but this place and Yeni Uğur in Adana are very good, and Yeni Uğur's tahini especially comes to Istanbul by cargo, and its price is a laughable amount for Istanbul. Yes, the ice cream maker Halil also has a kerebiç filling walnut or pistachio cookie, but what is interesting is the foam made with the Çöven root placed on top, but it didn't suit my taste.
+<br><br>
+After eating tantuni in Mersin, we can move on to Tarsus. Although tantuni geographically belongs to Mersin, it is now possible to find it everywhere, but of course the good ones. If you go to Tarsus hungry, you immediately eat a hot pastırma hummus made by hand at Akın Humus, along with about half a loaf of bread, it's such a magnificent thing.
+<br><br>
+Its feature is that it is generally made the same way in Tarsus, by pounding by hand. Then let's not eat the hummus with too much bread and enter the bazaar to eat a coaster-sized lahmacun; the reason it's called coaster-sized is that it's really the size of the bottom of a tea glass, and believe me, it doesn't matter whether you're hungry or full, you sit and eat it, I'm not writing the number.
+<br><br>
+Now, it would be good to eat some dessert; first of all, there is the well-known künefe in Tarsus and there is a famous künefe shop, but since it is too touristic, it seems to have turned into factory production, but when you ask where to eat it, that shop comes up; I leave the künefe subject to you.
+<br><br>
+While wandering around wondering what other dessert to eat, we started looking for the shop to eat the non-spilling kazandibi I saw on social media. And we found it, you really turn it upside down and it doesn't spill, but it's not the taste we know either, is it good? is it different? Yes.
+<br><br>
+Also as a dessert, there is the Karakuş Dessert, a dessert where plenty of walnuts are put inside the dough, fried and syruped; people take one while passing in front of the shop and continue, a crunchy, pleasant thing. Yes, we ate and drank, of course there are more varieties of food, but they are generally made at home on special days, I shared what I tasted here. I hope if your path falls to Mersin, Adana and Tarsus, I will have guided you even a little. Until we meet in the Black Sea in my next article…</p></div>
+                <div class="post-footer">
+                    <ul class="actions"><li><a href="#post-71" class="button read-more-btn" data-id="71">Read More</a></li></ul>
+                    <ul class="stats"><li class="comment-toggle" data-post="71"><a href="#post-71"><i class="fas fa-comment"></i> Comments (<span class="comment-count">0</span>)</a></li></ul>
+                </div>
+                <div class="comments-section" id="comments-section-71">
+                    <div class="comments-title">Comments (<span class="comment-count-display">0</span>)</div>
+                    <div class="comments-list" id="comments-list-71"></div>
+                    <div class="add-comment-form">
+                        <input type="text" class="comment-input" id="comment-name-71" placeholder="Your name">
+                        <textarea class="comment-text" id="comment-text-71" placeholder="Write your comment..." rows="2"></textarea>
+                        <button class="submit-comment" data-post="71">Submit</button>
+                    </div>
+                </div>
+                <div class="old-posts-link"><a href="index5.html" target="_blank"><i class="fas fa-archive"></i> Old Posts</a></div>
+            </article>
+
+            <!-- POST 72 -->
+            <article class="post" data-post-id="72" itemscope itemtype="https://schema.org/BlogPosting">
+                <script type="application/ld+json">
+                { "@context": "https://schema.org", "@type": "Article", "headline": "The Tears of Rain on the Window: An Autumn Accounting", "description": "Those Looking in the Same Direction", "author": { "@type": "Person", "name": "Elif Biçer" }, "datePublished": "2026-11-01", "dateModified": "2026-11-01", "image": "https://vom-blog.com/images/ELF_2.png", "url": "https://vom-blog.com/index6-eng.html#post-72", "mainEntityOfPage": { "@type": "WebPage", "@id": "https://vom-blog.com/index6-eng.html#post-72" }, "publisher": { "@type": "Organization", "name": "VOM PUBLISHING", "logo": { "@type": "ImageObject", "url": "https://vom-blog.com/favicon-32x32.png" } }, "keywords": "autumn, nature, reflection, Elif Biçer, essay", "inLanguage": "en" }
+                </script>
+                <header>
+                    <div class="title">
+                        <h2 itemprop="headline"><a href="#post-72" class="post-title-link">The Tears of Rain on the Window: An Autumn Accounting</a></h2>
+                        <p itemprop="description">Those Looking in the Same Direction</p>
+                    </div>
+                    <div class="meta">
+                        <span class="post-date" itemprop="datePublished" content="2026-11-01">November 1, 2026</span>
+                        <a href="#post-72" class="author" itemprop="author" itemscope itemtype="https://schema.org/Person">
+                            <span class="name" itemprop="name">Elif Biçer</span>
+                            <img src="https://vom-blog.com/images/elif.png" alt="Elif Biçer avatar" width="56" height="56" loading="lazy" onerror="this.src='https://randomuser.me/api/portraits/women/4.jpg'">
+                        </a>
+                    </div>
+                </header>
+                <a href="#post-72" class="image featured clickable-img" data-img="https://vom-blog.com/images/ELF_6.png" itemprop="image"><img src="https://vom-blog.com/images/ELF_6.png" alt="Those Looking in the Same Direction" width="800" height="450" loading="lazy"></a>
+                <p itemprop="articleBody">Autumn, with each arrival, greets us with the unique colors of sorrow and serenity. The trees shed the tones of green and begin to turn yellow, brown and crimson. Then they are defeated by the wind, by the rain; they shed their leaves one by one to the earth.
+                <br><br>
+Feeling the Rhythm of Nature
+Being on the roads in this season, collecting memories with photographs, and a person being alone with themselves by reading a book is a separate pleasure. Witnessing that rustle that comes out while walking calmly on the dried leaves makes us feel that we have reconnected with nature.</p>
+                <div class="full-post-content" id="full-72"><p class="full-text">Sometimes a person becomes melancholic while walking and murmurs, "Just like these leaves, what stories have departed from our lives one by one..." At that very moment, turning the sorrow of the season into joy by tossing the fallen leaves with our hands, fixing these moments with a photograph frame, makes life delightful.
+<br><br>
+The Feast of Surrender in the Sky
+Is it possible to watch the stork migration, the unchanging rhythm of autumn, and not be amazed by the serenity of those farewells, by their flawless navigational ability? The storks, using the warm air currents rising over the sun-warmed earth, present a visual feast in the sky. Instead of constantly flapping their wings, they surrender themselves to these air currents and display the most beautiful example of staying in the flow and surrender.
+<br><br>
+As the coolness of the evening accompanies the autumn days, the colorful life of summer gives way to calmness. While coffees are sipped in front of windows, books are embraced more often. And the tears of rain on the window sometimes remind us of joyful, sometimes deep emotional memories.
+<br><br>
+The Balance Sheet Period of Life
+Actually, autumn is the accounting period of life; it is, as it were, the bookkeeping of the past months. These days we question how much we have achieved the goals we set. We put our pluses and minuses before us, and shape our new plans in this way.
+<br><br>
+Now is the time to focus on the values each falling leaf adds to our lives and to greet fresh springs with new energies. That our losses spread over the years are few; that our gains such as friendship, tolerance and love multiply is the greatest profit of our conscience accounting. Could there be a better balance sheet equation than this?</p></div>
+                <div class="post-footer">
+                    <ul class="actions"><li><a href="#post-72" class="button read-more-btn" data-id="72">Read More</a></li></ul>
+                    <ul class="stats"><li class="comment-toggle" data-post="72"><a href="#post-72"><i class="fas fa-comment"></i> Comments (<span class="comment-count">0</span>)</a></li></ul>
+                </div>
+                <div class="comments-section" id="comments-section-72">
+                    <div class="comments-title">Comments (<span class="comment-count-display">0</span>)</div>
+                    <div class="comments-list" id="comments-list-72"></div>
+                    <div class="add-comment-form">
+                        <input type="text" class="comment-input" id="comment-name-72" placeholder="Your name">
+                        <textarea class="comment-text" id="comment-text-72" placeholder="Write your comment..." rows="2"></textarea>
+                        <button class="submit-comment" data-post="72">Submit</button>
+                    </div>
+                </div>
+                <div class="old-posts-link"><a href="index5.html" target="_blank"><i class="fas fa-archive"></i> Old Posts</a></div>
+            </article>
+
+            <!-- POST 73 -->
+            <article class="post" data-post-id="73" itemscope itemtype="https://schema.org/BlogPosting">
+                <script type="application/ld+json">
+                { "@context": "https://schema.org", "@type": "Article", "headline": "From Fatih to Taksim: A Journey of Memory", "description": "Voices, Faces, Streets", "author": { "@type": "Person", "name": "Fuat Durutaş" }, "datePublished": "2026-11-01", "dateModified": "2026-11-01", "image": "https://vom-blog.com/images/FU-2.png", "url": "https://vom-blog.com/index6-eng.html#post-73", "mainEntityOfPage": { "@type": "WebPage", "@id": "https://vom-blog.com/index6-eng.html#post-73" }, "publisher": { "@type": "Organization", "name": "VOM PUBLISHING", "logo": { "@type": "ImageObject", "url": "https://vom-blog.com/favicon-32x32.png" } }, "keywords": "Istanbul, memory, Fatih, Taksim, Fuat Durutaş", "inLanguage": "en" }
+                </script>
+                <header>
+                    <div class="title">
+                        <h2 itemprop="headline"><a href="#post-73" class="post-title-link">From Fatih to Taksim: A Journey of Memory</a></h2>
+                        <p itemprop="description">Voices, Faces, Streets</p>
+                    </div>
+                    <div class="meta">
+                        <span class="post-date" itemprop="datePublished" content="2026-11-01">November 1, 2026</span>
+                        <a href="#post-73" class="author" itemprop="author" itemscope itemtype="https://schema.org/Person">
+                            <span class="name" itemprop="name">Fuat Durutaş</span>
+                            <img src="https://vom-blog.com/images/fuat.png" alt="Fuat Durutaş avatar" width="56" height="56" loading="lazy" onerror="this.src='https://randomuser.me/api/portraits/men/3.jpg'">
+                        </a>
+                    </div>
+                </header>
+                <a href="#post-73" class="image featured clickable-img" data-img="https://vom-blog.com/images/FU-6.png" itemprop="image"><img src="https://vom-blog.com/images/FU-6.png" alt="Voices, Faces, Streets" width="800" height="450" loading="lazy"></a>
+                <p itemprop="articleBody">A bit inside the walls, a bit outside. But the places and main arteries where Istanbul's heart beats over time. First my neighborhood, my birthplace Fatih, then Beyoğlu. My childhood route. When starting my article, even though my thought was Fatih, Beyoğlu, Elmadağ, Osmanbey and Şişli, thinking that such an article would last for pages, for now I continue with Fatih and Beyoğlu.
+<br><br>
+So what has happened to these places, what was there? A lot, at least for me and as much as I could fit into the article. The first underpass I saw in my childhood was the Haşim İşcan Underpass in Fatih. I decided to write without looking at social media, and then I looked. I guessed correctly, it was opened in 1967. The next underpass was the Azapkapı underpass at the end of Unkapanı, also known as the Atatürk Bridge, connecting from the bridge to Karaköy. Either you will go to Karaköy, or to Taksim, that is, to Beyoğlu. I decided on Taksim-Beyoğlu for my article.</p>
+                <div class="full-post-content" id="full-73"><p class="full-text">My favorite route in my childhood and youth. Back then there was no bus from Fatih to Taksim, we would walk to the Saraçhane Underpass and take the bus or dolmuş from under the underpass to reach Taksim. Later the 87 Edirnekapı-Taksim line was opened. The difference between taking the bus and taking the dolmuş to reach Taksim was that if you took the bus you used the left side of the Şişhane Slope, and if you took the dolmuş you used the right side of this slope. While most people complained about the traffic, I, since I passed the same roads many times, would create a game for myself. The game was to read the signs, and then pronounce them backwards. The traffic would be so jammed that I would read a sign many times both forwards and backwards, and test myself by closing my eyes. Thus, I acquired the ability to recite every word backwards from memory, but unfortunately this is of no use to me. The only word I cannot say backwards is "Çekoslavakyalılaştıramadıklarımızdan mısınız".
+<br><br>
+On the road taken by bus, on the left is the Pera Palas, and on the right is the Hava Spor store that means so much to me. The sports store where my cub scout clothes and my drum were bought. My happiness at reaching İstiklal Avenue, my favorite street from Galatasaray at that time, was the toy store next to GS High School. I would stare in admiration, of course briefly, because the bus was moving on. Everyone would pray for the traffic to clear, and I would pray for the traffic to jam so I could watch the toys. We went up to İstiklal by bus, now let's go up by dolmuş. Generally 56 Chevrolet or Plymouth dolmuşes would reach İstiklal in a flash, taking the steep slope on the right side of the road with right-left maneuvers and keeping the Tunnel on their right. Over time, the dolmuşes made of American cars were replaced first by Anadol, then by Murat 131 and Şahins. Although their carrying capacity was 4 people, they would take two people in the one-person seat in front.
+<br><br>
+The most important place of İstiklal Avenue in my life was my uncle's tailor workshop. At the apartment entrance was Foto Lale, on the other floors other residents. The back of this workshop was home. My uncle's customers were the elite businessmen of Istanbul at that time. I remember one in particular, the owner of the ÇBS Paint Factory... I loved going to my uncle's. I would wait impatiently for the customers to leave, and after they left, the bay window in front of the workshop would be left to my uncle's daughter and me. Oh my God, what a sparkle, what colors, what splendor... When I looked at the avenue, what affected me most was the rotating windmill sign in the style of the red-light Moulin Rouge (Milen Ruj). I would watch its rotation in admiration. This was the Kemancı Bar, my uncle or father had told me, that's how I remember it. Since I am describing my observations at the ages when I took my first steps into childhood and youth, of course I cannot write about the flower passage and the bars.
+<br><br>
+Also, going to the Hydromel Disco in Elmadağ, which will not be included in this article. What does that have to do with İstiklal Avenue and Taksim now? There is a shoe shine shop on Ağa Camii Street, its name is Havai Shoe Shine. Where we had our shoes shined on the way to the disco. No other place could shine my brown-beige two-toned shoes. Brown was normal shoe polish, the beige top was painted with stencil paint. After the process was finished, our walk to the disco with the creak of our pleated trousers and our shoes. It felt as if all the girls were looking at us. Ah, youth.
+<br><br>
+When I was 16, I had chosen the Taksim Monument as the meeting place with my first girlfriend, what a naivety. Whereas the meeting point of Beyoğlu was in front of the PTT. After the first meeting, I learned this too.
+<br><br>
+Now, just as the PTT is gone, so are the two places of my youth: Boulevard and Pandrossa. Both were side by side and it was very hard to find a place in both. We would always go either before or after the disco, mostly to Pandrossa. We would either eat spaghetti or drink tomato soup. While eating spaghetti, twirling it on the fork and using the spoon for support so it wouldn't slip, and while drinking tomato soup, sprinkling grated cheese and wrestling with the stretching cheese, was very pleasing to us at our age.
+<br><br>
+Looking at what I have written so far, apart from the Haşim İşcan Underpass, Pera Palas, Azapkapı Underpass, and Havai Shoe Shine mentioned in my article, everything has disappeared. If I exclude the buildings too, only the Havai Shoe Shine remains, where we once waited in line for an hour, and which now has only a few customers...
+</p></div>
+                <div class="post-footer">
+                    <ul class="actions"><li><a href="#post-73" class="button read-more-btn" data-id="73">Read More</a></li></ul>
+                    <ul class="stats"><li class="comment-toggle" data-post="73"><a href="#post-73"><i class="fas fa-comment"></i> Comments (<span class="comment-count">0</span>)</a></li></ul>
+                </div>
+                <div class="comments-section" id="comments-section-73">
+                    <div class="comments-title">Comments (<span class="comment-count-display">0</span>)</div>
+                    <div class="comments-list" id="comments-list-73"></div>
+                    <div class="add-comment-form">
+                        <input type="text" class="comment-input" id="comment-name-73" placeholder="Your name">
+                        <textarea class="comment-text" id="comment-text-73" placeholder="Write your comment..." rows="2"></textarea>
+                        <button class="submit-comment" data-post="73">Submit</button>
+                    </div>
+                </div>
+                <div class="old-posts-link"><a href="index5.html" target="_blank"><i class="fas fa-archive"></i> Old Posts</a></div>
+            </article>
+
+            <!-- POST 74 -->
+            <article class="post" data-post-id="74" itemscope itemtype="https://schema.org/BlogPosting">
+                <script type="application/ld+json">
+                { "@context": "https://schema.org", "@type": "Article", "headline": "The Cycle of Days", "description": "The Ring of Words", "author": { "@type": "Person", "name": "Özlem Tüm" }, "datePublished": "2026-11-01", "dateModified": "2026-11-01", "image": "https://vom-blog.com/images/oz-2.png", "url": "https://vom-blog.com/index6-eng.html#post-74", "mainEntityOfPage": { "@type": "WebPage", "@id": "https://vom-blog.com/index6-eng.html#post-74" }, "publisher": { "@type": "Organization", "name": "VOM PUBLISHING", "logo": { "@type": "ImageObject", "url": "https://vom-blog.com/favicon-32x32.png" } }, "keywords": "days, cycle, reflection, Özlem Tüm, poetry", "inLanguage": "en" }
+                </script>
+                <header>
+                    <div class="title">
+                        <h2 itemprop="headline"><a href="#post-74" class="post-title-link">The Cycle of Days </a></h2>
+                        <p itemprop="description">The Ring of Words</p>
+                    </div>
+                    <div class="meta">
+                        <span class="post-date" itemprop="datePublished" content="2026-11-01">November 1, 2026</span>
+                        <a href="#post-74" class="author" itemprop="author" itemscope itemtype="https://schema.org/Person">
+                            <span class="name" itemprop="name">Özlem Tüm</span>
+                            <img src="https://vom-blog.com/images/ozlem.png" alt="Özlem Tüm avatar" width="56" height="56" loading="lazy" onerror="this.src='https://randomuser.me/api/portraits/women/5.jpg'">
+                        </a>
+                    </div>
+                </header>
+                <a href="#post-74" class="image featured clickable-img" data-img="https://vom-blog.com/images/oz-6.png" itemprop="image"><img src="https://vom-blog.com/images/oz-6.png" alt="The Ring of Words" width="800" height="450" loading="lazy"></a>
+                <p itemprop="articleBody">It was Friday… Dreams were flying up with pink balloons from the window in the living room. And the "if only"s, intertwining in gray and purple rings, had turned into a painting and begun to decorate the living room wall. The scent of vanilla drifted through the house every morning.
+				<br><br>
+Saturday… What happened inside the house flowed like water: hours, minutes, memories and unlived "if only"s… In spite of all of them, dreams were scattering around like yellow feathers.
+<br><br>
+Sunday… Descending the spiral staircase step by step was a skill. Orange handrails were watching the prohibitions. What you have lived, what you want to live, and what will happen afterward…
+<br><br>
+The world revolves around you. You revolve around the world too. So, whose head is spinning?
+<br><br>
+It was Monday… The week is renewing. It was blue… You sit on a blue chair. You feel your back, your waist, your feet and your knees one by one. You are getting to know your body anew, you notice the existence of each part. Time, for the first time, instead of flowing by, holds you where you are, as it were.
+<br><br>
+White Tuesday… Emotions and thoughts are waiting backstage, as it were. The curtains are closed. We are like actors waiting for their rehearsal turn. Some have forgotten the line they will say, some have long memorized their role. Everyone is waiting for the moment to step onto the stage. Yet the curtain has not opened yet.
+<br><br>
+Green Wednesday… She had given herself over to nature. The wind slipped in through the living room window and met the scent of pine. Nature outside and life inside touched each other. Perhaps a person hears the voice of nature more when they distance themselves from themselves.</p>
+<div class="full-post-content" id="full-74"><p class="full-text"><br><br>
+Black Thursday… It carried the joy of the completion of the cycle and the joy of completion itself. The end of a week had been reached. What was lived, what could not be lived, dreams and "if only"s met inside the same circle. One more week had been completed.
+<br><br>
+So, was it only a week that was completed?
+<br><br>
+Perhaps every day, we were leaving a piece of ourselves behind; we were waking up to each new day with another color.</p></div>
+                <div class="post-footer">
+                    <ul class="actions"><li><a href="#post-74" class="button read-more-btn" data-id="74">Read More</a></li></ul>
+                    <ul class="stats"><li class="comment-toggle" data-post="74"><a href="#post-74"><i class="fas fa-comment"></i> Comments (<span class="comment-count">0</span>)</a></li></ul>
+                </div>
+                <div class="comments-section" id="comments-section-74">
+                    <div class="comments-title">Comments (<span class="comment-count-display">0</span>)</div>
+                    <div class="comments-list" id="comments-list-74"></div>
+                    <div class="add-comment-form">
+                        <input type="text" class="comment-input" id="comment-name-74" placeholder="Your name">
+                        <textarea class="comment-text" id="comment-text-74" placeholder="Write your comment..." rows="2"></textarea>
+                        <button class="submit-comment" data-post="74">Submit</button>
+                    </div>
+                </div>
+                <div class="old-posts-link"><a href="index5.html" target="_blank"><i class="fas fa-archive"></i> Old Posts</a></div>
+            </article>
+
+            <!-- POST 75 -->
+            <article class="post" data-post-id="75" itemscope itemtype="https://schema.org/BlogPosting">
+                <script type="application/ld+json">
+                { "@context": "https://schema.org", "@type": "Article", "headline": "Airport", "description": "The Spirit of the Times", "author": { "@type": "Person", "name": "Dr. Funda Çar" }, "datePublished": "2026-11-01", "dateModified": "2026-11-01", "image": "https://vom-blog.com/images/FUN-2.png", "url": "https://vom-blog.com/index6-eng.html#post-75", "mainEntityOfPage": { "@type": "WebPage", "@id": "https://vom-blog.com/index6-eng.html#post-75" }, "publisher": { "@type": "Organization", "name": "VOM PUBLISHING", "logo": { "@type": "ImageObject", "url": "https://vom-blog.com/favicon-32x32.png" } }, "keywords": "airport, journey, memory, Funda Çar, life", "inLanguage": "en" }
+                </script>
+                <header>
+                    <div class="title">
+                        <h2 itemprop="headline"><a href="#post-75" class="post-title-link">Airport</a></h2>
+                        <p itemprop="description">The Spirit of the Times</p>
+                    </div>
+                    <div class="meta">
+                        <span class="post-date" itemprop="datePublished" content="2026-11-01">November 1, 2026</span>
+                        <a href="#post-75" class="author" itemprop="author" itemscope itemtype="https://schema.org/Person">
+                            <span class="name" itemprop="name">Dr. Funda Çar</span>
+                            <img src="https://vom-blog.com/images/funda.png" alt="Dr. Funda Çar avatar" width="56" height="56" loading="lazy" onerror="this.src='https://randomuser.me/api/portraits/women/6.jpg'">
+                        </a>
+                    </div>
+                </header>
+                <a href="#post-75" class="image featured clickable-img" data-img="https://vom-blog.com/images/FUN-6.png" itemprop="image"><img src="https://vom-blog.com/images/FUN-6.png" alt="The Spirit of the Times" width="1408" height="768" loading="lazy"></a>
+                <p itemprop="articleBody">
+She arrived at the airport with her big suitcases. Of course, this journey was both very far and to a date of return unknown. She had filled those suitcases with whatever she could take, could fit.
+<br><br>
+Her excitement, fear and curiosity were accompanied by the thought, "I must succeed at this!" She was only 25 and was going abroad for the first time. She had to leave behind her home, the city she grew up in, her family, her friends and all the life she had accumulated until now, look ahead; and open her arms to every kind of novelty and stranger in this new continent.
+<br><br>
+At the farewell scene at the airport, everyone was sorrowful; she was sure of how her mother was forcing herself to hold back her tears... After completing the boarding procedures, she lined up for passport control. She turned around one last time and waved to her family.</p>
+                <div class="full-post-content" id="full-75"><p class="full-text"><br><br>
+In all this hustle and emotional farewell, there was someone she did not notice... He had come all the way to the airport just to see her one last time, even if only from a distance. She would learn this truth from a friend much later.
+<br><br>
+Ahead of her was a long 14-hour flight and a transfer point in Europe. The sorrow of what she left behind was gradually replaced by an anticipation of a future full of curiosity. There were so many things she wanted to accomplish... Wasn't this a bit of the taste of life anyway: experiencing by living and following one's curiosity...
+<br><br>
+When she passed the border police and stepped to the other side, she was now waking up to the first day of her new life.
+<br><br>
+Could these be a few moments of happiness?</p></div>
+                <div class="post-footer">
+                    <ul class="actions"><li><a href="#post-75" class="button read-more-btn" data-id="75">Read More</a></li></ul>
+                    <ul class="stats"><li class="comment-toggle" data-post="75"><a href="#post-75"><i class="fas fa-comment"></i> Comments (<span class="comment-count">0</span>)</a></li></ul>
+                </div>
+                <div class="comments-section" id="comments-section-75">
+                    <div class="comments-title">Comments (<span class="comment-count-display">0</span>)</div>
+                    <div class="comments-list" id="comments-list-75"></div>
+                    <div class="add-comment-form">
+                        <input type="text" class="comment-input" id="comment-name-75" placeholder="Your name">
+                        <textarea class="comment-text" id="comment-text-75" placeholder="Write your comment..." rows="2"></textarea>
+                        <button class="submit-comment" data-post="75">Submit</button>
+                    </div>
+                </div>
+                <div class="old-posts-link"><a href="index5.html" target="_blank"><i class="fas fa-archive"></i> Old Posts</a></div>
+            </article>
+
+            <!-- POST 76 -->
+            <article class="post" data-post-id="76" itemscope itemtype="https://schema.org/BlogPosting">
+                <script type="application/ld+json">
+                { "@context": "https://schema.org", "@type": "Article", "headline": "Where Are You?", "description": "ce", "author": { "@type": "Person", "name": "Hatice Sarıkaya" }, "datePublished": "2026-11-01", "dateModified": "2026-11-01", "image": "https://vom-blog.com/images/hat-2.png", "url": "https://vom-blog.com/index6-eng.html#post-76", "mainEntityOfPage": { "@type": "WebPage", "@id": "https://vom-blog.com/index6-eng.html#post-76" }, "publisher": { "@type": "Organization", "name": "VOM PUBLISHING", "logo": { "@type": "ImageObject", "url": "https://vom-blog.com/favicon-32x32.png" } }, "keywords": "responsibility, action, Hatice Sarıkaya, society", "inLanguage": "en" }
+                </script>
+                <header>
+                    <div class="title">
+                        <h2 itemprop="headline"><a href="#post-76" class="post-title-link">Where Are You?</a></h2>
+                        <p itemprop="description">ce</p>
+                    </div>
+                    <div class="meta">
+                        <span class="post-date" itemprop="datePublished" content="2026-11-01">November 1, 2026</span>
+                        <a href="#post-76" class="author" itemprop="author" itemscope itemtype="https://schema.org/Person">
+                            <span class="name" itemprop="name">Hatice Sarıkaya</span>
+                            <img src="https://vom-blog.com/images/hatice.png" alt="Hatice Sarıkaya avatar" width="56" height="56" loading="lazy" onerror="this.src='https://randomuser.me/api/portraits/women/7.jpg'">
+                        </a>
+                    </div>
+                </header>
+                <a href="#post-76" class="image featured clickable-img" data-img="https://vom-blog.com/images/HAT-6.png" itemprop="image"><img src="https://vom-blog.com/images/HAT-6.png" alt="ce" width="800" height="450" loading="lazy"></a>
+                <p itemprop="articleBody">
+First, under the heading of the koala, with reference to the "principle of least effort," we talked about enjoying nature, the flow, "idleness." Then we remembered that time, which we ourselves decide how to spend or how to use, is the most valuable treasure. So, when time is the most valuable treasure in our hands and we are right in the middle of the flow, what do we do in the lives we witness around us, in the disruptions, or in situations that need to be improved and beautified? For example, you are on the stairs in the metro, you are in the crowd; everyone is in a hurry, in the rush to get to work, home, school, an appointment. Someone falls and cannot get up immediately, they need help. What do we do? Most people either don't notice the situation or, even if they do, choose to be spectators with the comfort of "someone will do it anyway" and continue on their way. If you change your path and rush to help, you are that "someone." You are, but how many are you? I know one of them: during the covid period everyone was confined to their homes, narrowed, suffocated.
+<br><br>
+That "someone" says, "We started a radio, would you listen to us?" Oh, beautiful music, programs whose taste remains on our palate, a platform full of respect and love. That "someone" says, "Would you like to make a program too?" While I say "I can't, uh, um," she encourages me, makes me believe in myself. She doesn't give up where I am not good enough, she gives tactics, when it doesn't work she arranges diction lessons. She makes it happen somehow. I meet new people, I spend a period more content with myself, happier. The radio you speak of is not founded by waving a magic wand. It requires setting up a system, spending money, effort and TIME. It has loads of burdens. Someone stops being a spectator, takes responsibility, spends effort, spends money, spends time. On the path I mentioned in the matter of turning idleness into art, she stops and notices the flowers by the roadside. Not enough, she also notices the weeds and the drying flowers. She clears the weeds, waters the drying flowers. For her, for the flowers, that is, for the people she touches, the world becomes a better place.
+<br><br>
+Let's deepen the subject a little more; in public spaces, parks, gardens, someone violates another's boundary.. leaves their food-drink waste in the open.. mistreats street animals.. bullies the weaker at work, at school.. spaces created by common effort and money are plundered.. trees are cut, forests are burned, streams, coasts are parceled out.. bridges, roads built with our money are sold.. our rights are pruned.. multiply the examples as much as you like. What are we doing? Let me confess what I am doing: I write three or five lines expressing my sorrow, my anger (I used to write at length) and share them on social media. I have declared my side, I have made my "protest." Since I have chosen not to follow the news for a few years, most of the time I don't even do that.</p>
+                <div class="full-post-content" id="full-76"><p class="full-text">I just press the like button on a post and say, "someone will solve it anyway." So I am, as you know, a spectator. The most comfortable side of the digital age is being able to transfer responsibility to Wi-Fi signals. Whereas that protest we throw with the tip of our finger while sitting in our place neither stops a flowing tear nor corrects an injustice. Our peaceful spectator state while lying on the grass and listening to the murmur of the stream on one hand and watching the dance of the leaves with the wind on the other while turning idleness into art, unfortunately turns into a dangerous inaction when it comes to touching the wound of society or a person.
+<br><br>
+We never have time to spare for social responsibilities, common dreams, a wound that needs healing. Without expecting anything in return, we cannot generously pour out our time like embracing that sick spouse or giving a shoulder to someone we love. We always have an excuse. Taking refuge in the saying "Someone will handle it," "Someone will call," "Someone will save," we cannot step out of our comfort zone. When we come together behind closed doors, we always complain.
+<br><br>
+<strong>Note to self: Hatice! Isn't it time to get out of the trap of "someone will do it anyway" and say "If not me, who; if not now, when," and take action?</strong><br><br>
+ce</p></div>
+                <div class="post-footer">
+                    <ul class="actions"><li><a href="#post-76" class="button read-more-btn" data-id="76">Read More</a></li></ul>
+                    <ul class="stats"><li class="comment-toggle" data-post="76"><a href="#post-76"><i class="fas fa-comment"></i> Comments (<span class="comment-count">0</span>)</a></li></ul>
+                </div>
+                <div class="comments-section" id="comments-section-76">
+                    <div class="comments-title">Comments (<span class="comment-count-display">0</span>)</div>
+                    <div class="comments-list" id="comments-list-76"></div>
+                    <div class="add-comment-form">
+                        <input type="text" class="comment-input" id="comment-name-76" placeholder="Your name">
+                        <textarea class="comment-text" id="comment-text-76" placeholder="Write your comment..." rows="2"></textarea>
+                        <button class="submit-comment" data-post="76">Submit</button>
+                    </div>
+                </div>
+                <div class="old-posts-link"><a href="index5.html" target="_blank"><i class="fas fa-archive"></i> Old Posts</a></div>
+            </article>
+
+            <!-- POST 77 -->
+            <article class="post" data-post-id="77" itemscope itemtype="https://schema.org/BlogPosting">
+                <script type="application/ld+json">
+                { "@context": "https://schema.org", "@type": "Article", "headline": "The Spoilsport", "description": "From Münire's Pen", "author": { "@type": "Person", "name": "Münire Özgencan" }, "datePublished": "2026-11-01", "dateModified": "2026-11-01", "image": "https://vom-blog.com/images/M-2.png", "url": "https://vom-blog.com/index6-eng.html#post-77", "mainEntityOfPage": { "@type": "WebPage", "@id": "https://vom-blog.com/index6-eng.html#post-77" }, "publisher": { "@type": "Organization", "name": "VOM PUBLISHING", "logo": { "@type": "ImageObject", "url": "https://vom-blog.com/favicon-32x32.png" } }, "keywords": "memory, friendship, loss, Münire Özgencan, story", "inLanguage": "en" }
+                </script>
+                <header>
+                    <div class="title">
+                        <h2 itemprop="headline"><a href="#post-77" class="post-title-link">The Spoilsport</a></h2>
+                        <p itemprop="description">From Münire's Pen</p>
+                    </div>
+                    <div class="meta">
+                        <span class="post-date" itemprop="datePublished" content="2026-11-01">November 1, 2026</span>
+                        <a href="#post-77" class="author" itemprop="author" itemscope itemtype="https://schema.org/Person">
+                            <span class="name" itemprop="name">Münire Özgencan</span>
+                            <img src="https://vom-blog.com/images/münire.png" alt="Münire Özgencan avatar" width="56" height="56" loading="lazy" onerror="this.src='https://randomuser.me/api/portraits/men/4.jpg'">
+                        </a>
+                    </div>
+                </header>
+                <a href="#post-77" class="image featured clickable-img" data-img="https://vom-blog.com/images/M-6.png" itemprop="image"><img src="https://vom-blog.com/images/M-6.png" alt="From Münire's Pen" width="800" height="450" loading="lazy"></a>
+                <p itemprop="articleBody">I don't remember exactly now, did we find his lifeless body on a tea-scented morning or after an afternoon rain? If it weren't for the blood stain on his temple, I wouldn't believe he was dead. He was in a calm, peaceful sleep, as if. And in a moment he would wake up and say, "Why is everyone here? What are we celebrating?"
+				<br><br>
+				We are in the boat. Ediz, Me, Nevra. Ediz's relationship with his father was not good in those days. They were constantly snarling at each other. Joyful songs were rising from the fish restaurants on the shore. We don't talk at all. We dream of faraway places, very faraway places. White houses, colorful flowers in the windows of the houses, people on bicycles, narrow cobblestone streets, the melodies of songs spreading through the streets, illuminated avenues lined with elegant shops. Freedom. The land of waters. Ediz's dreams... Our dreams.
+				<br><br>
+				Then Nevra suddenly jumps up from her seat saying, "Come on! Let's go to the old mill on the hill." Sometimes I think a mischievous child has escaped into her.</p>
+                <div class="full-post-content" id="full-77"><p class="full-text">Cavit's restaurant is crowded this evening. Summer is ending. Soon the summer people will leave. A few retired people, the unemployed bunch will remain. Then these restaurants, the roads, the houses, this town will shrink again. It will shrink, become tiny. Nevra is not here this evening. Whereas we never separate, she is always right beside us. Our usual place is taken. We move to another table and order a big bottle. We snack on the chickpeas on the table until the fish arrive. Ediz is upset. His father has cursed again the cursed day, and a child like him. His birthday. Cursed day. He takes a folded photograph out of his wallet and hands it to me. We are together again. We are hugging each other. We are happy. I remember that day. It was the first year of high school. Only twenty days or so until schools closed. We had skipped school. How we had fun. Life flowed joyfully in those years like the refrain of a cheerful song.
+				<br><br>
+				The Germans are guests of the contractor Mr. Dündar this evening. The table is set, the conversation and laughter are going strong. The meltemi breeze is burning our sun-tanned skins. The meltemi makes a person happy. I clink my glass against Ediz's and start a folk song. "If there were no love, it wouldn't fill the heart." He smiles. Am I happy, am I unhappy? I don't know.
+				<br><br>
+				We get up. We are Layla tonight again. The light of the lighthouse falls on the asphalt. The motorboat pulls up to the pier. Captain Ömer has fish in his hands. He hands each of us a fish. With the fish with lifeless eyes in our hands, we are right in the middle of the pier.
+				<br><br>
+				The asphalt is illuminated again by the light of the lighthouse. Ediz, with the lifeless-eyed fish in his hand, had already headed home. This time the lighthouse illuminates the sea. Going home takes long, I am lazy. I jump into the boat. I toss the fish into a corner of the boat. It doesn't take its lifeless eyes off me. I wish Nevra were with me now. Why isn't she, by the way?
+				<br><br>
+				Much quieter side streets compared to the shore. Lights of a few houses are on. Under the pale yellow light of the street lamp, Ediz takes a last drag from his cigarette and throws the butt. The butt falls near a moss-covered stone a little further ahead. The lights of the house are off. He tries the door. His father has obviously locked it after cursing and counting. Thank goodness his mother doesn't sleep, she waits for him to come. He enters his room and locks the door. The weather is very hot. He opens the window. The apricot tree stands motionless, waiting. Just like Ediz. With hands tied. The poor thing hasn't borne fruit for some time. "You are cursed," says his father. You too, and that tree! He looks at himself in the full-length mirror. He puts on the yellow women's wig from the wardrobe, wraps the pink sequined, feathered stole around his neck. He is disgusted by his own mocking hazel eyes. His stomach turns.
+				<br><br>
+				From the boat I watch the illuminated restaurants on the shore, forgetting my own sorrowful loneliness. As if steam rising from an incense burner, laughter wraps around. I admire these laughters the most. Nevra always laughs. Only she laughs. Then I think of Ediz. He must have reached home by now. I wish I hadn't let him go, I become restless. I think of going and bringing him back, then I give up. When I think that his father is in I don't know which sleep, I feel a little relieved. The lights come closer and go farther. This time the light of the lighthouse illuminates the rocks. I love sleeping in the boat.
+				<br><br>
+				I watch Nevra's exhausted shadow. She is crying. It is the first time I see her crying. She collapses at the head of the freshly mounded grave. The soil in her palm flows between her fingers. "Why?" she says. She raises her head and looks into my eyes. "I wish I could have seen him one last time, one last time." I sweat coldly. I swallow, I cannot answer. The crowd disperses. Everyone leaves one by one. We are alone with our loneliness again.
+				<br><br>
+				Summer leaves us with a heavy rain. Autumn is slowly pushing at the doors. Every night I see Ediz in my dreams. I am angry, I shout and yell at him for going away. I curse. When I wake up, my pain doesn't ease. I miss him.
+				<br><br>
+				We are in the boat. The night is calm. A few stars in the sky. I must drink. I must drink and get dead drunk. I down the wine I have hidden in the stash. Then I hand the bottle to Nevra. Nevra takes a curled-up book from her coat pocket and hands it to me. "I went to Ediz's yesterday. I entered his room. I took a thing or two as mementos. This is your share." The bedside book. His favorite novel character. I grab Nevra by the arm and say, "If we hurry, we can catch the last bus." Her eyes shine.
+				<br><br>
+				I buy a ticket for the last bus. For three.
+				<br><br>
+				I lean my back against the seat and start reading the book. "If we're not going to commit suicide, let's drink then!" *
+				<br><br>
+				* Adalet Ağaoğlu (Bir Düğün Gecesi / A Wedding Night, p.1)</p></div>
+                <div class="post-footer">
+                    <ul class="actions"><li><a href="#post-77" class="button read-more-btn" data-id="77">Read More</a></li></ul>
+                    <ul class="stats"><li class="comment-toggle" data-post="77"><a href="#post-77"><i class="fas fa-comment"></i> Comments (<span class="comment-count">0</span>)</a></li></ul>
+                </div>
+                <div class="comments-section" id="comments-section-77">
+                    <div class="comments-title">Comments (<span class="comment-count-display">0</span>)</div>
+                    <div class="comments-list" id="comments-list-77"></div>
+                    <div class="add-comment-form">
+                        <input type="text" class="comment-input" id="comment-name-77" placeholder="Your name">
+                        <textarea class="comment-text" id="comment-text-77" placeholder="Write your comment..." rows="2"></textarea>
+                        <button class="submit-comment" data-post="77">Submit</button>
+                    </div>
+                </div>
+                <div class="old-posts-link"><a href="index5.html" target="_blank"><i class="fas fa-archive"></i> Old Posts</a></div>
+            </article>
+
+            <!-- POST 78 -->
+            <article class="post" data-post-id="78" itemscope itemtype="https://schema.org/BlogPosting">
+                <script type="application/ld+json">
+                { "@context": "https://schema.org", "@type": "Article", "headline": "We Fall and We Rise...", "description": "From Zülay", "author": { "@type": "Person", "name": "Zülay Güçlü" }, "datePublished": "2026-11-01", "dateModified": "2026-11-01", "image": "https://vom-blog.com/images/Zul-2.png", "url": "https://vom-blog.com/index6-eng.html#post-78", "mainEntityOfPage": { "@type": "WebPage", "@id": "https://vom-blog.com/index6-eng.html#post-78" }, "publisher": { "@type": "Organization", "name": "VOM PUBLISHING", "logo": { "@type": "ImageObject", "url": "https://vom-blog.com/favicon-32x32.png" } }, "keywords": "leverage, rising, Zülay Güçlü, philosophy", "inLanguage": "en" }
+                </script>
+                <header>
+                  <div class="title">
+                    <h2 itemprop="headline"><a href="#post-78" class="post-title-link">We Fall and We Rise...</a></h2>
+                      <p itemprop="description">From Zülay</p>
+                    </div>
+                    <div class="meta">
+                        <span class="post-date" itemprop="datePublished" content="2026-11-01">November 1, 2026</span>
+                        <a href="#post-78" class="author" itemprop="author" itemscope itemtype="https://schema.org/Person">
+                            <span class="name" itemprop="name">Zülay Güçlü</span>
+                            <img src="https://vom-blog.com/images/zulay.png" alt="Zülay Güçlü avatar" width="56" height="56" loading="lazy" onerror="this.src='https://randomuser.me/api/portraits/lego/1.jpg'">
+                        </a>
+                    </div>
+                </header>
+                <a href="#post-78" class="image featured clickable-img" data-img="https://vom-blog.com/images/Zul-6.png" itemprop="image"><img src="https://vom-blog.com/images/Zul-6.png" alt="From Zülay" width="800" height="450" loading="lazy"></a>
+                <p itemprop="articleBody">This time we will speak not of falling, but of rising. "Give me a lever and I will move the world," said Archimedes. Let's leave the world to him. Let's talk about how a human being, having fallen, manages to rise again every time, tries to rise. A bit from physics, a bit from life, and a bit from the leverage force in my own life...
+                <br><br>
+In physics, a lever is the way to move a great weight with a small force. The matter is not only how strong you are, but where you get the support from, where and how you apply the force. Isn't life like this too?</p>
+                <div class="full-post-content" id="full-78"><p class="full-text">We think we cannot move a whole mountain. Whereas when we touch the right point, a burden we have carried for years suddenly lightens. A word, a glance, a hand touching our shoulder... Sometimes a tiny thing opens the door to a huge change within us.
+<br><br>
+One of the strongest levers of our life is our emotions. Especially if there are people who activate those emotions, who relight the light within us... Don't spoil our joy! To touch people's lives, you don't need to try to change them; it is enough to remind them of themselves. To help them see the power that already exists within them...
+<br><br>
+Because a person is crushed under their own weight; with the presence of another, they straighten up again. One person's belief becomes another's courage, one person's joy becomes another's hope... And a person realizes that they don't have to do everything alone. My leverage force in my life? My dear daughter... My beautiful daughter, whose existence I always give thanks for, whom I consider a great fortune to have in my life. The sweetest companion of both my worry and my joy.
+<br><br>
+One day, when I was about to give up from exhaustion, that short sentence she said looking into my eyes—"You are someone who can do this, mom"—was like a magical force applied exactly to that support point. Only five words... But a force applied exactly to the right place, at exactly the moment I needed it.
+<br><br>
+As a person grows, they think they know everything, but life gives its most beautiful lessons from the most unexpected places. A child enlarges not only their mother's heart, but also her courage. It turns out that the thing we call a lever is not only useful for lifting a weight. It also lifts the hope within a person, the joy of living, the desire to start over. So the matter is not only how strong we are, but where we place our strength... Because with the same strength we can break someone or lift them up. With one sentence we can close a door, with another sentence we can open a brand new door.
+<br><br>
+To change a person's life, you need to believe in them, not give them advice. The whole matter is to be in the right place at the right time. Just think... The force that will lift you up with its support may be much closer than you think. In a person's voice, in a child's smile, or in that strong person you need to see again when you look in the mirror.
+<br><br>
+Remember; to change a life, you don't need to move the world, you just need to touch the right point. A huge thank you to you, my dear daughter... For being the most beautiful support point of my life, for lifting me up again with a smile, a word, or just your presence...</p></div>
+                <div class="post-footer">
+                    <ul class="actions"><li><a href="#post-78" class="button read-more-btn" data-id="78">Read More</a></li></ul>
+                    <ul class="stats"><li class="comment-toggle" data-post="78"><a href="#post-78"><i class="fas fa-comment"></i> Comments (<span class="comment-count">0</span>)</a></li></ul>
+                </div>
+                <div class="comments-section" id="comments-section-78">
+                    <div class="comments-title">Comments (<span class="comment-count-display">0</span>)</div>
+                    <div class="comments-list" id="comments-list-78"></div>
+                    <div class="add-comment-form">
+                        <input type="text" class="comment-input" id="comment-name-78" placeholder="Your name">
+                        <textarea class="comment-text" id="comment-text-78" placeholder="Write your comment..." rows="2"></textarea>
+                        <button class="submit-comment" data-post="78">Submit</button>
+                    </div>
+                </div>
+                <div class="old-posts-link"><a href="index5.html" target="_blank"><i class="fas fa-archive"></i> Old Posts</a></div>
+            </article>
+
+            <!-- POST 79 -->
+            <article class="post" data-post-id="79" itemscope itemtype="https://schema.org/BlogPosting">
+                <script type="application/ld+json">
+                { "@context": "https://schema.org", "@type": "Article", "headline": "Hummingbird", "description": "Parallax", "author": { "@type": "Person", "name": "Sevim Yücel" }, "datePublished": "2026-11-01", "dateModified": "2026-11-01", "image": "https://vom-blog.com/images/SEV-2.png", "url": "https://vom-blog.com/index6-eng.html#post-79", "mainEntityOfPage": { "@type": "WebPage", "@id": "https://vom-blog.com/index6-eng.html#post-79" }, "publisher": { "@type": "Organization", "name": "VOM PUBLISHING", "logo": { "@type": "ImageObject", "url": "https://vom-blog.com/favicon-32x32.png" } }, "keywords": "book, review, hummingbird, Sevim Yücel, literature", "inLanguage": "en" }
+                </script>
+                <header>
+                  <div class="title">
+                    <h2 itemprop="headline"><a href="#post-79" class="post-title-link">Hummingbird</a></h2>
+                      <p itemprop="description">Parallax</p>
+                    </div>
+                    <div class="meta">
+                        <span class="post-date" itemprop="datePublished" content="2026-11-01">November 1, 2026</span>
+                        <a href="#post-79" class="author" itemprop="author" itemscope itemtype="https://schema.org/Person">
+                            <span class="name" itemprop="name">Sevim Yücel</span>
+                            <img src="https://vom-blog.com/images/sevim.png" alt="Sevim Yücel avatar" width="56" height="56" loading="lazy" onerror="this.src='https://randomuser.me/api/portraits/women/6.jpg'">
+                        </a>
+                    </div>
+                </header>
+                <a href="#post-79" class="image featured clickable-img" data-img="https://vom-blog.com/images/SEV-6.png" itemprop="image"><img src="https://vom-blog.com/images/SEV-6.png" alt="Sevim Yücel - Parallax" width="800" height="450" loading="lazy"></a>
+                <p itemprop="articleBody">According to Aztec belief, brave warriors who die on the battlefield return as hummingbirds. Hummingbirds can move forward and backward in time; they are fast enough to flap their wings 80 times per second and are thought to symbolize love, freedom and luck.
+                  <br><br>
+                  The novel is constructed in layers with forward and backward narratives in time. We too witness the life of our main character Marco by going forward and backward in time like a hummingbird.</p>
+                <div class="full-post-content" id="full-79"><p class="full-text">Marco is the middle child of the family. "His mother, an architect, is from head to toe emotion and revolution; his father, an engineer, is a man of calculation and transaction." They are definitely a pair that should not be together. There is love in this relationship, but it is one-sided. This love, which wounds Marco's essence, is nailed to this relationship and unhappiness because the woman cannot find it in any man.
+                    <br><br>
+                  Marco grew up inside this family whose walls leaked unhappiness, without realizing the situation. He is his mother's hummingbird. His developing personality was stamped by his father's intolerance and his mother's unease.
+                    <br><br>
+                Marco loves a woman with a love that never ends, but they cannot come together. He marries another woman and works as a dentist; he has a daughter. When his daughter turns three and a half, during breakfast at the kitchen table, she shares a secret with her father:
+                    <br><br>
+                    She thinks there is a string on her back. This string ends at the nearest wall. She has to lean her back against the wall so that people passing behind her don't get tangled in the string; but she says to her father, *"It's not a problem because you never pass behind me."* This perceptual disorder is actually the fear of losing the father.
+                    <br><br>
+                   I was most interested in this aspect of the book; in the string on Marco's daughter's back... In this string, which somehow disappears with therapy, reappearing when conditions change; in having to always lean her back against a wall to be safe, to not harm and not be harmed... One day when everything falls into place, when she clings to the string to hold onto life, the string breaks…
+                    <br><br>
+                    Just like the hummingbird's feature of "flapping fast but hanging in the air," Marco too has actually remained suspended somewhere; he could neither break free from his mother's unhappiness nor reach the woman he loved. This stasis (state of hanging) forms the essence of the book.
+					<br><br>
+					The symbolic bond established between the daughter's string and the hummingbird deepens with the sharp contrast between freedom and belonging and fear. While the hummingbird glides freely and boundlessly in the air, the string on the girl's back makes her dependent on a wall. Unlike the hummingbird that symbolizes freedom, the generations of this family, despite the quest, the luck and the temporal speeds in Marco's life, have symbolically been forced to live as if they always leaned their backs against a wall. Precisely for this reason, when the string they cling to in order to hold onto life breaks, they are forced to face the real truth and their own voids.</p></div>
+                <div class="post-footer">
+                    <ul class="actions"><li><a href="#post-79" class="button read-more-btn" data-id="79">Read More</a></li></ul>
+                    <ul class="stats"><li class="comment-toggle" data-post="79"><a href="#post-79"><i class="fas fa-comment"></i> Comments (<span class="comment-count">0</span>)</a></li></ul>
+                </div>
+                <div class="comments-section" id="comments-section-79">
+                    <div class="comments-title">Comments (<span class="comment-count-display">0</span>)</div>
+                    <div class="comments-list" id="comments-list-79"></div>
+                    <div class="add-comment-form">
+                        <input type="text" class="comment-input" id="comment-name-79" placeholder="Your name">
+                        <textarea class="comment-text" id="comment-text-79" placeholder="Write your comment..." rows="2"></textarea>
+                        <button class="submit-comment" data-post="79">Submit</button>
+                    </div>
+                </div>
+                <div class="old-posts-link"><a href="index5.html" target="_blank"><i class="fas fa-archive"></i> Old Posts</a></div>
+            </article>
+
+            <!-- POST 80 -->
+            <article class="post" data-post-id="80" itemscope itemtype="https://schema.org/BlogPosting">
+                <script type="application/ld+json">
+                { "@context": "https://schema.org", "@type": "Article", "headline": "Football", "description": "The Story of Small Things (Essays on life's overlooked details)", "author": { "@type": "Person", "name": "Fulya Yılmaz" }, "datePublished": "2026-11-01", "dateModified": "2026-11-01", "image": "https://vom-blog.com/images/yeni-post-36.png", "url": "https://vom-blog.com/index6-eng.html#post-80", "mainEntityOfPage": { "@type": "WebPage", "@id": "https://vom-blog.com/index6-eng.html#post-80" }, "publisher": { "@type": "Organization", "name": "VOM PUBLISHING", "logo": { "@type": "ImageObject", "url": "https://vom-blog.com/favicon-32x32.png" } }, "keywords": "football, offside, life, Fulya Yılmaz, essay", "inLanguage": "en" }
+                </script>
+                <header>
+                    <div class="title">
+                        <h2 itemprop="headline"><a href="#post-80" class="post-title-link">Football</a></h2>
+                        <p itemprop="description">The Story of Small Things <em>(Essays on life's overlooked details)</em></p>
+                  </div>
+                    <div class="meta">
+                        <span class="post-date" itemprop="datePublished" content="2026-11-01">November 1, 2026</span>
+                        <a href="#post-80" class="author" itemprop="author" itemscope itemtype="https://schema.org/Person">
+                            <span class="name" itemprop="name">Fulya Yılmaz</span>
+                            <img src="https://vom-blog.com/images/fulya.png" alt="Fulya Yılmaz avatar" width="56" height="56" loading="lazy" onerror="this.src='https://randomuser.me/api/portraits/women/6.jpg'">
+                        </a>
+                    </div>
+                </header>
+                <a href="#post-80" class="image featured clickable-img" data-img="https://vom-blog.com/images/FULYA-6.png" itemprop="image"><img src="https://vom-blog.com/images/FULYA-6.png" alt="The Story of Small Things" width="800" height="450" loading="lazy"></a>
+              <p itemprop="articleBody">Do you remember that magical moment when you thought everything in your life was going perfectly, when you said, "Now I've won!"? That second when you felt you had hit the bullseye, caught that love you dreamed of, or made the biggest move of your career... And right after that, an invisible hand shoving all your joy down your throat?
+				<br><br>
+				If you have tasted this feeling, you have already met that most ironic, most merciless rule of life: <strong>Offside.</strong></p><div class="full-post-content" id="full-80"><p class="full-text">Today I want to announce to you not the whispers of great events, dazzling successes or victories that make headlines; but of an old football that faded away in a neighborhood, and perhaps the whispers of our own story hidden behind that ball.
+<br><br>
+As Sami Paşazade Sezai whispered in his "Little Things"; the real tragedy of life is hidden inside those small details that no one turns to look at. Just like that old leather football silently waiting in the mud puddle that rain water has opened at the foot of a garden wall.
+<br><br>
+Some of the hexagonal stitches on it had come undone, its color had turned gray with the soot of the street. Whereas just a few months earlier, it was the most precious treasure in the world for the children of the neighborhood. It was the sole ruler of those imaginary castles set up between two stones in the back streets. While the children ran after it, they forgot time, and the street would echo with laughter mixed with the smell of freshly baked bread from the bakery.
+<br><br>
+Then, one day...
+<br><br>
+One of the most merciless rules of life quietly slipped in among them.
+<br><br>
+That evening, Ali, the most talented and most impatient child of the neighborhood, made the most perfect run he could possibly make. Kicking up the dust of the street, he lunged forward to catch perhaps the most beautiful pass life had offered him. His heartbeats were keeping rhythm with a tremendous victory. Before the defense line even understood what was happening, he met the ball in a completely empty position. Ali touched the leather ball with the inside of his foot so elegantly, so hard... The ball slid into the top corner amid the goalkeeper's helpless gaze and became a goal by passing between the two stones.
+<br><br>
+Ali, with arms wide open, was doing a victory lap in the street, his friends were running toward him. It was the happiest, most peak moment of his twelve-year life. At that very second, life's ironic and hidden referee blew his whistle. The children of the opposing team, with their hands in the air, were shouting: "Offside! You had already crossed the line when the pass was made!"
+<br><br>
+Ali's tremendous enthusiasm, his blind love for the goal, had passed that fine line he needed to stop at by a millimeter. He was too eager, he had rushed too much. The goal he scored was perhaps the most beautiful goal in the world, but his "timing" was wrong. The position was cancelled.
+<br><br>
+The women sitting on the sidewalk by the road, munching their sunflower seeds on one hand and watching the children on the other, could not make sense of this noise and looked at each other and whispered: "What happened now? Didn't the child put the ball in the right place? Why didn't they count it?"
+<br><br>
+To that curse of "doing the right thing at the wrong time," which men have built theories on for a lifetime and considered the greatest tragedy of life, women were obviously looking from a completely different window. Perhaps in the eyes of women, life was too big and too worth living to be confined to these mechanical calculations men invented for themselves, to millimetric lines. For them, if the ball went into the goal, it went in; if effort was given, it was given. The hidden calculations behind, the split seconds in which the pass was made, and those invisible boundary lines were nothing but empty details that shadowed the joy of life. While women embraced the beauty of the moment and the effort itself and looked at the result; men drowned in the irony of that invisible line.
+<br><br>
+As required by the rule of the game, as the penalty for the offside, the ball was placed for the opposing team, right at the foot of the garden wall of the grumpy old man at the end of the street. An indirect free kick was to be taken. When the opposing team's child threw himself at the ball with fury, the leather sphere this time cleared the high walls of that unlucky garden and fell inside. The old man did not give the ball back again, he threw it into the darkest corner of the garden, into oblivion. And thus the most aesthetic goal in the world disappeared without being able to change the scoreboard.
+<br><br>
+As the ball stayed there, it began to fade. Just like people's enthusiasm that begins with great hopes and an early excitement, and fades away by crashing into the harsh timing walls of life. For a while the children looked behind that wall, at that unjust position taken from them, with longing eyes; then each one got caught up in the "VAR" reviews of their own life and scattered in other directions. Some became apprentices in their father's shop, some were scattered to other cities in pursuit of their bread.
+<br><br>
+Now let's be honest and lean back and think.
+<br><br>
+How many of us scored the most aesthetic goal in the world in our work life, in our relationships or in our dreams, and that goal was cancelled just because of "timing"? How many of us, just when we opened our hearts completely to someone we loved very much, were stopped by life's assistant referee with the gesture "You got too excited, turn back now"? How many of us had our efforts, given by burning the candle at both ends, left to fade in that grumpy old man's garden?
+<br><br>
+Offside is the way life teaches us not how much we want something, but how patiently we can wait on the right line. That fading leather ball may still be mourning somewhere your most beautiful but invalid goal.
+<br><br>
+Because perhaps life is not the game of those who boast only of hitting the top corner; but of those who run at the right time, knowing when the flag will be raised..</p></div>
+                <div class="post-footer">
+                    <ul class="actions"><li><a href="#post-80" class="button read-more-btn" data-id="80">Read More</a></li></ul>
+                    <ul class="stats"><li class="comment-toggle" data-post="80"><a href="#post-80"><i class="fas fa-comment"></i> Comments (<span class="comment-count">0</span>)</a></li></ul>
+                </div>
+                <div class="comments-section" id="comments-section-80">
+                    <div class="comments-title">Comments (<span class="comment-count-display">0</span>)</div>
+                    <div class="comments-list" id="comments-list-80"></div>
+                    <div class="add-comment-form">
+                        <input type="text" class="comment-input" id="comment-name-80" placeholder="Your name">
+                        <textarea class="comment-text" id="comment-text-80" placeholder="Write your comment..." rows="2"></textarea>
+                        <button class="submit-comment" data-post="80">Submit</button>
+                    </div>
+                </div>
+                <div class="old-posts-link"><a href="index5.html" target="_blank"><i class="fas fa-archive"></i> Old Posts</a></div>
+            </article>
+
+            <!-- POST 81 -->
+            <article class="post" data-post-id="81" itemscope itemtype="https://schema.org/BlogPosting">
+                <script type="application/ld+json">
+                { "@context": "https://schema.org", "@type": "Article", "headline": "To Be Continued: L I", "description": "Ways of Seeing", "author": { "@type": "Person", "name": "Gürhan Yücel" }, "datePublished": "2026-11-01", "dateModified": "2026-11-01", "image": "https://vom-blog.com/images/yeni-post-37.png", "url": "https://vom-blog.com/index6-eng.html#post-81", "mainEntityOfPage": { "@type": "WebPage", "@id": "https://vom-blog.com/index6-eng.html#post-81" }, "publisher": { "@type": "Organization", "name": "VOM PUBLISHING", "logo": { "@type": "ImageObject", "url": "https://vom-blog.com/favicon-32x32.png" } }, "keywords": "story, mystery, Istanbul, Gürhan Yücel, serial", "inLanguage": "en" }
+                </script>
+                <header>
+                    <div class="title">
+                        <h2 itemprop="headline"><a href="#post-81" class="post-title-link">To Be Continued: L I</a></h2>
+                        <p itemprop="description">Ways of Seeing</p>
+                    </div>
+                    <div class="meta">
+                        <span class="post-date" itemprop="datePublished" content="2026-11-01">November 1, 2026</span>
+                        <a href="#post-81" class="author" itemprop="author" itemscope itemtype="https://schema.org/Person">
+                            <span class="name" itemprop="name">Gürhan Yücel</span>
+                        <img src="https://vom-blog.com/images/gur.png" alt="Gürhan Yücel" width="56" height="56" loading="lazy" onerror="this.src='https://randomuser.me/api/portraits/men/5.jpg'">
+                        </a>
+                    </div>
+                </header>
+                <a href="#post-81" class="image featured clickable-img" data-img="https://vom-blog.com/images/Gur-6.png" itemprop="image"><img src="https://vom-blog.com/images/Gur-6.png" alt="Ways of Seeing" width="800" height="450" loading="lazy"></a>
+                <p itemprop="articleBody">CHAPTER 6: THRESHOLD
+					<br><br>
+When I walked out of the massive gate of the Grand Bazaar, the sky had taken on a leaden darkness. The rain, increasing its intensity, had covered the city like a curtain. While people were rushing in a panic to take shelter under the eaves, a man slipping through the crowd bumped hard into my shoulder.
+                <br><br>
+I was shaken; as I held onto a wall to regain my balance, I looked at the man's silhouette rapidly moving away. At that moment, the silver ring on his right hand glinted: Ouroboros. The snake biting its own tail...
+<br><br>
+The Guardians were much closer than I had thought. For them, the snake was not just a symbol; it was both a protective and a destructive force, the ancient cycle of the passage from ignorance to wisdom, of the transformation of the impure into the pure—alchemy. The path to the secret knowledge passed through entering this cycle.
+From the depths of my mind, a dusty sentence surfaced: "<em>Non omnis figura sigillum est. Sed omne sigillum figuram abscondit</em>."
+    (Not every shape is a seal. But every seal hides a shape.) </p>
+                <div class="full-post-content" id="full-81"><p class="full-text">Suddenly I stopped. I had understood my biggest mistake: I kept trying to read the seal like a text. Whereas the seal was there not to be read, but to mask something. The letters were not messages, but veils. If Ouroboros points to four directions, the place I needed to look was not the letters themselves, but the geometric spaces they pointed to.
+<br><br>
+I quickly headed to the Beyazıt State Library. The silence inside was heavier, more uncanny than ever. Thinking of the collector's words, I pulled out from among the shelves that very old catalog that Agrippa had cited. After hours of scanning, I found a note whose binding was about to fall apart:
+    Ex Bibliotheca Constantinopolitana. (From the Library of Constantinople.)
+Right below it was that short phrase that froze my blood:
+    "Clavis non in litteris est." (The key is not in the letters.)
+And at the very bottom of the page, again those two letters: L.I.
+<br><br>
+While looking at the photograph on the table, I suddenly stopped. The letters 'L' and 'I'... In the Middle Ages, these letters could be not only sounds but also numbers. Latin L (50) and I (1)... In total, 51. This fresco in Florence was not the end of a word, but the 51st item of a list. If this was an inventory, the 51st item was that sacred relic with the lily symbol smuggled to Florence. But the inventory did not end here. I needed to reach the next number, 52.
+52... The weeks of the year? Or the completion of a sacred cycle?
+<br><br>
+My breath tightened. The fresco in Florence was not a source, but the visible last link of this strange chain. The real "threshold" was here, in Istanbul.
+When I raised my head, I realized that the librarian's desk was empty. In the whole building, no one was left but me. The noise of the rain outside made the absolute silence inside even more crushing.
+In the catalog of the Beyazıt Library, the same record appeared before me three times: Nicetae Choniatae Historia. The same work, in three different copies... But in the third copy there was a note: "Folium LII deest." (The 52nd leaf is missing...)
+<br><br>
+Suddenly, I heard the huge main doors of the library close with a great noise. As the echo rippled through the corridors, the electricity went out. The darkness spread through the room like ink. In the silent witness of thousands of books, I was trapped inside a giant tomb.
+<br><br>
+I held the weak light of my phone in front of me. The sound of my footsteps echoed on the high ceiling of the library like the footsteps of a stranger. The exit was closed; or perhaps the real path was in the very heart of the darkness.
+<br><br>
+...
+<br><br>
+<em>To be continued...</em> </p></div>
+                <div class="post-footer">
+                    <ul class="actions"><li><a href="#post-81" class="button read-more-btn" data-id="81">Read More</a></li></ul>
+                    <ul class="stats"><li class="comment-toggle" data-post="81"><a href="#post-81"><i class="fas fa-comment"></i> Comments (<span class="comment-count">0</span>)</a></li></ul>
+                </div>
+                <div class="comments-section" id="comments-section-81">
+                    <div class="comments-title">Comments (<span class="comment-count-display">0</span>)</div>
+                    <div class="comments-list" id="comments-list-81"></div>
+                    <div class="add-comment-form">
+                        <input type="text" class="comment-input" id="comment-name-81" placeholder="Your name">
+                        <textarea class="comment-text" id="comment-text-81" placeholder="Write your comment..." rows="2"></textarea>
+                        <button class="submit-comment" data-post="81">Submit</button>
+                    </div>
+                </div>
+                <div class="old-posts-link"><a href="index5.html" target="_blank"><i class="fas fa-archive"></i> Old Posts</a></div>
+            </article>
+
+        </div>
+
+        <!-- CONTACT SECTION -->
+        <div class="contact-bottom" id="contactSection">
+            <h2>VOM VOMITORIUM</h2>
+            <p>It is composed of a group of writers and art lovers who believe in the power of art and the role of culture in social change. Community members produce works focused on the human experience by combining their talents in literature, theater, music, painting and other art branches. The group, which has no commercial purpose, offers a platform that encourages artistic freedom while adhering to Republican values.
+            <br><br>
+            VOM VOMITORIUM aims to reach a wide audience with different events. It is a community that tries to create cultural and artistic richness both with its artistic productions and its social interactions.
+            <br><br>
+            The word VOMITORIUM was first used by the Roman writer Macrobius in the 4th century AD. This term was used to describe the passages that allowed spectators to exit their seats in amphitheaters quickly. Similarly, VOM aims to be a passage that enables art lovers to meet art quickly and effectively.
+            <br><br></p>
+
+<script>
+function sendEmail() {
+    var user = "vomitarium";
+    var domain = "proton.me";
+    window.location.href = "mailto:" + user + "@" + domain;
+}
+</script>
+
+            <div class="site-footer" style="text-align:center !important;">
+                <div style="display: flex; justify-content: center; align-items: center; gap: 1.5rem; margin-bottom: 0.5rem;">
+                    <a href="#" onclick="sendEmail(); return false;" 
+                       style="color: #2c5f8a; text-decoration: none; font-weight: 600; font-size: 0.9rem; transition: color 0.3s ease; cursor: pointer;"
+                       onmouseover="this.style.color='#6c86a3'"
+                       onmouseout="this.style.color='#2c5f8a'">
+                       <i class="fas fa-envelope"></i> Contact
+                    </a>
+                    <a href="https://www.instagram.com/vom_oyun/" target="_blank" rel="noopener noreferrer" aria-label="Instagram" 
+                       style="color: #4a5568; font-size: 1.5rem; transition: color 0.3s ease;"
+                       onmouseover="this.style.color='#6c86a3'"
+                       onmouseout="this.style.color='#4a5568'">
+                       <i class="fab fa-instagram"></i>
+                    </a>
+                </div>
+                <p style="text-align:center !important; font-size:0.7rem; color:#6c86a3; margin:0; padding:0;">© 2026 VOM PUBLISHING | Design: VOM | All Rights Reserved.</p>
+            </div>
+        </div>
+    </div>
+</div>
+</main>
+
+<script>
+    // ============================================
+    // FIREBASE - ISSUE 6 (BETWEEN 67-81)
+    // ============================================
+    const firebaseConfig = {
+        apiKey: "AIzaSyCp-NfSJmRSTAAWrNla5tH2OY9wMr87mFA",
+        authDomain: "vom-yayin.firebaseapp.com",
+        databaseURL: "https://vom-yayin-default-rtdb.europe-west1.firebasedatabase.app",
+        projectId: "vom-yayin",
+        storageBucket: "vom-yayin.firebasestorage.app",
+        messagingSenderId: "93785669208",
+        appId: "1:93785669208:web:ecccf7c03aa3ad6117d42d"
+    };
+
+    if (typeof firebase !== 'undefined') {
+        if (!firebase.apps.length) { firebase.initializeApp(firebaseConfig); }
+        const db = firebase.firestore();
+
+        function escapeHtml(str) {
+            if (!str) return '';
+            return str.replace(/[&<>]/g, function(m) {
+                if (m === '&') return '&amp;';
+                if (m === '<') return '&lt;';
+                if (m === '>') return '&gt;';
+                return m;
+            });
+        }
+        function formatDate(date) {
+            if (!date) return '';
+            let d = date.toDate ? date.toDate() : new Date(date);
+            return d.toLocaleDateString('en-US') + ' ' + d.toLocaleTimeString('en-US', {hour: '2-digit', minute:'2-digit'});
+        }
+        const isBot = /bot|googlebot|crawler|spider|robot|crawling/i.test(navigator.userAgent);
+
+        window.loadComments = function(postId) {
+            const commentsRef = db.collection('comments').doc('post_' + postId).collection('allComments');
+            const listDiv = document.getElementById('comments-list-' + postId);
+            const countDisplay = document.querySelector('#comments-section-' + postId + ' .comment-count-display');
+            const toggleCount = document.querySelector('.comment-toggle[data-post="' + postId + '"] .comment-count');
+
+            const processSnapshot = (snapshot) => {
+                const count = snapshot.size;
+                if (toggleCount) toggleCount.innerText = count;
+                if (countDisplay) countDisplay.innerText = count;
+                if (!listDiv) return;
+                if (count === 0) {
+                    listDiv.innerHTML = '<div style="padding:0.5rem; text-align:center; color:#888;">No comments yet. Be the first to comment!</div>';
+                    return;
+                }
+                let html = '';
+                snapshot.forEach(function(doc) {
+                    const comment = doc.data();
+                    html += '<div class="comment-item">';
+                    html += '<strong>' + escapeHtml(comment.author || 'Visitor') + '</strong>: ' + escapeHtml(comment.text || '');
+                    if (comment.createdAt) {
+                        html += '<div style="font-size:0.6rem; color:#aaa; margin-top:4px;">' + formatDate(comment.createdAt) + '</div>';
+                    }
+                    html += '<button class="delete-btn" data-post="' + postId + '" data-id="' + doc.id + '"><i class="fas fa-trash"></i></button>';
+                    html += '</div>';
+                });
+                listDiv.innerHTML = html;
+                listDiv.querySelectorAll('.delete-btn').forEach(function(btn) {
+                    btn.addEventListener('click', function(e) {
+                        e.stopPropagation();
+                        const pwd = prompt("Enter password to delete comment:");
+                        if (pwd === "vom2026") {
+                            db.collection('comments').doc('post_' + postId).collection('allComments').doc(this.dataset.id).delete();
+                        } else if (pwd !== null) {
+                            alert("Incorrect password!");
+                        }
+                    });
+                });
+            };
+
+            if (isBot) {
+                commentsRef.orderBy('createdAt', 'desc').get().then(processSnapshot).catch(() => {});
+            } else {
+                commentsRef.orderBy('createdAt', 'desc').onSnapshot(processSnapshot, (error) => { console.warn('Comment listening error:', error); });
+            }
+        };
+
+        document.querySelectorAll('.submit-comment').forEach(function(btn) {
+            btn.addEventListener('click', function() {
+                const pid = this.dataset.post;
+                const nameInp = document.getElementById('comment-name-' + pid);
+                const textInp = document.getElementById('comment-text-' + pid);
+                if (!textInp || !textInp.value.trim()) { alert('Please write a comment.'); return; }
+                const author = nameInp ? nameInp.value.trim() : '';
+                const text = textInp.value.trim();
+                db.collection('comments').doc('post_' + pid).collection('allComments').add({
+                    author: author || "Visitor",
+                    text: text,
+                    createdAt: firebase.firestore.FieldValue.serverTimestamp()
+                }).then(() => {
+                    if(nameInp) nameInp.value = '';
+                    if(textInp) textInp.value = '';
+                    alert('✅ Your comment has been submitted successfully!');
+                }).catch((error) => {
+                    console.error('❌ Comment submission error:', error);
+                    alert('❌ An error occurred while submitting your comment. Please try again.');
+                });
+            });
+        });
+
+        for (let i = 67; i <= 81; i++) { window.loadComments(i); }
+        console.log("✅ Firebase comment system (Issue 6 EN) initialized successfully.");
+    } else {
+        console.warn("❌ Firebase SDK not loaded yet.");
+        for (let i = 67; i <= 81; i++) {
+            const tc = document.querySelector('.comment-toggle[data-post="' + i + '"] .comment-count');
+            if (tc) tc.innerText = '0';
+        }
+    }
+
+    // DARK MODE
+    const darkModeToggle = document.getElementById('darkModeToggle');
+    if (darkModeToggle) {
+        if (localStorage.getItem('theme') === 'dark') {
+            document.body.classList.add('dark-mode');
+            darkModeToggle.innerHTML = '<i class="fas fa-sun"></i> Light Mode';
+        }
+        darkModeToggle.addEventListener('click', () => {
+            document.body.classList.toggle('dark-mode');
+            if (document.body.classList.contains('dark-mode')) {
+                localStorage.setItem('theme', 'dark');
+                darkModeToggle.innerHTML = '<i class="fas fa-sun"></i> Light Mode';
+            } else {
+                localStorage.setItem('theme', 'light');
+                darkModeToggle.innerHTML = '<i class="fas fa-moon"></i> Dark Mode';
+            }
+        });
+    }
+
+    // READ MORE
+    document.querySelectorAll('.read-more-btn').forEach(function(btn) {
+        btn.addEventListener('click', function(e) {
+            e.preventDefault();
+            const id = this.dataset.id;
+            const fullDiv = document.getElementById('full-' + id);
+            if (fullDiv) {
+                fullDiv.classList.toggle('show');
+                this.innerText = fullDiv.classList.contains('show') ? 'Show Less' : 'Read More';
+            }
+        });
+    });
+
+    // COMMENT TOGGLE
+    document.querySelectorAll('.comment-toggle').forEach(function(toggle) {
+        toggle.addEventListener('click', function(e) {
+            e.preventDefault();
+            const pid = this.dataset.post;
+            const sec = document.getElementById('comments-section-' + pid);
+            if (sec) { sec.style.display = (sec.style.display === 'block') ? 'none' : 'block'; }
+        });
+    });
+
+    // LIGHTBOX
+    const lightbox = document.getElementById('lightbox');
+    const lightboxImg = document.getElementById('lightbox-img');
+    window.closeLightbox = function() { if(lightbox) lightbox.classList.remove('show'); document.body.style.overflow = ''; };
+    document.querySelectorAll('.clickable-img').forEach(function(el) {
+        el.addEventListener('click', function(e) {
+            e.preventDefault();
+            const img = this.querySelector('img');
+            if (img && img.src && lightboxImg && lightbox) {
+                lightboxImg.src = img.src;
+                lightbox.classList.add('show');
+                document.body.style.overflow = 'hidden';
+            }
+        });
+    });
+
+    // SEARCH
+    const searchInput = document.getElementById('searchInputSide');
+    const searchBtn = document.getElementById('searchBtnSide');
+    function doSearch() {
+        const q = searchInput ? searchInput.value.trim() : '';
+        if(q) window.open('https://www.google.com/search?q=' + encodeURIComponent(q), '_blank');
+    }
+    if(searchBtn) searchBtn.addEventListener('click', doSearch);
+    if(searchInput) searchInput.addEventListener('keypress', function(e) { if(e.key === 'Enter') doSearch(); });
+
+    document.getElementById('contactNavLink')?.addEventListener('click', function(e) {
+        e.preventDefault();
+        document.getElementById('contactSection')?.scrollIntoView({ behavior: 'smooth' });
+    });
+</script>
+</body>
+</html>
