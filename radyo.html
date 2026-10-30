@@ -641,7 +641,7 @@
         audio.play().then(() => {
             isPlaying = true;
             playPauseIcon.className = "fas fa-pause";
-            streamStatusSpan.innerText = "🔴 Canlı Yayın Oynatılıyor";
+            streamStatusSpan.innerText = "🔴 VOM RADYO CANLI YAYINDA";
             initEqualizer();
         }).catch((err) => {
             console.warn("Play gecikmesi:", err);
@@ -678,12 +678,12 @@
     stopBtn.onclick = stopRadio;
     volumeSlider.oninput = (e) => { audio.volume = parseFloat(e.target.value); };
 
-    // ❌ ÖLÜMCÜL TUZAK SİLİNDİ:
+    
     // "stalled" olayında asla audio.load() çağrılmaz! Tarayıcı hafif ağ gecikmesinde kendi kendine tamponlar.
     audio.addEventListener('playing', () => {
         isPlaying = true;
         playPauseIcon.className = "fas fa-pause";
-        streamStatusSpan.innerText = "🔴 Canlı Yayın";
+        streamStatusSpan.innerText = "🔴 VOM RADYO CANLI YAYINDA"; 
         if (!eqAnimationId) initEqualizer();
     });
 
