@@ -3,17 +3,354 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>VOM Radyo - 7/24 Kesintisiz Bulut Yayını</title>
+  <title>VOM Radyo - 7/24 Kesintisiz Bulut Web Radyosu & Canlı Stüdyo</title>
+  <meta name="description" content="vom-blog.com 7/24 Kesintisiz Web Radyosu. Backblaze B2 & Cloudflare altyapısıyla sıfır kesilme.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;600;700;800&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
+  <script src="https://cdn.tailwindcss.com"></script>
   <style>
-    * { margin: 0; padding: 0; box-sizing: border-box; }
-    body, html { width: 100%; height: 100%; overflow: hidden; background: #09090b; }
-    iframe { width: 100%; height: 100%; border: none; }
+    body { font-family: 'Plus Jakarta Sans', sans-serif; }
+    .mono { font-family: 'JetBrains Mono', monospace; }
   </style>
 </head>
-<body>
-  <iframe
-    src="https://ais-pre-npptax7wjzll7fraf22jw5-709978936501.europe-west2.run.app"
-    allow="autoplay; microphone"
-  ></iframe>
+<body class="bg-zinc-950 text-zinc-100 min-h-screen flex flex-col selection:bg-orange-500 selection:text-white">
+
+  <!-- Header -->
+  <header class="border-b border-zinc-800 bg-zinc-900/90 backdrop-blur-md sticky top-0 z-50">
+    <div class="max-w-6xl mx-auto px-4 py-3 flex items-center justify-between">
+      <div class="flex items-center gap-3">
+        <div class="w-10 h-10 rounded-xl bg-gradient-to-br from-orange-500 to-amber-600 flex items-center justify-center font-extrabold text-white text-lg shadow-lg shadow-orange-500/20">
+          📻
+        </div>
+        <div>
+          <div class="flex items-center gap-2">
+            <span class="font-extrabold text-lg text-white">VOM RADYO</span>
+            <span class="text-xs text-zinc-400">vom-blog.com/radyo</span>
+          </div>
+          <div class="flex items-center gap-2 text-xs">
+            <span class="w-2 h-2 rounded-full bg-emerald-500 animate-pulse"></span>
+            <span id="station-status" class="text-emerald-400 font-medium">7/24 Bulut AutoDJ Yayında</span>
+            <span class="text-zinc-600">·</span>
+            <span class="text-zinc-400">Backblaze B2 & Cloudflare</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="flex items-center gap-3 text-xs">
+        <span class="bg-zinc-900 px-3 py-1.5 rounded-lg border border-zinc-800 text-zinc-300">
+          👥 <strong id="listener-count" class="text-white">42</strong> dinleyici
+        </span>
+      </div>
+    </div>
+  </header>
+
+  <!-- Main Content -->
+  <main class="flex-1 max-w-6xl w-full mx-auto p-4 sm:p-6 grid grid-cols-1 lg:grid-cols-12 gap-6">
+
+    <!-- Sol Kolon: Oynatıcı & Canlı DJ Masası (7 Kolon) -->
+    <div class="lg:col-span-7 space-y-6">
+
+      <!-- Oynatıcı Kartı -->
+      <div class="p-6 sm:p-8 rounded-2xl border border-zinc-800 bg-zinc-900/80 shadow-2xl relative overflow-hidden">
+        <div class="flex items-center justify-between pb-4 border-b border-zinc-800/80">
+          <span class="text-xs font-mono uppercase text-orange-400 tracking-wider">ŞU AN ÇALIYOR (7/24 BULUT)</span>
+          <span class="text-xs bg-zinc-950 px-2 py-1 rounded text-zinc-400 border border-zinc-800 mono">192 KBPS HD</span>
+        </div>
+
+        <div class="flex flex-col sm:flex-row items-center gap-6 mt-6">
+          <img id="cover-art" src="https://images.unsplash.com/photo-1511671782779-c97d3d27a1d4?w=400&auto=format&fit=crop&q=80" alt="Kapak" class="w-40 h-40 sm:w-48 sm:h-48 rounded-2xl object-cover shadow-2xl border border-zinc-700" />
+
+          <div class="space-y-3 flex-1 text-center sm:text-left">
+            <div>
+              <h2 id="track-title" class="text-2xl font-extrabold text-white truncate">Akustik Gece Esintisi</h2>
+              <p id="track-artist" class="text-base text-zinc-400 truncate">VOM Akustik Stüdyosu</p>
+            </div>
+
+            <!-- Canlı Ses Spektrumu -->
+            <div class="bg-zinc-950 p-2 rounded-xl border border-zinc-800">
+              <canvas id="visualizer" width="350" height="45" class="w-full h-11 rounded"></canvas>
+            </div>
+
+            <!-- Oynatıcı Tuşları -->
+            <div class="flex items-center justify-center sm:justify-start gap-4 pt-2">
+              <button id="play-btn" class="w-14 h-14 rounded-full bg-gradient-to-r from-orange-500 to-amber-600 hover:from-orange-400 hover:to-amber-500 text-white font-bold text-xl flex items-center justify-center shadow-lg shadow-orange-500/30 transition-transform active:scale-95">
+                ▶
+              </button>
+
+              <button id="next-btn" class="p-3 rounded-full bg-zinc-800 hover:bg-zinc-700 text-zinc-300 transition-colors" title="Sonraki Şarkı">
+                ⏭
+              </button>
+
+              <div class="flex items-center gap-2 bg-zinc-950 px-3 py-2 rounded-xl border border-zinc-800">
+                <span class="text-xs">🔊</span>
+                <input id="volume-slider" type="range" min="0" max="1" step="0.05" value="0.85" class="w-20 accent-orange-500 cursor-pointer" />
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Canlı DJ Mikrofon Stüdyosu (Icecast Gerekmez) -->
+      <div id="dj-panel" class="p-6 rounded-2xl border border-zinc-800 bg-zinc-900/60 space-y-4">
+        <div class="flex items-center justify-between">
+          <div>
+            <h3 class="text-base font-bold text-white flex items-center gap-2">
+              <span>🎙️ Canlı Yayın Masası</span>
+              <span id="on-air-badge" class="hidden px-2 py-0.5 rounded text-[10px] font-bold bg-red-600 text-white animate-pulse">ON AIR</span>
+            </h3>
+            <p class="text-xs text-zinc-400 mt-0.5">Bilgisayarda Icecast kurmadan, tarayıcıdan tek tıkla canlı yayına bağlanın.</p>
+          </div>
+
+          <button id="mic-toggle-btn" class="px-5 py-3 rounded-xl bg-orange-600 hover:bg-orange-500 text-white font-bold text-xs shadow-md transition-all">
+            🔴 Mikrofona Bağlan (Canlı Yayın)
+          </button>
+        </div>
+
+        <!-- Jingle ve Efekt Tuşları -->
+        <div class="pt-2 border-t border-zinc-800 grid grid-cols-4 gap-2 text-xs">
+          <button onclick="playJingleSound('id')" class="p-2.5 rounded-lg bg-zinc-950 hover:bg-zinc-800 border border-zinc-800 text-zinc-300 text-center">
+            ✨ İstasyon Sinyali
+          </button>
+          <button onclick="playJingleSound('applause')" class="p-2.5 rounded-lg bg-zinc-950 hover:bg-zinc-800 border border-zinc-800 text-zinc-300 text-center">
+            👏 Alkış
+          </button>
+          <button onclick="playJingleSound('horn')" class="p-2.5 rounded-lg bg-zinc-950 hover:bg-zinc-800 border border-zinc-800 text-zinc-300 text-center">
+            🔥 Airhorn
+          </button>
+          <button onclick="playJingleSound('beep')" class="p-2.5 rounded-lg bg-zinc-950 hover:bg-zinc-800 border border-zinc-800 text-zinc-300 text-center">
+            ⏰ Haber Bipi
+          </button>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- Sağ Kolon: Canlı Dinleyici Sohbeti (5 Kolon) -->
+    <div class="lg:col-span-5 flex flex-col h-[580px] rounded-2xl border border-zinc-800 bg-zinc-900/80 overflow-hidden shadow-2xl">
+      <div class="p-4 bg-zinc-950 border-b border-zinc-800 flex items-center justify-between">
+        <h3 class="font-bold text-sm text-white flex items-center gap-2">
+          <span>💬 Canlı Dinleyici Sohbeti</span>
+        </h3>
+        <span class="text-[11px] text-emerald-400 font-mono">● Canlı Akış</span>
+      </div>
+
+      <!-- Mesajlar -->
+      <div id="chat-stream" class="flex-1 p-4 overflow-y-auto space-y-3 text-xs">
+        <div class="p-2.5 rounded-xl bg-zinc-950 border border-zinc-800/80">
+          <strong class="text-orange-400">🤖 VOM Sistem:</strong>
+          <span class="text-zinc-300 ml-1">VOM Radyo 7/24 Bulut Otomasyonu devrede! İstek parçalarınızı yazabilirsiniz.</span>
+        </div>
+        <div class="p-2.5 rounded-xl bg-zinc-950/60 border border-zinc-800/60">
+          <strong class="text-zinc-300">🎧 Dinleyici Barış:</strong>
+          <span class="text-zinc-200 ml-1">Ses harika akıyor, kesinti yok tebrikler!</span>
+        </div>
+      </div>
+
+      <!-- Mesaj Yazma Alanı -->
+      <form id="chat-form" class="p-3 border-t border-zinc-800 bg-zinc-950 flex gap-2">
+        <input id="chat-input" type="text" placeholder="Canlı yayına mesaj yazın..." class="flex-1 px-3 py-2 rounded-xl bg-zinc-900 border border-zinc-700 text-xs text-white focus:outline-none focus:border-orange-500" required />
+        <button type="submit" class="px-4 py-2 rounded-xl bg-orange-600 hover:bg-orange-500 text-white font-semibold text-xs shadow">Gönder</button>
+      </form>
+    </div>
+
+  </main>
+
+  <footer class="py-4 border-t border-zinc-900 text-center text-xs text-zinc-500">
+    VOM Radyo © 2026 · vom-blog.com · Backblaze B2 & Cloudflare Altyapısı
+  </footer>
+
+  <script>
+    const TRACKS = [
+      {
+        title: "Akustik Gece Esintisi",
+        artist: "VOM Akustik Stüdyosu",
+        url: "https://cdn.freesound.org/previews/612/612607_5674468-lq.mp3",
+        cover: "https://images.unsplash.com/photo-1511671782779-c97d3d27a1d4?w=400&auto=format&fit=crop&q=80"
+      },
+      {
+        title: "Boğaz Melodisi (Lo-Fi Chill)",
+        artist: "VOM Sound Lab",
+        url: "https://cdn.freesound.org/previews/684/684260_5674468-lq.mp3",
+        cover: "https://images.unsplash.com/photo-1470225620780-dba8ba36b745?w=400&auto=format&fit=crop&q=80"
+      },
+      {
+        title: "Derin Caz Gecesi",
+        artist: "Mavi Nota Dörtlüsü",
+        url: "https://cdn.freesound.org/previews/689/689626_5674468-lq.mp3",
+        cover: "https://images.unsplash.com/photo-1514525253161-7a46d19cd819?w=400&auto=format&fit=crop&q=80"
+      }
+    ];
+
+    let currentIdx = 0;
+    let isPlaying = false;
+    let audio = new Audio();
+    audio.crossOrigin = "anonymous";
+    audio.src = TRACKS[0].url;
+
+    const playBtn = document.getElementById("play-btn");
+    const nextBtn = document.getElementById("next-btn");
+    const volumeSlider = document.getElementById("volume-slider");
+    const trackTitle = document.getElementById("track-title");
+    const trackArtist = document.getElementById("track-artist");
+    const coverArt = document.getElementById("cover-art");
+    const visualizer = document.getElementById("visualizer");
+    const ctxCanvas = visualizer.getContext("2d");
+
+    let audioCtx, analyser, sourceNode;
+
+    function initAudioContext() {
+      if (!audioCtx) {
+        audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+        analyser = audioCtx.createAnalyser();
+        analyser.fftSize = 64;
+        try {
+          sourceNode = audioCtx.createMediaElementSource(audio);
+          sourceNode.connect(analyser);
+          analyser.connect(audioCtx.destination);
+        } catch(e) {}
+      }
+      if (audioCtx && audioCtx.state === "suspended") {
+        audioCtx.resume();
+      }
+    }
+
+    function updateTrackUI() {
+      const t = TRACKS[currentIdx];
+      trackTitle.textContent = t.title;
+      trackArtist.textContent = t.artist;
+      coverArt.src = t.cover;
+      audio.src = t.url;
+      if (isPlaying) {
+        audio.play().catch(() => {});
+      }
+    }
+
+    playBtn.onclick = () => {
+      initAudioContext();
+      if (isPlaying) {
+        audio.pause();
+        playBtn.textContent = "▶";
+        isPlaying = false;
+      } else {
+        audio.play().then(() => {
+          playBtn.textContent = "⏸";
+          isPlaying = true;
+        }).catch(() => {});
+      }
+    };
+
+    nextBtn.onclick = () => {
+      currentIdx = (currentIdx + 1) % TRACKS.length;
+      updateTrackUI();
+    };
+
+    audio.onended = () => {
+      currentIdx = (currentIdx + 1) % TRACKS.length;
+      updateTrackUI();
+    };
+
+    volumeSlider.oninput = (e) => {
+      audio.volume = parseFloat(e.target.value);
+    };
+
+    function drawVisualizer() {
+      requestAnimationFrame(drawVisualizer);
+      const w = visualizer.width;
+      const h = visualizer.height;
+      ctxCanvas.clearRect(0, 0, w, h);
+
+      if (!isPlaying || !analyser) {
+        ctxCanvas.fillStyle = "#3f3f46";
+        ctxCanvas.fillRect(0, h / 2 - 1, w, 2);
+        return;
+      }
+
+      const data = new Uint8Array(analyser.frequencyBinCount);
+      analyser.getByteFrequencyData(data);
+      const barWidth = w / 20;
+
+      for (let i = 0; i < 20; i++) {
+        const val = (data[i] || 0) / 255;
+        const barH = Math.max(4, val * h);
+        ctxCanvas.fillStyle = "#f97316";
+        ctxCanvas.fillRect(i * barWidth, h - barH, barWidth - 2, barH);
+      }
+    }
+    drawVisualizer();
+
+    const chatForm = document.getElementById("chat-form");
+    const chatInput = document.getElementById("chat-input");
+    const chatStream = document.getElementById("chat-stream");
+
+    chatForm.onsubmit = (e) => {
+      e.preventDefault();
+      const text = chatInput.value.trim();
+      if (!text) return;
+      const msgDiv = document.createElement("div");
+      msgDiv.className = "p-2.5 rounded-xl bg-zinc-950 border border-zinc-800";
+      msgDiv.innerHTML = '<strong class="text-orange-400">👤 Dinleyici:</strong> <span class="text-zinc-200 ml-1">' + text + '</span>';
+      chatStream.appendChild(msgDiv);
+      chatStream.scrollTop = chatStream.scrollHeight;
+      chatInput.value = "";
+    };
+
+    let micStream = null;
+    const micBtn = document.getElementById("mic-toggle-btn");
+    const onAirBadge = document.getElementById("on-air-badge");
+    const stationStatus = document.getElementById("station-status");
+
+    micBtn.onclick = async () => {
+      if (micStream) {
+        micStream.getTracks().forEach(t => t.stop());
+        micStream = null;
+        audio.volume = parseFloat(volumeSlider.value);
+        micBtn.textContent = "🔴 Mikrofona Bağlan (Canlı Yayın)";
+        micBtn.className = "px-5 py-3 rounded-xl bg-orange-600 hover:bg-orange-500 text-white font-bold text-xs shadow-md transition-all";
+        onAirBadge.classList.add("hidden");
+        stationStatus.textContent = "7/24 Bulut AutoDJ Yayında";
+        stationStatus.className = "text-emerald-400 font-medium";
+      } else {
+        try {
+          initAudioContext();
+          micStream = await navigator.mediaDevices.getUserMedia({ audio: true });
+          audio.volume = 0.2; // Konuşurken müzik otomatik kısılır (Auto-Ducking)
+          micBtn.textContent = "⏹ Yayını Bitir (AutoDJ'e Dön)";
+          micBtn.className = "px-5 py-3 rounded-xl bg-red-600 hover:bg-red-500 text-white font-bold text-xs shadow-md animate-pulse";
+          onAirBadge.classList.remove("hidden");
+          stationStatus.textContent = "🔴 CANLI STÜDYO (ON AIR)";
+          stationStatus.className = "text-red-400 font-bold";
+        } catch(err) {
+          alert("Mikrofon izni verilmedi.");
+        }
+      }
+    };
+
+    function playJingleSound(type) {
+      initAudioContext();
+      if (!audioCtx) return;
+      const now = audioCtx.currentTime;
+      const osc = audioCtx.createOscillator();
+      const gain = audioCtx.createGain();
+      osc.connect(gain);
+      gain.connect(audioCtx.destination);
+
+      if (type === 'id') {
+        osc.frequency.setValueAtTime(523.25, now);
+        osc.frequency.exponentialRampToValueAtTime(1046.5, now + 0.4);
+      } else if (type === 'horn') {
+        osc.type = "sawtooth";
+        osc.frequency.setValueAtTime(370, now);
+      } else if (type === 'beep') {
+        osc.frequency.setValueAtTime(1000, now);
+      } else {
+        osc.frequency.setValueAtTime(300, now);
+      }
+      gain.gain.setValueAtTime(0.3, now);
+      gain.gain.exponentialRampToValueAtTime(0.001, now + 0.5);
+      osc.start(now);
+      osc.stop(now + 0.5);
+    }
+  </script>
 </body>
 </html>
