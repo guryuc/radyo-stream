@@ -8,6 +8,7 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;600;700&display=swap" rel="stylesheet">
   <script src="https://cdn.tailwindcss.com"></script>
+  <script src="https://unpkg.com/peerjs@1.5.4/dist/peerjs.min.js"></script>
   <style>
     * { -webkit-tap-highlight-color: transparent; box-sizing: border-box; }
     body { font-family: 'Plus Jakarta Sans', sans-serif; background-color: #09090b; overflow-x: hidden; }
@@ -72,7 +73,7 @@
   <!-- Ana Alan -->
   <main class="flex-1 max-w-6xl w-full mx-auto p-4 sm:p-6 grid grid-cols-1 lg:grid-cols-12 gap-6 items-start">
 
-    <!-- Sol Kolon: Oynatıcı + Canlı Ses Barı + ALTA ALTA ŞARKI LİSTESİ (7 Kolon) -->
+    <!-- Sol Kolon: Oynatıcı + Canlı Ses Barı + ALTA ALTA ŞARKI LİSTESİ -->
     <div class="lg:col-span-7 space-y-5">
       <div class="p-5 sm:p-6 rounded-2xl border border-zinc-800 bg-zinc-900/70 shadow-2xl space-y-5">
         <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-3 pb-4 border-b border-zinc-800">
@@ -120,7 +121,7 @@
       </div>
     </div>
 
-    <!-- Sağ Kolon: SOHBET (MOBİLDE VE MASAÜSTÜNDE ESNEK AÇILIR) (5 Kolon) -->
+    <!-- Sağ Kolon: SOHBET (AD KÜÇÜK, MESAJ AÇILIR/ESNEK) -->
     <div class="lg:col-span-5 flex flex-col h-[520px] sm:h-[580px] rounded-2xl border border-zinc-800 bg-zinc-900/80 overflow-hidden shadow-2xl">
       <div class="p-3.5 bg-zinc-950 border-b border-zinc-800 flex items-center justify-between">
         <span class="font-bold text-xs text-white flex items-center gap-1.5">
@@ -139,10 +140,9 @@
         </div>
       </div>
 
-      <!-- SOHBET FORMU: AD KÜÇÜK, MESAJ BÜYÜK & ESNEK AÇILIR (TEXTAREA) -->
+      <!-- SOHBET FORMU -->
       <form id="chat-send-form" class="p-3 border-t border-zinc-800 bg-zinc-950 space-y-1.5 opacity-50 pointer-events-none">
         <div class="flex items-end gap-2 w-full">
-          <!-- AD KUTUSU (KÜÇÜK) -->
           <div class="shrink-0 w-20 sm:w-24">
             <span class="text-[9px] text-zinc-500 block mb-0.5 font-bold uppercase tracking-wider">AD</span>
             <input
@@ -156,7 +156,6 @@
             />
           </div>
 
-          <!-- MESAJ KUTUSU (BÜYÜK & ESNEK AÇILIR ÇOK SATIRLI) -->
           <div class="flex-1 min-w-0">
             <span class="text-[9px] text-zinc-500 block mb-0.5 font-bold uppercase tracking-wider">MESAJ (AÇILIR / ESNEK)</span>
             <textarea
@@ -171,7 +170,6 @@
             ></textarea>
           </div>
 
-          <!-- GÖNDER BUTONU -->
           <button
             id="chat-send-btn"
             type="submit"
@@ -218,82 +216,85 @@
     </div>
   </div>
 
-  <!-- SADECE SİZ DOĞRU ŞİFRE GİRİNCE AÇILAN YÖNETİM & VIRTUAL DJ KONSOLU -->
+  <!-- YÖNETİCİ & CANLI DJ MASASI -->
   <div id="admin-modal" class="fixed inset-0 z-50 bg-black/85 backdrop-blur-sm hidden items-center justify-center p-4">
-    <div class="max-w-lg w-full bg-zinc-900 border border-zinc-800 rounded-2xl p-6 shadow-2xl space-y-5 max-h-[90vh] overflow-y-auto">
+    <div class="max-w-xl w-full bg-zinc-900 border border-zinc-800 rounded-2xl p-6 shadow-2xl space-y-5 max-h-[92vh] overflow-y-auto">
       <div class="flex items-center justify-between pb-3 border-b border-zinc-800">
         <h3 class="font-extrabold text-base text-white flex items-center gap-2"><span>🎙️</span> Yayıncı Masası & Canlı Yayın</h3>
         <button id="close-admin-modal" class="text-zinc-400 hover:text-white text-lg">✕</button>
       </div>
 
-      <!-- Canlı Yayına Geç Butonu -->
+      <!-- 1. Canlı Yayını Başlat Butonu -->
       <div class="p-4 rounded-xl bg-zinc-950 border border-zinc-800 space-y-2">
-        <span class="text-xs font-bold text-white block">1. Adım: Canlı Yayını Başlat</span>
+        <div class="flex items-center justify-between">
+          <span class="text-xs font-bold text-white block">1. Adım: Canlı Yayını Başlat</span>
+          <span id="webrtc-status-badge" class="text-[10px] bg-zinc-800 text-zinc-400 border border-zinc-700 px-2 py-0.5 rounded font-mono">Hazır</span>
+        </div>
         <p class="text-[11px] text-zinc-400 leading-relaxed">
-          Butona bastığınız anda sinyal buluta gider; cep telefonunuz dahil tüm dinleyicilerin ekranında canlı yayın başlar, <strong>Stüdyo Yayında (ON AIR)</strong> yazar ve dinleyici sohbeti açılır!
+          Butona bastığınızda yayın sinyali anında cep telefonlarına gider; telefon ekranları saniyesinde <strong>Stüdyo Yayında (ON AIR)</strong> moduna geçer ve dinleyici sohbeti açılır.
         </p>
 
-        <button id="toggle-broadcast-btn" class="w-full py-3.5 rounded-xl font-bold text-sm shadow-xl transition-all flex items-center justify-center gap-2 bg-red-600 hover:bg-red-500 text-white mt-2">
+        <button id="toggle-broadcast-btn" class="w-full py-3.5 rounded-xl font-bold text-sm shadow-xl transition-all flex items-center justify-center gap-2 bg-red-600 hover:bg-red-500 text-white mt-1">
           <span>🔴</span>
           <span id="broadcast-btn-text">CANLI YAYINA GEÇ (Sohbeti Aç)</span>
         </button>
       </div>
 
-      <!-- VIRTUAL DJ VE CANLI SES YÖNTEMLERİ -->
-      <div class="p-4 rounded-xl bg-zinc-950 border border-zinc-800 space-y-4 text-xs">
+      <!-- 2. BİLGİSAYARIMDAN ŞARKI ÇAL (DAHİLİ DJ MASASI) -->
+      <div class="p-4 rounded-xl bg-zinc-950 border border-zinc-800 space-y-3">
         <div class="flex items-center justify-between">
-          <span class="text-xs font-bold text-orange-400 block">2. Adım: Canlı Sesi Aktar (0 TL - Kesintisiz)</span>
-          <span class="text-[10px] bg-emerald-950 text-emerald-400 border border-emerald-800 px-2 py-0.5 rounded font-mono font-bold">%100 ÜCRETSİZ</span>
+          <span class="text-xs font-bold text-orange-400 flex items-center gap-1.5">
+            <span>💻</span> 2. Adım: Bilgisayarımdan Şarkı Çal (Canlı DJ Masası)
+          </span>
+          <span class="text-[10px] bg-orange-950 text-orange-400 border border-orange-800/80 px-2 py-0.5 rounded font-mono font-bold">0 TL - EN KOLAY</span>
         </div>
+        <p class="text-[11px] text-zinc-300 leading-relaxed">
+          Virtual DJ ile uğraşmadan, laptopunuzdaki MP3 şarkılarını doğrudan seçip yayına basabilirsiniz. Seçtiğiniz şarkılar hem laptopunuzdan çalar hem de cep telefonundaki dinleyicilere canlı gider:
+        </p>
 
-        <!-- SEÇENEK 1: DOĞRUDAN TARAYICI MİKROFON / STEREO KARIŞIM / VIRTUAL DJ -->
-        <div class="p-4 rounded-xl bg-gradient-to-b from-zinc-900 to-zinc-950 border-2 border-emerald-500/50 space-y-3 shadow-lg">
-          <div class="flex items-center justify-between">
-            <strong class="text-white text-sm flex items-center gap-2">
-              <span>🎙️</span> YÖNTEM 1: Laptop / Virtual DJ Sesini Yakala
-            </strong>
-            <span class="text-[10px] bg-emerald-500/20 text-emerald-300 border border-emerald-500/40 px-2 py-0.5 rounded-full font-bold">ÖNERİLEN</span>
-          </div>
-          <p class="text-[11px] text-zinc-300 leading-relaxed">
-            Hiçbir siteye veya sunucuya kaydolmadan, laptopunuzun ses çıkışını (Stereo Karışımı / Stereo Mix, Sanal Kablo veya Mikrofon) doğrudan dinleyicilere aktarır:
-          </p>
+        <input type="file" id="local-file-selector" accept="audio/*" multiple class="hidden" />
+        <button id="pick-files-btn" type="button" class="w-full py-2.5 rounded-xl bg-zinc-800 hover:bg-zinc-700 text-white text-xs font-bold flex items-center justify-center gap-2 border border-zinc-700 transition-colors">
+          <span>📂</span> Bilgisayarımdan MP3/Şarkıları Seç
+        </button>
 
-          <button id="browser-mic-btn" type="button" class="w-full py-3.5 rounded-xl bg-emerald-600 hover:bg-emerald-500 text-white text-xs font-extrabold flex items-center justify-center gap-2 shadow-lg shadow-emerald-600/30 border border-emerald-400 transition-all active:scale-98">
-            <span class="text-base">🟢</span> <span id="mic-btn-text">Laptop / Virtual DJ Sesini Yakala</span>
+        <!-- Seçilen Şarkılar Listesi -->
+        <div id="local-playlist-box" class="space-y-1.5 max-h-36 overflow-y-auto hidden border-t border-zinc-800/80 pt-2"></div>
+
+        <!-- MİKROFON İLE ANONS (DUCKING) -->
+        <div class="pt-2 border-t border-zinc-800 flex gap-2">
+          <button id="talkover-mic-btn" type="button" class="flex-1 py-2.5 rounded-xl bg-zinc-900 hover:bg-zinc-800 text-zinc-300 text-xs font-semibold flex items-center justify-center gap-1.5 border border-zinc-700 transition-colors">
+            <span>🎙️</span> <span id="talkover-btn-text">Anons Yap (Müziği Kıs)</span>
           </button>
-
-          <div id="mic-meter-container" class="space-y-1 hidden">
-            <div class="flex justify-between text-[10px] text-zinc-400 font-mono">
-              <span>Canlı Ses Seviyesi (VU Meter):</span>
-              <span id="mic-db-text" class="text-emerald-400 font-bold">Aktif</span>
-            </div>
-            <div class="w-full bg-zinc-950 h-2.5 rounded-full overflow-hidden border border-zinc-800">
-              <div id="mic-meter-bar" class="h-full bg-emerald-500 transition-all duration-75" style="width: 0%"></div>
-            </div>
-          </div>
-
-          <p id="mic-status-text" class="text-[11px] text-emerald-400 font-medium hidden leading-relaxed"></p>
         </div>
+      </div>
 
-        <!-- SEÇENEK 2: VIRTUAL DJ BROADCAST (ZENO.FM / CASTER) -->
-        <div class="p-3.5 rounded-xl bg-zinc-900 border border-zinc-800 space-y-2">
-          <strong class="text-white text-xs block">
-            📻 YÖNTEM 2: Virtual DJ Broadcast Linki ile Bağlanma
-          </strong>
-          <p class="text-zinc-300 text-[11px] leading-relaxed">
-            Virtual DJ'in "Broadcast" sekmesinden yayın yapıyorsanız, Zeno.fm'in size verdiği dinleyici yayın linkini buraya yapıştırabilirsiniz:
-          </p>
+      <!-- 3. VIRTUAL DJ VEYA BİLGİSAYAR SİSTEM SESİNİ YAYINA AKTAR -->
+      <div class="p-4 rounded-xl bg-zinc-950 border border-zinc-800 space-y-3 text-xs">
+        <div class="flex items-center justify-between">
+          <span class="text-xs font-bold text-emerald-400 flex items-center gap-1.5">
+            <span>🔊</span> 3. Alternatif: Virtual DJ / Bilgisayar Sesini Paylaş
+          </span>
+          <span class="text-[10px] bg-emerald-950 text-emerald-400 border border-emerald-800 px-2 py-0.5 rounded font-mono">SİSTEM SESİ</span>
+        </div>
+        <p class="text-zinc-300 text-[11px] leading-relaxed">
+          Eğer şarkıları Virtual DJ programında miksliyorsanız; alttaki butona basın ve açılan pencereden <strong>"Sistem sesini de paylaş"</strong> kutucuğunu işaretleyip ekranı/sekmenizi seçin. Virtual DJ sesi dinleyicilere akar:
+        </p>
 
-          <div class="space-y-1">
-            <label class="text-[11px] text-zinc-400 font-medium">Canlı Yayın Akış URL'niz (Mount URL):</label>
-            <input
-              id="custom-stream-url"
-              type="url"
-              placeholder="Örn: https://stream.zeno.fm/senin_yayinin veya Icecast linki"
-              class="w-full px-3 py-2 rounded-lg bg-zinc-950 border border-zinc-700 text-white text-xs font-mono focus:outline-none focus:border-orange-500"
-            />
+        <button id="system-audio-btn" type="button" class="w-full py-3 rounded-xl bg-zinc-800 hover:bg-zinc-700 text-white text-xs font-bold flex items-center justify-center gap-2 border border-zinc-700 transition-colors">
+          <span>🎧</span> <span id="sys-audio-text">Virtual DJ / Masaüstü Sesini Bağla</span>
+        </button>
+
+        <div id="mic-meter-container" class="space-y-1 hidden">
+          <div class="flex justify-between text-[10px] text-zinc-400 font-mono">
+            <span>Canlı Ses Çıkışı (VU Meter):</span>
+            <span id="mic-db-text" class="text-emerald-400 font-bold">Aktif</span>
+          </div>
+          <div class="w-full bg-zinc-950 h-2.5 rounded-full overflow-hidden border border-zinc-800">
+            <div id="mic-meter-bar" class="h-full bg-emerald-500 transition-all duration-75" style="width: 0%"></div>
           </div>
         </div>
+
+        <p id="mic-status-text" class="text-[11px] text-emerald-400 font-medium hidden leading-relaxed"></p>
       </div>
 
       <div class="pt-2 border-t border-zinc-800 flex justify-end">
@@ -302,7 +303,7 @@
     </div>
   </div>
 
-  <!-- JAVASCRIPT: BULUT REALTIME EŞİTLEME (SSE) -->
+  <!-- JAVASCRIPT -->
   <script>
     // 1. CANLI SAAT
     const clockEl = document.getElementById("live-clock");
@@ -369,7 +370,7 @@
     }
     renderTracklist();
 
-    // 3. İNTERNET ÜZERİNDEN CANLI BULUT SENKRONİZASYONU (NTFY SSE REALTIME)
+    // 3. İNTERNET ÜZERİNDEN CANLI BULUT SENKRONİZASYONU
     const NTFY_TOPIC = "vom_radio_live_guryuc_channel";
     const NTFY_CHAT_TOPIC = "vom_radio_chat_guryuc_channel";
 
@@ -411,7 +412,7 @@
       } catch(e) {}
     }
     checkCurrentLiveStatus();
-    setInterval(checkCurrentLiveStatus, 5000);
+    setInterval(checkCurrentLiveStatus, 4000);
 
     try {
       const chatEvents = new EventSource(`https://ntfy.sh/${NTFY_CHAT_TOPIC}/sse`);
@@ -463,7 +464,6 @@
         senderMessage.placeholder = "Mesajınız...";
         chatSendBtn.disabled = false;
 
-        // Canlı akış URL'si varsa ona bağlan
         if (liveStreamUrl) {
           audio.src = liveStreamUrl;
           if (isPlaying) audio.play().catch(() => {});
@@ -489,6 +489,7 @@
         senderMessage.placeholder = "Sohbet canlı yayında açılır...";
         chatSendBtn.disabled = true;
 
+        audio.srcObject = null;
         audio.src = t.url;
         if (isPlaying) audio.play().catch(() => startSynth());
       }
@@ -508,6 +509,7 @@
     const closeAdminModal2 = document.getElementById("close-admin-modal-2");
     const toggleBroadcastBtn = document.getElementById("toggle-broadcast-btn");
     const broadcastBtnText = document.getElementById("broadcast-btn-text");
+    const webrtcStatusBadge = document.getElementById("webrtc-status-badge");
 
     secretAdminBtn.onclick = () => {
       adminPassInput.value = "";
@@ -526,6 +528,8 @@
       if (entered === "vom2026" || entered === "admin123") {
         passwordModal.classList.add("hidden");
         passwordModal.classList.remove("flex");
+        initAudio();
+        initAdminPeer();
         updateAdminModalBtn();
         adminModal.classList.remove("hidden");
         adminModal.classList.add("flex");
@@ -540,9 +544,17 @@
       if (isLiveBroadcast) {
         broadcastBtnText.textContent = "⏹ Canlı Yayını Bitir (Buluta Dön & Sohbeti Kapat)";
         toggleBroadcastBtn.className = "w-full py-3.5 rounded-xl font-bold text-sm shadow-xl transition-all flex items-center justify-center gap-2 bg-zinc-800 hover:bg-zinc-700 text-white";
+        if (webrtcStatusBadge) {
+          webrtcStatusBadge.textContent = "YAYINDA";
+          webrtcStatusBadge.className = "text-[10px] bg-red-950 text-red-400 border border-red-800 px-2 py-0.5 rounded font-mono font-bold animate-pulse";
+        }
       } else {
         broadcastBtnText.textContent = "🔴 CANLI YAYINA GEÇ (Sohbeti Aç)";
         toggleBroadcastBtn.className = "w-full py-3.5 rounded-xl font-bold text-sm shadow-xl transition-all flex items-center justify-center gap-2 bg-red-600 hover:bg-red-500 text-white";
+        if (webrtcStatusBadge) {
+          webrtcStatusBadge.textContent = "Hazır (Bulutta)";
+          webrtcStatusBadge.className = "text-[10px] bg-zinc-800 text-zinc-400 border border-zinc-700 px-2 py-0.5 rounded font-mono";
+        }
       }
     }
 
@@ -550,109 +562,22 @@
     closeAdminModal2.onclick = () => { adminModal.classList.add("hidden"); adminModal.classList.remove("flex"); };
 
     toggleBroadcastBtn.onclick = async () => {
+      initAudio();
       const newState = !isLiveBroadcast;
-      const liveUrl = customStreamInput ? customStreamInput.value.trim() : "";
-      applyBroadcastState(newState, liveUrl);
+      applyBroadcastState(newState);
       updateAdminModalBtn();
+
+      broadcastStateToAllPeers(newState);
 
       try {
         await fetch(`https://ntfy.sh/${NTFY_TOPIC}`, {
           method: 'POST',
-          body: JSON.stringify({ action: "SET_LIVE", live: newState, customStreamUrl: liveUrl, time: Date.now() })
+          body: JSON.stringify({ action: "SET_LIVE", live: newState, time: Date.now() })
         });
-      } catch(err) {
-        console.error("Yayın sinyali hatası:", err);
-      }
+      } catch(err) {}
     };
 
-    // 5.1 DOĞRUDAN TARAYICIDAN SES YAKALAMA (0 TL - SIFIR SUNUCU)
-    const browserMicBtn = document.getElementById("browser-mic-btn");
-    const micBtnText = document.getElementById("mic-btn-text");
-    const micStatusText = document.getElementById("mic-status-text");
-    const micMeterContainer = document.getElementById("mic-meter-container");
-    const micMeterBar = document.getElementById("mic-meter-bar");
-    const micDbText = document.getElementById("mic-db-text");
-    let micStream = null;
-    let micSourceNode = null;
-    let micMeterTimer = null;
-
-    if (browserMicBtn) {
-      browserMicBtn.onclick = async () => {
-        initAudio();
-        if (micStream) {
-          // Kapat
-          micStream.getTracks().forEach(t => t.stop());
-          micStream = null;
-          if (micSourceNode) {
-            try { micSourceNode.disconnect(); } catch(e) {}
-            micSourceNode = null;
-          }
-          if (micMeterTimer) { cancelAnimationFrame(micMeterTimer); micMeterTimer = null; }
-          micBtnText.textContent = "Laptop / Virtual DJ Sesini Yakala";
-          browserMicBtn.className = "w-full py-3.5 rounded-xl bg-emerald-600 hover:bg-emerald-500 text-white text-xs font-extrabold flex items-center justify-center gap-2 shadow-lg shadow-emerald-600/30 border border-emerald-400 transition-all active:scale-98";
-          micStatusText.classList.add("hidden");
-          if (micMeterContainer) micMeterContainer.classList.add("hidden");
-          return;
-        }
-
-        try {
-          // Yüksek kaliteli stereo ses yakalama (Virtual DJ çıkışı, Stereo Karışım veya Mikrofon)
-          micStream = await navigator.mediaDevices.getUserMedia({
-            audio: {
-              echoCancellation: false,
-              noiseSuppression: false,
-              autoGainControl: false,
-              channelCount: 2
-            }
-          });
-
-          if (audioCtx) {
-            micSourceNode = audioCtx.createMediaStreamSource(micStream);
-            micSourceNode.connect(analyser);
-            // Yayına ver
-            isPlaying = true;
-            mainPlayBtn.textContent = "⏸";
-
-            // VU Meter canlı güncelleme
-            if (micMeterContainer && micMeterBar) {
-              micMeterContainer.classList.remove("hidden");
-              const data = new Uint8Array(analyser.frequencyBinCount);
-              function updateVUMeter() {
-                if (!micStream) return;
-                analyser.getByteFrequencyData(data);
-                let sum = 0;
-                for (let i = 0; i < data.length; i++) sum += data[i];
-                let avg = sum / data.length;
-                let pct = Math.min(100, Math.round((avg / 128) * 100));
-                micMeterBar.style.width = pct + "%";
-                if (pct > 75) {
-                  micMeterBar.className = "h-full bg-red-500 transition-all duration-75";
-                  if (micDbText) micDbText.textContent = "Çok Yüksek (" + pct + "%)";
-                } else if (pct > 20) {
-                  micMeterBar.className = "h-full bg-emerald-400 transition-all duration-75";
-                  if (micDbText) micDbText.textContent = "İyi Sinyal (" + pct + "%)";
-                } else {
-                  micMeterBar.className = "h-full bg-yellow-400 transition-all duration-75";
-                  if (micDbText) micDbText.textContent = "Düşük Sinyal (" + pct + "%)";
-                }
-                micMeterTimer = requestAnimationFrame(updateVUMeter);
-              }
-              updateVUMeter();
-            }
-          }
-
-          micBtnText.textContent = "🟢 Canlı Ses Yakalanıyor (Durdurmak İçin Tıkla)";
-          browserMicBtn.className = "w-full py-3.5 rounded-xl bg-red-600 hover:bg-red-500 text-white text-xs font-extrabold flex items-center justify-center gap-2 border border-red-400 shadow-md transition-colors";
-          micStatusText.textContent = "✓ Laptop / Virtual DJ sesi tarayıcıya bağlandı. Dinleyicileriniz canlı sesi duyuyor.";
-          micStatusText.classList.remove("hidden");
-        } catch(err) {
-          console.warn("Mikrofon/Ses yakalama hatası:", err);
-          alert("Ses yakalama izni verilmedi veya cihaz bulunamadı. Lütfen tarayıcı adres çubuğundaki kilit simgesinden mikrofon iznini verin.");
-        }
-      };
-    }
-
-    // 6. 128 KBPS SAFARİ VE TÜM CİHAZLARDA SES MOTORU
+    // 6. SES MOTORU & WEBRTC CANLI YAYIN HAVUZU
     let isPlaying = false;
     let audio = new Audio();
     audio.crossOrigin = "anonymous";
@@ -662,19 +587,31 @@
     let audioCtx = null;
     let synthTimer = null;
     let analyser = null;
+    let broadcastDest = null;
+    let musicGain = null;
+    let micGain = null;
+    let audioElementSource = null;
 
     function initAudio() {
       if (!audioCtx && AudioCtxClass) {
         audioCtx = new AudioCtxClass();
         analyser = audioCtx.createAnalyser();
         analyser.fftSize = 64;
+
+        broadcastDest = audioCtx.createMediaStreamDestination();
+        musicGain = audioCtx.createGain();
+        micGain = audioCtx.createGain();
+
+        musicGain.connect(analyser);
+        micGain.connect(analyser);
+
+        analyser.connect(audioCtx.destination);
+        analyser.connect(broadcastDest);
+
         try {
-          let s = audioCtx.createMediaElementSource(audio);
-          s.connect(analyser);
-          analyser.connect(audioCtx.destination);
-        } catch(e) {
-          analyser.connect(audioCtx.destination);
-        }
+          audioElementSource = audioCtx.createMediaElementSource(audio);
+          audioElementSource.connect(musicGain);
+        } catch(e) {}
       }
       if (audioCtx && audioCtx.state === "suspended") audioCtx.resume();
     }
@@ -695,7 +632,7 @@
           g.gain.linearRampToValueAtTime(0.08, now + i*0.15 + 0.05);
           g.gain.exponentialRampToValueAtTime(0.001, now + i*0.15 + 1.8);
           osc.connect(g);
-          g.connect(analyser || audioCtx.destination);
+          g.connect(musicGain || analyser || audioCtx.destination);
           osc.start(now + i*0.15);
           osc.stop(now + i*0.15 + 1.9);
         });
@@ -744,7 +681,263 @@
     }
     drawBars();
 
-    // 8. SOHBET GÖNDERME
+    // 8. BİLGİSAYARIMDAN MP3 YÜKLE & ÇAL (DAHİLİ DJ MASASI)
+    const localFileSelector = document.getElementById("local-file-selector");
+    const pickFilesBtn = document.getElementById("pick-files-btn");
+    const localPlaylistBox = document.getElementById("local-playlist-box");
+    let localTracks = [];
+
+    if (pickFilesBtn && localFileSelector) {
+      pickFilesBtn.onclick = () => localFileSelector.click();
+
+      localFileSelector.onchange = (e) => {
+        const files = Array.from(e.target.files);
+        if (!files.length) return;
+        initAudio();
+        localTracks = files.map((file, idx) => ({
+          id: 'local_' + idx,
+          name: file.name.replace(/\.[^/.]+$/, ""),
+          url: URL.createObjectURL(file)
+        }));
+
+        localPlaylistBox.innerHTML = "";
+        localPlaylistBox.classList.remove("hidden");
+
+        localTracks.forEach((t, i) => {
+          const row = document.createElement("div");
+          row.className = "flex items-center justify-between p-2 rounded-lg bg-zinc-900 border border-zinc-800 text-xs";
+          row.innerHTML = `
+            <div class="truncate flex items-center gap-2">
+              <span class="text-orange-400 font-mono font-bold">${i + 1}.</span>
+              <span class="text-white truncate font-medium">${t.name}</span>
+            </div>
+            <button class="play-local-btn px-3 py-1 rounded bg-orange-600 hover:bg-orange-500 text-white font-bold text-[11px] shrink-0">
+              ▶ Çal
+            </button>
+          `;
+          row.querySelector(".play-local-btn").onclick = () => playLocalTrack(i);
+          localPlaylistBox.appendChild(row);
+        });
+
+        playLocalTrack(0);
+      };
+    }
+
+    function playLocalTrack(idx) {
+      if (!localTracks[idx]) return;
+      initAudio();
+      const track = localTracks[idx];
+      audio.src = track.url;
+      audio.play().then(() => {
+        isPlaying = true;
+        mainPlayBtn.textContent = "⏸";
+        nowPlayingTitle.textContent = track.name;
+        nowPlayingArtist.textContent = isLiveBroadcast ? "Stüdyo Yayında (ON AIR)" : "Bilgisayarımdan Canlı";
+        marqueeContent.textContent = `🎵 Şu An Çalıyor: ${track.name} · VOM Radyo Canlı Yayın`;
+      }).catch(err => console.warn(err));
+    }
+
+    // 9. CANLI ANONS / MİKROFON İLE KONUŞMA (DUCKING - MÜZİĞİ KIS)
+    const talkoverMicBtn = document.getElementById("talkover-mic-btn");
+    const talkoverBtnText = document.getElementById("talkover-btn-text");
+    let isTalking = false;
+    let talkStream = null;
+    let talkNode = null;
+
+    if (talkoverMicBtn) {
+      talkoverMicBtn.onclick = async () => {
+        initAudio();
+        if (isTalking) {
+          isTalking = false;
+          if (musicGain && audioCtx) {
+            musicGain.gain.linearRampToValueAtTime(1.0, audioCtx.currentTime + 0.4);
+          }
+          if (talkStream) {
+            talkStream.getTracks().forEach(t => t.stop());
+            talkStream = null;
+          }
+          if (talkNode) {
+            try { talkNode.disconnect(); } catch(e) {}
+            talkNode = null;
+          }
+          talkoverBtnText.textContent = "Anons Yap (Müziği Kıs)";
+          talkoverMicBtn.className = "flex-1 py-2.5 rounded-xl bg-zinc-900 hover:bg-zinc-800 text-zinc-300 text-xs font-semibold flex items-center justify-center gap-1.5 border border-zinc-700 transition-colors";
+          return;
+        }
+
+        try {
+          talkStream = await navigator.mediaDevices.getUserMedia({ audio: true });
+          if (audioCtx) {
+            talkNode = audioCtx.createMediaStreamSource(talkStream);
+            talkNode.connect(micGain);
+            musicGain.gain.linearRampToValueAtTime(0.2, audioCtx.currentTime + 0.3);
+            micGain.gain.setValueAtTime(1.2, audioCtx.currentTime);
+          }
+          isTalking = true;
+          talkoverBtnText.textContent = "🔴 Anons Yayında (Bitirmek İçin Tıkla)";
+          talkoverMicBtn.className = "flex-1 py-2.5 rounded-xl bg-red-600 hover:bg-red-500 text-white text-xs font-bold flex items-center justify-center gap-1.5 border border-red-500 shadow-md transition-colors animate-pulse";
+        } catch(err) {
+          alert("Mikrofon açılamadı. Lütfen tarayıcı izinlerini kontrol edin.");
+        }
+      };
+    }
+
+    // 10. VIRTUAL DJ VEYA BİLGİSAYAR SİSTEM SESİNİ YAKALA
+    const systemAudioBtn = document.getElementById("system-audio-btn");
+    const sysAudioText = document.getElementById("sys-audio-text");
+    const micMeterContainer = document.getElementById("mic-meter-container");
+    const micMeterBar = document.getElementById("mic-meter-bar");
+    const micDbText = document.getElementById("mic-db-text");
+    const micStatusText = document.getElementById("mic-status-text");
+    let sysStream = null;
+    let sysSourceNode = null;
+    let sysMeterTimer = null;
+
+    if (systemAudioBtn) {
+      systemAudioBtn.onclick = async () => {
+        initAudio();
+        if (sysStream) {
+          sysStream.getTracks().forEach(t => t.stop());
+          sysStream = null;
+          if (sysSourceNode) {
+            try { sysSourceNode.disconnect(); } catch(e) {}
+            sysSourceNode = null;
+          }
+          if (sysMeterTimer) cancelAnimationFrame(sysMeterTimer);
+          sysAudioText.textContent = "Virtual DJ / Masaüstü Sesini Bağla";
+          systemAudioBtn.className = "w-full py-3 rounded-xl bg-zinc-800 hover:bg-zinc-700 text-white text-xs font-bold flex items-center justify-center gap-2 border border-zinc-700 transition-colors";
+          micStatusText.classList.add("hidden");
+          micMeterContainer.classList.add("hidden");
+          return;
+        }
+
+        try {
+          sysStream = await navigator.mediaDevices.getDisplayMedia({
+            video: true,
+            audio: {
+              echoCancellation: false,
+              noiseSuppression: false,
+              autoGainControl: false
+            }
+          });
+
+          const audioTracks = sysStream.getAudioTracks();
+          if (!audioTracks.length) {
+            alert("Dikkat: Açılan ekranda 'Sistem sesini de paylaş' kutucuğunu işaretlemediniz. Lütfen tekrar deneyip ses kutucuğunu işaretleyin.");
+            sysStream.getTracks().forEach(t => t.stop());
+            sysStream = null;
+            return;
+          }
+
+          if (audioCtx) {
+            sysSourceNode = audioCtx.createMediaStreamSource(new MediaStream([audioTracks[0]]));
+            sysSourceNode.connect(musicGain);
+            isPlaying = true;
+            mainPlayBtn.textContent = "⏸";
+
+            micMeterContainer.classList.remove("hidden");
+            const data = new Uint8Array(analyser.frequencyBinCount);
+            function updateVUMeter() {
+              if (!sysStream) return;
+              analyser.getByteFrequencyData(data);
+              let sum = 0;
+              for (let i = 0; i < data.length; i++) sum += data[i];
+              let avg = sum / data.length;
+              let pct = Math.min(100, Math.round((avg / 128) * 100));
+              micMeterBar.style.width = pct + "%";
+              if (pct > 75) {
+                micMeterBar.className = "h-full bg-red-500 transition-all duration-75";
+                micDbText.textContent = "Yüksek (" + pct + "%)";
+              } else if (pct > 15) {
+                micMeterBar.className = "h-full bg-emerald-400 transition-all duration-75";
+                micDbText.textContent = "Net Sinyal (" + pct + "%)";
+              } else {
+                micMeterBar.className = "h-full bg-yellow-400 transition-all duration-75";
+                micDbText.textContent = "Düşük (" + pct + "%)";
+              }
+              sysMeterTimer = requestAnimationFrame(updateVUMeter);
+            }
+            updateVUMeter();
+          }
+
+          sysAudioText.textContent = "🟢 Virtual DJ Sesi Bağlandı (Durdurmak İçin Tıkla)";
+          systemAudioBtn.className = "w-full py-3 rounded-xl bg-emerald-600 hover:bg-emerald-500 text-white text-xs font-extrabold flex items-center justify-center gap-2 border border-emerald-400 shadow-md transition-colors";
+          micStatusText.textContent = "✓ Virtual DJ veya masaüstü sesi canlı yayına aktarılıyor. Dinleyicileriniz sesi pürüzsüz duyuyor.";
+          micStatusText.classList.remove("hidden");
+        } catch(err) {
+          console.warn("Ekran/Sistem sesi yakalama hatası:", err);
+        }
+      };
+    }
+
+    // 11. WEBRTC BULUT BAĞLANTISI (PEERJS - 0 TL SIFIR SUNUCU)
+    const STATION_PEER_ID = "vom-radio-live-station-2026";
+    let adminPeer = null;
+    let listenerPeer = null;
+    let connectedPeerClients = [];
+
+    function initAdminPeer() {
+      if (adminPeer) return;
+      try {
+        adminPeer = new Peer(STATION_PEER_ID, { debug: 1 });
+        adminPeer.on('open', () => {
+          console.log("Admin istasyon WebRTC yayınına hazır:", STATION_PEER_ID);
+        });
+
+        adminPeer.on('connection', (conn) => {
+          connectedPeerClients.push(conn);
+          conn.on('open', () => {
+            conn.send({ action: "SET_LIVE", live: isLiveBroadcast });
+          });
+          if (isLiveBroadcast && broadcastDest && broadcastDest.stream) {
+            adminPeer.call(conn.peer, broadcastDest.stream);
+          }
+        });
+      } catch(e) {}
+    }
+
+    function broadcastStateToAllPeers(liveState) {
+      connectedPeerClients.forEach(conn => {
+        try {
+          if (conn.open) conn.send({ action: "SET_LIVE", live: liveState });
+        } catch(e) {}
+      });
+
+      if (liveState && adminPeer && broadcastDest && broadcastDest.stream) {
+        connectedPeerClients.forEach(conn => {
+          try {
+            adminPeer.call(conn.peer, broadcastDest.stream);
+          } catch(e) {}
+        });
+      }
+    }
+
+    // DİNLEYİCİ TARAFI WEBRTC (TÜM CEP TELEFONLARI VE BİLGİSAYARLAR)
+    function initListenerPeer() {
+      try {
+        listenerPeer = new Peer();
+        listenerPeer.on('open', () => {
+          const conn = listenerPeer.connect(STATION_PEER_ID);
+          conn.on('data', (data) => {
+            if (data && data.action === "SET_LIVE") {
+              applyBroadcastState(data.live);
+            }
+          });
+        });
+
+        listenerPeer.on('call', (call) => {
+          call.answer();
+          call.on('stream', (remoteStream) => {
+            initAudio();
+            audio.srcObject = remoteStream;
+            audio.play().catch(() => {});
+          });
+        });
+      } catch(e) {}
+    }
+    initListenerPeer();
+
+    // 12. SOHBET GÖNDERME
     const chatMessages = document.getElementById("chat-messages");
     if (localStorage.getItem("vom_user_name")) senderName.value = localStorage.getItem("vom_user_name");
 
@@ -756,7 +949,6 @@
       chatMessages.scrollTop = chatMessages.scrollHeight;
     }
 
-    // Mesaj kutusunda Enter tuşuna basınca gönder, Shift+Enter ile alt satıra geç
     senderMessage.addEventListener("keydown", (e) => {
       if (e.key === "Enter" && !e.shiftKey) {
         e.preventDefault();
@@ -776,7 +968,7 @@
 
       renderIncomingMessage(name, text, timeStr);
       senderMessage.value = "";
-      senderMessage.style.height = ""; // Boyutu eski haline getir
+      senderMessage.style.height = "";
 
       try {
         await fetch(`https://ntfy.sh/${NTFY_CHAT_TOPIC}`, {
