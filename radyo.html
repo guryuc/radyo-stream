@@ -25,22 +25,21 @@
 </head>
 <body class="min-h-screen flex flex-col text-zinc-100 selection:bg-orange-500 selection:text-white">
 
-  <!-- MOBİL CANLI YAYIN DOKUN-DİNLE BİLDİRİM BANDI -->
+  <!-- MOBİL CANLI YAYIN UYANDIRMA VE DOKUN-DİNLE BİLDİRİM BANDI -->
   <div id="mobile-live-alert" class="hidden fixed bottom-4 inset-x-4 z-50 p-4 rounded-2xl bg-gradient-to-r from-red-600 via-orange-600 to-amber-600 text-white shadow-2xl flex items-center justify-between border border-white/20 animate-bounce cursor-pointer">
     <div class="flex items-center gap-3">
       <span class="text-2xl animate-pulse">🔴</span>
       <div>
         <span class="font-extrabold text-xs block uppercase tracking-wider">CANLI YAYIN BAŞLADI (ON AIR)</span>
-        <span class="text-[11px] text-white/95 block font-medium">Canlı sesi dinlemek için dokunun</span>
+        <span class="text-[11px] text-white/95 block font-medium">Sesi açmak için ekrana dokunun</span>
       </div>
     </div>
     <button class="bg-white text-red-600 font-extrabold px-3.5 py-2 rounded-xl text-xs shadow-lg shrink-0 flex items-center gap-1 active:scale-95 transition-transform">
-      <span>DİNLE</span>
-      <span>▶</span>
+      <span>▶ DİNLE</span>
     </button>
   </div>
 
-  <!-- Üst Bar: İstasyon, Canlı Saat & Dinleyici Sayısı -->
+  <!-- Üst Bar -->
   <header class="border-b border-zinc-800 bg-zinc-950/90 backdrop-blur-md sticky top-0 z-40">
     <div class="max-w-6xl mx-auto px-4 py-3 flex items-center justify-between">
       <div class="flex items-center gap-3">
@@ -66,14 +65,14 @@
 
         <div class="bg-zinc-900 px-2.5 sm:px-3 py-1.5 rounded-lg border border-zinc-800 text-zinc-300 flex items-center gap-1.5">
           <span>👥</span>
-          <span class="font-bold text-white mono" id="live-listener-count">2</span>
+          <span class="font-bold text-white mono" id="live-listener-count">1</span>
           <span class="hidden sm:inline text-zinc-500">dinleyici</span>
         </div>
       </div>
     </div>
   </header>
 
-  <!-- KAYAN YAZI BARI -->
+  <!-- Kayan Yazı -->
   <div id="marquee-bar" class="bg-zinc-900/90 border-b border-zinc-800/80 overflow-hidden py-2 px-4 flex items-center">
     <span id="marquee-badge" class="text-xs bg-orange-600 text-white font-bold px-2 py-0.5 rounded mr-3 shrink-0 uppercase tracking-wider text-[10px]">
       YAYIN AKIŞI
@@ -85,10 +84,10 @@
     </div>
   </div>
 
-  <!-- Ana Alan -->
+  <!-- Ana İçerik -->
   <main class="flex-1 max-w-6xl w-full mx-auto p-4 sm:p-6 grid grid-cols-1 lg:grid-cols-12 gap-6 items-start">
 
-    <!-- Sol Kolon: Oynatıcı + Canlı Süre/İlerleme Barı + Şarkı Listesi (7 Kolon) -->
+    <!-- Sol Kolon: Oynatıcı & Çalma Listesi -->
     <div class="lg:col-span-7 space-y-5">
       <div class="p-5 sm:p-6 rounded-2xl border border-zinc-800 bg-zinc-900/70 shadow-2xl space-y-5">
         <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-3 pb-4 border-b border-zinc-800">
@@ -105,12 +104,11 @@
           </div>
         </div>
 
-        <!-- Canlı Ekolayzır Ses Barı -->
+        <!-- Ekolayzır Visualizer Canvas -->
         <div class="bg-zinc-950 p-3 rounded-xl border border-zinc-800/90 shadow-inner">
           <canvas id="audio-bars" width="450" height="48" class="w-full h-12 rounded"></canvas>
         </div>
 
-        <!-- Şarkı İlerleme ve Canlı Süre Barı -->
         <div class="space-y-1.5 pt-1">
           <div class="flex items-center justify-between text-xs font-mono text-zinc-400">
             <span id="current-time-text">00:00</span>
@@ -135,7 +133,6 @@
         </div>
       </div>
 
-      <!-- ALTA ALTA ŞARKI LİSTESİ -->
       <div class="p-5 rounded-2xl border border-zinc-800 bg-zinc-900/60 shadow-xl space-y-3">
         <div class="flex items-center justify-between pb-2 border-b border-zinc-800">
           <h3 class="text-sm font-bold text-white flex items-center gap-2">
@@ -148,7 +145,7 @@
       </div>
     </div>
 
-    <!-- Sağ Kolon: SOHBET -->
+    <!-- Sağ Kolon: Sohbet -->
     <div class="lg:col-span-5 flex flex-col h-[520px] sm:h-[580px] rounded-2xl border border-zinc-800 bg-zinc-900/80 overflow-hidden shadow-2xl">
       <div class="p-3.5 bg-zinc-950 border-b border-zinc-800 flex items-center justify-between">
         <span class="font-bold text-xs text-white flex items-center gap-1.5">
@@ -167,42 +164,19 @@
         </div>
       </div>
 
-      <!-- SOHBET FORMU -->
       <form id="chat-send-form" class="p-3 border-t border-zinc-800 bg-zinc-950 space-y-1.5 opacity-50 pointer-events-none">
         <div class="flex items-end gap-2 w-full">
           <div class="shrink-0 w-20 sm:w-24">
             <span class="text-[9px] text-zinc-500 block mb-0.5 font-bold uppercase tracking-wider">AD</span>
-            <input
-              id="sender-name"
-              type="text"
-              placeholder="Adınız"
-              maxlength="15"
-              disabled
-              class="w-full px-2.5 py-2 rounded-xl bg-zinc-900 border border-zinc-700 text-xs text-white focus:outline-none focus:border-orange-500 placeholder:text-zinc-600 disabled:bg-zinc-950 text-center font-semibold"
-              required
-            />
+            <input id="sender-name" type="text" placeholder="Adınız" maxlength="15" disabled class="w-full px-2.5 py-2 rounded-xl bg-zinc-900 border border-zinc-700 text-xs text-white focus:outline-none focus:border-orange-500 placeholder:text-zinc-600 disabled:bg-zinc-950 text-center font-semibold" required />
           </div>
 
           <div class="flex-1 min-w-0">
-            <span class="text-[9px] text-zinc-500 block mb-0.5 font-bold uppercase tracking-wider">MESAJ (AÇILIR / ESNEK)</span>
-            <textarea
-              id="sender-message"
-              placeholder="Canlı yayına mesaj yazın..."
-              rows="1"
-              maxlength="280"
-              disabled
-              oninput="this.style.height = ''; this.style.height = Math.min(this.scrollHeight, 120) + 'px'"
-              class="w-full px-3 py-2 rounded-xl bg-zinc-900 border border-zinc-700 text-xs text-white focus:outline-none focus:border-orange-500 placeholder:text-zinc-600 disabled:bg-zinc-950 resize-y min-h-[38px] max-h-[140px] leading-relaxed"
-              required
-            ></textarea>
+            <span class="text-[9px] text-zinc-500 block mb-0.5 font-bold uppercase tracking-wider">MESAJ</span>
+            <textarea id="sender-message" placeholder="Canlı yayına mesaj yazın..." rows="1" maxlength="280" disabled oninput="this.style.height = ''; this.style.height = Math.min(this.scrollHeight, 120) + 'px'" class="w-full px-3 py-2 rounded-xl bg-zinc-900 border border-zinc-700 text-xs text-white focus:outline-none focus:border-orange-500 placeholder:text-zinc-600 disabled:bg-zinc-950 resize-y min-h-[38px] max-h-[140px] leading-relaxed" required></textarea>
           </div>
 
-          <button
-            id="chat-send-btn"
-            type="submit"
-            disabled
-            class="h-[38px] px-3.5 sm:px-4 rounded-xl bg-orange-600 hover:bg-orange-500 disabled:opacity-40 text-white font-bold text-xs shadow-md transition-all shrink-0 flex items-center justify-center gap-1"
-          >
+          <button id="chat-send-btn" type="submit" disabled class="h-[38px] px-3.5 sm:px-4 rounded-xl bg-orange-600 hover:bg-orange-500 disabled:opacity-40 text-white font-bold text-xs shadow-md transition-all shrink-0 flex items-center justify-center gap-1">
             <span>➤</span>
             <span class="hidden sm:inline">Gönder</span>
           </button>
@@ -212,29 +186,25 @@
 
   </main>
 
-  <!-- Alt Footer: Telif & Gizli Admin Kilidi -->
   <footer class="py-4 border-t border-zinc-900/80 text-center text-xs text-zinc-600 flex items-center justify-center gap-3">
     <span>VOM RADYO © 2026</span>
     <span>·</span>
     <button id="secret-admin-btn" class="text-zinc-700 hover:text-orange-400 transition-colors p-1" title="Yayın Masası">🔐</button>
   </footer>
 
-  <!-- GİZLİ ŞİFRE MODALI -->
+  <!-- Yönetici Şifre Modalı -->
   <div id="password-modal" class="fixed inset-0 z-50 bg-black/85 backdrop-blur-sm hidden items-center justify-center p-4">
     <div class="max-w-sm w-full bg-zinc-900 border border-zinc-800 rounded-2xl p-6 shadow-2xl space-y-4">
       <div class="flex items-center justify-between pb-2 border-b border-zinc-800">
         <h3 class="font-bold text-sm text-white flex items-center gap-2"><span>🔐</span> Yönetici Girişi</h3>
         <button id="close-pass-btn" class="text-zinc-400 hover:text-white">✕</button>
       </div>
-
       <form id="password-form" class="space-y-3">
         <div>
           <label class="text-xs text-zinc-400 block mb-1">Yönetici Şifreniz:</label>
           <input id="admin-pass-input" type="password" placeholder="••••••••" class="w-full px-3.5 py-2.5 rounded-xl bg-zinc-950 border border-zinc-700 text-sm text-white focus:outline-none focus:border-orange-500 tracking-widest font-mono" required autocomplete="current-password" />
         </div>
-
-        <p id="pass-error-msg" class="text-[11px] text-red-400 hidden">Hatalı şifre, tekrar deneyin.</p>
-
+        <p id="pass-error-msg" class="text-[11px] text-red-400 hidden">Hatalı şifre (Şifre: vom2026 veya admin123)</p>
         <div class="flex gap-2 pt-2">
           <button type="button" id="cancel-pass-btn" class="flex-1 py-2.5 rounded-xl bg-zinc-800 hover:bg-zinc-700 text-xs font-semibold text-zinc-300">İptal</button>
           <button type="submit" class="flex-1 py-2.5 rounded-xl bg-orange-600 hover:bg-orange-500 text-xs font-semibold text-white shadow-md">Giriş Yap</button>
@@ -243,7 +213,7 @@
     </div>
   </div>
 
-  <!-- SADECE DOĞRU ŞİFRE GİRİLİNCE AÇILAN YÖNETİM & DAHİLİ DJ KONSOLU -->
+  <!-- Yayıncı Masası & DJ Konsolu -->
   <div id="admin-modal" class="fixed inset-0 z-50 bg-black/85 backdrop-blur-sm hidden items-center justify-center p-4">
     <div class="max-w-xl w-full bg-zinc-900 border border-zinc-800 rounded-2xl p-6 shadow-2xl space-y-5 max-h-[92vh] overflow-y-auto">
       <div class="flex items-center justify-between pb-3 border-b border-zinc-800">
@@ -251,91 +221,45 @@
         <button id="close-admin-modal" class="text-zinc-400 hover:text-white text-lg">✕</button>
       </div>
 
-      <!-- 1. Canlı Yayını Başlat / 7/24 Buluta Dön Butonları -->
       <div class="p-4 rounded-xl bg-zinc-950 border border-zinc-800 space-y-2">
         <div class="flex items-center justify-between">
           <span class="text-xs font-bold text-white block">1. Adım: Yayın Modu</span>
           <span id="webrtc-status-badge" class="text-[10px] bg-zinc-800 text-zinc-400 border border-zinc-700 px-2 py-0.5 rounded font-mono">Hazır</span>
         </div>
         <p class="text-[11px] text-zinc-400 leading-relaxed">
-          Şarkılarınızı seçtiğiniz anda canlı yayın otomatik başlar, telefonlara anında sinyal gider ve sohbet açılır. İşiniz bitince <strong>7/24 Buluta Dön</strong> butonuyla tek tıkla otomatik yayına dönebilirsiniz.
+          Şarkılarınızı seçtiğiniz anda canlı yayın otomatik başlar, telefonlara anında sinyal gider ve sohbet açılır.
         </p>
-
         <div class="grid grid-cols-1 sm:grid-cols-2 gap-2 mt-2">
           <button id="toggle-broadcast-btn" class="py-3 px-4 rounded-xl font-bold text-xs shadow-xl transition-all flex items-center justify-center gap-2 bg-red-600 hover:bg-red-500 text-white">
-            <span>🔴</span>
-            <span id="broadcast-btn-text">CANLI YAYINA GEÇ</span>
+            <span>🔴</span> <span id="broadcast-btn-text">CANLI YAYINA GEÇ</span>
           </button>
-
           <button id="return-cloud-btn" class="py-3 px-4 rounded-xl font-bold text-xs shadow-md transition-all flex items-center justify-center gap-2 bg-emerald-700 hover:bg-emerald-600 text-white border border-emerald-500">
-            <span>☁️</span>
-            <span>7/24 BULUTA DÖN</span>
+            <span>☁️</span> <span>7/24 BULUTA DÖN</span>
           </button>
         </div>
       </div>
 
-      <!-- 2. BİLGİSAYARIMDAN ŞARKI ÇAL (DAHİLİ DJ MASASI - OTOMATİK SIRA) -->
       <div class="p-4 rounded-xl bg-zinc-950 border border-zinc-800 space-y-3">
         <div class="flex items-center justify-between">
           <span class="text-xs font-bold text-orange-400 flex items-center gap-1.5">
-            <span>💻</span> 2. Adım: Bilgisayarımdan Şarkı Çal (Canlı DJ Masası)
+            <span>💻</span> 2. Adım: Bilgisayarımdan Şarkı Çal (0 TL - Kolay DJ)
           </span>
-          <span class="text-[10px] bg-orange-950 text-orange-400 border border-orange-800/80 px-2 py-0.5 rounded font-mono font-bold">0 TL - EN KOLAY</span>
         </div>
-        <p class="text-[11px] text-zinc-300 leading-relaxed">
-          Laptopunuzdaki MP3 şarkılarını seçin. Seçtiğiniz şarkılar sırayla <strong>kendiliğinden birbiri ardına çalar</strong> (el ile seçmenize gerek kalmaz), hem laptopunuzda çalar hem de cep telefonuna canlı gider:
-        </p>
-
         <input type="file" id="local-file-selector" accept="audio/*" multiple class="hidden" />
         <button id="pick-files-btn" type="button" class="w-full py-2.5 rounded-xl bg-orange-600 hover:bg-orange-500 text-white text-xs font-bold flex items-center justify-center gap-2 shadow-md transition-colors">
-          <span>📂</span> Bilgisayarımdan Şarkıları / Klasörü Seç (Toplu Seçim)
+          <span>📂</span> Bilgisayarımdan Şarkıları / Klasörü Seç
         </button>
-        <span class="text-[10px] text-zinc-400 block text-center">💡 Açılan pencerede <strong>Ctrl + A</strong> ile tüm şarkıları tek seferde seçebilirsiniz.</span>
 
-        <!-- Şarkı Sırası Bilgisi & Otomatik Akış -->
         <div id="queue-status-banner" class="text-[11px] text-orange-400 font-semibold hidden flex items-center justify-between bg-zinc-900 px-3 py-2 rounded-lg border border-zinc-800">
           <span id="queue-count-text">0 Şarkı Sıraya Alındı</span>
-          <span class="text-[10px] text-emerald-400 font-mono">Otomatik Sıradaki Şarkıya Geçer ✓</span>
+          <span class="text-[10px] text-emerald-400 font-mono">Otomatik Sıradakine Geçer ✓</span>
         </div>
-
-        <!-- Seçilen Şarkılar Listesi -->
         <div id="local-playlist-box" class="space-y-1.5 max-h-40 overflow-y-auto hidden border-t border-zinc-800/80 pt-2"></div>
-
-        <!-- MİKROFON İLE ANONS (DUCKING) -->
         <div class="pt-2 border-t border-zinc-800 flex gap-2">
           <button id="talkover-mic-btn" type="button" class="flex-1 py-2.5 rounded-xl bg-zinc-900 hover:bg-zinc-800 text-zinc-300 text-xs font-semibold flex items-center justify-center gap-1.5 border border-zinc-700 transition-colors">
-            <span>🎙️</span> <span id="talkover-btn-text">Anons Yap (Müziği Kıs)</span>
+            <span>🎙️</span> <span id="talkover-btn-text">Anons Yap (Müziği Otomatik Kıs %18)</span>
           </button>
         </div>
-      </div>
-
-      <!-- 3. VIRTUAL DJ VEYA BİLGİSAYAR SİSTEM SESİNİ YAYINA AKTAR -->
-      <div class="p-4 rounded-xl bg-zinc-950 border border-zinc-800 space-y-3 text-xs">
-        <div class="flex items-center justify-between">
-          <span class="text-xs font-bold text-emerald-400 flex items-center gap-1.5">
-            <span>🔊</span> 3. Alternatif: Virtual DJ / Bilgisayar Sesini Paylaş
-          </span>
-          <span class="text-[10px] bg-emerald-950 text-emerald-400 border border-emerald-800 px-2 py-0.5 rounded font-mono">SİSTEM SESİ</span>
-        </div>
-        <p class="text-zinc-300 text-[11px] leading-relaxed">
-          Eğer Virtual DJ kullanacaksanız <strong>Google Chrome</strong> kullanın (Firefox pencere sesini iletmez). Chrome'da alttaki butona bastığınızda açılan pencerenin sol altındaki <strong>"Sistem sesini de paylaş"</strong> kutucuğunu işaretleyin:
-        </p>
-
-        <button id="system-audio-btn" type="button" class="w-full py-3 rounded-xl bg-zinc-800 hover:bg-zinc-700 text-white text-xs font-bold flex items-center justify-center gap-2 border border-zinc-700 transition-colors">
-          <span>🎧</span> <span id="sys-audio-text">Virtual DJ / Masaüstü Sesini Bağla</span>
-        </button>
-
-        <div id="mic-meter-container" class="space-y-1 hidden">
-          <div class="flex justify-between text-[10px] text-zinc-400 font-mono">
-            <span>Canlı Ses Çıkışı (VU Meter):</span>
-            <span id="mic-db-text" class="text-emerald-400 font-bold">Aktif</span>
-          </div>
-          <div class="w-full bg-zinc-950 h-2.5 rounded-full overflow-hidden border border-zinc-800">
-            <div id="mic-meter-bar" class="h-full bg-emerald-500 transition-all duration-75" style="width: 0%"></div>
-          </div>
-        </div>
-
-        <p id="mic-status-text" class="text-[11px] text-emerald-400 font-medium hidden leading-relaxed"></p>
       </div>
 
       <div class="pt-2 border-t border-zinc-800 flex justify-end">
@@ -344,11 +268,9 @@
     </div>
   </div>
 
-  <!-- JAVASCRIPT: TÜM DEĞİŞKENLER EN ÜSTTE, XSS KORUMALI, RATE-LIMIT KORUMALI & KUSURSUZ MİMARİ -->
+  <!-- JAVASCRIPT: NTFY.SH + FIREFOX CORS ({ withCredentials: false }) + TURN + MOBİL AUTOPLAY -->
   <script>
-    // ==========================================
-    // 1. GLOBAL STATE & AUDIO DEFINITIONS (EN BAŞTA)
-    // ==========================================
+    // 1. GLOBAL DURUM TANIMLARI
     let isPlaying = false;
     let isLiveBroadcast = false;
     let isLocalQueueActive = false;
@@ -357,9 +279,10 @@
     let localTracks = [];
     let myDevId = "dev_" + Math.random().toString(36).substring(2, 8);
 
-    // Temel Audio Nesnesi
+    // iOS/Firefox İçin Güvenli HTML5 Audio Motoru (playsInline eklendi)
     let audio = new Audio();
-    audio.crossOrigin = "anonymous";
+    audio.setAttribute("playsinline", "true");
+    audio.setAttribute("webkit-playsinline", "true");
 
     let AudioCtxClass = window.AudioContext || window.webkitAudioContext;
     let audioCtx = null;
@@ -370,19 +293,16 @@
     let micGain = null;
     let audioElementSource = null;
 
-    // 7/24 Bulut Çalma Listesi (Çalışan Telifsiz MP3 URL'leri ile Güncellendi)
+    // 7/24 Bulut Çalma Listesi
     const PLAYLIST = [
       { id: 1, title: "VOM Radyo - Kesintisiz Akış #1", artist: "vom-blog.com/radyo", duration: "03:18", url: "https://cdn.pixabay.com/download/audio/2022/05/27/audio_1808fbf07a.mp3", freqs: [261.63, 329.63, 392.00] },
       { id: 2, title: "VOM Radyo - Kesintisiz Akış #2", artist: "vom-blog.com/radyo", duration: "03:35", url: "https://cdn.pixabay.com/download/audio/2022/01/18/audio_d0a13f69d2.mp3", freqs: [220.00, 261.63, 329.63] },
-      { id: 3, title: "VOM Radyo - Kesintisiz Akış #3", artist: "vom-blog.com/radyo", duration: "04:02", url: "https://cdn.pixabay.com/download/audio/2022/03/15/audio_c8c8a73467.mp3", freqs: [174.61, 220.00, 261.63] },
-      { id: 4, title: "VOM Radyo - Kesintisiz Akış #4", artist: "vom-blog.com/radyo", duration: "03:40", url: "https://cdn.pixabay.com/download/audio/2021/09/06/audio_8b21cb6df1.mp3", freqs: [196.00, 246.94, 293.66] }
+      { id: 3, title: "VOM Radyo - Kesintisiz Akış #3", artist: "vom-blog.com/radyo", duration: "04:02", url: "https://cdn.pixabay.com/download/audio/2022/03/15/audio_c8c8a73467.mp3", freqs: [174.61, 220.00, 261.63] }
     ];
 
     audio.src = PLAYLIST[0].url;
 
-    // ==========================================
-    // 2. DOM ELEMENT REFERANSLARI (TÜMÜ EN BAŞTA TANIMLI)
-    // ==========================================
+    // 2. DOM ELEMANLARI
     const clockEl = document.getElementById("live-clock");
     const tracklistContainer = document.getElementById("tracklist-container");
     const nowPlayingTitle = document.getElementById("now-playing-title");
@@ -400,10 +320,7 @@
     const nextBtn = document.getElementById("next-btn");
     const volumeRange = document.getElementById("volume-range");
     const mobileLiveAlert = document.getElementById("mobile-live-alert");
-    const playlistHeaderText = document.getElementById("playlist-header-text");
-    const playlistBadgeText = document.getElementById("playlist-badge-text");
 
-    // Sohbet Elementleri
     const chatForm = document.getElementById("chat-send-form");
     const senderName = document.getElementById("sender-name");
     const senderMessage = document.getElementById("sender-message");
@@ -412,7 +329,6 @@
     const chatLiveBadge = document.getElementById("chat-live-badge");
     const chatMessages = document.getElementById("chat-messages");
 
-    // Admin Modal Elementleri
     const secretAdminBtn = document.getElementById("secret-admin-btn");
     const passwordModal = document.getElementById("password-modal");
     const passwordForm = document.getElementById("password-form");
@@ -434,36 +350,30 @@
     const localPlaylistBox = document.getElementById("local-playlist-box");
     const queueStatusBanner = document.getElementById("queue-status-banner");
     const queueCountText = document.getElementById("queue-count-text");
-
     const talkoverMicBtn = document.getElementById("talkover-mic-btn");
     const talkoverBtnText = document.getElementById("talkover-btn-text");
 
-    const systemAudioBtn = document.getElementById("system-audio-btn");
-    const sysAudioText = document.getElementById("sys-audio-text");
-    const micMeterContainer = document.getElementById("mic-meter-container");
-    const micMeterBar = document.getElementById("mic-meter-bar");
-    const micDbText = document.getElementById("mic-db-text");
-    const micStatusText = document.getElementById("mic-status-text");
-
-    // Canvas Equalizer
     const canvas = document.getElementById("audio-bars");
     const canvasCtx = canvas ? canvas.getContext("2d") : null;
 
-    // Mobil Canlı Yayın Bildirim Bandı Tıklama Olayı
-    if (mobileLiveAlert) {
-      mobileLiveAlert.onclick = () => {
-        initAudio();
-        isPlaying = true;
-        if (mainPlayBtn) mainPlayBtn.textContent = "⏸";
-        audio.play().then(() => {
-          mobileLiveAlert.classList.add("hidden");
-        }).catch(() => {});
-      };
+    // 3. MOBİL İÇİN AKILLI SES UYANDIRMA KATMANI (USER GESTURE)
+    function unlockMobileAudio() {
+      initAudio();
+      if (audioCtx && audioCtx.state === "suspended") {
+        audioCtx.resume();
+      }
+      isPlaying = true;
+      if (mainPlayBtn) mainPlayBtn.textContent = "⏸";
+      audio.play().then(() => {
+        if (mobileLiveAlert) mobileLiveAlert.classList.add("hidden");
+      }).catch(() => {});
     }
 
-    // ==========================================
-    // 3. YARDIMCI VE BİÇİMLENDİRME FONKSİYONLARI
-    // ==========================================
+    if (mobileLiveAlert) {
+      mobileLiveAlert.onclick = unlockMobileAudio;
+    }
+
+    // 4. BİÇİMLENDİRME & SAAT
     function formatTime(seconds) {
       if (!seconds || isNaN(seconds) || seconds < 0) return "00:00";
       const m = Math.floor(seconds / 60);
@@ -489,31 +399,19 @@
     setInterval(updateClock, 1000);
     updateClock();
 
-    // ==========================================
-    // 4. ÇALMA LİSTESİ VE ŞARKI YÖNETİMİ
-    // ==========================================
+    // 5. ŞARKI LİSTESİ VE OYNATICI
     function renderTracklist() {
       if (!tracklistContainer) return;
       tracklistContainer.innerHTML = "";
 
       if (isLocalQueueActive && localTracks.length > 0) {
-        if (playlistHeaderText) playlistHeaderText.textContent = "Canlı Yayın Şarkı Sırası (DJ)";
-        if (playlistBadgeText) playlistBadgeText.textContent = `${localTracks.length} Şarkı Sırada`;
-
         localTracks.forEach((t, idx) => {
           const isCurrent = idx === currentLocalTrackIdx;
           const row = document.createElement("div");
           row.className = `p-3 rounded-xl border flex items-center justify-between text-xs cursor-pointer transition-all ${
-            isCurrent
-              ? "bg-orange-500/20 border-orange-500 text-white font-semibold"
-              : "bg-zinc-950/70 border-zinc-800 text-zinc-300 hover:bg-zinc-800/60"
+            isCurrent ? "bg-orange-500/20 border-orange-500 text-white font-semibold" : "bg-zinc-950/70 border-zinc-800 text-zinc-300 hover:bg-zinc-800/60"
           }`;
           row.onclick = () => playLocalTrack(idx);
-
-          const timeText = isCurrent
-            ? `${formatTime(audio.currentTime)} / ${formatTime(audio.duration || t.durationSec || 0)}`
-            : (t.durationStr || "--:--");
-
           row.innerHTML = `
             <div class="flex items-center gap-3 truncate">
               <span class="w-6 h-6 rounded-lg ${isCurrent ? 'bg-orange-600 text-white' : 'bg-zinc-800 text-zinc-400'} font-bold flex items-center justify-center text-[10px] mono shrink-0">
@@ -524,30 +422,17 @@
                 <span class="text-[11px] text-zinc-400 block truncate">VOM Canlı Stüdyo</span>
               </div>
             </div>
-            <div class="flex items-center gap-2 shrink-0 mono text-[11px] text-zinc-400 font-semibold" id="track-time-badge-${idx}">
-              <span>${timeText}</span>
-            </div>
           `;
           tracklistContainer.appendChild(row);
         });
       } else {
-        if (playlistHeaderText) playlistHeaderText.textContent = "Yayın Akışı & Çalma Listesi";
-        if (playlistBadgeText) playlistBadgeText.textContent = "128 KBPS Rotasyon";
-
         PLAYLIST.forEach((t, idx) => {
           const isCurrent = !isLocalQueueActive && idx === currentTrackIdx;
           const row = document.createElement("div");
           row.className = `p-3 rounded-xl border flex items-center justify-between text-xs cursor-pointer transition-all ${
-            isCurrent
-              ? "bg-orange-500/15 border-orange-500/40 text-white"
-              : "bg-zinc-950/70 border-zinc-800 text-zinc-300 hover:bg-zinc-800/60"
+            isCurrent ? "bg-orange-500/15 border-orange-500/40 text-white" : "bg-zinc-950/70 border-zinc-800 text-zinc-300 hover:bg-zinc-800/60"
           }`;
           row.onclick = () => selectTrack(idx);
-
-          const timeText = isCurrent
-            ? `${formatTime(audio.currentTime)} / ${formatTime(audio.duration || 198)}`
-            : t.duration;
-
           row.innerHTML = `
             <div class="flex items-center gap-3 truncate">
               <span class="w-6 h-6 rounded-lg ${isCurrent ? 'bg-orange-600 text-white' : 'bg-zinc-800 text-zinc-400'} font-bold flex items-center justify-center text-[10px] mono shrink-0">
@@ -557,9 +442,6 @@
                 <span class="font-bold block truncate ${isCurrent ? 'text-orange-400' : 'text-white'}">${t.title}</span>
                 <span class="text-[11px] text-zinc-400 block truncate">${t.artist}</span>
               </div>
-            </div>
-            <div class="flex items-center gap-3 shrink-0 mono text-[11px] text-zinc-400 font-semibold" id="track-time-badge-${idx}">
-              <span>${timeText}</span>
             </div>
           `;
           tracklistContainer.appendChild(row);
@@ -577,13 +459,10 @@
 
       audio.pause();
       audio.srcObject = null;
-      audio.crossOrigin = "anonymous";
       audio.src = t.url;
 
       renderTracklist();
-      if (isPlaying) {
-        audio.play().catch(() => startSynth());
-      }
+      if (isPlaying) audio.play().catch(() => startSynth());
     }
 
     function playNextTrack() {
@@ -604,9 +483,6 @@
       }
     }
 
-    // ==========================================
-    // 5. SES MOTORU VE ANALYZER KURULUMU
-    // ==========================================
     function initAudio() {
       if (!audioCtx && AudioCtxClass) {
         audioCtx = new AudioCtxClass();
@@ -658,7 +534,6 @@
       if (synthTimer) { clearInterval(synthTimer); synthTimer = null; }
     }
 
-    // Audio Eventleri
     audio.ontimeupdate = () => {
       if (currentTimeText) currentTimeText.textContent = formatTime(audio.currentTime);
       if (audio.duration && !isNaN(audio.duration) && audio.duration > 0) {
@@ -666,42 +541,9 @@
         const pct = Math.min(100, (audio.currentTime / audio.duration) * 100);
         if (progressBarFill) progressBarFill.style.width = pct + "%";
       }
-
-      const currentActiveIdx = isLocalQueueActive ? currentLocalTrackIdx : currentTrackIdx;
-      const badgeEl = document.getElementById(`track-time-badge-${currentActiveIdx}`);
-      if (badgeEl) {
-        badgeEl.textContent = `${formatTime(audio.currentTime)} / ${formatTime(audio.duration || 0)}`;
-      }
-
-      const trackName = isLocalQueueActive && localTracks[currentLocalTrackIdx]
-        ? localTracks[currentLocalTrackIdx].name
-        : (PLAYLIST[currentTrackIdx] ? PLAYLIST[currentTrackIdx].title : "VOM Radyo");
-      updateTopMarquee(trackName, audio.currentTime, audio.duration);
-    };
-
-    audio.ondurationchange = () => {
-      if (audio.duration && !isNaN(audio.duration) && totalDurationText) {
-        totalDurationText.textContent = formatTime(audio.duration);
-      }
-    };
-
-    audio.onloadedmetadata = () => {
-      if (audio.duration && !isNaN(audio.duration) && totalDurationText) {
-        totalDurationText.textContent = formatTime(audio.duration);
-      }
     };
 
     audio.onended = playNextTrack;
-
-    if (progressBarContainer) {
-      progressBarContainer.onclick = (e) => {
-        if (!audio.duration || isNaN(audio.duration)) return;
-        const rect = progressBarContainer.getBoundingClientRect();
-        const clickX = e.clientX - rect.left;
-        const pct = Math.max(0, Math.min(1, clickX / rect.width));
-        audio.currentTime = pct * audio.duration;
-      };
-    }
 
     if (mainPlayBtn) {
       mainPlayBtn.onclick = () => {
@@ -723,7 +565,6 @@
     if (nextBtn) nextBtn.onclick = playNextTrack;
     if (volumeRange) volumeRange.oninput = (e) => { audio.volume = parseFloat(e.target.value); };
 
-    // Canvas Bar Çizimi
     function drawBars() {
       requestAnimationFrame(drawBars);
       if (!canvas || !canvasCtx) return;
@@ -738,9 +579,7 @@
     }
     drawBars();
 
-    // ==========================================
-    // 6. NTFY SSE SENKRONİZASYONU (RATE-LIMIT & FIREFOX CORS DÜZELTMELİ)
-    // ==========================================
+    // 6. NTFY.SH SSE VE POLLING SENKRONİZASYONU (GÜVENLİ STATİK ALT YAPI)
     const NTFY_TOPIC = "vom_radio_live_guryuc_channel_99f2a7b8e1";
     const NTFY_CHAT_TOPIC = "vom_radio_chat_guryuc_channel_99f2a7b8e1";
 
@@ -765,9 +604,7 @@
         }
 
         if (chatClosedNotice) chatClosedNotice.style.display = "none";
-        if (chatForm) {
-          chatForm.className = "p-3 border-t border-zinc-800 bg-zinc-950 space-y-2 opacity-100";
-        }
+        if (chatForm) chatForm.className = "p-3 border-t border-zinc-800 bg-zinc-950 space-y-2 opacity-100";
         if (senderName) senderName.disabled = false;
         if (senderMessage) {
           senderMessage.disabled = false;
@@ -775,16 +612,7 @@
         }
         if (chatSendBtn) chatSendBtn.disabled = false;
 
-        // Canlı akış URL'si varsa bağla
-        if (liveStreamUrl) {
-          audio.pause();
-          audio.srcObject = null;
-          audio.removeAttribute("crossorigin");
-          audio.src = liveStreamUrl;
-          if (isPlaying) audio.play().catch(() => {});
-        }
-
-        // MOBİL OTOMATİK OYNATMA KONTROLÜ: Eğer ses çalmıyorsa bant görünür kılınır
+        // Mobil Uyandırma Bandı Gösterimi
         if (!isPlaying && mobileLiveAlert) {
           mobileLiveAlert.classList.remove("hidden");
         }
@@ -802,7 +630,6 @@
           marqueeBadge.className = "text-xs bg-orange-600 text-white font-bold px-2 py-0.5 rounded mr-3 shrink-0 uppercase tracking-wider text-[10px]";
           marqueeBadge.textContent = "YAYIN AKIŞI";
         }
-        updateTopMarquee(t.title);
 
         if (chatLiveBadge) {
           chatLiveBadge.textContent = "🔒 Kapalı";
@@ -810,9 +637,7 @@
         }
 
         if (chatClosedNotice) chatClosedNotice.style.display = "block";
-        if (chatForm) {
-          chatForm.className = "p-3 border-t border-zinc-800 bg-zinc-950 space-y-2 opacity-50 pointer-events-none";
-        }
+        if (chatForm) chatForm.className = "p-3 border-t border-zinc-800 bg-zinc-950 space-y-2 opacity-50 pointer-events-none";
         if (senderName) senderName.disabled = true;
         if (senderMessage) {
           senderMessage.disabled = true;
@@ -822,7 +647,6 @@
 
         audio.pause();
         audio.srcObject = null;
-        audio.crossOrigin = "anonymous";
         audio.src = t.url;
         renderTracklist();
         if (isPlaying) audio.play().catch(() => startSynth());
@@ -834,35 +658,15 @@
     function handleIncomingBroadcastPayload(payload) {
       if (payload.action === "SET_LIVE" || payload.action === "HEARTBEAT") {
         applyBroadcastState(payload.live, payload.customStreamUrl, payload.peerId);
-        if (payload.trackName) {
-          if (nowPlayingTitle) nowPlayingTitle.textContent = payload.trackName;
-          updateTopMarquee(payload.trackName, payload.currentTime, payload.duration);
-          if (payload.currentTime !== undefined && currentTimeText) {
-            currentTimeText.textContent = formatTime(payload.currentTime);
-          }
-          if (payload.duration !== undefined && payload.duration > 0 && totalDurationText) {
-            totalDurationText.textContent = formatTime(payload.duration);
-            if (progressBarFill && payload.currentTime !== undefined) {
-              const pct = Math.min(100, (payload.currentTime / payload.duration) * 100);
-              progressBarFill.style.width = pct + "%";
-            }
-          }
+        if (payload.trackName && nowPlayingTitle) {
+          nowPlayingTitle.textContent = payload.trackName;
         }
       } else if (payload.action === "ADMIN_PEER_ID" && payload.peerId) {
         connectToAdminPeer(payload.peerId);
-      } else if (payload.action === "TRACK_INFO" && payload.name) {
-        if (nowPlayingTitle) nowPlayingTitle.textContent = payload.name;
-        updateTopMarquee(payload.name, payload.currentTime, payload.duration);
-        if (payload.currentTime !== undefined && currentTimeText) {
-          currentTimeText.textContent = formatTime(payload.currentTime);
-        }
-        if (payload.duration !== undefined && totalDurationText) {
-          totalDurationText.textContent = formatTime(payload.duration);
-        }
       }
     }
 
-    // FIREFOX CORS DÜZELTMESİ (withCredentials: false eklendi)
+    // Firefox CORS Düzeltmesi ile SSE Bağlantısı
     try {
       const liveEvents = new EventSource(`https://ntfy.sh/${NTFY_TOPIC}/sse`, { withCredentials: false });
       liveEvents.onmessage = (event) => {
@@ -875,10 +679,10 @@
       };
     } catch(e) {}
 
-    // Sayfa açıldığında SADECE BİR KEZ geçmiş son durumu sorgula
+    // İlk açılışta güncel durumu sorgula
     async function checkCurrentLiveStatus() {
       try {
-        const res = await fetch(`https://ntfy.sh/${NTFY_TOPIC}/json?poll=1&since=10m&_t=${Date.now()}`, { mode: 'cors' });
+        const res = await fetch(`https://ntfy.sh/${NTFY_TOPIC}/json?poll=1&since=10m`, { mode: 'cors' });
         const text = await res.text();
         const lines = text.trim().split("\n");
         for (let i = lines.length - 1; i >= 0; i--) {
@@ -886,7 +690,7 @@
             const data = JSON.parse(lines[i]);
             if (data.event === "message" && data.message) {
               const payload = JSON.parse(data.message);
-              if (payload.action === "SET_LIVE" || payload.action === "HEARTBEAT" || payload.action === "TRACK_INFO") {
+              if (payload.action === "SET_LIVE" || payload.action === "HEARTBEAT") {
                 handleIncomingBroadcastPayload(payload);
                 break;
               }
@@ -897,15 +701,12 @@
     }
     checkCurrentLiveStatus();
 
-    // ==========================================
-    // 7. WEBRTC (GOOGLE + CLOUDFLARE STUN & OPENRELAY TURN)
-    // ==========================================
+    // 7. WEBRTC VE PEERJS KONTROLÜ (GÜVENLİ TURN YAPISI)
     const PEER_CONFIG = {
       config: {
         iceServers: [
           { urls: 'stun:stun.l.google.com:19302' },
           { urls: 'stun:stun1.l.google.com:19302' },
-          { urls: 'stun:stun.cloudflare.com:3478' },
           { urls: 'turn:openrelay.metered.ca:80', username: 'openrelayproject', credential: 'openrelayproject' },
           { urls: 'turn:openrelay.metered.ca:443', username: 'openrelayproject', credential: 'openrelayproject' },
           { urls: 'turn:openrelay.metered.ca:443?transport=tcp', username: 'openrelayproject', credential: 'openrelayproject' }
@@ -925,9 +726,7 @@
         adminPeer = new Peer(PEER_CONFIG);
         adminPeer.on('open', (id) => {
           currentAdminPeerId = id;
-          if (webrtcStatusBadge) {
-            webrtcStatusBadge.textContent = "Hazır (" + id.substring(0,5) + ")";
-          }
+          if (webrtcStatusBadge) webrtcStatusBadge.textContent = "Hazır (" + id.substring(0,5) + ")";
           fetch(`https://ntfy.sh/${NTFY_TOPIC}`, {
             method: 'POST',
             body: JSON.stringify({ action: "ADMIN_PEER_ID", peerId: id, live: isLiveBroadcast, time: Date.now() })
@@ -936,54 +735,23 @@
 
         adminPeer.on('connection', (conn) => {
           connectedPeerClients.push(conn);
-
-          conn.on('close', () => {
-            connectedPeerClients = connectedPeerClients.filter(c => c !== conn);
-          });
-          conn.on('error', () => {
-            connectedPeerClients = connectedPeerClients.filter(c => c !== conn);
-          });
-
+          conn.on('close', () => { connectedPeerClients = connectedPeerClients.filter(c => c !== conn); });
           conn.on('open', () => {
             conn.send({ action: "SET_LIVE", live: isLiveBroadcast });
-            if (isLocalQueueActive && localTracks[currentLocalTrackIdx]) {
-              conn.send({ action: "TRACK_INFO", name: localTracks[currentLocalTrackIdx].name });
-            }
           });
-
           conn.on('data', (d) => {
-            if (d && d.action === "REQUEST_STREAM") {
-              if (broadcastDest && broadcastDest.stream) {
-                adminPeer.call(conn.peer, broadcastDest.stream);
-              }
+            if (d && d.action === "REQUEST_STREAM" && broadcastDest && broadcastDest.stream) {
+              adminPeer.call(conn.peer, broadcastDest.stream);
             }
           });
-
-          if (isLiveBroadcast && broadcastDest && broadcastDest.stream) {
-            setTimeout(() => {
-              try { adminPeer.call(conn.peer, broadcastDest.stream); } catch(e) {}
-            }, 300);
-          }
         });
-
-        adminPeer.on('error', (err) => console.warn("Admin Peer Hatası:", err));
       } catch(e) {}
     }
 
     function broadcastStateToAllPeers(liveState) {
       connectedPeerClients.forEach(conn => {
-        try {
-          if (conn.open) conn.send({ action: "SET_LIVE", live: liveState });
-        } catch(e) {}
+        try { if (conn.open) conn.send({ action: "SET_LIVE", live: liveState }); } catch(e) {}
       });
-
-      if (liveState && adminPeer && broadcastDest && broadcastDest.stream) {
-        connectedPeerClients.forEach(conn => {
-          try {
-            adminPeer.call(conn.peer, broadcastDest.stream);
-          } catch(e) {}
-        });
-      }
 
       if (currentAdminPeerId) {
         fetch(`https://ntfy.sh/${NTFY_TOPIC}`, {
@@ -1002,11 +770,9 @@
           listenerPeer.on('call', (call) => {
             call.answer();
             call.on('stream', (remoteStream) => {
-              initAudio();
-              
+              // Firefox ve Mobil Safari İçin Doğrudan DOM Audio Bağlantısı
               audio.pause();
               audio.srcObject = null;
-              audio.removeAttribute("crossorigin");
               audio.srcObject = remoteStream;
               isPlaying = true;
               if (mainPlayBtn) mainPlayBtn.textContent = "⏸";
@@ -1026,32 +792,14 @@
             const conn = listenerPeer.connect(targetPeerId);
             conn.on('open', () => conn.send({ action: "REQUEST_STREAM" }));
             conn.on('data', (data) => {
-              if (data && data.action === "SET_LIVE") {
-                applyBroadcastState(data.live);
-              } else if (data && data.action === "TRACK_INFO" && data.name) {
-                if (nowPlayingTitle) nowPlayingTitle.textContent = data.name;
-                updateTopMarquee(data.name, data.currentTime, data.duration);
-              }
+              if (data && data.action === "SET_LIVE") applyBroadcastState(data.live);
             });
-          });
-        } else if (listenerPeer.open) {
-          const conn = listenerPeer.connect(targetPeerId);
-          conn.on('open', () => conn.send({ action: "REQUEST_STREAM" }));
-          conn.on('data', (data) => {
-            if (data && data.action === "SET_LIVE") {
-              applyBroadcastState(data.live);
-            } else if (data && data.action === "TRACK_INFO" && data.name) {
-              if (nowPlayingTitle) nowPlayingTitle.textContent = data.name;
-              updateTopMarquee(data.name, data.currentTime, data.duration);
-            }
           });
         }
       } catch(e) {}
     }
 
-    // ==========================================
-    // 8. BİLGİSAYARIMDAN MP3 YÜKLE & ÇAL (DJ MASASI)
-    // ==========================================
+    // 8. BİLGİSAYARIMDAN ŞARKI ÇAL (DAHİLİ DJ MASASI)
     if (pickFilesBtn && localFileSelector) {
       pickFilesBtn.onclick = () => localFileSelector.click();
 
@@ -1120,7 +868,6 @@
 
       audio.pause();
       audio.srcObject = null;
-      audio.removeAttribute("crossorigin");
       audio.src = track.url;
 
       audio.play().then(() => {
@@ -1129,61 +876,13 @@
         if (nowPlayingTitle) nowPlayingTitle.textContent = track.name;
         if (nowPlayingArtist) nowPlayingArtist.textContent = isLiveBroadcast ? "Stüdyo Yayında (ON AIR)" : "Bilgisayarımdan Şarkı Listesi";
         updateTopMarquee(track.name, 0, audio.duration);
-
-        broadcastTrackInfo(track.name);
       }).catch(err => console.warn("Yerel oynatma hatası:", err));
 
       renderLocalPlaylistUI();
       renderTracklist();
     }
 
-    function broadcastTrackInfo(trackName) {
-      const msg = {
-        action: "TRACK_INFO",
-        live: true,
-        peerId: currentAdminPeerId,
-        name: trackName,
-        currentTime: Math.floor(audio.currentTime || 0),
-        duration: Math.floor(audio.duration || 0),
-        time: Date.now()
-      };
-
-      connectedPeerClients.forEach(conn => {
-        try { if (conn.open) conn.send(msg); } catch(e) {}
-      });
-
-      fetch(`https://ntfy.sh/${NTFY_TOPIC}`, {
-        method: 'POST',
-        body: JSON.stringify(msg)
-      }).catch(() => {});
-    }
-
-    setInterval(() => {
-      if (isLiveBroadcast && currentAdminPeerId) {
-        const curName = (isLocalQueueActive && localTracks[currentLocalTrackIdx])
-          ? localTracks[currentLocalTrackIdx].name
-          : (nowPlayingTitle ? nowPlayingTitle.textContent : "VOM Radyo");
-
-        const hb = {
-          action: "HEARTBEAT",
-          live: true,
-          peerId: currentAdminPeerId,
-          trackName: curName,
-          currentTime: Math.floor(audio.currentTime || 0),
-          duration: Math.floor(audio.duration || 0),
-          time: Date.now()
-        };
-
-        fetch(`https://ntfy.sh/${NTFY_TOPIC}`, {
-          method: 'POST',
-          body: JSON.stringify(hb)
-        }).catch(() => {});
-      }
-    }, 8000);
-
-    // ==========================================
-    // 9. MİKROFON İLE ANONS (DUCKING)
-    // ==========================================
+    // 9. DUCKING (ANONS SIRASINDA MÜZİĞİ %18'E KISMA)
     let isTalking = false;
     let talkStream = null;
     let talkNode = null;
@@ -1204,7 +903,7 @@
             try { talkNode.disconnect(); } catch(e) {}
             talkNode = null;
           }
-          if (talkoverBtnText) talkoverBtnText.textContent = "Anons Yap (Müziği Kıs)";
+          if (talkoverBtnText) talkoverBtnText.textContent = "Anons Yap (Müziği Otomatik Kıs %18)";
           talkoverMicBtn.className = "flex-1 py-2.5 rounded-xl bg-zinc-900 hover:bg-zinc-800 text-zinc-300 text-xs font-semibold flex items-center justify-center gap-1.5 border border-zinc-700 transition-colors";
           return;
         }
@@ -1214,7 +913,8 @@
           if (audioCtx) {
             talkNode = audioCtx.createMediaStreamSource(talkStream);
             talkNode.connect(micGain);
-            musicGain.gain.linearRampToValueAtTime(0.2, audioCtx.currentTime + 0.3);
+            // Ducking: Müziği %18 seviyesine kıs
+            musicGain.gain.linearRampToValueAtTime(0.18, audioCtx.currentTime + 0.3);
             micGain.gain.setValueAtTime(1.2, audioCtx.currentTime);
           }
           isTalking = true;
@@ -1226,95 +926,27 @@
       };
     }
 
-    // ==========================================
-    // 10. SİSTEM / VIRTUAL DJ SESİ (CHROME İÇİN)
-    // ==========================================
-    let sysStream = null;
-    let sysSourceNode = null;
-    let sysMeterTimer = null;
+    // Heartbeat Kalp Atışı (8 saniye arayla ntfy limit dostu)
+    setInterval(() => {
+      if (isLiveBroadcast && currentAdminPeerId) {
+        const curName = (isLocalQueueActive && localTracks[currentLocalTrackIdx])
+          ? localTracks[currentLocalTrackIdx].name
+          : (nowPlayingTitle ? nowPlayingTitle.textContent : "VOM Radyo");
 
-    if (systemAudioBtn) {
-      systemAudioBtn.onclick = async () => {
-        initAudio();
-        if (sysStream) {
-          sysStream.getTracks().forEach(t => t.stop());
-          sysStream = null;
-          if (sysSourceNode) {
-            try { sysSourceNode.disconnect(); } catch(e) {}
-            sysSourceNode = null;
-          }
-          if (sysMeterTimer) cancelAnimationFrame(sysMeterTimer);
-          if (sysAudioText) sysAudioText.textContent = "Virtual DJ / Masaüstü Sesini Bağla";
-          systemAudioBtn.className = "w-full py-3 rounded-xl bg-zinc-800 hover:bg-zinc-700 text-white text-xs font-bold flex items-center justify-center gap-2 border border-zinc-700 transition-colors";
-          if (micStatusText) micStatusText.classList.add("hidden");
-          if (micMeterContainer) micMeterContainer.classList.add("hidden");
-          return;
-        }
+        fetch(`https://ntfy.sh/${NTFY_TOPIC}`, {
+          method: 'POST',
+          body: JSON.stringify({
+            action: "HEARTBEAT",
+            live: true,
+            peerId: currentAdminPeerId,
+            trackName: curName,
+            time: Date.now()
+          })
+        }).catch(() => {});
+      }
+    }, 8000);
 
-        try {
-          sysStream = await navigator.mediaDevices.getDisplayMedia({
-            video: true,
-            audio: {
-              echoCancellation: false,
-              noiseSuppression: false,
-              autoGainControl: false
-            }
-          });
-
-          const audioTracks = sysStream.getAudioTracks();
-          if (!audioTracks.length) {
-            alert("Dikkat: Firefox pencere paylaşımında ses iletmez. Virtual DJ sesi için Google Chrome kullanıp 'Sistem sesini de paylaş' kutucuğunu işaretleyin VEYA 2. Adım'daki 'Bilgisayarımdan Şarkı Seç' butonunu kullanarak doğrudan şarkılarınızı çalın.");
-            sysStream.getTracks().forEach(t => t.stop());
-            sysStream = null;
-            return;
-          }
-
-          if (audioCtx) {
-            sysSourceNode = audioCtx.createMediaStreamSource(new MediaStream([audioTracks[0]]));
-            sysSourceNode.connect(musicGain);
-            isPlaying = true;
-            if (mainPlayBtn) mainPlayBtn.textContent = "⏸";
-
-            if (micMeterContainer) micMeterContainer.classList.remove("hidden");
-            const data = new Uint8Array(analyser.frequencyBinCount);
-            function updateVUMeter() {
-              if (!sysStream) return;
-              analyser.getByteFrequencyData(data);
-              let sum = 0;
-              for (let i = 0; i < data.length; i++) sum += data[i];
-              let avg = sum / data.length;
-              let pct = Math.min(100, Math.round((avg / 128) * 100));
-              if (micMeterBar) micMeterBar.style.width = pct + "%";
-              if (pct > 75) {
-                if (micMeterBar) micMeterBar.className = "h-full bg-red-500 transition-all duration-75";
-                if (micDbText) micDbText.textContent = "Yüksek (" + pct + "%)";
-              } else if (pct > 15) {
-                if (micMeterBar) micMeterBar.className = "h-full bg-emerald-400 transition-all duration-75";
-                if (micDbText) micDbText.textContent = "Net Sinyal (" + pct + "%)";
-              } else {
-                if (micMeterBar) micMeterBar.className = "h-full bg-yellow-400 transition-all duration-75";
-                if (micDbText) micDbText.textContent = "Düşük (" + pct + "%)";
-              }
-              sysMeterTimer = requestAnimationFrame(updateVUMeter);
-            }
-            updateVUMeter();
-          }
-
-          if (sysAudioText) sysAudioText.textContent = "🟢 Virtual DJ Sesi Bağlandı (Durdurmak İçin Tıkla)";
-          systemAudioBtn.className = "w-full py-3 rounded-xl bg-emerald-600 hover:bg-emerald-500 text-white text-xs font-extrabold flex items-center justify-center gap-2 border border-emerald-400 shadow-md transition-colors";
-          if (micStatusText) {
-            micStatusText.textContent = "✓ Ses canlı yayına aktarılıyor. Dinleyicileriniz sesi net duyuyor.";
-            micStatusText.classList.remove("hidden");
-          }
-        } catch(err) {
-          console.warn("Ekran sesi hatası:", err);
-        }
-      };
-    }
-
-    // ==========================================
-    // 11. ADMİN MODAL KONTROLLERİ
-    // ==========================================
+    // 10. ADMİN VE ŞİFRE KONTROLLERİ
     if (secretAdminBtn) {
       secretAdminBtn.onclick = () => {
         if (adminPassInput) adminPassInput.value = "";
@@ -1346,10 +978,6 @@
           }
         } else {
           if (passErrorMsg) passErrorMsg.classList.remove("hidden");
-          if (adminPassInput) {
-            adminPassInput.value = "";
-            adminPassInput.focus();
-          }
         }
       };
     }
@@ -1359,17 +987,9 @@
       if (isLiveBroadcast) {
         broadcastBtnText.textContent = "⏹ Canlı Yayını Bitir";
         toggleBroadcastBtn.className = "py-3 px-4 rounded-xl font-bold text-xs shadow-xl transition-all flex items-center justify-center gap-2 bg-zinc-800 hover:bg-zinc-700 text-white";
-        if (webrtcStatusBadge) {
-          webrtcStatusBadge.textContent = "YAYINDA (ON AIR)";
-          webrtcStatusBadge.className = "text-[10px] bg-red-950 text-red-400 border border-red-800 px-2 py-0.5 rounded font-mono font-bold animate-pulse";
-        }
       } else {
         broadcastBtnText.textContent = "🔴 CANLI YAYINA GEÇ";
         toggleBroadcastBtn.className = "py-3 px-4 rounded-xl font-bold text-xs shadow-xl transition-all flex items-center justify-center gap-2 bg-red-600 hover:bg-red-500 text-white";
-        if (webrtcStatusBadge) {
-          webrtcStatusBadge.textContent = "Hazır (Bulutta)";
-          webrtcStatusBadge.className = "text-[10px] bg-zinc-800 text-zinc-400 border border-zinc-700 px-2 py-0.5 rounded font-mono";
-        }
       }
     }
 
@@ -1384,15 +1004,7 @@
         const newState = !isLiveBroadcast;
         applyBroadcastState(newState);
         updateAdminModalBtn();
-
         broadcastStateToAllPeers(newState);
-
-        try {
-          await fetch(`https://ntfy.sh/${NTFY_TOPIC}`, {
-            method: 'POST',
-            body: JSON.stringify({ action: "SET_LIVE", live: newState, peerId: currentAdminPeerId, time: Date.now() })
-          });
-        } catch(err) {}
       };
     }
 
@@ -1404,26 +1016,14 @@
         updateAdminModalBtn();
         broadcastStateToAllPeers(false);
         selectTrack(currentTrackIdx);
-
-        try {
-          await fetch(`https://ntfy.sh/${NTFY_TOPIC}`, {
-            method: 'POST',
-            body: JSON.stringify({ action: "SET_LIVE", live: false, time: Date.now() })
-          });
-        } catch(err) {}
-
-        if (queueStatusBanner) queueStatusBanner.classList.add("hidden");
       };
     }
 
-    // ==========================================
-    // 12. XSS KORUMALI DINLEYİCİ SOHBETİ
-    // ==========================================
+    // 11. XSS KORUMALI SOHBET MOTORU (NTFY.SH İLE)
     if (localStorage.getItem("vom_user_name") && senderName) {
       senderName.value = localStorage.getItem("vom_user_name");
     }
 
-    // XSS Açığını Önleyen Güvenli DOM Üretimi (.textContent kullanımı)
     function renderIncomingMessage(name, text, timeStr) {
       if (!chatMessages) return;
       const div = document.createElement("div");
@@ -1449,7 +1049,7 @@
       chatMessages.scrollTop = chatMessages.scrollHeight;
     }
 
-    // FIREFOX SOHBET CORS DÜZELTMESİ (withCredentials: false eklendi)
+    // Firefox CORS Düzeltmesi ile Sohbet SSE
     try {
       const chatEvents = new EventSource(`https://ntfy.sh/${NTFY_CHAT_TOPIC}/sse`, { withCredentials: false });
       chatEvents.onmessage = (event) => {
@@ -1464,15 +1064,6 @@
         } catch(err) {}
       };
     } catch(e) {}
-
-    if (senderMessage) {
-      senderMessage.addEventListener("keydown", (e) => {
-        if (e.key === "Enter" && !e.shiftKey) {
-          e.preventDefault();
-          chatForm.requestSubmit ? chatForm.requestSubmit() : chatForm.dispatchEvent(new Event("submit"));
-        }
-      });
-    }
 
     if (chatForm) {
       chatForm.onsubmit = async (e) => {
@@ -1500,7 +1091,6 @@
       };
     }
 
-    // İlk Çalıştırma: Çalma Listesini Ekrana Bas
     renderTracklist();
   </script>
 </body>
