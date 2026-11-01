@@ -24,7 +24,7 @@
 </head>
 <body class="min-h-screen flex flex-col text-zinc-100 selection:bg-orange-500 selection:text-white">
 
-  <!-- Üst Bar: İstasyon, Canlı Saat & Dinleyici Sayısı -->
+  <!-- Üst Bar: İstasyon, Canlı Saat & Cihazlar Arası Dinleyici Sayısı -->
   <header class="border-b border-zinc-800 bg-zinc-950/90 backdrop-blur-md sticky top-0 z-40">
     <div class="max-w-6xl mx-auto px-4 py-3 flex items-center justify-between">
       <div class="flex items-center gap-3">
@@ -72,7 +72,7 @@
   <!-- Ana Alan -->
   <main class="flex-1 max-w-6xl w-full mx-auto p-4 sm:p-6 grid grid-cols-1 lg:grid-cols-12 gap-6 items-start">
 
-    <!-- Sol Kolon: Oynatıcı + Canlı Ses Barı + ALTA ALTA ŞARKI LİSTESİ -->
+    <!-- Sol Kolon: Oynatıcı + Canlı Ses Barı + ALTA ALTA ŞARKI LİSTESİ (7 Kolon) -->
     <div class="lg:col-span-7 space-y-5">
       <div class="p-5 sm:p-6 rounded-2xl border border-zinc-800 bg-zinc-900/70 shadow-2xl space-y-5">
         <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-3 pb-4 border-b border-zinc-800">
@@ -120,7 +120,7 @@
       </div>
     </div>
 
-    <!-- Sağ Kolon: SOHBET (MOBİLDE DIŞARI TAŞMAYAN MÜKEMMEL DÜZEN) -->
+    <!-- Sağ Kolon: SOHBET (MOBİLDE VE MASAÜSTÜNDE ESNEK AÇILIR) (5 Kolon) -->
     <div class="lg:col-span-5 flex flex-col h-[520px] sm:h-[580px] rounded-2xl border border-zinc-800 bg-zinc-900/80 overflow-hidden shadow-2xl">
       <div class="p-3.5 bg-zinc-950 border-b border-zinc-800 flex items-center justify-between">
         <span class="font-bold text-xs text-white flex items-center gap-1.5">
@@ -139,40 +139,48 @@
         </div>
       </div>
 
-      <!-- SOHBET FORMU: MOBİLDE TAŞMAYAN DÜZEN -->
-      <form id="chat-send-form" class="p-3 border-t border-zinc-800 bg-zinc-950 space-y-2 opacity-50 pointer-events-none">
-        <div class="flex flex-col sm:flex-row gap-2 w-full">
-          <!-- AD KUTUSU -->
-          <input
-            id="sender-name"
-            type="text"
-            placeholder="Adınız..."
-            maxlength="20"
-            disabled
-            class="w-full sm:w-28 px-3 py-2.5 rounded-xl bg-zinc-900 border border-zinc-700 text-xs text-white focus:outline-none focus:border-orange-500 placeholder:text-zinc-600 disabled:bg-zinc-950 shrink-0"
-            required
-          />
-
-          <!-- MESAJ KUTUSU & GÖNDER BUTONU -->
-          <div class="flex gap-2 flex-1 w-full">
+      <!-- SOHBET FORMU: AD KÜÇÜK, MESAJ BÜYÜK & ESNEK AÇILIR (TEXTAREA) -->
+      <form id="chat-send-form" class="p-3 border-t border-zinc-800 bg-zinc-950 space-y-1.5 opacity-50 pointer-events-none">
+        <div class="flex items-end gap-2 w-full">
+          <!-- AD KUTUSU (KÜÇÜK) -->
+          <div class="shrink-0 w-20 sm:w-24">
+            <span class="text-[9px] text-zinc-500 block mb-0.5 font-bold uppercase tracking-wider">AD</span>
             <input
-              id="sender-message"
+              id="sender-name"
               type="text"
-              placeholder="Mesajınız..."
-              maxlength="150"
+              placeholder="Adınız"
+              maxlength="15"
               disabled
-              class="flex-1 min-w-0 px-3 py-2.5 rounded-xl bg-zinc-900 border border-zinc-700 text-xs text-white focus:outline-none focus:border-orange-500 placeholder:text-zinc-600 disabled:bg-zinc-950"
+              class="w-full px-2.5 py-2 rounded-xl bg-zinc-900 border border-zinc-700 text-xs text-white focus:outline-none focus:border-orange-500 placeholder:text-zinc-600 disabled:bg-zinc-950 text-center font-semibold"
               required
             />
-            <button
-              id="chat-send-btn"
-              type="submit"
-              disabled
-              class="px-4 py-2.5 rounded-xl bg-orange-600 hover:bg-orange-500 disabled:opacity-40 text-white font-semibold text-xs shadow-md transition-all shrink-0"
-            >
-              Gönder
-            </button>
           </div>
+
+          <!-- MESAJ KUTUSU (BÜYÜK & ESNEK AÇILIR ÇOK SATIRLI) -->
+          <div class="flex-1 min-w-0">
+            <span class="text-[9px] text-zinc-500 block mb-0.5 font-bold uppercase tracking-wider">MESAJ (AÇILIR / ESNEK)</span>
+            <textarea
+              id="sender-message"
+              placeholder="Canlı yayına mesaj yazın..."
+              rows="1"
+              maxlength="280"
+              disabled
+              oninput="this.style.height = ''; this.style.height = Math.min(this.scrollHeight, 120) + 'px'"
+              class="w-full px-3 py-2 rounded-xl bg-zinc-900 border border-zinc-700 text-xs text-white focus:outline-none focus:border-orange-500 placeholder:text-zinc-600 disabled:bg-zinc-950 resize-y min-h-[38px] max-h-[140px] leading-relaxed"
+              required
+            ></textarea>
+          </div>
+
+          <!-- GÖNDER BUTONU -->
+          <button
+            id="chat-send-btn"
+            type="submit"
+            disabled
+            class="h-[38px] px-3.5 sm:px-4 rounded-xl bg-orange-600 hover:bg-orange-500 disabled:opacity-40 text-white font-bold text-xs shadow-md transition-all shrink-0 flex items-center justify-center gap-1"
+          >
+            <span>➤</span>
+            <span class="hidden sm:inline">Gönder</span>
+          </button>
         </div>
       </form>
     </div>
@@ -210,7 +218,7 @@
     </div>
   </div>
 
-  <!-- SADECE SİZ DOĞRU ŞİFRE GİRİNCE AÇILAN YÖNETİM & CANLI YAYIN MASASI -->
+  <!-- SADECE SİZ DOĞRU ŞİFRE GİRİNCE AÇILAN YÖNETİM & VIRTUAL DJ KONSOLU -->
   <div id="admin-modal" class="fixed inset-0 z-50 bg-black/85 backdrop-blur-sm hidden items-center justify-center p-4">
     <div class="max-w-lg w-full bg-zinc-900 border border-zinc-800 rounded-2xl p-6 shadow-2xl space-y-5 max-h-[90vh] overflow-y-auto">
       <div class="flex items-center justify-between pb-3 border-b border-zinc-800">
@@ -220,9 +228,9 @@
 
       <!-- Canlı Yayına Geç Butonu -->
       <div class="p-4 rounded-xl bg-zinc-950 border border-zinc-800 space-y-2">
-        <span class="text-xs font-bold text-white block">1. Canlı Yayını Başlat</span>
+        <span class="text-xs font-bold text-white block">1. Adım: Canlı Yayını Başlat</span>
         <p class="text-[11px] text-zinc-400 leading-relaxed">
-          Butona bastığınız anda sinyal buluta gider; cep telefonunuz dahil tüm dinleyicilerin ekranında canlı yayın başlar ve sohbet açılır!
+          Butona bastığınız anda sinyal buluta gider; cep telefonunuz dahil tüm dinleyicilerin ekranında canlı yayın başlar, <strong>Stüdyo Yayında (ON AIR)</strong> yazar ve dinleyici sohbeti açılır!
         </p>
 
         <button id="toggle-broadcast-btn" class="w-full py-3.5 rounded-xl font-bold text-sm shadow-xl transition-all flex items-center justify-center gap-2 bg-red-600 hover:bg-red-500 text-white mt-2">
@@ -231,28 +239,60 @@
         </button>
       </div>
 
-      <!-- CANLI SES BAĞLANTI AYARI -->
-      <div class="p-4 rounded-xl bg-zinc-950 border border-zinc-800 space-y-3 text-xs">
-        <span class="text-xs font-bold text-orange-400 block">2. Canlı Yayın Ses Akış Linki (Canlı Miks)</span>
-        <p class="text-zinc-300 text-[11px] leading-relaxed">
-          Virtual DJ'den internete bastığınız canlı sesin dinleyicilere ulaşması için canlı yayın akış linkinizi buraya girebilirsiniz:
-        </p>
-
-        <div class="space-y-1">
-          <label class="text-[11px] text-zinc-400">Canlı Ses Akış URL'niz (Mount URL):</label>
-          <input
-            id="custom-stream-url"
-            type="url"
-            placeholder="Örn: https://stream.zeno.fm/... veya Icecast canlı linki"
-            class="w-full px-3 py-2 rounded-lg bg-zinc-900 border border-zinc-700 text-white text-xs font-mono focus:outline-none focus:border-orange-500"
-          />
+      <!-- VIRTUAL DJ VE CANLI SES YÖNTEMLERİ -->
+      <div class="p-4 rounded-xl bg-zinc-950 border border-zinc-800 space-y-4 text-xs">
+        <div class="flex items-center justify-between">
+          <span class="text-xs font-bold text-orange-400 block">2. Adım: Canlı Sesi Aktar (0 TL - Kesintisiz)</span>
+          <span class="text-[10px] bg-emerald-950 text-emerald-400 border border-emerald-800 px-2 py-0.5 rounded font-mono font-bold">%100 ÜCRETSİZ</span>
         </div>
 
-        <div class="p-2.5 rounded-lg bg-zinc-900 border border-zinc-800/80 text-[10px] text-zinc-400 space-y-1">
-          <strong class="text-zinc-200 block">Virtual DJ Ayarları (Ayarlar &gt; Broadcast):</strong>
-          <div>• <strong>Protocol:</strong> Icecast 2 / Shoutcast</div>
-          <div>• <strong>Format:</strong> MP3 / 128 kbps / 44100 Hz</div>
-          <div>• <strong>Master Ses:</strong> Virtual DJ ana çıkışını aktarır.</div>
+        <!-- SEÇENEK 1: DOĞRUDAN TARAYICI MİKROFON / STEREO KARIŞIM / VIRTUAL DJ -->
+        <div class="p-4 rounded-xl bg-gradient-to-b from-zinc-900 to-zinc-950 border-2 border-emerald-500/50 space-y-3 shadow-lg">
+          <div class="flex items-center justify-between">
+            <strong class="text-white text-sm flex items-center gap-2">
+              <span>🎙️</span> YÖNTEM 1: Laptop / Virtual DJ Sesini Yakala
+            </strong>
+            <span class="text-[10px] bg-emerald-500/20 text-emerald-300 border border-emerald-500/40 px-2 py-0.5 rounded-full font-bold">ÖNERİLEN</span>
+          </div>
+          <p class="text-[11px] text-zinc-300 leading-relaxed">
+            Hiçbir siteye veya sunucuya kaydolmadan, laptopunuzun ses çıkışını (Stereo Karışımı / Stereo Mix, Sanal Kablo veya Mikrofon) doğrudan dinleyicilere aktarır:
+          </p>
+
+          <button id="browser-mic-btn" type="button" class="w-full py-3.5 rounded-xl bg-emerald-600 hover:bg-emerald-500 text-white text-xs font-extrabold flex items-center justify-center gap-2 shadow-lg shadow-emerald-600/30 border border-emerald-400 transition-all active:scale-98">
+            <span class="text-base">🟢</span> <span id="mic-btn-text">Laptop / Virtual DJ Sesini Yakala</span>
+          </button>
+
+          <div id="mic-meter-container" class="space-y-1 hidden">
+            <div class="flex justify-between text-[10px] text-zinc-400 font-mono">
+              <span>Canlı Ses Seviyesi (VU Meter):</span>
+              <span id="mic-db-text" class="text-emerald-400 font-bold">Aktif</span>
+            </div>
+            <div class="w-full bg-zinc-950 h-2.5 rounded-full overflow-hidden border border-zinc-800">
+              <div id="mic-meter-bar" class="h-full bg-emerald-500 transition-all duration-75" style="width: 0%"></div>
+            </div>
+          </div>
+
+          <p id="mic-status-text" class="text-[11px] text-emerald-400 font-medium hidden leading-relaxed"></p>
+        </div>
+
+        <!-- SEÇENEK 2: VIRTUAL DJ BROADCAST (ZENO.FM / CASTER) -->
+        <div class="p-3.5 rounded-xl bg-zinc-900 border border-zinc-800 space-y-2">
+          <strong class="text-white text-xs block">
+            📻 YÖNTEM 2: Virtual DJ Broadcast Linki ile Bağlanma
+          </strong>
+          <p class="text-zinc-300 text-[11px] leading-relaxed">
+            Virtual DJ'in "Broadcast" sekmesinden yayın yapıyorsanız, Zeno.fm'in size verdiği dinleyici yayın linkini buraya yapıştırabilirsiniz:
+          </p>
+
+          <div class="space-y-1">
+            <label class="text-[11px] text-zinc-400 font-medium">Canlı Yayın Akış URL'niz (Mount URL):</label>
+            <input
+              id="custom-stream-url"
+              type="url"
+              placeholder="Örn: https://stream.zeno.fm/senin_yayinin veya Icecast linki"
+              class="w-full px-3 py-2 rounded-lg bg-zinc-950 border border-zinc-700 text-white text-xs font-mono focus:outline-none focus:border-orange-500"
+            />
+          </div>
         </div>
       </div>
 
@@ -262,6 +302,7 @@
     </div>
   </div>
 
+  <!-- JAVASCRIPT: BULUT REALTIME EŞİTLEME (SSE) -->
   <script>
     // 1. CANLI SAAT
     const clockEl = document.getElementById("live-clock");
@@ -407,7 +448,7 @@
         stationStatusText.textContent = "🔴 CANLI YAYIN (ON AIR)";
         stationStatusText.className = "text-[11px] font-bold text-red-500";
         nowPlayingTitle.textContent = "🎙️ Canlı Yayın";
-        nowPlayingArtist.textContent = "Stüdyo Yayında";
+        nowPlayingArtist.textContent = "Stüdyo Yayında (ON AIR)";
         marqueeBadge.className = "text-xs bg-red-600 text-white font-bold px-2 py-0.5 rounded mr-3 shrink-0 uppercase tracking-wider text-[10px] animate-pulse";
         marqueeBadge.textContent = "CANLI YAYIN";
         marqueeContent.textContent = "🔴 DİKKAT: VOM Radyo Canlı Yayında! Dinleyici sohbeti açıldı, mesajlarınızı yazabilirsiniz.";
@@ -422,6 +463,7 @@
         senderMessage.placeholder = "Mesajınız...";
         chatSendBtn.disabled = false;
 
+        // Canlı akış URL'si varsa ona bağlan
         if (liveStreamUrl) {
           audio.src = liveStreamUrl;
           if (isPlaying) audio.play().catch(() => {});
@@ -522,6 +564,93 @@
         console.error("Yayın sinyali hatası:", err);
       }
     };
+
+    // 5.1 DOĞRUDAN TARAYICIDAN SES YAKALAMA (0 TL - SIFIR SUNUCU)
+    const browserMicBtn = document.getElementById("browser-mic-btn");
+    const micBtnText = document.getElementById("mic-btn-text");
+    const micStatusText = document.getElementById("mic-status-text");
+    const micMeterContainer = document.getElementById("mic-meter-container");
+    const micMeterBar = document.getElementById("mic-meter-bar");
+    const micDbText = document.getElementById("mic-db-text");
+    let micStream = null;
+    let micSourceNode = null;
+    let micMeterTimer = null;
+
+    if (browserMicBtn) {
+      browserMicBtn.onclick = async () => {
+        initAudio();
+        if (micStream) {
+          // Kapat
+          micStream.getTracks().forEach(t => t.stop());
+          micStream = null;
+          if (micSourceNode) {
+            try { micSourceNode.disconnect(); } catch(e) {}
+            micSourceNode = null;
+          }
+          if (micMeterTimer) { cancelAnimationFrame(micMeterTimer); micMeterTimer = null; }
+          micBtnText.textContent = "Laptop / Virtual DJ Sesini Yakala";
+          browserMicBtn.className = "w-full py-3.5 rounded-xl bg-emerald-600 hover:bg-emerald-500 text-white text-xs font-extrabold flex items-center justify-center gap-2 shadow-lg shadow-emerald-600/30 border border-emerald-400 transition-all active:scale-98";
+          micStatusText.classList.add("hidden");
+          if (micMeterContainer) micMeterContainer.classList.add("hidden");
+          return;
+        }
+
+        try {
+          // Yüksek kaliteli stereo ses yakalama (Virtual DJ çıkışı, Stereo Karışım veya Mikrofon)
+          micStream = await navigator.mediaDevices.getUserMedia({
+            audio: {
+              echoCancellation: false,
+              noiseSuppression: false,
+              autoGainControl: false,
+              channelCount: 2
+            }
+          });
+
+          if (audioCtx) {
+            micSourceNode = audioCtx.createMediaStreamSource(micStream);
+            micSourceNode.connect(analyser);
+            // Yayına ver
+            isPlaying = true;
+            mainPlayBtn.textContent = "⏸";
+
+            // VU Meter canlı güncelleme
+            if (micMeterContainer && micMeterBar) {
+              micMeterContainer.classList.remove("hidden");
+              const data = new Uint8Array(analyser.frequencyBinCount);
+              function updateVUMeter() {
+                if (!micStream) return;
+                analyser.getByteFrequencyData(data);
+                let sum = 0;
+                for (let i = 0; i < data.length; i++) sum += data[i];
+                let avg = sum / data.length;
+                let pct = Math.min(100, Math.round((avg / 128) * 100));
+                micMeterBar.style.width = pct + "%";
+                if (pct > 75) {
+                  micMeterBar.className = "h-full bg-red-500 transition-all duration-75";
+                  if (micDbText) micDbText.textContent = "Çok Yüksek (" + pct + "%)";
+                } else if (pct > 20) {
+                  micMeterBar.className = "h-full bg-emerald-400 transition-all duration-75";
+                  if (micDbText) micDbText.textContent = "İyi Sinyal (" + pct + "%)";
+                } else {
+                  micMeterBar.className = "h-full bg-yellow-400 transition-all duration-75";
+                  if (micDbText) micDbText.textContent = "Düşük Sinyal (" + pct + "%)";
+                }
+                micMeterTimer = requestAnimationFrame(updateVUMeter);
+              }
+              updateVUMeter();
+            }
+          }
+
+          micBtnText.textContent = "🟢 Canlı Ses Yakalanıyor (Durdurmak İçin Tıkla)";
+          browserMicBtn.className = "w-full py-3.5 rounded-xl bg-red-600 hover:bg-red-500 text-white text-xs font-extrabold flex items-center justify-center gap-2 border border-red-400 shadow-md transition-colors";
+          micStatusText.textContent = "✓ Laptop / Virtual DJ sesi tarayıcıya bağlandı. Dinleyicileriniz canlı sesi duyuyor.";
+          micStatusText.classList.remove("hidden");
+        } catch(err) {
+          console.warn("Mikrofon/Ses yakalama hatası:", err);
+          alert("Ses yakalama izni verilmedi veya cihaz bulunamadı. Lütfen tarayıcı adres çubuğundaki kilit simgesinden mikrofon iznini verin.");
+        }
+      };
+    }
 
     // 6. 128 KBPS SAFARİ VE TÜM CİHAZLARDA SES MOTORU
     let isPlaying = false;
@@ -627,6 +756,14 @@
       chatMessages.scrollTop = chatMessages.scrollHeight;
     }
 
+    // Mesaj kutusunda Enter tuşuna basınca gönder, Shift+Enter ile alt satıra geç
+    senderMessage.addEventListener("keydown", (e) => {
+      if (e.key === "Enter" && !e.shiftKey) {
+        e.preventDefault();
+        chatForm.requestSubmit ? chatForm.requestSubmit() : chatForm.dispatchEvent(new Event("submit"));
+      }
+    });
+
     chatForm.onsubmit = async (e) => {
       e.preventDefault();
       const name = senderName.value.trim();
@@ -639,6 +776,7 @@
 
       renderIncomingMessage(name, text, timeStr);
       senderMessage.value = "";
+      senderMessage.style.height = ""; // Boyutu eski haline getir
 
       try {
         await fetch(`https://ntfy.sh/${NTFY_CHAT_TOPIC}`, {
