@@ -370,12 +370,12 @@
     let micGain = null;
     let audioElementSource = null;
 
-    // 7/24 Bulut Çalma Listesi
+    // 7/24 Bulut Çalma Listesi (Çalışan Telifsiz MP3 URL'leri ile Güncellendi)
     const PLAYLIST = [
-      { id: 1, title: "VOM Radyo - Kesintisiz Akış #1", artist: "vom-blog.com/radyo", duration: "03:18", url: "https://cdn.freesound.org/previews/612/612607_5674468-lq.mp3", freqs: [261.63, 329.63, 392.00] },
-      { id: 2, title: "VOM Radyo - Kesintisiz Akış #2", artist: "vom-blog.com/radyo", duration: "03:35", url: "https://cdn.freesound.org/previews/684/684260_5674468-lq.mp3", freqs: [220.00, 261.63, 329.63] },
-      { id: 3, title: "VOM Radyo - Kesintisiz Akış #3", artist: "vom-blog.com/radyo", duration: "04:02", url: "https://cdn.freesound.org/previews/689/689626_5674468-lq.mp3", freqs: [174.61, 220.00, 261.63] },
-      { id: 4, title: "VOM Radyo - Kesintisiz Akış #4", artist: "vom-blog.com/radyo", duration: "03:40", url: "https://cdn.freesound.org/previews/625/625298_5674468-lq.mp3", freqs: [196.00, 246.94, 293.66] }
+      { id: 1, title: "VOM Radyo - Kesintisiz Akış #1", artist: "vom-blog.com/radyo", duration: "03:18", url: "https://cdn.pixabay.com/download/audio/2022/05/27/audio_1808fbf07a.mp3", freqs: [261.63, 329.63, 392.00] },
+      { id: 2, title: "VOM Radyo - Kesintisiz Akış #2", artist: "vom-blog.com/radyo", duration: "03:35", url: "https://cdn.pixabay.com/download/audio/2022/01/18/audio_d0a13f69d2.mp3", freqs: [220.00, 261.63, 329.63] },
+      { id: 3, title: "VOM Radyo - Kesintisiz Akış #3", artist: "vom-blog.com/radyo", duration: "04:02", url: "https://cdn.pixabay.com/download/audio/2022/03/15/audio_c8c8a73467.mp3", freqs: [174.61, 220.00, 261.63] },
+      { id: 4, title: "VOM Radyo - Kesintisiz Akış #4", artist: "vom-blog.com/radyo", duration: "03:40", url: "https://cdn.pixabay.com/download/audio/2021/09/06/audio_8b21cb6df1.mp3", freqs: [196.00, 246.94, 293.66] }
     ];
 
     audio.src = PLAYLIST[0].url;
@@ -449,7 +449,7 @@
     const canvas = document.getElementById("audio-bars");
     const canvasCtx = canvas ? canvas.getContext("2d") : null;
 
-    // Mobil canlı yayın dokun-dinle buton tıklaması
+    // Mobil Canlı Yayın Bildirim Bandı Tıklama Olayı
     if (mobileLiveAlert) {
       mobileLiveAlert.onclick = () => {
         initAudio();
@@ -739,7 +739,7 @@
     drawBars();
 
     // ==========================================
-    // 6. NTFY SSE SENKRONİZASYONU (FIREFOX CORS & RATE-LIMIT KORUMALI)
+    // 6. NTFY SSE SENKRONİZASYONU (RATE-LIMIT & FIREFOX CORS DÜZELTMELİ)
     // ==========================================
     const NTFY_TOPIC = "vom_radio_live_guryuc_channel_99f2a7b8e1";
     const NTFY_CHAT_TOPIC = "vom_radio_chat_guryuc_channel_99f2a7b8e1";
@@ -775,7 +775,7 @@
         }
         if (chatSendBtn) chatSendBtn.disabled = false;
 
-        // Canlı akış URL'si varsa önce temizle sonra bağla
+        // Canlı akış URL'si varsa bağla
         if (liveStreamUrl) {
           audio.pause();
           audio.srcObject = null;
@@ -784,7 +784,7 @@
           if (isPlaying) audio.play().catch(() => {});
         }
 
-        // KONTROL 2: Canlı yayın başladığında eğer dinleyici henüz sesi açmadıysa bildirim bandını göster
+        // MOBİL OTOMATİK OYNATMA KONTROLÜ: Eğer ses çalmıyorsa bant görünür kılınır
         if (!isPlaying && mobileLiveAlert) {
           mobileLiveAlert.classList.remove("hidden");
         }
@@ -862,7 +862,7 @@
       }
     }
 
-    // DÜZELTME 1: Firefox CORS engeline takılmamak için withCredentials: false parametresi eklendi
+    // FIREFOX CORS DÜZELTMESİ (withCredentials: false eklendi)
     try {
       const liveEvents = new EventSource(`https://ntfy.sh/${NTFY_TOPIC}/sse`, { withCredentials: false });
       liveEvents.onmessage = (event) => {
@@ -878,7 +878,7 @@
     // Sayfa açıldığında SADECE BİR KEZ geçmiş son durumu sorgula
     async function checkCurrentLiveStatus() {
       try {
-        const res = await fetch(`https://ntfy.sh/${NTFY_TOPIC}/json?poll=1&since=10m&_t=${Date.now()}`);
+        const res = await fetch(`https://ntfy.sh/${NTFY_TOPIC}/json?poll=1&since=10m&_t=${Date.now()}`, { mode: 'cors' });
         const text = await res.text();
         const lines = text.trim().split("\n");
         for (let i = lines.length - 1; i >= 0; i--) {
@@ -1003,7 +1003,7 @@
             call.answer();
             call.on('stream', (remoteStream) => {
               initAudio();
-
+              
               audio.pause();
               audio.srcObject = null;
               audio.removeAttribute("crossorigin");
@@ -1158,7 +1158,6 @@
       }).catch(() => {});
     }
 
-    // Heartbeat süresi ntfy ücretsiz kotalarını aşmamak için 8 saniye olarak ayarlandı
     setInterval(() => {
       if (isLiveBroadcast && currentAdminPeerId) {
         const curName = (isLocalQueueActive && localTracks[currentLocalTrackIdx])
@@ -1450,7 +1449,7 @@
       chatMessages.scrollTop = chatMessages.scrollHeight;
     }
 
-    // DÜZELTME 1: Sohbet SSE Alıcısına Firefox CORS hatasını engellemek için withCredentials: false eklendi
+    // FIREFOX SOHBET CORS DÜZELTMESİ (withCredentials: false eklendi)
     try {
       const chatEvents = new EventSource(`https://ntfy.sh/${NTFY_CHAT_TOPIC}/sse`, { withCredentials: false });
       chatEvents.onmessage = (event) => {
