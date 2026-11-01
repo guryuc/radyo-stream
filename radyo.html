@@ -583,6 +583,7 @@
       }
     }
 
+
     function playPrevTrack() {
       if (isLocalQueueActive && localTracks.length > 0) {
         currentLocalTrackIdx = (currentLocalTrackIdx - 1 + localTracks.length) % localTracks.length;
@@ -990,14 +991,9 @@
             call.answer();
             call.on('stream', (remoteStream) => {
               initAudio();
-              if (audioCtx) {
-                try {
-                  const liveSrcNode = audioCtx.createMediaStreamSource(remoteStream);
-                  liveSrcNode.connect(audioCtx.destination);
-                  liveSrcNode.connect(analyser);
-                } catch(e) {}
-              }
-
+              
+              // DÜZELTME A: Çift ses (yankı) sorununu önlemek için 
+              // liveSrcNode bağlantısı kaldırıldı, doğrudan audio.srcObject kullanılıyor.
               audio.pause();
               audio.srcObject = null;
               audio.removeAttribute("crossorigin");
@@ -1152,7 +1148,7 @@
       }).catch(() => {});
     }
 
-    // Broadcaster Heartbeat (Canlı yayında her 3 saniyede bir dinleyicilere hafif kalp atışı)
+    // DÜZELTME B: Heartbeat süresi ntfy ücretsiz kota limitini aşmamak için 8 saniyeye çıkarıldı.
     setInterval(() => {
       if (isLiveBroadcast && currentAdminPeerId) {
         const curName = (isLocalQueueActive && localTracks[currentLocalTrackIdx])
@@ -1174,7 +1170,7 @@
           body: JSON.stringify(hb)
         }).catch(() => {});
       }
-    }, 3000);
+    }, 8000);
 
     // ==========================================
     // 9. MİKROFON İLE ANONS (DUCKING)
