@@ -449,6 +449,18 @@
     const canvas = document.getElementById("audio-bars");
     const canvasCtx = canvas ? canvas.getContext("2d") : null;
 
+    // Mobil canlı yayın dokun-dinle buton tıklaması
+    if (mobileLiveAlert) {
+      mobileLiveAlert.onclick = () => {
+        initAudio();
+        isPlaying = true;
+        if (mainPlayBtn) mainPlayBtn.textContent = "⏸";
+        audio.play().then(() => {
+          mobileLiveAlert.classList.add("hidden");
+        }).catch(() => {});
+      };
+    }
+
     // ==========================================
     // 3. YARDIMCI VE BİÇİMLENDİRME FONKSİYONLARI
     // ==========================================
@@ -582,7 +594,6 @@
         selectTrack((currentTrackIdx + 1) % PLAYLIST.length);
       }
     }
-
 
     function playPrevTrack() {
       if (isLocalQueueActive && localTracks.length > 0) {
@@ -728,7 +739,7 @@
     drawBars();
 
     // ==========================================
-    // 6. NTFY SSE SENKRONİZASYONU (RATE-LIMIT KORUMALI)
+    // 6. NTFY SSE SENKRONİZASYONU (FIREFOX CORS & RATE-LIMIT KORUMALI)
     // ==========================================
     const NTFY_TOPIC = "vom_radio_live_guryuc_channel_99f2a7b8e1";
     const NTFY_CHAT_TOPIC = "vom_radio_chat_guryuc_channel_99f2a7b8e1";
@@ -773,6 +784,7 @@
           if (isPlaying) audio.play().catch(() => {});
         }
 
+        // KONTROL 2: Canlı yayın başladığında eğer dinleyici henüz sesi açmadıysa bildirim bandını göster
         if (!isPlaying && mobileLiveAlert) {
           mobileLiveAlert.classList.remove("hidden");
         }
@@ -850,9 +862,9 @@
       }
     }
 
-    // SSE EventSource - Gerçek zamanlı dinleyici (Rate limit oluşturmaz)
+    // DÜZELTME 1: Firefox CORS engeline takılmamak için withCredentials: false parametresi eklendi
     try {
-      const liveEvents = new EventSource(`https://ntfy.sh/${NTFY_TOPIC}/sse`);
+      const liveEvents = new EventSource(`https://ntfy.sh/${NTFY_TOPIC}/sse`, { withCredentials: false });
       liveEvents.onmessage = (event) => {
         try {
           const envelope = JSON.parse(event.data);
@@ -991,9 +1003,7 @@
             call.answer();
             call.on('stream', (remoteStream) => {
               initAudio();
-              
-              // DÜZELTME A: Çift ses (yankı) sorununu önlemek için 
-              // liveSrcNode bağlantısı kaldırıldı, doğrudan audio.srcObject kullanılıyor.
+
               audio.pause();
               audio.srcObject = null;
               audio.removeAttribute("crossorigin");
@@ -1148,7 +1158,7 @@
       }).catch(() => {});
     }
 
-    // DÜZELTME B: Heartbeat süresi ntfy ücretsiz kota limitini aşmamak için 8 saniyeye çıkarıldı.
+    // Heartbeat süresi ntfy ücretsiz kotalarını aşmamak için 8 saniye olarak ayarlandı
     setInterval(() => {
       if (isLiveBroadcast && currentAdminPeerId) {
         const curName = (isLocalQueueActive && localTracks[currentLocalTrackIdx])
@@ -1440,9 +1450,9 @@
       chatMessages.scrollTop = chatMessages.scrollHeight;
     }
 
-    // Sohbet SSE Alıcısı
+    // DÜZELTME 1: Sohbet SSE Alıcısına Firefox CORS hatasını engellemek için withCredentials: false eklendi
     try {
-      const chatEvents = new EventSource(`https://ntfy.sh/${NTFY_CHAT_TOPIC}/sse`);
+      const chatEvents = new EventSource(`https://ntfy.sh/${NTFY_CHAT_TOPIC}/sse`, { withCredentials: false });
       chatEvents.onmessage = (event) => {
         try {
           const envelope = JSON.parse(event.data);
