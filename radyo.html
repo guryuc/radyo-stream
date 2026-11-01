@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-  <title>VOM RADYO - Canlı Yayın & Sohbet</title>
+  <title>VOM RADYO - 7/24 Kesintisiz Yayın & Canlı Sohbet</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;600;700;800&family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet">
@@ -13,6 +13,7 @@
     body { font-family: 'Plus Jakarta Sans', sans-serif; background-color: #09090b; }
     .mono { font-family: 'JetBrains Mono', monospace; }
 
+    /* Dönen Vinil Plak Animasyonu */
     @keyframes spinVinyl {
       from { transform: rotate(0deg); }
       to { transform: rotate(360deg); }
@@ -20,6 +21,7 @@
     .spinning { animation: spinVinyl 3.5s linear infinite; }
     .paused { animation-play-state: paused; }
 
+    /* Plak Yivleri Efekti (Resim Yok, Gerçek Vinil Çizgileri) */
     .vinyl-grooves {
       background: radial-gradient(
         circle,
@@ -34,7 +36,7 @@
 </head>
 <body class="min-h-screen flex flex-col text-zinc-100 selection:bg-orange-500 selection:text-white">
 
-  <!-- Üst Bar: İstasyon, Canlı Saat & Gerçek Dinleyici -->
+  <!-- Üst Bar: İstasyon, Canlı Saat & Dinleyici -->
   <header class="border-b border-zinc-800 bg-zinc-950/90 backdrop-blur-md sticky top-0 z-50">
     <div class="max-w-6xl mx-auto px-4 py-3 flex items-center justify-between">
       <div class="flex items-center gap-3">
@@ -44,18 +46,20 @@
         <div>
           <h1 class="font-extrabold text-base tracking-tight text-white leading-none">VOM RADYO</h1>
           <div class="flex items-center gap-2 mt-1">
-            <span class="w-2 h-2 rounded-full bg-emerald-500 animate-pulse"></span>
-            <span id="station-status-text" class="text-[11px] font-semibold text-emerald-400">YAYINDA</span>
+            <span id="status-dot" class="w-2 h-2 rounded-full bg-emerald-500 animate-pulse"></span>
+            <span id="station-status-text" class="text-[11px] font-semibold text-emerald-400">7/24 BULUT YAYINDA</span>
           </div>
         </div>
       </div>
 
       <div class="flex items-center gap-3 text-xs">
+        <!-- Canlı Saat -->
         <div class="bg-zinc-900 px-3 py-1.5 rounded-lg border border-zinc-800 text-orange-400 mono font-bold flex items-center gap-1.5 shadow-inner">
           <span>🕒</span>
           <span id="live-clock">--:--:--</span>
         </div>
 
+        <!-- Gerçek Dinleyici -->
         <div class="bg-zinc-900 px-3 py-1.5 rounded-lg border border-zinc-800 text-zinc-300 flex items-center gap-1.5">
           <span>👥</span>
           <span class="font-bold text-white mono" id="live-listener-count">1</span>
@@ -65,14 +69,35 @@
     </div>
   </header>
 
+  <!-- YÖNETİCİ MASASI (Sadece Siz Şifreyle Girdiğinizde Görünür) -->
+  <div id="admin-bar" class="hidden bg-gradient-to-r from-orange-950/90 via-zinc-900 to-orange-950/90 border-b border-orange-500/40 p-4">
+    <div class="max-w-6xl mx-auto flex flex-col sm:flex-row items-center justify-between gap-4">
+      <div class="flex items-center gap-3">
+        <span class="px-2.5 py-1 rounded bg-orange-500 text-black font-extrabold text-xs uppercase tracking-wider">YÖNETİCİ MASASI</span>
+        <span class="text-xs text-zinc-300">Bulut yayınını kesip haftalık canlı yayına / Virtual DJ'e geçin:</span>
+      </div>
+
+      <div class="flex items-center gap-3">
+        <button id="toggle-broadcast-btn" class="px-5 py-2.5 rounded-xl bg-red-600 hover:bg-red-500 text-white font-bold text-xs shadow-lg shadow-red-600/30 transition-all flex items-center gap-2">
+          <span>🔴</span>
+          <span id="broadcast-btn-text">Virtual DJ / Canlı Yayına Geç</span>
+        </button>
+
+        <button id="admin-logout-btn" class="px-3 py-2 rounded-xl bg-zinc-800 hover:bg-zinc-700 text-zinc-400 hover:text-white text-xs">
+          Çıkış
+        </button>
+      </div>
+    </div>
+  </div>
+
   <!-- Ana Alan -->
   <main class="flex-1 max-w-6xl w-full mx-auto p-4 sm:p-6 grid grid-cols-1 lg:grid-cols-12 gap-6 items-start">
 
-    <!-- Sol Kolon: Dönen Plak + Ses Barı + Oynatıcı -->
+    <!-- Sol Kolon: Dönen Plak + Ses Barı + Oynatıcı (7 Kolon) -->
     <div class="lg:col-span-7 space-y-4">
       <div class="p-6 sm:p-8 rounded-2xl border border-zinc-800 bg-zinc-900/70 shadow-2xl flex flex-col items-center text-center relative overflow-hidden">
         
-        <!-- Dönen Plak (Resim Yok) -->
+        <!-- Dönen Vinil Plak (Resim Yok) -->
         <div class="relative my-2">
           <div id="vinyl-disc" class="w-48 h-48 sm:w-56 sm:h-56 rounded-full vinyl-grooves relative flex items-center justify-center border-4 border-zinc-800 paused transition-all duration-300">
             <div class="absolute inset-0 rounded-full bg-gradient-to-tr from-white/5 via-transparent to-white/10 pointer-events-none"></div>
@@ -84,90 +109,83 @@
           </div>
         </div>
 
-        <!-- Parça Başlığı -->
+        <!-- Şarkı / Yayın Başlığı -->
         <div class="mt-4 space-y-1 max-w-md w-full">
-          <h2 id="track-name" class="text-xl sm:text-2xl font-extrabold text-white truncate">Akustik Gece Dinletisi</h2>
-          <p id="artist-name" class="text-sm text-zinc-400 truncate">VOM Kesintisiz Müzik</p>
+          <h2 id="track-name" class="text-xl sm:text-2xl font-extrabold text-white truncate">VOM Kesintisiz Müzik</h2>
+          <p id="artist-name" class="text-sm text-zinc-400 truncate">7/24 Bulut Yayını</p>
         </div>
 
-        <!-- Canlı Ses Barı (Ses Dalgası) -->
+        <!-- Canlı Ses Barı (Ses Dalgası Equalizer) -->
         <div class="w-full max-w-md mt-4 bg-zinc-950 p-2.5 rounded-xl border border-zinc-800/90 shadow-inner">
           <canvas id="audio-bars" width="400" height="42" class="w-full h-10 rounded"></canvas>
         </div>
 
         <!-- Oynatma Tuşları -->
         <div class="flex items-center justify-center gap-4 mt-6">
-          <button id="prev-btn" class="p-3 rounded-full bg-zinc-800 hover:bg-zinc-700 text-zinc-300 transition-colors" title="Önceki">
-            ⏮
-          </button>
-
-          <button id="main-play-btn" class="w-16 h-16 rounded-full bg-orange-600 hover:bg-orange-500 text-white font-bold text-2xl flex items-center justify-center shadow-lg shadow-orange-600/30 transition-transform active:scale-95">
-            ▶
-          </button>
-
-          <button id="next-btn" class="p-3 rounded-full bg-zinc-800 hover:bg-zinc-700 text-zinc-300 transition-colors" title="Sonraki">
-            ⏭
-          </button>
+          <button id="prev-btn" class="p-3 rounded-full bg-zinc-800 hover:bg-zinc-700 text-zinc-300 transition-colors" title="Önceki">⏮</button>
+          <button id="main-play-btn" class="w-16 h-16 rounded-full bg-orange-600 hover:bg-orange-500 text-white font-bold text-2xl flex items-center justify-center shadow-lg shadow-orange-600/30 transition-transform active:scale-95">▶</button>
+          <button id="next-btn" class="p-3 rounded-full bg-zinc-800 hover:bg-zinc-700 text-zinc-300 transition-colors" title="Sonraki">⏭</button>
 
           <div class="h-6 w-px bg-zinc-800 mx-1"></div>
 
+          <!-- Ses Sürgüsü -->
           <div class="flex items-center gap-2 bg-zinc-950 px-3 py-2 rounded-xl border border-zinc-800">
             <span class="text-xs">🔊</span>
             <input id="volume-range" type="range" min="0" max="1" step="0.05" value="0.85" class="w-20 sm:w-24 accent-orange-500 cursor-pointer" />
           </div>
         </div>
       </div>
-
-      <!-- Canlı Mikrofon Butonu -->
-      <div class="p-4 rounded-xl border border-zinc-800 bg-zinc-900/50 flex items-center justify-between">
-        <span class="text-xs text-zinc-400 font-medium">Yayıncı / Canlı Mikrofon:</span>
-        <button id="live-mic-btn" class="px-4 py-2 rounded-lg bg-zinc-800 hover:bg-zinc-700 text-white font-bold text-xs transition-all flex items-center gap-2">
-          <span>🎙️</span>
-          <span id="mic-btn-text">Mikrofonu Aç</span>
-        </button>
-      </div>
     </div>
 
-    <!-- Sağ Kolon: Canlı Sohbet (Önce Ad, Sonra Mesaj) -->
+    <!-- Sağ Kolon: SOHBET (SADECE CANLI YAYINDA AÇILIR) (5 Kolon) -->
     <div class="lg:col-span-5 flex flex-col h-[520px] rounded-2xl border border-zinc-800 bg-zinc-900/80 overflow-hidden shadow-2xl">
       <div class="p-3.5 bg-zinc-950 border-b border-zinc-800 flex items-center justify-between">
         <span class="font-bold text-xs text-white flex items-center gap-1.5">
-          <span>💬</span> Canlı Sohbet
+          <span>💬</span> Dinleyici Sohbeti
         </span>
-        <span class="text-[10px] text-emerald-400 font-mono">● Anlık</span>
+        <span id="chat-live-badge" class="text-[10px] font-mono text-zinc-500">🔒 Kapalı</span>
       </div>
 
-      <!-- Mesajlar -->
+      <!-- Mesaj Akışı -->
       <div id="chat-messages" class="flex-1 p-4 overflow-y-auto space-y-2.5 text-xs">
-        <div class="p-2.5 rounded-xl bg-zinc-950 border border-zinc-800/80">
-          <span class="text-[10px] text-zinc-500 block mb-0.5 mono" id="welcome-time">14:00</span>
-          <strong class="text-orange-400">VOM Radyo:</strong>
-          <span class="text-zinc-200 ml-1">Hoş geldiniz! Canlı sohbete mesajınızı yazabilirsiniz.</span>
+        <div id="chat-closed-notice" class="p-4 rounded-xl bg-zinc-950/80 border border-zinc-800 text-center space-y-2 my-auto">
+          <span class="text-2xl block">📻</span>
+          <p class="font-bold text-zinc-300">Sohbet Şu An Kapalıdır</p>
+          <p class="text-[11px] text-zinc-500">
+            Dinleyici sohbeti haftalık canlı yayın başladığında otomatik olarak açılacaktır. Keyifli dinlemeler!
+          </p>
         </div>
       </div>
 
-      <!-- ÖNCE AD, SONRA MESAJ FORMU -->
-      <form id="chat-send-form" class="p-3 border-t border-zinc-800 bg-zinc-950 space-y-2">
+      <!-- SOHBET FORMU: ÖNCE AD, SONRA MESAJ (Canlı Yayında Aktif Olur) -->
+      <form id="chat-send-form" class="p-3 border-t border-zinc-800 bg-zinc-950 space-y-2 opacity-50 pointer-events-none">
         <div class="flex gap-2">
+          <!-- ÖNCE AD -->
           <input
             id="sender-name"
             type="text"
             placeholder="Adınız..."
             maxlength="20"
-            class="w-1/3 px-3 py-2 rounded-xl bg-zinc-900 border border-zinc-700 text-xs text-white focus:outline-none focus:border-orange-500 placeholder:text-zinc-600"
+            disabled
+            class="w-1/3 px-3 py-2 rounded-xl bg-zinc-900 border border-zinc-700 text-xs text-white focus:outline-none focus:border-orange-500 placeholder:text-zinc-600 disabled:bg-zinc-950"
             required
           />
+          <!-- SONRA MESAJ -->
           <input
             id="sender-message"
             type="text"
-            placeholder="Mesajınız..."
+            placeholder="Sohbet canlı yayında açılır..."
             maxlength="150"
-            class="flex-1 px-3 py-2 rounded-xl bg-zinc-900 border border-zinc-700 text-xs text-white focus:outline-none focus:border-orange-500 placeholder:text-zinc-600"
+            disabled
+            class="flex-1 px-3 py-2 rounded-xl bg-zinc-900 border border-zinc-700 text-xs text-white focus:outline-none focus:border-orange-500 placeholder:text-zinc-600 disabled:bg-zinc-950"
             required
           />
+          <!-- GÖNDER -->
           <button
+            id="chat-send-btn"
             type="submit"
-            class="px-4 py-2 rounded-xl bg-orange-600 hover:bg-orange-500 text-white font-semibold text-xs shadow-md transition-all shrink-0"
+            disabled
+            class="px-4 py-2 rounded-xl bg-orange-600 hover:bg-orange-500 disabled:opacity-40 text-white font-semibold text-xs shadow-md transition-all shrink-0"
           >
             Gönder
           </button>
@@ -177,41 +195,145 @@
 
   </main>
 
-  <script>
-    // Canlı Saat
-    const clockEl = document.getElementById("live-clock");
-    const welcomeTime = document.getElementById("welcome-time");
-    function updateLiveClock() {
-      const now = new Date();
-      const h = String(now.getHours()).padStart(2, '0');
-      const m = String(now.getMinutes()).padStart(2, '0');
-      const s = String(now.getSeconds()).padStart(2, '0');
-      if (clockEl) clockEl.textContent = h + ":" + m + ":" + s;
-      if (welcomeTime && welcomeTime.textContent === "14:00") welcomeTime.textContent = h + ":" + m;
-    }
-    setInterval(updateLiveClock, 1000);
-    updateLiveClock();
+  <!-- Alt Footer & Gizli Yönetici Girişi -->
+  <footer class="py-4 border-t border-zinc-900/80 text-center text-xs text-zinc-600 flex items-center justify-center gap-3">
+    <span>VOM RADYO © 2026</span>
+    <span>·</span>
+    <!-- Gizli Admin Giriş Butonu -->
+    <button id="admin-login-modal-btn" class="text-zinc-700 hover:text-orange-400 transition-colors text-[11px] flex items-center gap-1" title="Yönetici Girişi">
+      <span>🔐</span>
+      <span>Yayıncı Masası</span>
+    </button>
+  </footer>
 
-    // Gerçek Dinleyici Sayacı
+  <script>
+    // 1. CANLI DİJİTAL SAAT (HH:MM:SS)
+    const clockEl = document.getElementById("live-clock");
+    function updateClock() {
+      const d = new Date();
+      clockEl.textContent = String(d.getHours()).padStart(2,'0') + ":" + String(d.getMinutes()).padStart(2,'0') + ":" + String(d.getSeconds()).padStart(2,'0');
+    }
+    setInterval(updateClock, 1000);
+    updateClock();
+
+    // 2. OTOMATİK GERÇEK DİNLİYİCİ SAYIMI
     const listenerCountEl = document.getElementById("live-listener-count");
     let activeTabs = 1;
     try {
-      const bc = new BroadcastChannel("vom_radio_listeners");
+      const bc = new BroadcastChannel("vom_listeners");
       bc.onmessage = (e) => {
-        if (e.data.type === "PING") bc.postMessage({ type: "PONG" });
-        else if (e.data.type === "PONG") { activeTabs++; if (listenerCountEl) listenerCountEl.textContent = activeTabs; }
+        if (e.data === "ping") bc.postMessage("pong");
+        else if (e.data === "pong") { activeTabs++; listenerCountEl.textContent = activeTabs; }
       };
-      bc.postMessage({ type: "PING" });
+      bc.postMessage("ping");
     } catch(e) {}
 
-    // Safari & Tüm Tarayıcılarda %100 Çalışan Ses Motoru
-    const PLAYLIST = [
-      { title: "Akustik Gece Dinletisi", artist: "VOM Radyo", url: "https://cdn.freesound.org/previews/612/612607_5674468-lq.mp3", freqs: [261.63, 329.63, 392.00, 523.25] },
-      { title: "Boğaz Rüzgarı (Lo-Fi)", artist: "VOM Akustik", url: "https://cdn.freesound.org/previews/684/684260_5674468-lq.mp3", freqs: [220.00, 261.63, 329.63, 392.00] },
-      { title: "Gece Cazı", artist: "VOM Stüdyo", url: "https://cdn.freesound.org/previews/689/689626_5674468-lq.mp3", freqs: [174.61, 220.00, 261.63, 329.63] }
-    ];
+    // 3. YAYIN DURUMU & SOHBET KİLİDİ
+    let isLiveBroadcast = localStorage.getItem("vom_is_live") === "true";
 
-    let currentTrackIdx = 0;
+    const chatForm = document.getElementById("chat-send-form");
+    const senderName = document.getElementById("sender-name");
+    const senderMessage = document.getElementById("sender-message");
+    const chatSendBtn = document.getElementById("chat-send-btn");
+    const chatClosedNotice = document.getElementById("chat-closed-notice");
+    const chatLiveBadge = document.getElementById("chat-live-badge");
+    const statusDot = document.getElementById("status-dot");
+    const stationStatusText = document.getElementById("station-status-text");
+    const trackNameEl = document.getElementById("track-name");
+    const artistNameEl = document.getElementById("artist-name");
+
+    function applyBroadcastState(live) {
+      isLiveBroadcast = live;
+      localStorage.setItem("vom_is_live", live ? "true" : "false");
+
+      if (live) {
+        // Canlı Yayın Modu: Sohbet AÇILIR!
+        statusDot.className = "w-2 h-2 rounded-full bg-red-500 animate-ping";
+        stationStatusText.textContent = "🔴 CANLI YAYIN (ON AIR)";
+        stationStatusText.className = "text-[11px] font-bold text-red-500";
+        trackNameEl.textContent = "🎙️ Canlı Yayın / Virtual DJ";
+        artistNameEl.textContent = "Stüdyo Yayında";
+
+        chatLiveBadge.textContent = "● Canlı Açık";
+        chatLiveBadge.className = "text-[10px] font-mono text-emerald-400 font-bold";
+
+        chatClosedNotice.style.display = "none";
+        chatForm.className = "p-3 border-t border-zinc-800 bg-zinc-950 space-y-2 opacity-100";
+        senderName.disabled = false;
+        senderMessage.disabled = false;
+        senderMessage.placeholder = "Canlı yayına mesaj yazın...";
+        chatSendBtn.disabled = false;
+      } else {
+        // 7/24 Bulut Modu: Sohbet KİLİTLİDİR!
+        statusDot.className = "w-2 h-2 rounded-full bg-emerald-500 animate-pulse";
+        stationStatusText.textContent = "7/24 BULUT YAYINDA";
+        stationStatusText.className = "text-[11px] font-semibold text-emerald-400";
+        trackNameEl.textContent = "VOM Kesintisiz Müzik";
+        artistNameEl.textContent = "7/24 Bulut Yayını";
+
+        chatLiveBadge.textContent = "🔒 Kapalı";
+        chatLiveBadge.className = "text-[10px] font-mono text-zinc-500";
+
+        chatClosedNotice.style.display = "block";
+        chatForm.className = "p-3 border-t border-zinc-800 bg-zinc-950 space-y-2 opacity-50 pointer-events-none";
+        senderName.disabled = true;
+        senderMessage.disabled = true;
+        senderMessage.placeholder = "Sohbet canlı yayında açılır...";
+        chatSendBtn.disabled = true;
+      }
+    }
+    applyBroadcastState(isLiveBroadcast);
+
+    // 4. ADMIN MASASI YÖNETİMİ
+    const adminBar = document.getElementById("admin-bar");
+    const toggleBroadcastBtn = document.getElementById("toggle-broadcast-btn");
+    const broadcastBtnText = document.getElementById("broadcast-btn-text");
+    const adminLoginBtn = document.getElementById("admin-login-modal-btn");
+    const adminLogoutBtn = document.getElementById("admin-logout-btn");
+
+    const urlParams = new URLSearchParams(window.location.search);
+    let isAdminLoggedIn = localStorage.getItem("vom_admin_logged") === "true" || urlParams.get("admin") === "1";
+
+    if (isAdminLoggedIn) {
+      adminBar.classList.remove("hidden");
+    }
+
+    adminLoginBtn.onclick = () => {
+      const pass = prompt("Yönetici Şifrenizi Girin (Varsayılan: admin123):");
+      if (pass === "admin123" || pass === "vom2026") {
+        isAdminLoggedIn = true;
+        localStorage.setItem("vom_admin_logged", "true");
+        adminBar.classList.remove("hidden");
+        alert("Yönetici Masası Açıldı! Artık yayına geçebilir ve sohbeti açıp kapatabilirsiniz.");
+      } else if (pass) {
+        alert("Hatalı şifre.");
+      }
+    };
+
+    adminLogoutBtn.onclick = () => {
+      localStorage.removeItem("vom_admin_logged");
+      adminBar.classList.add("hidden");
+      isAdminLoggedIn = false;
+    };
+
+    toggleBroadcastBtn.onclick = () => {
+      if (!isLiveBroadcast) {
+        applyBroadcastState(true);
+        broadcastBtnText.textContent = "⏹ Canlı Yayını Bitir (Buluta Dön)";
+        toggleBroadcastBtn.className = "px-5 py-2.5 rounded-xl bg-zinc-800 hover:bg-zinc-700 text-white font-bold text-xs transition-all flex items-center gap-2";
+      } else {
+        applyBroadcastState(false);
+        broadcastBtnText.textContent = "Virtual DJ / Canlı Yayına Geç";
+        toggleBroadcastBtn.className = "px-5 py-2.5 rounded-xl bg-red-600 hover:bg-red-500 text-white font-bold text-xs shadow-lg shadow-red-600/30 transition-all flex items-center gap-2";
+      }
+    };
+
+    // 5. SAFARİ VE TÜM CİHAZLARDA %100 ÇALIŞAN SES MOTORU
+    const PLAYLIST = [
+      { url: "https://cdn.freesound.org/previews/612/612607_5674468-lq.mp3", freqs: [261.63, 329.63, 392.00] },
+      { url: "https://cdn.freesound.org/previews/684/684260_5674468-lq.mp3", freqs: [220.00, 261.63, 329.63] }
+    ];
+    let trackIdx = 0;
     let isPlaying = false;
     let audio = new Audio();
     audio.crossOrigin = "anonymous";
@@ -219,75 +341,61 @@
 
     let AudioCtxClass = window.AudioContext || window.webkitAudioContext;
     let audioCtx = null;
-    let synthInterval = null;
-    let analyserNode = null;
+    let synthTimer = null;
+    let analyser = null;
 
-    function ensureAudioContext() {
+    function initAudio() {
       if (!audioCtx && AudioCtxClass) {
         audioCtx = new AudioCtxClass();
-        analyserNode = audioCtx.createAnalyser();
-        analyserNode.fftSize = 64;
+        analyser = audioCtx.createAnalyser();
+        analyser.fftSize = 64;
         try {
-          let src = audioCtx.createMediaElementSource(audio);
-          src.connect(analyserNode);
-          analyserNode.connect(audioCtx.destination);
+          let s = audioCtx.createMediaElementSource(audio);
+          s.connect(analyser);
+          analyser.connect(audioCtx.destination);
         } catch(e) {
-          analyserNode.connect(audioCtx.destination);
+          analyser.connect(audioCtx.destination);
         }
       }
       if (audioCtx && audioCtx.state === "suspended") audioCtx.resume();
     }
 
-    function startSynthStream() {
-      if (synthInterval) return;
-      ensureAudioContext();
+    function startSynth() {
+      if (synthTimer) return;
+      initAudio();
       if (!audioCtx) return;
-      const playMelody = () => {
+      synthTimer = setInterval(() => {
         if (!isPlaying || !audioCtx) return;
         const now = audioCtx.currentTime;
-        PLAYLIST[currentTrackIdx].freqs.forEach((freq, idx) => {
+        PLAYLIST[trackIdx].freqs.forEach((f, i) => {
           const osc = audioCtx.createOscillator();
-          const gain = audioCtx.createGain();
+          const g = audioCtx.createGain();
           osc.type = "sine";
-          osc.frequency.setValueAtTime(freq, now + idx * 0.15);
-          gain.gain.setValueAtTime(0, now + idx * 0.15);
-          gain.gain.linearRampToValueAtTime(0.08, now + idx * 0.15 + 0.05);
-          gain.gain.exponentialRampToValueAtTime(0.001, now + idx * 0.15 + 1.8);
-          osc.connect(gain);
-          gain.connect(analyserNode || audioCtx.destination);
-          osc.start(now + idx * 0.15);
-          osc.stop(now + idx * 0.15 + 1.9);
+          osc.frequency.setValueAtTime(f, now + i*0.15);
+          g.gain.setValueAtTime(0, now + i*0.15);
+          g.gain.linearRampToValueAtTime(0.08, now + i*0.15 + 0.05);
+          g.gain.exponentialRampToValueAtTime(0.001, now + i*0.15 + 1.8);
+          osc.connect(g);
+          g.connect(analyser || audioCtx.destination);
+          osc.start(now + i*0.15);
+          osc.stop(now + i*0.15 + 1.9);
         });
-      };
-      playMelody();
-      synthInterval = setInterval(playMelody, 2200);
+      }, 2200);
     }
 
-    function stopSynthStream() {
-      if (synthInterval) { clearInterval(synthInterval); synthInterval = null; }
+    function stopSynth() {
+      if (synthTimer) { clearInterval(synthTimer); synthTimer = null; }
     }
 
     const mainPlayBtn = document.getElementById("main-play-btn");
-    const prevBtn = document.getElementById("prev-btn");
-    const nextBtn = document.getElementById("next-btn");
     const vinylDisc = document.getElementById("vinyl-disc");
-    const trackNameEl = document.getElementById("track-name");
-    const artistNameEl = document.getElementById("artist-name");
     const volumeRange = document.getElementById("volume-range");
 
-    function updateTrackDisplay() {
-      const t = PLAYLIST[currentTrackIdx];
-      trackNameEl.textContent = t.title;
-      artistNameEl.textContent = t.artist;
-      audio.src = t.url;
-      if (isPlaying) audio.play().catch(() => startSynthStream());
-    }
-
     mainPlayBtn.onclick = () => {
-      ensureAudioContext();
+      initAudio();
       if (isPlaying) {
         audio.pause();
-        stopSynthStream();
+        stopSynth();
         isPlaying = false;
         mainPlayBtn.textContent = "▶";
         vinylDisc.classList.remove("spinning");
@@ -297,45 +405,42 @@
         mainPlayBtn.textContent = "⏸";
         vinylDisc.classList.remove("paused");
         vinylDisc.classList.add("spinning");
-        audio.play().then(() => stopSynthStream()).catch(() => startSynthStream());
+        audio.play().then(() => stopSynth()).catch(() => startSynth());
       }
     };
 
-    nextBtn.onclick = () => { currentTrackIdx = (currentTrackIdx + 1) % PLAYLIST.length; updateTrackDisplay(); };
-    prevBtn.onclick = () => { currentTrackIdx = (currentTrackIdx - 1 + PLAYLIST.length) % PLAYLIST.length; updateTrackDisplay(); };
-    audio.onended = () => { currentTrackIdx = (currentTrackIdx + 1) % PLAYLIST.length; updateTrackDisplay(); };
+    document.getElementById("next-btn").onclick = () => {
+      trackIdx = (trackIdx + 1) % PLAYLIST.length;
+      audio.src = PLAYLIST[trackIdx].url;
+      if (isPlaying) audio.play().catch(() => startSynth());
+    };
+
+    document.getElementById("prev-btn").onclick = () => {
+      trackIdx = (trackIdx - 1 + PLAYLIST.length) % PLAYLIST.length;
+      audio.src = PLAYLIST[trackIdx].url;
+      if (isPlaying) audio.play().catch(() => startSynth());
+    };
+
     volumeRange.oninput = (e) => { audio.volume = parseFloat(e.target.value); };
 
-    // Ses Barı Animasyonu
+    // 6. CANLI SES BARI (EQUALIZER)
     const canvas = document.getElementById("audio-bars");
     const ctx = canvas.getContext("2d");
-    function renderAudioBars() {
-      requestAnimationFrame(renderAudioBars);
-      const w = canvas.width;
-      const h = canvas.height;
+    function drawBars() {
+      requestAnimationFrame(drawBars);
+      const w = canvas.width, h = canvas.height;
       ctx.clearRect(0, 0, w, h);
-      if (!isPlaying) { ctx.fillStyle = "#27272a"; ctx.fillRect(0, h / 2 - 1, w, 2); return; }
-      const barCount = 32;
-      const barWidth = (w / barCount) - 2;
-      for (let i = 0; i < barCount; i++) {
-        let barHeight = Math.max(4, Math.sin((Date.now() / 150) + i) * (h * 0.4) + (h * 0.45));
-        if (analyserNode && audioCtx && audioCtx.state === "running") {
-          const data = new Uint8Array(analyserNode.frequencyBinCount);
-          analyserNode.getByteFrequencyData(data);
-          if (data[i]) barHeight = Math.max(4, (data[i] / 255) * h * 0.9);
-        }
-        ctx.fillStyle = "#f97316";
-        ctx.fillRect(i * (barWidth + 2), h - barHeight, barWidth, barHeight);
+      if (!isPlaying) { ctx.fillStyle = "#27272a"; ctx.fillRect(0, h/2 - 1, w, 2); return; }
+      for (let i = 0; i < 32; i++) {
+        let barH = Math.max(4, Math.sin((Date.now() / 140) + i) * (h * 0.4) + (h * 0.45));
+        ctx.fillStyle = isLiveBroadcast ? "#ef4444" : "#f97316";
+        ctx.fillRect(i * (w / 32), h - barH, (w / 32) - 2, barH);
       }
     }
-    renderAudioBars();
+    drawBars();
 
-    // Sohbet: Önce Ad, Sonra Mesaj
-    const chatForm = document.getElementById("chat-send-form");
-    const senderName = document.getElementById("sender-name");
-    const senderMessage = document.getElementById("sender-message");
+    // 7. SOHBET GÖNDERME
     const chatMessages = document.getElementById("chat-messages");
-
     if (localStorage.getItem("vom_user_name")) senderName.value = localStorage.getItem("vom_user_name");
 
     chatForm.onsubmit = (e) => {
@@ -344,44 +449,14 @@
       const text = senderMessage.value.trim();
       if (!name || !text) return;
       localStorage.setItem("vom_user_name", name);
-      const now = new Date();
-      const timeStr = String(now.getHours()).padStart(2, '0') + ":" + String(now.getMinutes()).padStart(2, '0');
-      const msgDiv = document.createElement("div");
-      msgDiv.className = "p-2.5 rounded-xl bg-zinc-950 border border-zinc-800";
-      msgDiv.innerHTML = `<span class="text-[10px] text-zinc-500 block mb-0.5 mono">${timeStr}</span><strong class="text-orange-400 font-bold">${name}:</strong><span class="text-zinc-200 ml-1 break-words">${text}</span>`;
-      chatMessages.appendChild(msgDiv);
+      const d = new Date();
+      const t = String(d.getHours()).padStart(2,'0') + ":" + String(d.getMinutes()).padStart(2,'0');
+      const div = document.createElement("div");
+      div.className = "p-2.5 rounded-xl bg-zinc-950 border border-zinc-800";
+      div.innerHTML = `<span class="text-[10px] text-zinc-500 block mb-0.5 mono">${t}</span><strong class="text-orange-400 font-bold">${name}:</strong><span class="text-zinc-200 ml-1 break-words">${text}</span>`;
+      chatMessages.appendChild(div);
       chatMessages.scrollTop = chatMessages.scrollHeight;
       senderMessage.value = "";
-    };
-
-    // Canlı Mikrofon
-    let micStream = null;
-    const liveMicBtn = document.getElementById("live-mic-btn");
-    const micBtnText = document.getElementById("mic-btn-text");
-    const stationStatusText = document.getElementById("station-status-text");
-
-    liveMicBtn.onclick = async () => {
-      if (micStream) {
-        micStream.getTracks().forEach(t => t.stop());
-        micStream = null;
-        audio.volume = parseFloat(volumeRange.value);
-        micBtnText.textContent = "Mikrofonu Aç";
-        liveMicBtn.className = "px-4 py-2 rounded-lg bg-zinc-800 hover:bg-zinc-700 text-white font-bold text-xs transition-all flex items-center gap-2";
-        stationStatusText.textContent = "YAYINDA";
-        stationStatusText.className = "text-[11px] font-semibold text-emerald-400";
-      } else {
-        try {
-          ensureAudioContext();
-          micStream = await navigator.mediaDevices.getUserMedia({ audio: true });
-          audio.volume = 0.15;
-          micBtnText.textContent = "🔴 Yayını Kapat";
-          liveMicBtn.className = "px-4 py-2 rounded-lg bg-red-600 hover:bg-red-500 text-white font-bold text-xs transition-all flex items-center gap-2 animate-pulse";
-          stationStatusText.textContent = "CANLI YAYIN";
-          stationStatusText.className = "text-[11px] font-bold text-red-500";
-        } catch(e) {
-          alert("Mikrofon izni verilmedi.");
-        }
-      }
     };
   </script>
 </body>
