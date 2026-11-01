@@ -9,8 +9,8 @@
   <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;600;700&display=swap" rel="stylesheet">
   <script src="https://cdn.tailwindcss.com"></script>
   <style>
-    * { -webkit-tap-highlight-color: transparent; }
-    body { font-family: 'Plus Jakarta Sans', sans-serif; background-color: #09090b; }
+    * { -webkit-tap-highlight-color: transparent; box-sizing: border-box; }
+    body { font-family: 'Plus Jakarta Sans', sans-serif; background-color: #09090b; overflow-x: hidden; }
     .mono { font-family: 'JetBrains Mono', monospace; }
 
     @keyframes marquee { 0% { transform: translateX(100%); } 100% { transform: translateX(-100%); } }
@@ -24,7 +24,7 @@
 </head>
 <body class="min-h-screen flex flex-col text-zinc-100 selection:bg-orange-500 selection:text-white">
 
-  <!-- Üst Bar: İstasyon, Canlı Saat & Cihazlar Arası Dinleyici Sayısı -->
+  <!-- Üst Bar: İstasyon, Canlı Saat & Dinleyici Sayısı -->
   <header class="border-b border-zinc-800 bg-zinc-950/90 backdrop-blur-md sticky top-0 z-40">
     <div class="max-w-6xl mx-auto px-4 py-3 flex items-center justify-between">
       <div class="flex items-center gap-3">
@@ -42,13 +42,13 @@
         </div>
       </div>
 
-      <div class="flex items-center gap-3 text-xs">
-        <div class="bg-zinc-900 px-3 py-1.5 rounded-lg border border-zinc-800 text-orange-400 mono font-bold flex items-center gap-1.5 shadow-inner">
+      <div class="flex items-center gap-2 sm:gap-3 text-xs">
+        <div class="bg-zinc-900 px-2.5 sm:px-3 py-1.5 rounded-lg border border-zinc-800 text-orange-400 mono font-bold flex items-center gap-1.5 shadow-inner">
           <span>🕒</span>
           <span id="live-clock">--:--:--</span>
         </div>
 
-        <div class="bg-zinc-900 px-3 py-1.5 rounded-lg border border-zinc-800 text-zinc-300 flex items-center gap-1.5">
+        <div class="bg-zinc-900 px-2.5 sm:px-3 py-1.5 rounded-lg border border-zinc-800 text-zinc-300 flex items-center gap-1.5">
           <span>👥</span>
           <span class="font-bold text-white mono" id="live-listener-count">2</span>
           <span class="hidden sm:inline text-zinc-500">dinleyici</span>
@@ -64,7 +64,7 @@
     </span>
     <div class="overflow-hidden w-full relative">
       <div id="marquee-content" class="marquee-text text-xs text-zinc-300 font-medium">
-        🎵 Şu An Çalıyor: Akustik Gece Dinletisi - VOM Radyo · 128 KBPS Kesintisiz Bulut Akışı · vom-blog.com/radyo
+        🎵 Şu An Çalıyor: Akustik Gece Dinletisi - VOM Radyo · 128 KBPS Kesintisiz Akış · vom-blog.com/radyo
       </div>
     </div>
   </div>
@@ -74,7 +74,7 @@
 
     <!-- Sol Kolon: Oynatıcı + Canlı Ses Barı + ALTA ALTA ŞARKI LİSTESİ -->
     <div class="lg:col-span-7 space-y-5">
-      <div class="p-6 rounded-2xl border border-zinc-800 bg-zinc-900/70 shadow-2xl space-y-5">
+      <div class="p-5 sm:p-6 rounded-2xl border border-zinc-800 bg-zinc-900/70 shadow-2xl space-y-5">
         <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-3 pb-4 border-b border-zinc-800">
           <div>
             <span class="text-[10px] text-zinc-500 font-mono uppercase tracking-wider block">ŞU AN YAYINDA</span>
@@ -94,7 +94,7 @@
         </div>
 
         <div class="flex items-center justify-between gap-4 pt-1">
-          <div class="flex items-center gap-3">
+          <div class="flex items-center gap-2 sm:gap-3">
             <button id="prev-btn" class="p-3 rounded-xl bg-zinc-800 hover:bg-zinc-700 text-zinc-300 transition-colors" title="Önceki">⏮</button>
             <button id="main-play-btn" class="w-14 h-14 rounded-full bg-orange-600 hover:bg-orange-500 text-white font-bold text-2xl flex items-center justify-center shadow-lg shadow-orange-600/30 transition-transform active:scale-95">▶</button>
             <button id="next-btn" class="p-3 rounded-xl bg-zinc-800 hover:bg-zinc-700 text-zinc-300 transition-colors" title="Sonraki">⏭</button>
@@ -102,7 +102,7 @@
 
           <div class="flex items-center gap-2 bg-zinc-950 px-3 py-2 rounded-xl border border-zinc-800">
             <span class="text-xs">🔊</span>
-            <input id="volume-range" type="range" min="0" max="1" step="0.05" value="0.85" class="w-20 sm:w-28 accent-orange-500 cursor-pointer" />
+            <input id="volume-range" type="range" min="0" max="1" step="0.05" value="0.85" class="w-16 sm:w-28 accent-orange-500 cursor-pointer" />
           </div>
         </div>
       </div>
@@ -120,8 +120,8 @@
       </div>
     </div>
 
-    <!-- Sağ Kolon: SOHBET (CANLI YAYINDA TÜM TELEFONLARDA OTOMATİK AÇILIR) -->
-    <div class="lg:col-span-5 flex flex-col h-[580px] rounded-2xl border border-zinc-800 bg-zinc-900/80 overflow-hidden shadow-2xl">
+    <!-- Sağ Kolon: SOHBET (MOBİLDE DIŞARI TAŞMAYAN MÜKEMMEL DÜZEN) -->
+    <div class="lg:col-span-5 flex flex-col h-[520px] sm:h-[580px] rounded-2xl border border-zinc-800 bg-zinc-900/80 overflow-hidden shadow-2xl">
       <div class="p-3.5 bg-zinc-950 border-b border-zinc-800 flex items-center justify-between">
         <span class="font-bold text-xs text-white flex items-center gap-1.5">
           <span>💬</span> Dinleyici Sohbeti
@@ -134,17 +134,45 @@
           <span class="text-2xl block">📻</span>
           <p class="font-bold text-zinc-300">Sohbet Şu An Kapalıdır</p>
           <p class="text-[11px] text-zinc-500 leading-relaxed">
-            Dinleyici sohbeti canlı yayın başladığında telefonunuzda ve tüm cihazlarda otomatik olarak açılacaktır. Keyifli dinlemeler!
+            Dinleyici sohbeti canlı yayın başladığında otomatik olarak açılacaktır. Keyifli dinlemeler!
           </p>
         </div>
       </div>
 
-      <!-- SOHBET FORMU: ÖNCE AD, SONRA MESAJ -->
+      <!-- SOHBET FORMU: MOBİLDE TAŞMAYAN DÜZEN -->
       <form id="chat-send-form" class="p-3 border-t border-zinc-800 bg-zinc-950 space-y-2 opacity-50 pointer-events-none">
-        <div class="flex gap-2">
-          <input id="sender-name" type="text" placeholder="Adınız..." maxlength="20" disabled class="w-1/3 px-3 py-2 rounded-xl bg-zinc-900 border border-zinc-700 text-xs text-white focus:outline-none focus:border-orange-500 placeholder:text-zinc-600 disabled:bg-zinc-950" required />
-          <input id="sender-message" type="text" placeholder="Sohbet canlı yayında açılır..." maxlength="150" disabled class="flex-1 px-3 py-2 rounded-xl bg-zinc-900 border border-zinc-700 text-xs text-white focus:outline-none focus:border-orange-500 placeholder:text-zinc-600 disabled:bg-zinc-950" required />
-          <button id="chat-send-btn" type="submit" disabled class="px-4 py-2 rounded-xl bg-orange-600 hover:bg-orange-500 disabled:opacity-40 text-white font-semibold text-xs shadow-md transition-all shrink-0">Gönder</button>
+        <div class="flex flex-col sm:flex-row gap-2 w-full">
+          <!-- AD KUTUSU -->
+          <input
+            id="sender-name"
+            type="text"
+            placeholder="Adınız..."
+            maxlength="20"
+            disabled
+            class="w-full sm:w-28 px-3 py-2.5 rounded-xl bg-zinc-900 border border-zinc-700 text-xs text-white focus:outline-none focus:border-orange-500 placeholder:text-zinc-600 disabled:bg-zinc-950 shrink-0"
+            required
+          />
+
+          <!-- MESAJ KUTUSU & GÖNDER BUTONU -->
+          <div class="flex gap-2 flex-1 w-full">
+            <input
+              id="sender-message"
+              type="text"
+              placeholder="Mesajınız..."
+              maxlength="150"
+              disabled
+              class="flex-1 min-w-0 px-3 py-2.5 rounded-xl bg-zinc-900 border border-zinc-700 text-xs text-white focus:outline-none focus:border-orange-500 placeholder:text-zinc-600 disabled:bg-zinc-950"
+              required
+            />
+            <button
+              id="chat-send-btn"
+              type="submit"
+              disabled
+              class="px-4 py-2.5 rounded-xl bg-orange-600 hover:bg-orange-500 disabled:opacity-40 text-white font-semibold text-xs shadow-md transition-all shrink-0"
+            >
+              Gönder
+            </button>
+          </div>
         </div>
       </form>
     </div>
@@ -158,7 +186,7 @@
     <button id="secret-admin-btn" class="text-zinc-700 hover:text-orange-400 transition-colors p-1" title="Yayın Masası">🔐</button>
   </footer>
 
-  <!-- GİZLİ ŞİFRE GİRİŞ MODALI (INPUT TYPE=PASSWORD) -->
+  <!-- GİZLİ ŞİFRE MODALI -->
   <div id="password-modal" class="fixed inset-0 z-50 bg-black/85 backdrop-blur-sm hidden items-center justify-center p-4">
     <div class="max-w-sm w-full bg-zinc-900 border border-zinc-800 rounded-2xl p-6 shadow-2xl space-y-4">
       <div class="flex items-center justify-between pb-2 border-b border-zinc-800">
@@ -182,32 +210,58 @@
     </div>
   </div>
 
-  <!-- SADECE SİZ DOĞRU ŞİFRE GİRİNCE AÇILAN YÖNETİM PENCERESİ -->
-  <div id="admin-modal" class="fixed inset-0 z-50 bg-black/80 backdrop-blur-sm hidden items-center justify-center p-4">
-    <div class="max-w-md w-full bg-zinc-900 border border-zinc-800 rounded-2xl p-6 shadow-2xl space-y-5">
+  <!-- SADECE SİZ DOĞRU ŞİFRE GİRİNCE AÇILAN YÖNETİM & CANLI YAYIN MASASI -->
+  <div id="admin-modal" class="fixed inset-0 z-50 bg-black/85 backdrop-blur-sm hidden items-center justify-center p-4">
+    <div class="max-w-lg w-full bg-zinc-900 border border-zinc-800 rounded-2xl p-6 shadow-2xl space-y-5 max-h-[90vh] overflow-y-auto">
       <div class="flex items-center justify-between pb-3 border-b border-zinc-800">
-        <h3 class="font-extrabold text-base text-white flex items-center gap-2"><span>🎙️</span> Yayıncı Masası</h3>
+        <h3 class="font-extrabold text-base text-white flex items-center gap-2"><span>🎙️</span> Yayıncı Masası & Canlı Yayın</h3>
         <button id="close-admin-modal" class="text-zinc-400 hover:text-white text-lg">✕</button>
       </div>
 
-      <div class="space-y-3">
-        <p class="text-xs text-zinc-400 leading-relaxed">
-          Butona bastığınız anda sinyal buluta gider; cep telefonunuz dahil tüm dinleyicilerin ekranında sayfa anında canlıya döner ve sohbet açılır!
+      <!-- Canlı Yayına Geç Butonu -->
+      <div class="p-4 rounded-xl bg-zinc-950 border border-zinc-800 space-y-2">
+        <span class="text-xs font-bold text-white block">1. Canlı Yayını Başlat</span>
+        <p class="text-[11px] text-zinc-400 leading-relaxed">
+          Butona bastığınız anda sinyal buluta gider; cep telefonunuz dahil tüm dinleyicilerin ekranında canlı yayın başlar ve sohbet açılır!
         </p>
 
-        <button id="toggle-broadcast-btn" class="w-full py-4 rounded-xl font-bold text-sm shadow-xl transition-all flex items-center justify-center gap-2 bg-red-600 hover:bg-red-500 text-white">
+        <button id="toggle-broadcast-btn" class="w-full py-3.5 rounded-xl font-bold text-sm shadow-xl transition-all flex items-center justify-center gap-2 bg-red-600 hover:bg-red-500 text-white mt-2">
           <span>🔴</span>
           <span id="broadcast-btn-text">CANLI YAYINA GEÇ (Sohbeti Aç)</span>
         </button>
       </div>
 
+      <!-- CANLI SES BAĞLANTI AYARI -->
+      <div class="p-4 rounded-xl bg-zinc-950 border border-zinc-800 space-y-3 text-xs">
+        <span class="text-xs font-bold text-orange-400 block">2. Canlı Yayın Ses Akış Linki (Canlı Miks)</span>
+        <p class="text-zinc-300 text-[11px] leading-relaxed">
+          Virtual DJ'den internete bastığınız canlı sesin dinleyicilere ulaşması için canlı yayın akış linkinizi buraya girebilirsiniz:
+        </p>
+
+        <div class="space-y-1">
+          <label class="text-[11px] text-zinc-400">Canlı Ses Akış URL'niz (Mount URL):</label>
+          <input
+            id="custom-stream-url"
+            type="url"
+            placeholder="Örn: https://stream.zeno.fm/... veya Icecast canlı linki"
+            class="w-full px-3 py-2 rounded-lg bg-zinc-900 border border-zinc-700 text-white text-xs font-mono focus:outline-none focus:border-orange-500"
+          />
+        </div>
+
+        <div class="p-2.5 rounded-lg bg-zinc-900 border border-zinc-800/80 text-[10px] text-zinc-400 space-y-1">
+          <strong class="text-zinc-200 block">Virtual DJ Ayarları (Ayarlar &gt; Broadcast):</strong>
+          <div>• <strong>Protocol:</strong> Icecast 2 / Shoutcast</div>
+          <div>• <strong>Format:</strong> MP3 / 128 kbps / 44100 Hz</div>
+          <div>• <strong>Master Ses:</strong> Virtual DJ ana çıkışını aktarır.</div>
+        </div>
+      </div>
+
       <div class="pt-2 border-t border-zinc-800 flex justify-end">
-        <button id="close-admin-modal-2" class="px-4 py-2 rounded-lg bg-zinc-800 hover:bg-zinc-700 text-zinc-300 text-xs font-semibold">Kapat</button>
+        <button id="close-admin-modal-2" class="px-5 py-2.5 rounded-xl bg-zinc-800 hover:bg-zinc-700 text-zinc-300 text-xs font-semibold">Kapat</button>
       </div>
     </div>
   </div>
 
-  <!-- JAVASCRIPT: BULUT REALTIME EŞİTLEME (SSE) -->
   <script>
     // 1. CANLI SAAT
     const clockEl = document.getElementById("live-clock");
@@ -281,7 +335,6 @@
     let isLiveBroadcast = false;
     let myDevId = "dev_" + Math.random().toString(36).substr(2, 6);
 
-    // SSE: Cep Telefonu ve Diğer Tüm Dinleyiciler Anında Sinyal Alır!
     try {
       const liveEvents = new EventSource(`https://ntfy.sh/${NTFY_TOPIC}/sse`);
       liveEvents.onmessage = (event) => {
@@ -290,14 +343,13 @@
           if (envelope.event === "message" && envelope.message) {
             const payload = JSON.parse(envelope.message);
             if (payload.action === "SET_LIVE") {
-              applyBroadcastState(payload.live);
+              applyBroadcastState(payload.live, payload.customStreamUrl);
             }
           }
         } catch(err) {}
       };
     } catch(e) {}
 
-    // Cep Telefonu Sayfayı İlk Açtığında Son Durumu Öğrenir
     async function checkCurrentLiveStatus() {
       try {
         const res = await fetch(`https://ntfy.sh/${NTFY_TOPIC}/json?poll=1&since=30m`);
@@ -309,7 +361,7 @@
             if (data.event === "message" && data.message) {
               const payload = JSON.parse(data.message);
               if (payload.action === "SET_LIVE") {
-                applyBroadcastState(payload.live);
+                applyBroadcastState(payload.live, payload.customStreamUrl);
                 break;
               }
             }
@@ -320,7 +372,6 @@
     checkCurrentLiveStatus();
     setInterval(checkCurrentLiveStatus, 5000);
 
-    // Canlı Sohbet Eşitlemesi (Laptoptan Yazınca Telefona, Telefondan Yazınca Laptopa Düşer)
     try {
       const chatEvents = new EventSource(`https://ntfy.sh/${NTFY_CHAT_TOPIC}/sse`);
       chatEvents.onmessage = (event) => {
@@ -346,16 +397,17 @@
     const statusDot = document.getElementById("status-dot");
     const stationStatusText = document.getElementById("station-status-text");
     const marqueeBadge = document.getElementById("marquee-badge");
+    const customStreamInput = document.getElementById("custom-stream-url");
 
-    function applyBroadcastState(live) {
+    function applyBroadcastState(live, liveStreamUrl) {
       isLiveBroadcast = live;
 
       if (live) {
         statusDot.className = "w-2 h-2 rounded-full bg-red-500 animate-ping";
         stationStatusText.textContent = "🔴 CANLI YAYIN (ON AIR)";
         stationStatusText.className = "text-[11px] font-bold text-red-500";
-        nowPlayingTitle.textContent = "🎙️ Canlı Yayın / Virtual DJ";
-        nowPlayingArtist.textContent = "Laptoptan Canlı Bağlantı";
+        nowPlayingTitle.textContent = "🎙️ Canlı Yayın";
+        nowPlayingArtist.textContent = "Stüdyo Yayında";
         marqueeBadge.className = "text-xs bg-red-600 text-white font-bold px-2 py-0.5 rounded mr-3 shrink-0 uppercase tracking-wider text-[10px] animate-pulse";
         marqueeBadge.textContent = "CANLI YAYIN";
         marqueeContent.textContent = "🔴 DİKKAT: VOM Radyo Canlı Yayında! Dinleyici sohbeti açıldı, mesajlarınızı yazabilirsiniz.";
@@ -367,8 +419,13 @@
         chatForm.className = "p-3 border-t border-zinc-800 bg-zinc-950 space-y-2 opacity-100";
         senderName.disabled = false;
         senderMessage.disabled = false;
-        senderMessage.placeholder = "Canlı yayına mesaj yazın...";
+        senderMessage.placeholder = "Mesajınız...";
         chatSendBtn.disabled = false;
+
+        if (liveStreamUrl) {
+          audio.src = liveStreamUrl;
+          if (isPlaying) audio.play().catch(() => {});
+        }
       } else {
         statusDot.className = "w-2 h-2 rounded-full bg-emerald-500 animate-pulse";
         stationStatusText.textContent = "7/24 BULUT YAYINDA";
@@ -389,6 +446,9 @@
         senderMessage.disabled = true;
         senderMessage.placeholder = "Sohbet canlı yayında açılır...";
         chatSendBtn.disabled = true;
+
+        audio.src = t.url;
+        if (isPlaying) audio.play().catch(() => startSynth());
       }
     }
 
@@ -437,27 +497,26 @@
     function updateAdminModalBtn() {
       if (isLiveBroadcast) {
         broadcastBtnText.textContent = "⏹ Canlı Yayını Bitir (Buluta Dön & Sohbeti Kapat)";
-        toggleBroadcastBtn.className = "w-full py-4 rounded-xl font-bold text-sm shadow-xl transition-all flex items-center justify-center gap-2 bg-zinc-800 hover:bg-zinc-700 text-white";
+        toggleBroadcastBtn.className = "w-full py-3.5 rounded-xl font-bold text-sm shadow-xl transition-all flex items-center justify-center gap-2 bg-zinc-800 hover:bg-zinc-700 text-white";
       } else {
         broadcastBtnText.textContent = "🔴 CANLI YAYINA GEÇ (Sohbeti Aç)";
-        toggleBroadcastBtn.className = "w-full py-4 rounded-xl font-bold text-sm shadow-xl transition-all flex items-center justify-center gap-2 bg-red-600 hover:bg-red-500 text-white";
+        toggleBroadcastBtn.className = "w-full py-3.5 rounded-xl font-bold text-sm shadow-xl transition-all flex items-center justify-center gap-2 bg-red-600 hover:bg-red-500 text-white";
       }
     }
 
     closeAdminModal.onclick = () => { adminModal.classList.add("hidden"); adminModal.classList.remove("flex"); };
     closeAdminModal2.onclick = () => { adminModal.classList.add("hidden"); adminModal.classList.remove("flex"); };
 
-    // LAPTOPTAN BUTONA BASTIĞINIZ ANDA CEP TELEFONUNA ANINDA İLETİLİR!
     toggleBroadcastBtn.onclick = async () => {
       const newState = !isLiveBroadcast;
-      applyBroadcastState(newState);
+      const liveUrl = customStreamInput ? customStreamInput.value.trim() : "";
+      applyBroadcastState(newState, liveUrl);
       updateAdminModalBtn();
 
-      // Buluta anında sinyal fırlat
       try {
         await fetch(`https://ntfy.sh/${NTFY_TOPIC}`, {
           method: 'POST',
-          body: JSON.stringify({ action: "SET_LIVE", live: newState, time: Date.now() })
+          body: JSON.stringify({ action: "SET_LIVE", live: newState, customStreamUrl: liveUrl, time: Date.now() })
         });
       } catch(err) {
         console.error("Yayın sinyali hatası:", err);
@@ -581,7 +640,6 @@
       renderIncomingMessage(name, text, timeStr);
       senderMessage.value = "";
 
-      // İnternet üzerinden cep telefonuna veya diğer dinleyicilere gönder
       try {
         await fetch(`https://ntfy.sh/${NTFY_CHAT_TOPIC}`, {
           method: 'POST',
