@@ -77,7 +77,6 @@
         <div class="bg-zinc-900 px-2.5 sm:px-3 py-1.5 rounded-lg border border-zinc-800 text-zinc-300 flex items-center gap-1.5">
           <span>👥</span>
           <span class="font-bold text-white mono" id="live-listener-count">1</span>
-          <span class="hidden sm:inline text-zinc-500">dinleyici</span>
         </div>
       </div>
     </div>
@@ -488,6 +487,23 @@
     window.addEventListener("touchstart", unlockAppleAudio, { once: true, passive: true });
     window.addEventListener("click", unlockAppleAudio, { once: true, passive: true });
 
+    // DÜZELTME 5: CANLI YAYIN BAŞLADI BANDI TIKLAMA İŞLEMCİSİ
+    if (mobileLiveAlert) {
+      mobileLiveAlert.onclick = () => {
+        mobileLiveAlert.classList.add("hidden");
+        unlockAppleAudio();
+        // Admin peer ID'yi ntfy'den bul ve bağlan
+        checkCurrentLiveStatus();
+        // Ses çal
+        setTimeout(() => {
+          if (webrtcAudio && webrtcAudio.srcObject) {
+            webrtcAudio.play().catch(() => {});
+          }
+          togglePlay();
+        }, 300);
+      };
+    }
+
     // Apple Kilit Ekranı (MediaSession API)
     function updateAppleMediaSession(title, artist) {
       if ('mediaSession' in navigator) {
@@ -541,13 +557,23 @@
           conn.on('close', () => { 
             connectedPeerClients = connectedPeerClients.filter(c => c !== conn); 
             updateListenerCount();
+            // Tüm bağlı dinleyicilere güncel sayıyı gönder
+            connectedPeerClients.forEach(c => {
+              try { if (c.open) c.send({ action: "LISTENER_COUNT", count: connectedPeerClients.length + 1 }); } catch(e) {}
+            });
           });
           conn.on('open', () => {
             conn.send({ action: "SET_LIVE", live: isLiveBroadcast });
+            // Yeni dinleyiciye güncel sayıyı gönder
+            conn.send({ action: "LISTENER_COUNT", count: connectedPeerClients.length + 1 });
           });
           conn.on('data', (d) => {
             if (d && d.action === "REQUEST_STREAM" && broadcastDest && broadcastDest.stream) {
               adminPeer.call(conn.peer, broadcastDest.stream);
+            } else if (d && d.action === "REQUEST_COUNT") {
+              try {
+                conn.send({ action: "LISTENER_COUNT", count: connectedPeerClients.length + 1 });
+              } catch(e) {}
             }
           });
         });
@@ -573,13 +599,28 @@
                 });
               }
             });
+            call.on('data', (data) => {
+              if (data && data.action === "LISTENER_COUNT") {
+                const el = document.getElementById("live-listener-count");
+                if (el) el.textContent = data.count;
+              }
+            });
           });
         }
         if (!listenerInitialized) {
           listenerInitialized = true;
           listenerPeer.on('open', () => {
             const conn = listenerPeer.connect(targetPeerId);
-            conn.on('open', () => conn.send({ action: "REQUEST_STREAM" }));
+            conn.on('open', () => {
+              conn.send({ action: "REQUEST_STREAM" });
+              conn.send({ action: "REQUEST_COUNT" });
+            });
+            conn.on('data', (data) => {
+              if (data && data.action === "LISTENER_COUNT") {
+                const el = document.getElementById("live-listener-count");
+                if (el) el.textContent = data.count;
+              }
+            });
           });
         }
       } catch(e) {}
@@ -588,6 +629,17 @@
     function updateListenerCount() {
       const el = document.getElementById("live-listener-count");
       if (el) el.textContent = connectedPeerClients.length + 1;
+
+      // HER DİNLEYİCİYE de gönder
+      connectedPeerClients.forEach(conn => {
+        try { 
+          if (conn.open) {
+            conn.send({ action: "LISTENER_COUNT", count: connectedPeerClients.length + 1 });
+          }
+        } catch(e) {}
+      });
+
+      // ntfy.sh'e de gönder
       if (currentAdminPeerId) {
         fetch(`https://ntfy.sh/${NTFY_TOPIC}`, {
           method: 'POST',
@@ -887,7 +939,7 @@
     }
 
     // ==========================================
-    // DÜZELTME 5: EQUALIZER (64 ÇUBUK, 1.5PX GENİŞLİK, SABİT ZARİF ÇUBUKLAR)
+    // DÜZELTME 1: EQUALIZER (64 ÇUBUK, 48PX YÜKSEKLİK)
     // ==========================================
     function drawBars() {
       requestAnimationFrame(drawBars);
@@ -906,11 +958,10 @@
       gradient.addColorStop(1, "#fbbf24");
 
       for (let i = 0; i < barCount; i++) {
-        let barH = 2; // minimum yükseklik
+        let barH = 4;
         if (isPlaying) {
-          // Dalga yerine hafif rastgele titreşim (daha zarif)
           const noise = Math.sin(Date.now() / 300 + i * 0.5) * 0.5 + 0.5;
-          barH = 2 + noise * 10; // 2-12px arası
+          barH = 4 + noise * (h - 8); // 4px - (h-4)px arası
         }
         const x = startX + i * (barWidth + gap);
         const y = h - barH;
@@ -966,11 +1017,6 @@
 
         if (mobileLiveAlert) {
           mobileLiveAlert.classList.remove("hidden");
-          mobileLiveAlert.onclick = () => {
-            mobileLiveAlert.classList.add("hidden");
-            if (peerId) connectToAdminPeer(peerId);
-            togglePlay();
-          };
         }
 
         // Admin peer başlat & broadcastDest oluştur
@@ -1101,29 +1147,40 @@
       localFileSelector.onchange = (e) => {
         const files = Array.from(e.target.files);
         if (!files.length) return;
-        unlockAppleAudio();
-        initAdminPeer();
-        createBroadcastStream();
 
-        localTracks = files.map((file, idx) => ({
-          id: 'local_' + idx,
-          name: file.name.replace(/\.[^/.]+$/, ""),
-          url: URL.createObjectURL(file)
-        }));
+        // Önce görsel geri bildirim (buton rengi değişsin)
+        pickFilesBtn.textContent = "⏳ Yükleniyor...";
+        pickFilesBtn.disabled = true;
 
-        isLocalQueueActive = true;
-        currentLocalTrackIdx = 0;
+        setTimeout(() => {
+          unlockAppleAudio();
+          initAdminPeer();
+          createBroadcastStream();
 
-        if (queueStatusBanner && queueCountText) {
-          queueCountText.textContent = `${files.length} Şarkı Sıraya Alındı`;
-          queueStatusBanner.classList.remove("hidden");
-        }
+          localTracks = files.map((file, idx) => ({
+            id: 'local_' + idx,
+            name: file.name.replace(/\.[^/.]+$/, ""),
+            url: URL.createObjectURL(file)
+          }));
 
-        applyBroadcastState(true, null, currentAdminPeerId);
-        updateAdminModalBtn();
-        renderLocalPlaylistUI();
-        renderTracklist();
-        playLocalTrack(0);
+          isLocalQueueActive = true;
+          currentLocalTrackIdx = 0;
+
+          if (queueStatusBanner && queueCountText) {
+            queueCountText.textContent = `${files.length} Şarkı Sıraya Alındı`;
+            queueStatusBanner.classList.remove("hidden");
+          }
+
+          applyBroadcastState(true, null, currentAdminPeerId);
+          updateAdminModalBtn();
+          renderLocalPlaylistUI();
+          renderTracklist();
+          playLocalTrack(0);
+
+          // Butonu eski haline getir
+          pickFilesBtn.textContent = "📂 Şarkıları Seç (Toplu Seçim)";
+          pickFilesBtn.disabled = false;
+        }, 100);
       };
     }
 
