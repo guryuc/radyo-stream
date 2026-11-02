@@ -227,8 +227,35 @@
   </div>
 
   <script>
-    const NTFY_TOPIC = "vom_radio_live_guryuc_channel_99f2a7b8e1";
-    const NTFY_CHAT_TOPIC = "vom_radio_chat_guryuc_channel_99f2a7b8e1";
+    // CLOUDFLARE WORKER WEBSOCKET BAĞLANTISI
+    const WS_URL = 'wss://radyo-yayin.guryuc.workers.dev';
+    let ws = null, wsConnected = false, wsReconnectTimer = null;
+
+    function connectWebSocket() {
+      if (ws && (ws.readyState === WebSocket.OPEN || ws.readyState === WebSocket.CONNECTING)) return;
+      try {
+        ws = new WebSocket(WS_URL);
+        ws.onopen = () => { console.log("WS bağlandı"); wsConnected = true; };
+        ws.onmessage = (event) => {
+          try { handleIncomingPayload(JSON.parse(event.data)); } catch(e) {}
+        };
+        ws.onclose = () => {
+          wsConnected = false; ws = null;
+          if (wsReconnectTimer) clearTimeout(wsReconnectTimer);
+          wsReconnectTimer = setTimeout(connectWebSocket, 3000);
+        };
+        ws.onerror = (err) => { console.warn("WS hatası:", err); ws.close(); };
+      } catch(e) {
+        if (wsReconnectTimer) clearTimeout(wsReconnectTimer);
+        wsReconnectTimer = setTimeout(connectWebSocket, 3000);
+      }
+    }
+    function sendWS(data) {
+      if (ws && ws.readyState === WebSocket.OPEN) ws.send(JSON.stringify(data));
+    }
+    connectWebSocket();
+
+    // GLOBAL DEĞİŞKENLER
     const isIOS = /iPad|iPhone|iPod/.test(navigator.userAgent) || (navigator.platform === 'MacIntel' && navigator.maxTouchPoints > 1);
     let isPlaying = false, isLiveBroadcast = false, isLocalQueueActive = false;
     let currentTrackIdx = 0, currentLocalTrackIdx = 0, localTracks = [];
@@ -258,6 +285,7 @@
 
     if (isIOS) { const h = document.getElementById("ios-volume-hint"); if (h) h.classList.remove("hidden"); }
 
+    // DOM REFERANSLARI
     const clockEl = document.getElementById("live-clock");
     const tracklistContainer = document.getElementById("tracklist-container");
     const nowPlayingTitle = document.getElementById("now-playing-title");
@@ -312,11 +340,13 @@
     const talkoverBtnText = document.getElementById("talkover-btn-text");
     const canvas = document.getElementById("audio-bars");
     const canvasCtx = canvas ? canvas.getContext("2d") : null;
+    const clearChatBtn = document.getElementById("clear-chat-btn");
 
+    // APPLE AUDIO
     let audioCtx = null, AudioCtxClass = window.AudioContext || window.webkitAudioContext;
     function unlockAppleAudio() {
       if (!audioCtx && AudioCtxClass) { try { audioCtx = new AudioCtxClass(); } catch(e) {} }
-      if (audioCtx && audioCtx.state === "suspended") { audioCtx.resume().catch(() => {}); }
+      if (audioCtx && audioCtx.state === "suspended") audioCtx.resume().catch(() => {});
       if (audioCtx) {
         try {
           const buffer = audioCtx.createBuffer(1, 1, 22050);
@@ -332,9 +362,8 @@
       mobileLiveAlert.onclick = () => {
         mobileLiveAlert.classList.add("hidden");
         unlockAppleAudio();
-        checkCurrentLiveStatus();
         setTimeout(() => {
-          if (webrtcAudio && webrtcAudio.srcObject) { webrtcAudio.play().catch(() => {}); }
+          if (webrtcAudio && webrtcAudio.srcObject) webrtcAudio.play().catch(() => {});
           togglePlay();
         }, 300);
       };
@@ -353,27 +382,25 @@
       }
     }
 
+    // PEERJS
     function createBroadcastStream() {
       if (broadcastDest && broadcastDest.stream) return broadcastDest;
       try {
         if (audio.captureStream) {
           broadcastDest = { stream: audio.captureStream() };
-          console.log("captureStream OK");
           return broadcastDest;
         }
         const ctx = new (window.AudioContext || window.webkitAudioContext)();
         broadcastDest = ctx.createMediaStreamDestination();
         const src = ctx.createMediaElementSource(audio);
         src.connect(broadcastDest); src.connect(ctx.destination);
-        console.log("AudioContext OK");
       } catch(e) {
-        console.warn("Broadcast hata:", e);
         try {
           const ctx = new (window.AudioContext || window.webkitAudioContext)();
           broadcastDest = ctx.createMediaStreamDestination();
           const src = ctx.createMediaElementSource(audio);
           src.connect(broadcastDest); src.connect(ctx.destination);
-        } catch(e2) { console.warn("Fallback hata:", e2); }
+        } catch(e2) {}
       }
       return broadcastDest;
     }
@@ -385,19 +412,13 @@
         adminPeer.on('open', (id) => {
           currentAdminPeerId = id;
           if (webrtcStatusBadge) webrtcStatusBadge.textContent = "Hazır (" + id.substring(0,5) + ")";
-          fetch(`https://ntfy.sh/${NTFY_TOPIC}`, { method: 'POST', body: JSON.stringify({ action: "ADMIN_PEER_ID", peerId: id, live: isLiveBroadcast, time: Date.now() }) }).catch(() => {});
+          sendWS({ action: "ADMIN_PEER_ID", peerId: id, live: isLiveBroadcast });
         });
         adminPeer.on('connection', (conn) => {
           connectedPeerClients.push(conn);
-          updateListenerCount();
-          conn.on('close', () => { 
-            connectedPeerClients = connectedPeerClients.filter(c => c !== conn); 
-            updateListenerCount();
-          });
+          conn.on('close', () => { connectedPeerClients = connectedPeerClients.filter(c => c !== conn); });
           conn.on('open', () => {
             conn.send({ action: "SET_LIVE", live: isLiveBroadcast });
-            conn.send({ action: "LISTENER_COUNT", count: connectedPeerClients.length + 1 });
-            // Stream hazırsa hemen gönder
             if (broadcastDest && broadcastDest.stream) {
               try { adminPeer.call(conn.peer, broadcastDest.stream); } catch(e) {}
             }
@@ -405,8 +426,6 @@
           conn.on('data', (d) => {
             if (d && d.action === "REQUEST_STREAM" && broadcastDest && broadcastDest.stream) {
               adminPeer.call(conn.peer, broadcastDest.stream);
-            } else if (d && d.action === "REQUEST_COUNT") {
-              try { conn.send({ action: "LISTENER_COUNT", count: connectedPeerClients.length + 1 }); } catch(e) {}
             }
           });
         });
@@ -432,48 +451,19 @@
                 });
               }
             });
-            call.on('data', (data) => {
-              if (data && data.action === "LISTENER_COUNT") {
-                const el = document.getElementById("live-listener-count");
-                if (el) el.textContent = data.count;
-              } else if (data && data.action === "CLEAR_CHAT") {
-                if (chatMessages) chatMessages.innerHTML = '<div class="p-4 rounded-xl bg-zinc-950/80 border border-zinc-800 text-center space-y-2"><span class="text-2xl block">📻</span><p class="font-bold text-zinc-300">Sohbet Temizlendi</p></div>';
-              }
-            });
           });
         }
         if (!listenerInitialized) {
           listenerInitialized = true;
           listenerPeer.on('open', () => {
             const conn = listenerPeer.connect(targetPeerId);
-            conn.on('open', () => {
-              conn.send({ action: "REQUEST_STREAM" });
-              conn.send({ action: "REQUEST_COUNT" });
-            });
-            conn.on('data', (data) => {
-              if (data && data.action === "LISTENER_COUNT") {
-                const el = document.getElementById("live-listener-count");
-                if (el) el.textContent = data.count;
-              } else if (data && data.action === "CLEAR_CHAT") {
-                if (chatMessages) chatMessages.innerHTML = '<div class="p-4 rounded-xl bg-zinc-950/80 border border-zinc-800 text-center space-y-2"><span class="text-2xl block">📻</span><p class="font-bold text-zinc-300">Sohbet Temizlendi</p></div>';
-              }
-            });
+            conn.on('open', () => conn.send({ action: "REQUEST_STREAM" }));
           });
         }
       } catch(e) {}
     }
 
-    function updateListenerCount() {
-      const el = document.getElementById("live-listener-count");
-      if (el) el.textContent = connectedPeerClients.length + 1;
-      connectedPeerClients.forEach(conn => {
-        try { if (conn.open) conn.send({ action: "LISTENER_COUNT", count: connectedPeerClients.length + 1 }); } catch(e) {}
-      });
-      if (currentAdminPeerId) {
-        fetch(`https://ntfy.sh/${NTFY_TOPIC}`, { method: 'POST', body: JSON.stringify({ action: "LISTENER_COUNT", count: connectedPeerClients.length + 1, peerId: currentAdminPeerId, time: Date.now() }) }).catch(() => {});
-      }
-    }
-
+    // SES KONTROLÜ
     function formatTime(seconds) {
       if (!seconds || isNaN(seconds) || seconds < 0 || !isFinite(seconds)) return "00:00";
       const m = Math.floor(seconds / 60), s = Math.floor(seconds % 60);
@@ -574,6 +564,7 @@
       if (isPlaying) audio.play().catch(() => {});
     }
 
+    // ÇALMA LİSTESİ RENDER
     function renderTracklist() {
       if (!tracklistContainer) return;
       tracklistContainer.innerHTML = "";
@@ -604,6 +595,7 @@
       }
     }
 
+    // EQUALIZER
     function drawBars() {
       requestAnimationFrame(drawBars);
       if (!canvas || !canvasCtx) return;
@@ -629,10 +621,10 @@
     }
     drawBars();
 
+    // YAYIN DURUMU
     function applyBroadcastState(live, liveStreamUrl, peerId) {
       isLiveBroadcast = live;
       if (live) {
-        if (!currentAdminPeerId && audio) { audio.pause(); audio.srcObject = null; }
         if (statusDot) statusDot.className = "w-2 h-2 rounded-full bg-red-500 animate-ping";
         if (stationStatusText) { stationStatusText.textContent = "🔴 CANLI YAYIN (ON AIR)"; stationStatusText.className = "text-[11px] font-bold text-red-500"; }
         if (nowPlayingArtist) nowPlayingArtist.textContent = "Stüdyo Canlı Yayında (ON AIR)";
@@ -646,11 +638,6 @@
         if (mobileLiveAlert) mobileLiveAlert.classList.remove("hidden");
         initAdminPeer();
         if (!broadcastDest) { try { createBroadcastStream(); } catch(e) {} }
-        setTimeout(() => {
-          if (broadcastDest && broadcastDest.stream && adminPeer) {
-            connectedPeerClients.forEach(conn => { try { if (conn.open) adminPeer.call(conn.peer, broadcastDest.stream); } catch(e) {} });
-          }
-        }, 500);
       } else {
         if (mobileLiveAlert) mobileLiveAlert.classList.add("hidden");
         if (statusDot) statusDot.className = "w-2 h-2 rounded-full bg-emerald-500 animate-pulse";
@@ -672,87 +659,40 @@
       if (peerId) connectToAdminPeer(peerId);
     }
 
-    let liveEvents = null;
-    function startLiveSSE() {
-      try {
-        liveEvents = new EventSource(`https://ntfy.sh/${NTFY_TOPIC}/sse`);
-        liveEvents.onmessage = (event) => {
-          try {
-            const envelope = JSON.parse(event.data);
-            if (envelope.event === "message" && envelope.message) {
-              const payload = JSON.parse(envelope.message);
-              if (payload.action === "SET_LIVE") applyBroadcastState(payload.live, payload.customStreamUrl, payload.peerId);
-              else if (payload.action === "ADMIN_PEER_ID" && payload.peerId) connectToAdminPeer(payload.peerId);
-              else if (payload.action === "LISTENER_COUNT" && payload.count) { const el = document.getElementById("live-listener-count"); if (el) el.textContent = payload.count; }
-              else if (payload.action === "CLEAR_CHAT") { if (chatMessages) chatMessages.innerHTML = '<div class="p-4 rounded-xl bg-zinc-950/80 border border-zinc-800 text-center space-y-2"><span class="text-2xl block">📻</span><p class="font-bold text-zinc-300">Sohbet Temizlendi</p></div>'; }
-            }
-          } catch(err) {}
-        };
-        liveEvents.onerror = () => { if (liveEvents) liveEvents.close(); setTimeout(startLiveSSE, 5000); };
-      } catch(e) { setTimeout(startLiveSSE, 5000); }
+    // GELEN MESAJLAR
+    function handleIncomingPayload(payload) {
+      if (payload.action === "SET_LIVE") applyBroadcastState(payload.live, payload.customStreamUrl, payload.peerId);
+      else if (payload.action === "ADMIN_PEER_ID" && payload.peerId) connectToAdminPeer(payload.peerId);
+      else if (payload.action === "CLEAR_CHAT") { if (chatMessages) chatMessages.innerHTML = '<div class="p-4 rounded-xl bg-zinc-950/80 border border-zinc-800 text-center space-y-2"><span class="text-2xl block">📻</span><p class="font-bold text-zinc-300">Sohbet Temizlendi</p></div>'; }
+      else if (payload.action === "LISTENER_COUNT" && payload.count) { const el = document.getElementById("live-listener-count"); if (el) el.textContent = payload.count; }
+      else if (payload.type === "message" && payload.msg) { renderIncomingMessage("Dinleyici", payload.msg, ""); }
     }
-    startLiveSSE();
 
-    async function checkCurrentLiveStatus() {
-      try {
-        const res = await fetch(`https://ntfy.sh/${NTFY_TOPIC}/json?poll=1&since=30m`, { mode: 'cors' });
-        const text = await res.text();
-        const lines = text.trim().split("\n");
-        let foundLive = null, foundPeerId = null, foundTrack = null;
-        for (let i = 0; i < lines.length; i++) {
-          try {
-            const data = JSON.parse(lines[i]);
-            if (data.event === "message" && data.message) {
-              const payload = JSON.parse(data.message);
-              if (payload.action === "SET_LIVE") foundLive = payload;
-              else if (payload.action === "ADMIN_PEER_ID" && payload.peerId) foundPeerId = payload.peerId;
-              else if (payload.action === "HEARTBEAT" && payload.live) foundLive = payload;
-              else if (payload.action === "TRACK_INFO" && payload.name) foundTrack = payload.name;
-            }
-          } catch(e) {}
-        }
-        if (foundPeerId) connectToAdminPeer(foundPeerId);
-        if (foundLive) applyBroadcastState(foundLive.live, foundLive.customStreamUrl, foundLive.peerId);
-        if (foundTrack && nowPlayingTitle) nowPlayingTitle.textContent = foundTrack;
-      } catch(e) {}
-    }
-    checkCurrentLiveStatus();
-    document.addEventListener("visibilitychange", () => { if (!document.hidden) checkCurrentLiveStatus(); });
-
+    // DOSYA SEÇ
     if (pickFilesBtn && localFileSelector) {
-      pickFilesBtn.onclick = () => {
-        pickFilesBtn.textContent = "📂 Dosya Seçici Açılıyor...";
-        localFileSelector.click();
-        setTimeout(() => { pickFilesBtn.textContent = "📂 Şarkıları Seç (Toplu Seçim)"; }, 500);
-      };
+      pickFilesBtn.onclick = () => localFileSelector.click();
       localFileSelector.onchange = (e) => {
         const files = Array.from(e.target.files);
         if (!files.length) return;
-        pickFilesBtn.textContent = "⏳ Yükleniyor...";
-        pickFilesBtn.disabled = true;
+        pickFilesBtn.textContent = "⏳ Yükleniyor..."; pickFilesBtn.disabled = true;
         setTimeout(() => {
-          unlockAppleAudio();
-          initAdminPeer();
-          createBroadcastStream();
+          unlockAppleAudio(); initAdminPeer(); createBroadcastStream();
           localTracks = files.map((file, idx) => ({ id: 'local_' + idx, name: file.name.replace(/\.[^/.]+$/, ""), url: URL.createObjectURL(file) }));
-          isLocalQueueActive = true;
-          currentLocalTrackIdx = 0;
+          isLocalQueueActive = true; currentLocalTrackIdx = 0;
           if (queueStatusBanner && queueCountText) { queueCountText.textContent = `${files.length} Şarkı Sıraya Alındı`; queueStatusBanner.classList.remove("hidden"); }
           applyBroadcastState(true, null, currentAdminPeerId);
           updateAdminModalBtn();
           renderLocalPlaylistUI();
           renderTracklist();
           playLocalTrack(0);
-          pickFilesBtn.textContent = "📂 Şarkıları Seç (Toplu Seçim)";
-          pickFilesBtn.disabled = false;
+          pickFilesBtn.textContent = "📂 Şarkıları Seç (Toplu Seçim)"; pickFilesBtn.disabled = false;
         }, 100);
       };
     }
 
     function renderLocalPlaylistUI() {
       if (!localPlaylistBox) return;
-      localPlaylistBox.innerHTML = "";
-      localPlaylistBox.classList.remove("hidden");
+      localPlaylistBox.innerHTML = ""; localPlaylistBox.classList.remove("hidden");
       localTracks.forEach((t, i) => {
         const isCurrent = isLocalQueueActive && i === currentLocalTrackIdx;
         const row = document.createElement("div");
@@ -765,23 +705,19 @@
 
     function playLocalTrack(idx) {
       if (!localTracks || !localTracks[idx]) return;
-      currentLocalTrackIdx = idx;
-      isLocalQueueActive = true;
-      unlockAppleAudio();
+      currentLocalTrackIdx = idx; isLocalQueueActive = true; unlockAppleAudio();
       const track = localTracks[idx];
       audio.pause(); audio.src = track.url; audio.load();
       audio.play().then(() => {
-        isPlaying = true;
-        if (mainPlayBtn) mainPlayBtn.textContent = "⏸";
+        isPlaying = true; if (mainPlayBtn) mainPlayBtn.textContent = "⏸";
         if (nowPlayingTitle) nowPlayingTitle.textContent = track.name;
         if (nowPlayingArtist) nowPlayingArtist.textContent = isLiveBroadcast ? "Stüdyo Yayında (ON AIR)" : "DJ Sırası";
-        updateTopMarquee(track.name);
-        updateAppleMediaSession(track.name, "VOM DJ Canlı");
+        updateTopMarquee(track.name); updateAppleMediaSession(track.name, "VOM DJ Canlı");
       }).catch(err => console.warn("Yerel parça hatası:", err));
-      renderLocalPlaylistUI();
-      renderTracklist();
+      renderLocalPlaylistUI(); renderTracklist();
     }
 
+    // MİKROFON
     let isTalking = false, micStream = null;
     if (talkoverMicBtn) {
       talkoverMicBtn.onclick = async () => {
@@ -803,6 +739,7 @@
       };
     }
 
+    // ADMİN
     if (secretAdminBtn) secretAdminBtn.onclick = () => {
       if (adminPassInput) adminPassInput.value = "";
       if (passErrorMsg) passErrorMsg.classList.add("hidden");
@@ -816,17 +753,11 @@
         e.preventDefault();
         const entered = adminPassInput ? adminPassInput.value.trim() : "";
         if (entered === "vom2026" || entered === "admin123") {
-          passwordModal.classList.add("hidden");
-          passwordModal.classList.remove("flex");
-          unlockAppleAudio();
-          initAdminPeer();
-          try { createBroadcastStream(); console.log("Broadcast stream hazır:", broadcastDest); } catch(e) { console.warn("Broadcast hata:", e); }
-          setTimeout(() => { if (!broadcastDest && audio) { try { createBroadcastStream(); } catch(e) {} } }, 1500);
+          passwordModal.classList.add("hidden"); passwordModal.classList.remove("flex");
+          unlockAppleAudio(); initAdminPeer(); createBroadcastStream();
           updateAdminModalBtn();
           if (adminModal) { adminModal.classList.remove("hidden"); adminModal.classList.add("flex"); }
-        } else {
-          if (passErrorMsg) passErrorMsg.classList.remove("hidden");
-        }
+        } else { if (passErrorMsg) passErrorMsg.classList.remove("hidden"); }
       };
     }
 
@@ -849,7 +780,7 @@
         const newState = !isLiveBroadcast;
         applyBroadcastState(newState, null, currentAdminPeerId);
         updateAdminModalBtn();
-        fetch(`https://ntfy.sh/${NTFY_TOPIC}`, { method: 'POST', body: JSON.stringify({ action: "SET_LIVE", live: newState, peerId: currentAdminPeerId, time: Date.now() }) }).catch(() => {});
+        sendWS({ action: "SET_LIVE", live: newState, peerId: currentAdminPeerId });
       };
     }
 
@@ -859,42 +790,23 @@
         applyBroadcastState(false);
         updateAdminModalBtn();
         selectTrack(currentTrackIdx);
-        fetch(`https://ntfy.sh/${NTFY_TOPIC}`, { method: 'POST', body: JSON.stringify({ action: "SET_LIVE", live: false, time: Date.now() }) }).catch(() => {});
+        sendWS({ action: "SET_LIVE", live: false });
       };
     }
 
+    // SOHBET
     if (localStorage.getItem("vom_user_name") && senderName) senderName.value = localStorage.getItem("vom_user_name");
 
     function renderIncomingMessage(name, text, timeStr) {
       if (!chatMessages) return;
       const div = document.createElement("div");
       div.className = "p-2.5 rounded-xl bg-zinc-950 border border-zinc-800";
-      const timeSpan = document.createElement("span");
-      timeSpan.className = "text-[10px] text-zinc-500 block mb-0.5 mono";
-      timeSpan.textContent = timeStr;
-      const nameStrong = document.createElement("strong");
-      nameStrong.className = "text-orange-400 font-bold";
-      nameStrong.textContent = name + ": ";
-      const textSpan = document.createElement("span");
-      textSpan.className = "text-zinc-200 ml-1 break-words";
-      textSpan.textContent = text;
+      const timeSpan = document.createElement("span"); timeSpan.className = "text-[10px] text-zinc-500 block mb-0.5 mono"; timeSpan.textContent = timeStr;
+      const nameStrong = document.createElement("strong"); nameStrong.className = "text-orange-400 font-bold"; nameStrong.textContent = name + ": ";
+      const textSpan = document.createElement("span"); textSpan.className = "text-zinc-200 ml-1 break-words"; textSpan.textContent = text;
       div.appendChild(timeSpan); div.appendChild(nameStrong); div.appendChild(textSpan);
-      chatMessages.appendChild(div);
-      chatMessages.scrollTop = chatMessages.scrollHeight;
+      chatMessages.appendChild(div); chatMessages.scrollTop = chatMessages.scrollHeight;
     }
-
-    try {
-      const chatEvents = new EventSource(`https://ntfy.sh/${NTFY_CHAT_TOPIC}/sse`);
-      chatEvents.onmessage = (event) => {
-        try {
-          const envelope = JSON.parse(event.data);
-          if (envelope.event === "message" && envelope.message) {
-            const msg = JSON.parse(envelope.message);
-            if (msg.senderId !== myDevId) renderIncomingMessage(msg.name, msg.text, msg.time);
-          }
-        } catch(err) {}
-      };
-    } catch(e) {}
 
     if (chatForm) {
       chatForm.onsubmit = async (e) => {
@@ -907,20 +819,15 @@
         const timeStr = String(d.getHours()).padStart(2,'0') + ":" + String(d.getMinutes()).padStart(2,'0');
         renderIncomingMessage(name, text, timeStr);
         if (senderMessage) senderMessage.value = "";
-        fetch(`https://ntfy.sh/${NTFY_CHAT_TOPIC}`, { method: 'POST', body: JSON.stringify({ name, text, time: timeStr, senderId: myDevId }) }).catch(() => {});
+        sendWS({ type: "message", msg: text, name: name, time: timeStr });
       };
     }
 
-    const clearChatBtn = document.getElementById("clear-chat-btn");
     if (clearChatBtn) {
       clearChatBtn.onclick = () => {
         if (!confirm("Tüm sohbet mesajlarını silmek istediğinize emin misiniz?")) return;
-        if (chatMessages) chatMessages.innerHTML = '<div class="p-4 rounded-xl bg-zinc-950/80 border border-zinc-800 text-center space-y-2"><span class="text-2xl block">📻</span><p class="font-bold text-zinc-300">Sohbet Temizlendi</p><p class="text-[11px] text-zinc-500">Yeni mesajlar burada görünecek.</p></div>';
-        connectedPeerClients.forEach(conn => { try { if (conn.open) conn.send({ action: "CLEAR_CHAT" }); } catch(e) {} });
-        if (currentAdminPeerId) fetch(`https://ntfy.sh/${NTFY_TOPIC}`, { method: 'POST', body: JSON.stringify({ action: "CLEAR_CHAT", peerId: currentAdminPeerId, time: Date.now() }) }).catch(() => {});
-        clearChatBtn.innerHTML = "<span>✅</span> Sohbet Temizlendi";
-        clearChatBtn.disabled = true;
-        setTimeout(() => { clearChatBtn.innerHTML = "<span>🗑️</span> Tüm Sohbeti Temizle"; clearChatBtn.disabled = false; }, 2000);
+        if (chatMessages) chatMessages.innerHTML = '<div class="p-4 rounded-xl bg-zinc-950/80 border border-zinc-800 text-center space-y-2"><span class="text-2xl block">📻</span><p class="font-bold text-zinc-300">Sohbet Temizlendi</p></div>';
+        sendWS({ action: "CLEAR_CHAT" });
       };
     }
 
@@ -929,6 +836,3 @@
   </script>
 </body>
 </html>
-```
-
-**Tamamı bu.** Kopyalayın, `radyo.son.html` dosyasının tamamını bununla değiştirin, kaydedin, GitHub Pages'e yükleyin, test edin. 👍
