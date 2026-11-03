@@ -2,8 +2,13 @@
 <html lang="tr">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
-  <title>VOM RADYO - 128 KBPS Kesintisiz Canlı Yayın & Stüdyo</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+  <meta name="theme-color" content="#09090b">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <meta name="apple-mobile-web-app-title" content="VOM Radyo">
+  <title>VOM RADYO</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;600;700&display=swap" rel="stylesheet">
@@ -12,37 +17,53 @@
     * { -webkit-tap-highlight-color: transparent; box-sizing: border-box; }
     body { font-family: 'Plus Jakarta Sans', system-ui, -apple-system, sans-serif; background-color: #09090b; overflow-x: hidden; }
     .mono { font-family: 'JetBrains Mono', monospace; }
-    @keyframes marquee { 0% { transform: translateX(100%); } 100% { transform: translateX(-100%); } }
-    .marquee-text { display: inline-block; white-space: nowrap; animation: marquee 24s linear infinite; }
+    @keyframes marquee { 0% { transform: translateX(0); } 100% { transform: translateX(-100%); } }
+    .marquee-text { display: inline-block; white-space: nowrap; padding-left: 100%; will-change: transform; }
     .marquee-text:hover { animation-play-state: paused; }
+    @media (prefers-reduced-motion: reduce) {
+      .marquee-text { animation: none !important; padding-left: 0; }
+    }
     ::-webkit-scrollbar { width: 6px; }
     ::-webkit-scrollbar-track { background: #09090b; }
     ::-webkit-scrollbar-thumb { background: #27272a; border-radius: 4px; }
     ::-webkit-scrollbar-thumb:hover { background: #3f3f46; }
+    button:focus-visible, input:focus-visible { outline: 2px solid #f97316; outline-offset: 2px; }
+    @keyframes onair {
+      0%, 100% { opacity: 1; box-shadow: 0 0 14px 4px rgba(239,68,68,.95); }
+      50% { opacity: .2; box-shadow: 0 0 0 0 rgba(239,68,68,0); }
+    }
+    .onair-dot { width: 12px; height: 12px; border-radius: 9999px; background: #ef4444; animation: onair 1s ease-in-out infinite; }
+    .onair-sm { width: 8px; height: 8px; }
+    @media (prefers-reduced-motion: reduce) { .onair-dot { animation: none; box-shadow: 0 0 10px 2px rgba(239,68,68,.8); } }
+    @keyframes ring { 0%,100% { box-shadow: 0 0 0 0 rgba(249,115,22,.55); } 50% { box-shadow: 0 0 0 10px rgba(249,115,22,0); } }
+    .ring-hint { animation: ring 1.8s ease-in-out infinite; }
+    @media (prefers-reduced-motion: reduce) { .ring-hint { animation: none; } }
   </style>
-<script src="/_aistudio-iframe.js?v=1f94f900"></script></head>
+</head>
 <body class="min-h-screen flex flex-col text-zinc-100 selection:bg-orange-500 selection:text-white">
 
-  <!-- Ana Bulut Çalar ve WebRTC Canlı Ses Çalar (Doğrudan Buluttan 7/24 Kesintisiz)[cite: 1] -->
-  <audio id="main-audio-player" preload="metadata" playsinline webkit-playsinline x-webkit-airplay="allow"></audio>
-  <audio id="live-webrtc-player" autoplay playsinline webkit-playsinline x-webkit-airplay="allow"></audio>
+  <!-- TEK PLAYER: bulut müzik ve canlı yayın aynı ses elemanından çalar (iOS/Android kesintisiz geçiş) -->
+  <audio id="player" playsinline webkit-playsinline x-webkit-airplay="allow" preload="none"></audio>
 
-  <!-- iOS / Mobil Canlı Ses Dokunma Uyarısı[cite: 1] -->
-  <div id="mobile-live-alert" class="hidden fixed bottom-4 inset-x-4 z-50 p-4 rounded-2xl bg-gradient-to-r from-red-600 via-orange-600 to-amber-600 text-white shadow-2xl flex items-center justify-between border border-white/20 animate-bounce cursor-pointer max-w-lg mx-auto">
+  <!-- Bildirim (toast) -->
+  <div id="toast" role="status" aria-live="polite" class="hidden fixed top-16 inset-x-4 z-[60] max-w-md mx-auto px-4 py-3 rounded-xl bg-zinc-800 border border-zinc-700 text-sm text-zinc-100 shadow-2xl text-center"></div>
+
+  <!-- CANLI YAYIN BAŞLADI uyarısı (Apple/Android: dokunma ile sesi açar) -->
+  <div id="live-alert" style="display:none" class="fixed bottom-4 inset-x-4 z-50 p-4 rounded-2xl bg-gradient-to-r from-red-600 via-orange-600 to-amber-600 text-white shadow-2xl items-center justify-between border border-white/20 cursor-pointer max-w-lg mx-auto" role="alert">
     <div class="flex items-center gap-3">
       <span class="text-2xl animate-pulse">🔴</span>
       <div>
-        <span class="font-extrabold text-xs block uppercase tracking-wider">CANLI YAYIN BAŞLADI</span>
-        <span class="text-[11px] text-white/95 block font-medium">Canlı sesi dinlemek için dokunun</span>
+        <span class="font-extrabold text-sm block">🔴 CANLI YAYIN BAŞLADI</span>
+        <span id="live-alert-sub" class="text-xs text-white/95 block font-medium">Canlı yayını dinlemek için dokunun</span>
       </div>
     </div>
-    <button class="bg-white text-red-600 font-extrabold px-3.5 py-2 rounded-xl text-xs shadow-lg shrink-0 flex items-center gap-1 active:scale-95 transition-transform">
-      <span>DİNLE</span><span>▶</span>
+    <button id="live-alert-btn" type="button" class="bg-white text-red-600 font-extrabold px-4 py-2.5 rounded-xl text-sm shadow-lg shrink-0 flex items-center gap-1.5 active:scale-95 transition-transform">
+      <span>▶</span><span>CANLI DİNLE</span>
     </button>
   </div>
 
-  <!-- Üst Bar[cite: 1] -->
-  <header class="border-b border-zinc-800 bg-zinc-950/90 backdrop-blur-md sticky top-0 z-40">
+  <!-- Üst Bar -->
+  <header class="border-b border-zinc-800 bg-zinc-950/90 backdrop-blur-md sticky top-0 z-40" style="padding-top: env(safe-area-inset-top, 0px)">
     <div class="max-w-6xl mx-auto px-4 py-3 flex items-center justify-between">
       <div class="flex items-center gap-3">
         <div id="station-logo" class="w-10 h-10 rounded-xl bg-gradient-to-br from-orange-500 to-amber-600 flex items-center justify-center font-extrabold text-white text-lg shadow-lg shadow-orange-600/30 transition-all">📻</div>
@@ -50,7 +71,7 @@
           <h1 class="font-extrabold text-base tracking-tight text-white leading-none">VOM RADYO</h1>
           <div class="flex items-center gap-2 mt-1">
             <span id="status-dot" class="w-2 h-2 rounded-full bg-emerald-500 animate-pulse"></span>
-            <span id="station-status-text" class="text-[11px] font-semibold text-emerald-400">7/24 BULUT YAYINDA</span>
+            <span id="station-status-text" class="text-[11px] font-semibold text-emerald-400">YAYINDA</span>
             <span class="text-zinc-600">·</span>
             <span class="text-[10px] bg-zinc-900 border border-zinc-800 px-1.5 py-0.5 rounded font-mono text-orange-400 font-bold">128 KBPS STEREO</span>
           </div>
@@ -60,106 +81,80 @@
         <div class="bg-zinc-900 px-2.5 sm:px-3 py-1.5 rounded-lg border border-zinc-800 text-orange-400 mono font-bold flex items-center gap-1.5 shadow-inner">
           <span>🕒</span><span id="live-clock">--:--:--</span>
         </div>
-        <div class="bg-zinc-900 px-2.5 sm:px-3 py-1.5 rounded-lg border border-zinc-800 text-zinc-300 flex items-center gap-1.5">
+        <div class="bg-zinc-900 px-2.5 sm:px-3 py-1.5 rounded-lg border border-zinc-800 text-zinc-300 flex items-center gap-1.5" title="Dinleyici sayısı">
           <span>👥</span><span class="font-bold text-white mono" id="live-listener-count">1</span>
         </div>
       </div>
     </div>
   </header>
 
-  <!-- Kayan Bilgi Bandı[cite: 1] -->
+  <!-- Kayan yazı: yalnızca anlık şarkı -->
   <div id="marquee-bar" class="bg-zinc-900/90 border-b border-zinc-800/80 overflow-hidden py-2 px-4 flex items-center">
-    <span id="marquee-badge" class="text-xs bg-orange-600 text-white font-bold px-2 py-0.5 rounded mr-3 shrink-0 uppercase tracking-wider text-[10px]">YAYIN AKIŞI</span>
-    <div class="overflow-hidden w-full relative">
-      <div id="marquee-content" class="marquee-text text-xs text-zinc-300 font-medium">🎵 Şu An Çalıyor: VOM Radyo Canlı Yayın</div>
+    <span id="marquee-badge" class="bg-orange-600 text-white font-bold px-2 py-0.5 rounded mr-3 shrink-0 uppercase tracking-wider text-[10px]">ŞU AN ÇALIYOR</span>
+    <div id="marquee-wrap" class="overflow-hidden w-full relative">
+      <div id="marquee-content" class="marquee-text text-xs text-zinc-300 font-medium">🎵 VOM Yayın</div>
     </div>
   </div>
 
-  <!-- Ana İçerik[cite: 1] -->
-  <main class="flex-1 max-w-6xl w-full mx-auto p-4 sm:p-6 grid grid-cols-1 lg:grid-cols-12 gap-6 items-start">
-    <div class="lg:col-span-7 space-y-5">
-      <!-- Çalar Kartı[cite: 1] -->
-      <div class="p-5 sm:p-6 rounded-2xl border border-zinc-800 bg-zinc-900/70 shadow-2xl space-y-5">
-        <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-3 pb-4 border-b border-zinc-800">
-          <div class="min-w-0 flex-1">
-            <span id="player-badge-top" class="text-[10px] text-zinc-500 font-mono uppercase tracking-wider block">ŞU AN YAYINDA</span>
-            <h2 id="now-playing-title" class="text-xl sm:text-2xl font-extrabold text-white truncate">VOM Kesintisiz Müzik</h2>
-            <p id="now-playing-artist" class="text-sm text-orange-400 font-medium truncate">vom-blog.com/radyo</p>
-          </div>
-          <div class="flex items-center gap-2 shrink-0">
-            <span class="px-2.5 py-1 rounded-lg bg-zinc-950 border border-zinc-800 text-[11px] font-mono text-zinc-400">128 KBPS STEREO</span>
-          </div>
+  <!-- Ana İçerik -->
+  <main class="flex-1 w-full mx-auto p-4 sm:p-6 flex flex-col items-center">
+    <div class="w-full max-w-xl space-y-4">
+      <!-- Çalar -->
+      <div id="player-card" class="p-5 sm:p-6 rounded-2xl border border-zinc-800 bg-zinc-900/70 shadow-2xl space-y-5 transition-colors">
+        <div class="flex items-center justify-center gap-3 pb-4 border-b border-zinc-800 min-h-[3rem]">
+          <span id="card-dot" class="w-2 h-2 rounded-full bg-emerald-500 animate-pulse shrink-0"></span>
+          <span id="card-label" class="text-[11px] font-semibold tracking-wide text-zinc-400">VOM YAYIN · YAYINDA · ON AIR</span>
         </div>
+
         <div class="bg-zinc-950 p-3 rounded-xl border border-zinc-800/90 shadow-inner">
           <canvas id="audio-bars" width="450" height="48" class="w-full h-12 rounded"></canvas>
         </div>
-        <div class="space-y-1.5 pt-1">
-          <div class="flex items-center justify-between text-xs font-mono text-zinc-400">
-            <span id="current-time-text">00:00</span>
-            <span id="audio-state-indicator" class="text-xs text-orange-400 font-sans font-medium">Hazır</span>
-            <span id="total-duration-text" class="text-zinc-500">00:00</span>
+
+        <div class="text-center">
+          <span id="audio-state-indicator" class="text-xs text-orange-400 font-medium">Başlatmak için ▶</span>
+        </div>
+
+        <div class="grid grid-cols-3 items-center gap-3">
+          <div></div>
+          <div class="flex justify-center">
+            <button id="main-play-btn" type="button" aria-label="Dinle" class="ring-hint w-16 h-16 rounded-full bg-orange-600 hover:bg-orange-500 text-white font-bold text-3xl flex items-center justify-center shadow-lg shadow-orange-600/30 transition-transform active:scale-95 cursor-pointer">▶</button>
           </div>
-          <div id="progress-bar-container" class="w-full bg-zinc-950 h-2.5 rounded-full overflow-hidden border border-zinc-800/80 cursor-pointer relative" title="İleri/Geri Sar">
-            <div id="progress-bar-fill" class="h-full bg-gradient-to-r from-orange-600 to-amber-500 rounded-full transition-all duration-100" style="width: 0%"></div>
+          <div class="flex justify-end">
+            <div id="volume-box" class="flex items-center gap-2 bg-zinc-950 px-3 py-2 rounded-xl border border-zinc-800">
+              <button id="mute-btn" type="button" aria-label="Sesi kapat/aç" class="text-sm hover:text-orange-400 cursor-pointer">🔊</button>
+              <input id="volume-range" type="range" min="0" max="1" step="0.05" value="0.9" aria-label="Ses seviyesi" class="w-14 sm:w-24 accent-orange-500 cursor-pointer" />
+            </div>
           </div>
         </div>
-        <div class="flex items-center justify-between gap-4 pt-1 flex-wrap sm:flex-nowrap">
-          <div class="flex items-center gap-2 sm:gap-3">
-            <button id="prev-btn" class="p-3 rounded-xl bg-zinc-800 hover:bg-zinc-700 text-zinc-300 transition-colors active:scale-95 cursor-pointer">⏮</button>
-            <button id="main-play-btn" class="w-14 h-14 rounded-full bg-orange-600 hover:bg-orange-500 text-white font-bold text-2xl flex items-center justify-center shadow-lg shadow-orange-600/30 transition-transform active:scale-95 cursor-pointer">▶</button>
-            <button id="next-btn" class="p-3 rounded-xl bg-zinc-800 hover:bg-zinc-700 text-zinc-300 transition-colors active:scale-95 cursor-pointer">⏭</button>
-          </div>
-          <div class="flex items-center gap-2 bg-zinc-950 px-3 py-2 rounded-xl border border-zinc-800">
-            <button id="mute-btn" class="text-xs hover:text-orange-400 cursor-pointer">🔊</button>
-            <input id="volume-range" type="range" min="0" max="1" step="0.05" value="0.9" class="w-16 sm:w-28 accent-orange-500 cursor-pointer" />
-          </div>
-        </div>
-        <div id="audio-error-banner" class="hidden p-3 rounded-xl bg-red-950/80 border border-red-800 text-red-200 text-xs flex items-center justify-between">
+
+        <div id="audio-error-banner" class="hidden p-3 rounded-xl bg-red-950/80 border border-red-800 text-red-200 text-xs items-center justify-between gap-3">
           <span id="audio-error-text">Ses bağlantısı yenileniyor...</span>
-          <button id="audio-retry-btn" class="bg-red-700 hover:bg-red-600 px-3 py-1 rounded-lg text-white font-bold text-xs cursor-pointer">Yenile</button>
+          <button id="audio-retry-btn" type="button" class="bg-red-700 hover:bg-red-600 px-3 py-1 rounded-lg text-white font-bold text-xs cursor-pointer shrink-0">Yenile</button>
         </div>
       </div>
+
+      <!-- Canlı Sohbet: link şimdilik boş. href="#" yerine kendi adresini yaz -->
+      <a id="chat-link" href="#" target="_blank" rel="noopener" class="flex items-center justify-center gap-2 w-full py-3 rounded-2xl border border-zinc-800 bg-zinc-900/70 hover:border-orange-500/60 hover:text-orange-400 text-sm font-semibold text-zinc-200 transition-colors">💬 Canlı Sohbet</a>
     </div>
 
-    <!-- Dinleyici Sohbeti (Bulut Yayında Kapalı, Yalnızca Canlı Yayında Açık)[cite: 1] -->
-    <div class="lg:col-span-5 flex flex-col h-[520px] sm:h-[620px] rounded-2xl border border-zinc-800 bg-zinc-900/80 overflow-hidden shadow-2xl">
-      <div class="p-3.5 bg-zinc-950 border-b border-zinc-800 flex items-center justify-between">
-        <span class="font-bold text-xs text-white flex items-center gap-1.5"><span>💬</span> Dinleyici Sohbeti</span>
-        <span id="chat-live-badge" class="text-[10px] font-mono text-amber-500 font-bold">● Sadece Canlı Yayında Açık</span>
-      </div>
-      <div id="chat-messages" class="flex-1 p-4 overflow-y-auto space-y-2.5 text-xs">
-        <div id="chat-closed-notice" class="p-4 rounded-xl bg-zinc-950/80 border border-zinc-800 text-center space-y-2 my-auto">
-          <span class="text-2xl block">🔒</span>
-          <p class="font-bold text-zinc-300">Sohbet Şu An Kapalı</p>
-          <p class="text-[11px] text-zinc-500 leading-relaxed">Dinleyici sohbeti yalnızca stüdyodan <b>Canlı Yayın (On Air)</b> başlatıldığında aktifleşir.</p>
-        </div>
-      </div>
-      <form id="chat-send-form" class="p-3 border-t border-zinc-800 bg-zinc-950 opacity-40 pointer-events-none">
-        <div class="bg-zinc-950/80 rounded-2xl border border-zinc-800 p-3 flex flex-col gap-2">
-          <input id="sender-name" type="text" placeholder="Adınız..." maxlength="20" class="w-full bg-zinc-900 text-zinc-100 placeholder-zinc-500 border border-zinc-800 rounded-xl px-3 py-2 text-sm focus:outline-none font-semibold" disabled required />
-          <textarea id="sender-message" rows="2" placeholder="Sohbet kapalı..." maxlength="280" class="w-full bg-zinc-900 text-zinc-100 placeholder-zinc-500 border border-zinc-800 rounded-xl px-3 py-2 text-sm focus:outline-none resize-none" disabled required></textarea>
-          <button id="chat-send-btn" type="submit" class="w-full bg-zinc-800 text-zinc-400 font-semibold py-2.5 rounded-xl text-sm cursor-not-allowed" disabled>Gönder ➤</button>
-        </div>
-      </form>
-    </div>
   </main>
 
-  <footer class="py-4 border-t border-zinc-900/80 text-center text-xs text-zinc-600 flex items-center justify-center gap-3">
+  <footer class="py-4 border-t border-zinc-900/80 text-center text-xs text-zinc-600 flex items-center justify-center gap-3" style="padding-bottom: calc(1rem + env(safe-area-inset-bottom, 0px))">
     <span>VOM RADYO © 2026</span><span>·</span>
-    <button id="secret-admin-btn" title="Yayıncı Masası Girişi" class="text-zinc-600 hover:text-orange-400 transition-colors p-1 cursor-pointer">🔐</button>
+    <button id="secret-admin-btn" type="button" title="Yayıncı Masası Girişi" aria-label="Yayıncı Masası Girişi" class="text-zinc-600 hover:text-orange-400 transition-colors p-1 cursor-pointer">🔐</button>
   </footer>
 
-  <!-- Yönetici Şifre Modalı[cite: 1] -->
+  <!-- Yönetici Şifre Modalı -->
   <div id="password-modal" class="fixed inset-0 z-50 bg-black/85 backdrop-blur-sm hidden items-center justify-center p-4">
     <div class="max-w-sm w-full bg-zinc-900 border border-zinc-800 rounded-2xl p-6 shadow-2xl space-y-4">
       <div class="flex items-center justify-between pb-2 border-b border-zinc-800">
         <h3 class="font-bold text-sm text-white flex items-center gap-2"><span>🔐</span> Yönetici Girişi</h3>
-        <button id="close-pass-btn" class="text-zinc-400 hover:text-white cursor-pointer">✕</button>
+        <button id="close-pass-btn" type="button" aria-label="Kapat" class="text-zinc-400 hover:text-white cursor-pointer">✕</button>
       </div>
       <form id="password-form" class="space-y-3">
         <div>
-          <label class="text-xs text-zinc-400 block mb-1">Yönetici Şifreniz (Varsayılan: <code class="text-orange-400">vom2026</code>):</label>
-          <input id="admin-pass-input" type="password" placeholder="••••••••" class="w-full px-3.5 py-2.5 rounded-xl bg-zinc-950 border border-zinc-700 text-sm text-white focus:outline-none focus:border-orange-500 tracking-widest font-mono text-center" required />
+          <label for="admin-pass-input" class="text-xs text-zinc-400 block mb-1">Yönetici şifresi</label>
+          <input id="admin-pass-input" type="password" autocapitalize="off" autocorrect="off" spellcheck="false" placeholder="••••••••" autocomplete="current-password" class="w-full px-3.5 py-2.5 rounded-xl bg-zinc-950 border border-zinc-700 text-sm text-white focus:outline-none focus:border-orange-500 tracking-widest font-mono text-center" required />
         </div>
         <p id="pass-error-msg" class="text-[11px] text-red-400 hidden text-center">Hatalı şifre.</p>
         <div class="flex gap-2 pt-2">
@@ -170,21 +165,21 @@
     </div>
   </div>
 
-  <!-- Yayıncı Masası Modalı (Cloudflare Calls SFU)[cite: 1] -->
+  <!-- Yayıncı Masası -->
   <div id="admin-modal" class="fixed inset-0 z-50 bg-black/85 backdrop-blur-sm hidden items-center justify-center p-4">
     <div class="max-w-xl w-full bg-zinc-900 border border-zinc-800 rounded-2xl p-6 shadow-2xl space-y-5 max-h-[92vh] overflow-y-auto">
       <div class="flex items-center justify-between pb-3 border-b border-zinc-800">
-        <h3 class="font-extrabold text-base text-white flex items-center gap-2"><span>🎙️</span> Yayıncı Masası (Cloudflare Calls SFU)</h3>
-        <button id="close-admin-modal" class="text-zinc-400 hover:text-white text-lg cursor-pointer">✕</button>
+        <h3 class="font-extrabold text-base text-white flex items-center gap-2"><span>🎙️</span> Yayıncı Masası</h3>
+        <button id="close-admin-modal" type="button" aria-label="Kapat" class="text-zinc-400 hover:text-white text-lg cursor-pointer">✕</button>
       </div>
 
       <div class="p-4 rounded-xl bg-zinc-950 border border-zinc-800 space-y-2">
         <div class="flex items-center justify-between">
-          <span class="text-xs font-bold text-white block">1. Adım: Cloudflare Calls Canlı Yayın</span>
+          <span class="text-xs font-bold text-white block">1. Adım: Canlı Yayın</span>
           <span id="webrtc-status-badge" class="text-[10px] bg-zinc-800 text-zinc-400 border border-zinc-700 px-2 py-0.5 rounded font-mono">Hazır</span>
         </div>
         <p class="text-[11px] text-zinc-400 leading-relaxed">
-          Canlı yayına geçtiğiniz anda dinleyici sohbeti otomatik olarak açılır.
+          Canlı yayına geçtiğiniz anda tüm dinleyicilerde canlı yayın açılır, kayan yazı güncellenir ve kırmızı ON AIR ışığı yanıp söner.
         </p>
 
         <div class="flex flex-col gap-1.5 pt-1 text-xs">
@@ -195,21 +190,21 @@
           </label>
           <label class="flex items-center gap-2 text-zinc-300 cursor-pointer">
             <input type="radio" name="broadcast-source" id="source-queue" value="queue" class="accent-orange-500" />
-            <span class="font-semibold text-white">Şarkı / Bilgisayar Sesi (captureStream)</span>
+            <span class="font-semibold text-white">Şarkı / Bilgisayar Sesi</span>
             <span class="text-[11px] text-zinc-400">(Yerel dosyalar)</span>
           </label>
         </div>
 
         <div id="queue-warn-box" class="hidden p-2.5 rounded-lg bg-amber-950/80 border border-amber-800 text-amber-200 text-[11px]">
-          Şarkı sesi yayınlanabilmesi için önce bir şarkıyı çalmaya başlatmış olmalısınız.
+          Şarkı sesi yayınlanabilmesi için önce 2. adımdan şarkı seçip çalmaya başlatmalısınız.
         </div>
 
         <div class="grid grid-cols-1 sm:grid-cols-2 gap-2 mt-2">
-          <button id="toggle-broadcast-btn" class="py-3 px-4 rounded-xl font-bold text-xs shadow-xl transition-all flex items-center justify-center gap-2 bg-red-600 hover:bg-red-500 text-white cursor-pointer">
+          <button id="toggle-broadcast-btn" type="button" class="py-3 px-4 rounded-xl font-bold text-xs shadow-xl transition-all flex items-center justify-center gap-2 bg-red-600 hover:bg-red-500 text-white cursor-pointer disabled:opacity-60">
             <span>🔴</span><span id="broadcast-btn-text">CANLI YAYINA GEÇ</span>
           </button>
-          <button id="return-cloud-btn" class="py-3 px-4 rounded-xl font-bold text-xs shadow-md transition-all flex items-center justify-center gap-2 bg-emerald-700 hover:bg-emerald-600 text-white border border-emerald-500 cursor-pointer">
-            <span>☁️</span><span>7/24 BULUTA DÖN</span>
+          <button id="return-cloud-btn" type="button" class="py-3 px-4 rounded-xl font-bold text-xs shadow-md transition-all flex items-center justify-center gap-2 bg-emerald-700 hover:bg-emerald-600 text-white border border-emerald-500 cursor-pointer">
+            <span>🔀</span><span>OTOMATİK YAYINA DÖN</span>
           </button>
         </div>
       </div>
@@ -220,37 +215,37 @@
         </div>
         <input type="file" id="local-file-selector" accept="audio/*" multiple class="hidden" />
         <button id="pick-files-btn" type="button" class="w-full py-2.5 rounded-xl bg-orange-600 hover:bg-orange-500 text-white text-xs font-bold flex items-center justify-center gap-2 shadow-md transition-colors cursor-pointer"><span>📂</span> Şarkıları Seç (Toplu MP3/WAV/AAC)</button>
-        <div id="queue-status-banner" class="text-[11px] text-orange-400 font-semibold hidden flex items-center justify-between bg-zinc-900 px-3 py-2 rounded-lg border border-zinc-800">
+        <label class="flex items-center gap-2 text-[11px] text-zinc-300 cursor-pointer">
+          <input type="checkbox" id="auto-live-chk" checked class="accent-orange-500" />
+          <span>Şarkı seçince otomatik canlı yayına geç (dinleyicide ON AIR yanar)</span>
+        </label>
+        <div id="queue-status-banner" class="text-[11px] text-orange-400 font-semibold hidden items-center justify-between bg-zinc-900 px-3 py-2 rounded-lg border border-zinc-800">
           <span id="queue-count-text">0 Şarkı Sıraya Alındı</span>
-          <span class="text-[10px] text-emerald-400 font-mono">Otomatik Sıradaki Şarkıya Geçer ✓</span>
+          <span class="text-[10px] text-emerald-400 font-mono">Bitince başa döner ✓</span>
         </div>
         <div id="local-playlist-box" class="space-y-1.5 max-h-40 overflow-y-auto hidden border-t border-zinc-800/80 pt-2"></div>
       </div>
 
-      <div class="p-4 rounded-xl bg-zinc-950 border border-zinc-800 space-y-3">
-        <div class="flex items-center justify-between">
-          <span class="text-xs font-bold text-red-400 flex items-center gap-1.5"><span>🗑️</span> 3. Adım: Sohbeti Temizle</span>
-        </div>
-        <button id="clear-chat-btn" type="button" class="w-full py-2.5 rounded-xl bg-red-600 hover:bg-red-500 text-white text-xs font-bold flex items-center justify-center gap-2 shadow-md transition-colors cursor-pointer"><span>🗑️</span> Tüm Sohbeti Temizle</button>
-      </div>
-
       <div class="pt-2 border-t border-zinc-800 flex justify-end">
-        <button id="close-admin-modal-2" class="px-5 py-2.5 rounded-xl bg-zinc-800 hover:bg-zinc-700 text-zinc-300 text-xs font-semibold cursor-pointer">Kapat</button>
+        <button id="close-admin-modal-2" type="button" class="px-5 py-2.5 rounded-xl bg-zinc-800 hover:bg-zinc-700 text-zinc-300 text-xs font-semibold cursor-pointer">Kapat</button>
       </div>
     </div>
   </div>
 
   <script>
+  (() => {
+    'use strict';
+
     // ==================== SABİTLER ====================
     const WORKER_BASE = 'https://radyo-yayin.guryuc.workers.dev';
     const WS_URL = 'wss://radyo-yayin.guryuc.workers.dev/ws';
-
+    const LIVE_TRACK_NAME = 'vom-canli-ses';
     const ICE_SERVERS = [
-      { urls: "stun:stun.cloudflare.com:3478" },
-      { urls: "stun:stun.l.google.com:19302" }
+      { urls: 'stun:stun.cloudflare.com:3478' },
+      { urls: 'stun:stun.l.google.com:19302' }
     ];
 
-    // ==================== 175 ŞARKILIK GERÇEK BULUT LİSTESİ ====================
+    // ==================== ŞARKI LİSTESİ ====================
     const baseURL = "https://archive.org/download/pomme-plus-grands-succes-2021-pomme-greatest-hits-full-album-pomme-best-of-1/";
 
     const sarkilarHam = [
@@ -432,809 +427,1054 @@
       { title: "solmaz naraghi & nobahari", file: "solmaz naraghi & nobahari.mp3" }
     ];
 
-    const PLAYLIST = sarkilarHam.map((s, index) => {
-      let artist = "VOM Arşiv";
-      let title = s.title;
-      if (s.title.includes(" - ")) {
-        const parts = s.title.split(" - ");
-        artist = parts[0].trim();
-        title = parts.slice(1).join(" - ").trim();
+    const PLAYLIST = sarkilarHam.map((s, i) => ({
+      id: i,
+      full: s.title,
+      url: baseURL + encodeURIComponent(s.file)
+    }));
+
+    // ==================== YARDIMCILAR ====================
+    const $ = (id) => document.getElementById(id);
+    const AudioCtxClass = window.AudioContext || window.webkitAudioContext;
+
+    const audio = $('player');
+    const clockEl = $('live-clock');
+    const countEl = $('live-listener-count');
+    const marqueeContent = $('marquee-content');
+    const marqueeWrap = $('marquee-wrap');
+    const marqueeBadge = $('marquee-badge');
+    const statusDot = $('status-dot');
+    const stationStatusText = $('station-status-text');
+    const stationLogo = $('station-logo');
+    const cardDot = $('card-dot');
+    const cardLabel = $('card-label');
+    const playerCard = $('player-card');
+    const chatLink = $('chat-link');
+    const stateEl = $('audio-state-indicator');
+    const playBtn = $('main-play-btn');
+    const volumeRange = $('volume-range');
+    const volumeBox = $('volume-box');
+    const muteBtn = $('mute-btn');
+    const liveAlert = $('live-alert');
+    const liveAlertBtn = $('live-alert-btn');
+    const errBanner = $('audio-error-banner');
+    const errText = $('audio-error-text');
+    const errRetry = $('audio-retry-btn');
+    const toastEl = $('toast');
+    const webrtcBadge = $('webrtc-status-badge');
+    const queueWarnBox = $('queue-warn-box');
+    const toggleBroadcastBtn = $('toggle-broadcast-btn');
+    const broadcastBtnText = $('broadcast-btn-text');
+    const returnCloudBtn = $('return-cloud-btn');
+    const canvas = $('audio-bars');
+    const canvasCtx = canvas ? canvas.getContext('2d') : null;
+
+    function shuffle(arr) {
+      for (let i = arr.length - 1; i > 0; i--) {
+        const j = Math.floor(Math.random() * (i + 1));
+        [arr[i], arr[j]] = [arr[j], arr[i]];
       }
-      const directUrl = baseURL + encodeURIComponent(s.file);
-      return {
-        id: index + 1,
-        title: title,
-        artist: artist,
-        directUrl: directUrl,
-        url: directUrl,
-        file: s.file
-      };
-    });
-
-    let ws = null, wsConnected = false, wsReconnectTimer = null;
-    let isPlaying = false, isLiveBroadcast = false, isLocalQueueActive = false;
-    let currentTrackIdx = 0, currentLocalTrackIdx = 0, localTracks = [];
-    let publisherPC = null, publisherSessionId = null, publishedTrackName = null, activeBroadcastStream = null;
-    let listenerPC = null, listenerSessionId = null;
-    let audioCtx = null, AudioCtxClass = window.AudioContext || window.webkitAudioContext;
-
-    const audio = document.getElementById("main-audio-player");
-    const webrtcAudio = document.getElementById("live-webrtc-player");
-    const clockEl = document.getElementById("live-clock");
-    const nowPlayingTitle = document.getElementById("now-playing-title");
-    const nowPlayingArtist = document.getElementById("now-playing-artist");
-    const marqueeContent = document.getElementById("marquee-content");
-    const marqueeBadge = document.getElementById("marquee-badge");
-    const statusDot = document.getElementById("status-dot");
-    const stationStatusText = document.getElementById("station-status-text");
-    const stationLogo = document.getElementById("station-logo");
-    const currentTimeText = document.getElementById("current-time-text");
-    const totalDurationText = document.getElementById("total-duration-text");
-    const progressBarFill = document.getElementById("progress-bar-fill");
-    const progressBarContainer = document.getElementById("progress-bar-container");
-    const mainPlayBtn = document.getElementById("main-play-btn");
-    const prevBtn = document.getElementById("prev-btn");
-    const nextBtn = document.getElementById("next-btn");
-    const volumeRange = document.getElementById("volume-range");
-    const muteBtn = document.getElementById("mute-btn");
-    const audioStateIndicator = document.getElementById("audio-state-indicator");
-    const mobileLiveAlert = document.getElementById("mobile-live-alert");
-    const audioErrorBanner = document.getElementById("audio-error-banner");
-    const audioErrorText = document.getElementById("audio-error-text");
-    const audioRetryBtn = document.getElementById("audio-retry-btn");
-    const chatForm = document.getElementById("chat-send-form");
-    const senderName = document.getElementById("sender-name");
-    const senderMessage = document.getElementById("sender-message");
-    const chatSendBtn = document.getElementById("chat-send-btn");
-    const chatClosedNotice = document.getElementById("chat-closed-notice");
-    const chatLiveBadge = document.getElementById("chat-live-badge");
-    const chatMessages = document.getElementById("chat-messages");
-    const secretAdminBtn = document.getElementById("secret-admin-btn");
-    const passwordModal = document.getElementById("password-modal");
-    const passwordForm = document.getElementById("password-form");
-    const adminPassInput = document.getElementById("admin-pass-input");
-    const passErrorMsg = document.getElementById("pass-error-msg");
-    const closePassBtn = document.getElementById("close-pass-btn");
-    const cancelPassBtn = document.getElementById("cancel-pass-btn");
-    const adminModal = document.getElementById("admin-modal");
-    const closeAdminModal = document.getElementById("close-admin-modal");
-    const closeAdminModal2 = document.getElementById("close-admin-modal-2");
-    const toggleBroadcastBtn = document.getElementById("toggle-broadcast-btn");
-    const returnCloudBtn = document.getElementById("return-cloud-btn");
-    const broadcastBtnText = document.getElementById("broadcast-btn-text");
-    const webrtcStatusBadge = document.getElementById("webrtc-status-badge");
-    const localFileSelector = document.getElementById("local-file-selector");
-    const pickFilesBtn = document.getElementById("pick-files-btn");
-    const localPlaylistBox = document.getElementById("local-playlist-box");
-    const queueStatusBanner = document.getElementById("queue-status-banner");
-    const queueCountText = document.getElementById("queue-count-text");
-    const canvas = document.getElementById("audio-bars");
-    const canvasCtx = canvas ? canvas.getContext("2d") : null;
-    const clearChatBtn = document.getElementById("clear-chat-btn");
-    const queueWarnBox = document.getElementById("queue-warn-box");
-
-    function connectWebSocket() {
-      if (ws && (ws.readyState === WebSocket.OPEN || ws.readyState === WebSocket.CONNECTING)) return;
-      try {
-        ws = new WebSocket(WS_URL);
-        ws.onopen = () => { wsConnected = true; };
-        ws.onmessage = (event) => {
-          try { handleIncomingPayload(JSON.parse(event.data)); } catch(e) {}
-        };
-        ws.onclose = () => {
-          wsConnected = false; ws = null;
-          if (wsReconnectTimer) clearTimeout(wsReconnectTimer);
-          wsReconnectTimer = setTimeout(connectWebSocket, 3000);
-        };
-        ws.onerror = () => { if (ws) ws.close(); };
-      } catch(e) {
-        if (wsReconnectTimer) clearTimeout(wsReconnectTimer);
-        wsReconnectTimer = setTimeout(connectWebSocket, 3000);
-      }
-    }
-    function sendWS(data) {
-      if (ws && ws.readyState === WebSocket.OPEN) ws.send(JSON.stringify(data));
-    }
-    connectWebSocket();
-
-    function unlockAppleAudio() {
-      if (!audioCtx && AudioCtxClass) { try { audioCtx = new AudioCtxClass(); } catch(e) {} }
-      if (audioCtx && audioCtx.state === "suspended") audioCtx.resume().catch(() => {});
-      if (audioCtx) {
-        try {
-          const buffer = audioCtx.createBuffer(1, 1, 22050);
-          const source = audioCtx.createBufferSource();
-          source.buffer = buffer; source.connect(audioCtx.destination); source.start(0);
-        } catch(e) {}
-      }
-    }
-    window.addEventListener("touchstart", unlockAppleAudio, { once: true, passive: true });
-    window.addEventListener("click", unlockAppleAudio, { once: true, passive: true });
-
-    if (mobileLiveAlert) {
-      mobileLiveAlert.onclick = () => {
-        mobileLiveAlert.classList.add("hidden");
-        unlockAppleAudio();
-        if (webrtcAudio && webrtcAudio.srcObject) {
-          webrtcAudio.play().then(() => {
-            isPlaying = true;
-            if (mainPlayBtn) mainPlayBtn.textContent = "⏸";
-          }).catch(() => {});
-        }
-      };
+      return arr;
     }
 
-    function formatTime(seconds) {
-      if (!seconds || isNaN(seconds) || seconds < 0 || !isFinite(seconds)) return "00:00";
-      const m = Math.floor(seconds / 60), s = Math.floor(seconds % 60);
-      return String(m).padStart(2, '0') + ":" + String(s).padStart(2, '0');
+    let toastTimer = null;
+    function toast(msg) {
+      if (!toastEl) return;
+      toastEl.textContent = msg;
+      toastEl.classList.remove('hidden');
+      clearTimeout(toastTimer);
+      toastTimer = setTimeout(() => toastEl.classList.add('hidden'), 5500);
     }
-    function updateTopMarquee(title) {
-      if (marqueeContent) marqueeContent.textContent = `🎵 Şu An Çalıyor: ${title} · 128 KBPS HD Kesintisiz Akış · VOM Radyo`;
+
+    function showError(msg) {
+      if (!errBanner) return;
+      errText.textContent = msg;
+      errBanner.classList.remove('hidden');
+      errBanner.classList.add('flex');
     }
+    function hideError() {
+      if (!errBanner) return;
+      errBanner.classList.add('hidden');
+      errBanner.classList.remove('flex');
+    }
+    function showLiveAlert() { if (liveAlert) liveAlert.style.display = 'flex'; }
+    function hideLiveAlert() { if (liveAlert) liveAlert.style.display = 'none'; }
+
+    function setBadge(text, kind) {
+      if (!webrtcBadge) return;
+      webrtcBadge.textContent = text;
+      webrtcBadge.className = kind === 'live'
+        ? 'text-[10px] bg-red-950 text-red-400 border border-red-800 px-2 py-0.5 rounded font-mono font-bold animate-pulse'
+        : 'text-[10px] bg-zinc-800 text-zinc-400 border border-zinc-700 px-2 py-0.5 rounded font-mono';
+    }
+
+    // Saat
     function updateClock() {
       if (!clockEl) return;
       const d = new Date();
-      clockEl.textContent = String(d.getHours()).padStart(2,'0') + ":" + String(d.getMinutes()).padStart(2,'0') + ":" + String(d.getSeconds()).padStart(2,'0');
+      clockEl.textContent = [d.getHours(), d.getMinutes(), d.getSeconds()].map(n => String(n).padStart(2, '0')).join(':');
     }
     setInterval(updateClock, 1000); updateClock();
 
-    async function callsCreateSession() {
-      const res = await fetch(`${WORKER_BASE}/calls/session/new`, {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-      });
-      if (!res.ok) {
-        const txt = await res.text();
-        throw new Error("Session oluşturulamadı (" + res.status + "): " + txt);
-      }
-      return await res.json();
+    // ==================== DURUM ====================
+    let mode = 'cloud';                 // 'cloud' | 'live-listener' | 'live-publisher'
+    let userWantsPlay = false;          // kullanıcı dinlemek istiyor mu
+    let hasPlayed = false;
+    let buffering = false;
+    let audioIsCloud = false;           // element şu an bulut şarkısı mı çalıyor
+    let liveState = { live: false, sessionId: null, trackName: null, title: '' };
+    let currentSong = '';
+
+    let order = [], orderPos = -1, currentIdx = -1;
+
+    let localTracks = [], localIdx = 0, localActive = false;
+
+    let isPublisher = false, publisherSource = 'mic';
+    let publisherPC = null, publisherSessionId = null, publishedTrackName = null, activeBroadcastStream = null;
+
+    let listenerPC = null, listenerGen = 0, listenerRetryTimer = null;
+
+    let ws = null, wsTimer = null, wsBackoff = 1000, pingTimer = null;
+
+    let actx = null, mediaElSource = null, mediaDest = null, destConnected = false;
+
+    // ==================== KAYAN YAZI (yalnızca anlık şarkı) ====================
+    let lastMarquee = '';
+    function setMarqueeText(text) {
+      if (!marqueeContent || text === lastMarquee) return;
+      lastMarquee = text;
+      marqueeContent.textContent = text;
+      marqueeContent.style.animation = 'none';
+      void marqueeContent.offsetWidth;
+      const dur = Math.max(14, marqueeContent.scrollWidth / 60);
+      marqueeContent.style.animation = 'marquee ' + dur + 's linear infinite';
     }
 
-    async function callsAddTrack(sessionId, sessionDescription, tracks) {
-      const res = await fetch(`${WORKER_BASE}/calls/tracks/new`, {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ sessionId, sessionDescription, tracks }),
-      });
-      if (!res.ok) {
-        const txt = await res.text();
-        throw new Error("Track eklenemedi (" + res.status + "): " + txt);
+    function refreshMarquee() {
+      if (liveState.live) {
+        if (marqueeBadge) {
+          marqueeBadge.className = 'bg-red-600 text-white font-bold px-2 py-0.5 rounded mr-3 shrink-0 uppercase tracking-wider text-[10px] animate-pulse';
+          marqueeBadge.textContent = 'CANLI YAYIN';
+        }
+        setMarqueeText(liveState.title ? '🔴 ' + liveState.title : '🔴 CANLI YAYIN');
+      } else {
+        if (marqueeBadge) {
+          marqueeBadge.className = 'bg-orange-600 text-white font-bold px-2 py-0.5 rounded mr-3 shrink-0 uppercase tracking-wider text-[10px]';
+          marqueeBadge.textContent = 'ŞU AN ÇALIYOR';
+        }
+        setMarqueeText('🎵 ' + (currentSong || 'VOM Yayın'));
       }
-      return await res.json();
     }
 
-    async function callsRenegotiate(sessionId, sessionDescription) {
-      const res = await fetch(`${WORKER_BASE}/calls/renegotiate`, {
-        method: "PUT",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ sessionId, sessionDescription }),
-      });
-      if (!res.ok) {
-        const txt = await res.text();
-        throw new Error("Renegotiate başarısız (" + res.status + "): " + txt);
-      }
-      return await res.json();
+    function setSong(text) {
+      currentSong = text || '';
+      refreshMarquee();
+      updateMediaSession();
     }
 
-    async function startPublishing() {
-      if (queueWarnBox) queueWarnBox.classList.add("hidden");
+    // ==================== DURUM GÖSTERGELERİ ====================
+    function renderStatus() {
+      const live = liveState.live;
+      if (statusDot) statusDot.className = live ? 'onair-dot onair-sm shrink-0' : 'w-2 h-2 rounded-full bg-emerald-500 animate-pulse';
+      if (cardDot) cardDot.className = live ? 'onair-dot shrink-0' : 'w-2 h-2 rounded-full bg-emerald-500 animate-pulse shrink-0';
+      if (stationStatusText) {
+        stationStatusText.textContent = live ? 'CANLI · ON AIR' : 'YAYINDA';
+        stationStatusText.className = live ? 'text-[11px] font-bold text-red-500' : 'text-[11px] font-semibold text-emerald-400';
+      }
+      if (cardLabel) {
+        cardLabel.textContent = live ? 'CANLI · ON AIR' : 'VOM YAYIN · YAYINDA · ON AIR';
+        cardLabel.className = live ? 'text-base font-extrabold tracking-widest text-red-500' : 'text-[11px] font-semibold tracking-wide text-zinc-400';
+      }
+      if (playerCard) {
+        playerCard.className = 'p-5 sm:p-6 rounded-2xl border bg-zinc-900/70 shadow-2xl space-y-5 transition-colors ' +
+          (live ? 'border-red-600/70' : 'border-zinc-800');
+      }
+      if (stationLogo) {
+        stationLogo.className = 'w-10 h-10 rounded-xl bg-gradient-to-br ' +
+          (live ? 'from-red-600 to-amber-600 shadow-red-600/30' : 'from-orange-500 to-amber-600 shadow-orange-600/30') +
+          ' flex items-center justify-center font-extrabold text-white text-lg shadow-lg transition-all';
+      }
+    }
+
+    function stateText() {
+      if (isPublisher && publisherSource === 'mic') return '🎙️ Mikrofon yayında';
+      if (audio.paused) {
+        if (userWantsPlay) return 'Bağlanıyor…';
+        if (liveState.live) return 'Canlı yayın var · CANLI DİNLE ▶';
+        return hasPlayed ? 'Duraklatıldı' : 'Başlatmak için ▶';
+      }
+      if (buffering) return 'Bağlanıyor…';
+      return liveState.live ? 'Canlı ●' : 'Yayında ●';
+    }
+
+    function updatePlayUI() {
+      const micLive = isPublisher && publisherSource === 'mic';
+      const playing = !audio.paused;
+      if (playBtn) {
+        playBtn.textContent = micLive ? '🎙️' : (playing ? '⏸' : '▶');
+        playBtn.setAttribute('aria-label', playing ? 'Duraklat' : 'Dinle');
+        playBtn.classList.toggle('ring-hint', !playing && (!hasPlayed || liveState.live) && !micLive);
+      }
+      if (stateEl) stateEl.textContent = stateText();
+      try { if ('mediaSession' in navigator) navigator.mediaSession.playbackState = playing ? 'playing' : 'paused'; } catch (e) {}
+    }
+
+    function updateAdminBtn() {
+      if (!toggleBroadcastBtn || !broadcastBtnText) return;
+      if (isPublisher) {
+        broadcastBtnText.textContent = '⏹ Canlı Yayını Bitir';
+        toggleBroadcastBtn.className = 'py-3 px-4 rounded-xl font-bold text-xs shadow-xl transition-all flex items-center justify-center gap-2 bg-zinc-800 hover:bg-zinc-700 text-white cursor-pointer disabled:opacity-60';
+      } else {
+        broadcastBtnText.textContent = 'CANLI YAYINA GEÇ';
+        toggleBroadcastBtn.className = 'py-3 px-4 rounded-xl font-bold text-xs shadow-xl transition-all flex items-center justify-center gap-2 bg-red-600 hover:bg-red-500 text-white cursor-pointer disabled:opacity-60';
+      }
+    }
+
+    function refreshAll() {
+      renderStatus();
+      refreshMarquee();
+      updatePlayUI();
+      updateMediaSession();
+      updateAdminBtn();
+    }
+
+    // ==================== MEDIA SESSION (kilit ekranı) ====================
+    function updateMediaSession() {
+      if (!('mediaSession' in navigator)) return;
       try {
-        webrtcStatusBadge.textContent = "Hazırlanıyor...";
-        let stream = null;
-        const useQueue = document.getElementById("source-queue")?.checked;
+        const title = liveState.live ? (liveState.title || 'Canlı Yayın') : (currentSong || 'VOM Yayın');
+        navigator.mediaSession.metadata = new MediaMetadata({
+          title: title,
+          artist: 'VOM Radyo',
+          album: liveState.live ? 'CANLI YAYIN' : 'ON AIR'
+        });
+      } catch (e) {}
+    }
 
+    function setupMediaSession() {
+      if (!('mediaSession' in navigator)) return;
+      const set = (name, fn) => { try { navigator.mediaSession.setActionHandler(name, fn); } catch (e) {} };
+      set('play', () => { userWantsPlay = true; hasPlayed = true; tryPlay(); });
+      set('pause', () => { userWantsPlay = false; audio.pause(); updatePlayUI(); });
+      // Tek player, kesintisiz yayın: ileri/geri/sarma yok
+      ['previoustrack', 'nexttrack', 'seekbackward', 'seekforward', 'seekto'].forEach(n => set(n, null));
+    }
+
+    // ==================== iOS SES KİLİDİ ====================
+    function makeSilentWav() {
+      const sampleRate = 8000, n = 800;
+      const buf = new ArrayBuffer(44 + n);
+      const v = new DataView(buf);
+      const w = (o, s) => { for (let i = 0; i < s.length; i++) v.setUint8(o + i, s.charCodeAt(i)); };
+      w(0, 'RIFF'); v.setUint32(4, 36 + n, true); w(8, 'WAVE'); w(12, 'fmt ');
+      v.setUint32(16, 16, true); v.setUint16(20, 1, true); v.setUint16(22, 1, true);
+      v.setUint32(24, sampleRate, true); v.setUint32(28, sampleRate, true);
+      v.setUint16(32, 1, true); v.setUint16(34, 8, true);
+      w(36, 'data'); v.setUint32(40, n, true);
+      for (let i = 0; i < n; i++) v.setUint8(44 + i, 128);
+      return URL.createObjectURL(new Blob([buf], { type: 'audio/wav' }));
+    }
+    let silentUrl = null;
+    function primeElement() {
+      // Dokunma anında elementi "açar": sonradan canlı yayın sesi izinsiz başlatılabilir (Apple)
+      try {
+        if (!silentUrl) silentUrl = makeSilentWav();
+        audio.srcObject = null;
+        audio.src = silentUrl;
+        audioIsCloud = false;
+        const p = audio.play();
+        if (p && p.catch) p.catch(() => {});
+      } catch (e) {}
+      if (!actx && AudioCtxClass) { try { actx = new AudioCtxClass(); } catch (e) {} }
+      if (actx && actx.state === 'suspended') actx.resume().catch(() => {});
+    }
+
+    // ==================== BULUT ÇALMA LİSTESİ (karışık + döngü) ====================
+    function buildOrder(avoidIdx) {
+      order = shuffle(PLAYLIST.map((_, i) => i));
+      if (avoidIdx != null && order.length > 1 && order[0] === avoidIdx) {
+        const j = 1 + Math.floor(Math.random() * (order.length - 1));
+        [order[0], order[j]] = [order[j], order[0]];
+      }
+      orderPos = -1;
+    }
+    function pickNext() {
+      if (!order.length || orderPos + 1 >= order.length) buildOrder(currentIdx);
+      orderPos++;
+      return order[orderPos];
+    }
+
+    function loadCloud(idx, play) {
+      if (!PLAYLIST[idx]) return;
+      currentIdx = idx;
+      localActive = false;
+      if (audio.srcObject) audio.srcObject = null;
+      audio.src = PLAYLIST[idx].url;
+      audioIsCloud = true;
+      setSong(PLAYLIST[idx].full);
+      if (play) {
+        const p = audio.play();
+        if (p && p.catch) p.catch(onPlayBlocked);
+      }
+      updatePlayUI();
+    }
+
+    function playLocal(i) {
+      if (!localTracks[i]) return;
+      localIdx = i;
+      localActive = true;
+      audioIsCloud = false;
+      userWantsPlay = true;
+      hasPlayed = true;
+      if (audio.srcObject) audio.srcObject = null;
+      audio.src = localTracks[i].url;
+      setSong(localTracks[i].name);
+      const p = audio.play();
+      if (p && p.catch) p.catch(onPlayBlocked);
+      renderLocalList();
+      if (isPublisher && publisherSource === 'queue') {
+        liveState.title = localTracks[i].name;
+        announceLive();
+        refreshMarquee();
+      }
+    }
+
+    function advance() {
+      if (localActive && localTracks.length) playLocal((localIdx + 1) % localTracks.length);   // bitince başa döner
+      else loadCloud(pickNext(), userWantsPlay);                                              // bitince yeniden karıştırır
+    }
+
+    function resumeCloud() {
+      localActive = false;
+      renderLocalList();
+      if (audio.srcObject) audio.srcObject = null;
+      if (audioIsCloud && currentIdx >= 0 && !audio.ended && !audio.error) {
+        setSong(PLAYLIST[currentIdx].full);
+        if (userWantsPlay && audio.paused) {
+          const p = audio.play();
+          if (p && p.catch) p.catch(onPlayBlocked);
+        }
+      } else {
+        loadCloud(pickNext(), userWantsPlay);
+      }
+    }
+
+    function onPlayBlocked(err) {
+      if (err && err.name === 'AbortError') return;
+      if (mode === 'live-listener') { showLiveAlert(); }
+      else if (err && err.name === 'NotAllowedError') {
+        userWantsPlay = false;
+        showError('Sesi başlatmak için ▶ tuşuna dokunun.');
+      }
+      updatePlayUI();
+    }
+
+    function shouldBeAudible() {
+      if (!userWantsPlay) return false;
+      if (mode === 'live-publisher') return publisherSource === 'queue';
+      return true;
+    }
+
+    async function tryPlay() {
+      hideError();
+      if (mode === 'live-listener' && !audio.srcObject) {
+        primeElement();
+        if (!listenerPC) startListening();
+        updatePlayUI();
+        return;
+      }
+      if (!audio.srcObject && !audio.getAttribute('src')) { loadCloud(pickNext(), true); return; }
+      try { await audio.play(); } catch (e) { onPlayBlocked(e); }
+    }
+
+    async function togglePlay() {
+      if (isPublisher && publisherSource === 'mic') {
+        toast('Mikrofon yayını sürüyor. Bitirmek için Yayıncı Masası\'nı kullanın.');
+        return;
+      }
+      if (!audio.paused) {
+        userWantsPlay = false;
+        audio.pause();
+        updatePlayUI();
+        return;
+      }
+      userWantsPlay = true;
+      hasPlayed = true;
+      if (actx && actx.state === 'suspended') actx.resume().catch(() => {});
+      await tryPlay();
+      updatePlayUI();
+    }
+
+    // ==================== AUDIO OLAYLARI ====================
+    let errCount = 0, errTimer = null;
+
+    audio.addEventListener('play', updatePlayUI);
+    audio.addEventListener('pause', updatePlayUI);
+    audio.addEventListener('waiting', () => { buffering = true; updatePlayUI(); });
+    audio.addEventListener('canplay', () => { buffering = false; updatePlayUI(); });
+    audio.addEventListener('playing', () => {
+      buffering = false; errCount = 0; hasPlayed = true;
+      hideError();
+      if (mode === 'live-listener' && audio.srcObject) hideLiveAlert();
+      updatePlayUI();
+    });
+
+    audio.addEventListener('ended', () => {
+      if (audio.srcObject) { if (mode === 'live-listener') scheduleListenerRetry(); return; }
+      if (mode === 'live-listener' && !audioIsCloud) return;            // sessiz kilit dosyası bitti
+      if (mode === 'live-publisher' && publisherSource === 'mic') return;
+      advance();
+    });
+
+    audio.addEventListener('error', () => {
+      if (audio.srcObject) return;
+      if (!audio.getAttribute('src') || (silentUrl && audio.src === silentUrl)) return;
+      if (mode === 'live-publisher' && publisherSource === 'mic') return;
+      errCount++;
+      let delay = 1000;
+      if (errCount >= 6) { errCount = 0; delay = 10000; showError('Bağlantı sorunu var, yeniden deneniyor…'); }
+      clearTimeout(errTimer);
+      errTimer = setTimeout(() => { if (!audio.srcObject) advance(); }, delay);
+    });
+
+    // Donma bekçisi + beklenmedik duraklamalarda (arama, bildirim) otomatik devam
+    let lastT = -1, stuck = 0;
+    function ensurePlaying() {
+      if (!shouldBeAudible()) { stuck = 0; return; }
+      if (mode === 'live-listener' && !audio.srcObject) return;
+      if (audio.paused) {
+        if (audio.srcObject || (audio.getAttribute('src') && !audio.ended)) {
+          const p = audio.play();
+          if (p && p.catch) p.catch(() => {});
+        }
+        stuck = 0;
+        return;
+      }
+      if (audio.srcObject) return;
+      if (audio.currentTime === lastT && !audio.seeking) {
+        stuck++;
+        if (stuck >= 3) { stuck = 0; advance(); }
+      } else { stuck = 0; lastT = audio.currentTime; }
+    }
+    setInterval(ensurePlaying, 5000);
+    document.addEventListener('visibilitychange', () => {
+      if (document.visibilityState === 'visible') { ensurePlaying(); connectWS(); }
+    });
+    window.addEventListener('online', () => { connectWS(); ensurePlaying(); if (mode === 'live-listener') startListening(); });
+
+    // ==================== SES / SESSİZ ====================
+    const volumeSupported = (() => {
+      try { const a = new Audio(); a.volume = 0.5; return a.volume === 0.5; } catch (e) { return false; }
+    })();
+    if (!volumeSupported && volumeRange) volumeRange.style.display = 'none';   // iOS'ta ses cihazın tuşlarıyla ayarlanır
+    if (volumeRange && volumeSupported) {
+      audio.volume = parseFloat(volumeRange.value);
+      volumeRange.oninput = (e) => { audio.volume = parseFloat(e.target.value); };
+    }
+    if (muteBtn) {
+      muteBtn.onclick = () => {
+        audio.muted = !audio.muted;
+        muteBtn.textContent = audio.muted ? '🔇' : '🔊';
+      };
+    }
+    if (playBtn) playBtn.onclick = togglePlay;
+    if (liveAlertBtn) {
+      liveAlertBtn.onclick = (e) => {
+        e.stopPropagation();
+        userWantsPlay = true; hasPlayed = true;
+        hideLiveAlert();
+        tryPlay();
+      };
+    }
+    if (liveAlert) liveAlert.onclick = () => liveAlertBtn.click();
+    if (errRetry) {
+      errRetry.onclick = () => {
+        hideError();
+        userWantsPlay = true; hasPlayed = true;
+        if (mode === 'live-listener') startListening();
+        else loadCloud(pickNext(), true);
+      };
+    }
+
+    // ==================== CLOUDFLARE CALLS ====================
+    async function api(path, method, body) {
+      const res = await fetch(WORKER_BASE + path, {
+        method: method,
+        headers: { 'Content-Type': 'application/json' },
+        body: body ? JSON.stringify(body) : undefined
+      });
+      if (!res.ok) {
+        const txt = await res.text().catch(() => '');
+        throw new Error(path + ' (' + res.status + ') ' + txt.slice(0, 120));
+      }
+      return res.json();
+    }
+    const callsCreateSession = () => api('/calls/session/new', 'POST');
+    const callsAddTrack = (sessionId, sessionDescription, tracks) => api('/calls/tracks/new', 'POST', { sessionId, sessionDescription, tracks });
+    const callsRenegotiate = (sessionId, sessionDescription) => api('/calls/renegotiate', 'PUT', { sessionId, sessionDescription });
+
+    function checkTrackErrors(data) {
+      if (data && data.errorCode) throw new Error(data.errorDescription || ('Hata ' + data.errorCode));
+      const t = data && data.tracks && data.tracks[0];
+      if (t && t.errorCode) throw new Error(t.errorDescription || ('Track hatası ' + t.errorCode));
+    }
+
+    function waitIce(pc, ms) {
+      return new Promise((resolve, reject) => {
+        const ok = () => pc.iceConnectionState === 'connected' || pc.iceConnectionState === 'completed';
+        if (ok()) return resolve();
+        const done = (fn, arg) => { clearTimeout(timer); pc.removeEventListener('iceconnectionstatechange', h); fn(arg); };
+        const h = () => {
+          if (ok()) done(resolve);
+          else if (pc.iceConnectionState === 'failed') done(reject, new Error('ICE bağlantısı kurulamadı'));
+        };
+        const timer = setTimeout(() => done(reject, new Error('Bağlantı zaman aşımına uğradı')), ms);
+        pc.addEventListener('iceconnectionstatechange', h);
+      });
+    }
+
+    // ---------- Yayıncı ----------
+    function captureAudio() {
+      let s = null;
+      try {
+        if (audio.captureStream) s = audio.captureStream();
+        else if (audio.mozCaptureStream) s = audio.mozCaptureStream();
+      } catch (e) {}
+      if (s && s.getAudioTracks().length) return s;
+      // Safari yedeği: WebAudio üzerinden yakala
+      if (!AudioCtxClass) throw new Error('Tarayıcı ses yakalamayı desteklemiyor');
+      if (!actx) actx = new AudioCtxClass();
+      if (actx.state === 'suspended') actx.resume().catch(() => {});
+      if (!mediaElSource) mediaElSource = actx.createMediaElementSource(audio);
+      if (!destConnected) { mediaElSource.connect(actx.destination); destConnected = true; }
+      if (mediaDest) { try { mediaElSource.disconnect(mediaDest); } catch (e) {} }
+      mediaDest = actx.createMediaStreamDestination();
+      mediaElSource.connect(mediaDest);
+      return mediaDest.stream;
+    }
+
+    async function cleanupPublisher() {
+      if (publisherPC) {
+        publisherPC.oniceconnectionstatechange = null;
+        try { publisherPC.close(); } catch (e) {}
+        publisherPC = null;
+      }
+      if (activeBroadcastStream) {
+        activeBroadcastStream.getTracks().forEach(t => { try { t.stop(); } catch (e) {} });
+        activeBroadcastStream = null;
+      }
+      isPublisher = false;
+      publisherSessionId = null;
+      publishedTrackName = null;
+      setBadge('Hazır');
+    }
+
+    function liveTitleForPublisher() {
+      return publisherSource === 'queue' && localTracks[localIdx] ? localTracks[localIdx].name : '';
+    }
+
+    function announceLive() {
+      if (!isPublisher) return;
+      sendWS({
+        action: 'SET_LIVE',
+        live: true,
+        sessionId: publisherSessionId,
+        trackName: publishedTrackName,
+        trackTitle: liveState.title || liveTitleForPublisher()
+      });
+    }
+
+    async function startLive() {
+      if (liveState.live && !isPublisher) {
+        if (!confirm('Şu an başka bir canlı yayın görünüyor. Devralmak istiyor musunuz?')) return false;
+      }
+      if (queueWarnBox) queueWarnBox.classList.add('hidden');
+      const useQueue = !!($('source-queue') && $('source-queue').checked);
+      setBadge('Hazırlanıyor...');
+      try {
+        let stream;
         if (useQueue) {
-          if (!audio.src || audio.paused) {
+          if (!localActive || audio.srcObject || audio.paused) {
             if (queueWarnBox) {
-              queueWarnBox.textContent = "Şarkı sırası modunda yayın yapabilmek için önce bir şarkıyı çalmaya başlatmalısınız.";
-              queueWarnBox.classList.remove("hidden");
+              queueWarnBox.textContent = 'Şarkı modunda yayın için önce 2. adımdan şarkı seçip çalmaya başlatın.';
+              queueWarnBox.classList.remove('hidden');
             }
-            throw new Error("Şarkı çalmıyor.");
+            throw new Error('Yerel şarkı çalmıyor');
           }
-          try {
-            if (audio.captureStream) stream = audio.captureStream();
-            else if (audio.mozCaptureStream) stream = audio.mozCaptureStream();
-          } catch(e) {}
-          if (!stream || stream.getAudioTracks().length === 0) {
-            throw new Error("Ses yakalanamadı.");
-          }
+          stream = captureAudio();
         } else {
+          if (!navigator.mediaDevices || !navigator.mediaDevices.getUserMedia) {
+            throw new Error('Mikrofon için HTTPS bağlantı gerekli');
+          }
           stream = await navigator.mediaDevices.getUserMedia({
             audio: { echoCancellation: true, noiseSuppression: true, autoGainControl: true }
           });
         }
+        if (!stream || !stream.getAudioTracks().length) throw new Error('Ses yakalanamadı');
 
         activeBroadcastStream = stream;
-        publisherPC = new RTCPeerConnection({ iceServers: ICE_SERVERS });
-        stream.getAudioTracks().forEach(track => publisherPC.addTrack(track, stream));
+        publisherSource = useQueue ? 'queue' : 'mic';
 
-        const offer = await publisherPC.createOffer({ offerToReceiveAudio: false, offerToReceiveVideo: false });
-        await publisherPC.setLocalDescription(offer);
+        const pc = new RTCPeerConnection({ iceServers: ICE_SERVERS, bundlePolicy: 'max-bundle' });
+        publisherPC = pc;
+        const transceiver = pc.addTransceiver(stream.getAudioTracks()[0], { direction: 'sendonly', streams: [stream] });
 
-        webrtcStatusBadge.textContent = "Oturum Açılıyor...";
-        const sessionData = await callsCreateSession();
-        publisherSessionId = sessionData.sessionId;
+        const offer = await pc.createOffer();
+        await pc.setLocalDescription(offer);
 
-        webrtcStatusBadge.textContent = "SFU'ya Ekleniyor...";
-        const trackData = await callsAddTrack(
-          publisherSessionId,
-          { sdp: publisherPC.localDescription.sdp, type: "offer" },
-          [{ location: "local", trackName: "vom-canli-ses" }]
+        setBadge('Oturum Açılıyor...');
+        const sess = await callsCreateSession();
+        if (!sess || !sess.sessionId) throw new Error('Oturum oluşturulamadı');
+
+        setBadge("SFU'ya Ekleniyor...");
+        const data = await callsAddTrack(
+          sess.sessionId,
+          { sdp: pc.localDescription.sdp, type: 'offer' },
+          [{ location: 'local', mid: transceiver.mid, trackName: LIVE_TRACK_NAME }]
         );
+        checkTrackErrors(data);
 
-        if (trackData.sessionDescription) {
-          await publisherPC.setRemoteDescription(trackData.sessionDescription);
-        }
+        if (data.sessionDescription) await pc.setRemoteDescription(data.sessionDescription);
 
-        if (trackData.requiresImmediateRenegotiation) {
-          if (trackData.sessionDescription && trackData.sessionDescription.type === "offer") {
-            const answer = await publisherPC.createAnswer();
-            await publisherPC.setLocalDescription(answer);
-            await callsRenegotiate(publisherSessionId, { type: "answer", sdp: answer.sdp });
+        if (data.requiresImmediateRenegotiation) {
+          if (data.sessionDescription && data.sessionDescription.type === 'offer') {
+            const answer = await pc.createAnswer();
+            await pc.setLocalDescription(answer);
+            await callsRenegotiate(sess.sessionId, { type: 'answer', sdp: answer.sdp });
           } else {
-            const newOffer = await publisherPC.createOffer();
-            await publisherPC.setLocalDescription(newOffer);
-            const reneg = await callsRenegotiate(publisherSessionId, { type: "offer", sdp: publisherPC.localDescription.sdp });
-            if (reneg.sessionDescription) {
-              await publisherPC.setRemoteDescription(reneg.sessionDescription);
-            }
+            const newOffer = await pc.createOffer();
+            await pc.setLocalDescription(newOffer);
+            const reneg = await callsRenegotiate(sess.sessionId, { type: 'offer', sdp: pc.localDescription.sdp });
+            if (reneg.sessionDescription) await pc.setRemoteDescription(reneg.sessionDescription);
           }
         }
 
-        publishedTrackName = trackData.tracks?.[0]?.trackName || "vom-canli-ses";
+        setBadge('Bağlanıyor...');
+        await waitIce(pc, 12000);     // bağlantı gerçekten kurulmadan dinleyicilere duyurma
 
-        sendWS({
-          action: "SET_LIVE",
-          live: true,
-          sessionId: publisherSessionId,
-          trackName: publishedTrackName,
-          trackTitle: isLocalQueueActive && localTracks[currentLocalTrackIdx] ? localTracks[currentLocalTrackIdx].name : "Canlı DJ Stüdyosu"
-        });
+        publisherSessionId = sess.sessionId;
+        publishedTrackName = (data.tracks && data.tracks[0] && data.tracks[0].trackName) || LIVE_TRACK_NAME;
+        isPublisher = true;
 
-        webrtcStatusBadge.textContent = "Yayında (Calls SFU) ✓";
-        webrtcStatusBadge.className = "text-[10px] bg-red-950 text-red-400 border border-red-800 px-2 py-0.5 rounded font-mono font-bold animate-pulse";
-      } catch (err) {
-        webrtcStatusBadge.textContent = "Hata: " + err.message;
-      }
-    }
-
-    async function stopPublishing() {
-      if (publisherPC) { publisherPC.close(); publisherPC = null; }
-      if (activeBroadcastStream) { activeBroadcastStream.getTracks().forEach(t => t.stop()); activeBroadcastStream = null; }
-      publisherSessionId = null;
-      publishedTrackName = null;
-      sendWS({ action: "SET_LIVE", live: false });
-      webrtcStatusBadge.textContent = "Hazır";
-      webrtcStatusBadge.className = "text-[10px] bg-zinc-800 text-zinc-400 border border-zinc-700 px-2 py-0.5 rounded font-mono";
-    }
-
-    async function startListening(remoteSessionId, remoteTrackName) {
-      if (listenerPC) { listenerPC.close(); listenerPC = null; }
-      listenerSessionId = null;
-
-      try {
-        listenerPC = new RTCPeerConnection({ iceServers: ICE_SERVERS });
-        listenerPC.ontrack = (event) => {
-          const [remoteStream] = event.streams;
-          if (webrtcAudio && remoteStream) {
-            webrtcAudio.srcObject = remoteStream;
-            webrtcAudio.play().then(() => {
-              isPlaying = true;
-              if (mainPlayBtn) mainPlayBtn.textContent = "⏸";
-              hideError();
-            }).catch(() => {
-              if (mobileLiveAlert) mobileLiveAlert.classList.remove("hidden");
-            });
+        pc.oniceconnectionstatechange = () => {
+          if (publisherPC !== pc) return;
+          const s = pc.iceConnectionState;
+          if (s === 'failed') { toast('Yayın bağlantısı koptu. Yayın sonlandırılıyor.'); stopLive(); }
+          else if (s === 'disconnected') {
+            setTimeout(() => {
+              if (publisherPC === pc && pc.iceConnectionState === 'disconnected') { toast('Yayın bağlantısı koptu. Yayın sonlandırılıyor.'); stopLive(); }
+            }, 6000);
           }
         };
 
-        listenerPC.addTransceiver("audio", { direction: "recvonly" });
-        const offer = await listenerPC.createOffer();
-        await listenerPC.setLocalDescription(offer);
-
-        const sessionData = await callsCreateSession();
-        listenerSessionId = sessionData.sessionId;
-
-        const subData = await callsAddTrack(
-          listenerSessionId,
-          { sdp: listenerPC.localDescription.sdp, type: "offer" },
-          [{ location: "remote", trackName: remoteTrackName, sessionId: remoteSessionId }]
-        );
-
-        if (subData.sessionDescription) {
-          if (subData.sessionDescription.type === "offer") {
-            await listenerPC.setRemoteDescription(subData.sessionDescription);
-            const answer = await listenerPC.createAnswer();
-            await listenerPC.setLocalDescription(answer);
-            await callsRenegotiate(listenerSessionId, { type: "answer", sdp: answer.sdp });
-          } else {
-            await listenerPC.setRemoteDescription(subData.sessionDescription);
-            if (subData.requiresImmediateRenegotiation) {
-              const newOffer = await listenerPC.createOffer();
-              await listenerPC.setLocalDescription(newOffer);
-              const reneg = await callsRenegotiate(listenerSessionId, { type: "offer", sdp: listenerPC.localDescription.sdp });
-              if (reneg.sessionDescription) await listenerPC.setRemoteDescription(reneg.sessionDescription);
-            }
-          }
-        } else if (subData.requiresImmediateRenegotiation) {
-          const newOffer = await listenerPC.createOffer();
-          await listenerPC.setLocalDescription(newOffer);
-          const reneg = await callsRenegotiate(listenerSessionId, { type: "offer", sdp: listenerPC.localDescription.sdp });
-          if (reneg.sessionDescription) await listenerPC.setRemoteDescription(reneg.sessionDescription);
-        }
+        liveState.title = liveTitleForPublisher();
+        announceLive();
+        setBadge('Yayında ✓', 'live');
+        return true;
       } catch (err) {
-        showError("Canlı yayın bağlantısı kuruluyor...");
+        await cleanupPublisher();
+        const msg = (err && err.message) ? err.message : 'Bilinmeyen hata';
+        setBadge('Hata');
+        toast('Canlı yayın başlatılamadı: ' + msg);
+        return false;
       }
+    }
+
+    async function stopLive() {
+      await cleanupPublisher();
+      sendWS({ action: 'SET_LIVE', live: false });
+      applyLive(false);
+    }
+
+    // ---------- Dinleyici ----------
+    function closeListenerPC() {
+      if (listenerPC) {
+        listenerPC.ontrack = null;
+        listenerPC.oniceconnectionstatechange = null;
+        try { listenerPC.close(); } catch (e) {}
+        listenerPC = null;
+      }
+    }
+
+    function scheduleListenerRetry() {
+      clearTimeout(listenerRetryTimer);
+      if (!liveState.live || mode !== 'live-listener') return;
+      listenerRetryTimer = setTimeout(startListening, 3000);
+    }
+
+    function onRemoteTrack(e) {
+      const stream = (e.streams && e.streams[0]) || new MediaStream([e.track]);
+      audio.srcObject = stream;
+      audioIsCloud = false;
+      localActive = false;
+      hideError();
+      updateMediaSession();
+      if (userWantsPlay) {
+        const p = audio.play();
+        if (p && p.then) p.then(() => hideLiveAlert()).catch(onPlayBlocked);
+      } else {
+        showLiveAlert();
+      }
+      updatePlayUI();
+    }
+
+    async function negotiateListener(pc, remoteSid, trackName, withOffer) {
+      let sd;
+      if (withOffer) {
+        pc.addTransceiver('audio', { direction: 'recvonly' });
+        const o = await pc.createOffer();
+        await pc.setLocalDescription(o);
+        sd = { sdp: pc.localDescription.sdp, type: 'offer' };
+      }
+      const sess = await callsCreateSession();
+      if (!sess || !sess.sessionId) throw new Error('Dinleyici oturumu açılamadı');
+      const data = await callsAddTrack(sess.sessionId, sd, [{ location: 'remote', sessionId: remoteSid, trackName: trackName }]);
+      checkTrackErrors(data);
+
+      const remote = data.sessionDescription;
+      if (remote && remote.type === 'offer') {
+        await pc.setRemoteDescription(remote);
+        const answer = await pc.createAnswer();
+        await pc.setLocalDescription(answer);
+        await callsRenegotiate(sess.sessionId, { type: 'answer', sdp: answer.sdp });
+      } else {
+        if (remote) await pc.setRemoteDescription(remote);
+        if (data.requiresImmediateRenegotiation) {
+          const newOffer = await pc.createOffer();
+          await pc.setLocalDescription(newOffer);
+          const reneg = await callsRenegotiate(sess.sessionId, { type: 'offer', sdp: pc.localDescription.sdp });
+          if (reneg.sessionDescription) await pc.setRemoteDescription(reneg.sessionDescription);
+        }
+      }
+    }
+
+    async function startListening() {
+      if (!liveState.live || !liveState.sessionId || !liveState.trackName) return;
+      const gen = ++listenerGen;
+      clearTimeout(listenerRetryTimer);
+      closeListenerPC();
+      const remoteSid = liveState.sessionId, trackName = liveState.trackName;
+
+      for (const withOffer of [false, true]) {
+        if (gen !== listenerGen) return;
+        const pc = new RTCPeerConnection({ iceServers: ICE_SERVERS, bundlePolicy: 'max-bundle' });
+        listenerPC = pc;
+        pc.ontrack = (e) => { if (gen === listenerGen) onRemoteTrack(e); };
+        pc.oniceconnectionstatechange = () => {
+          if (gen !== listenerGen) return;
+          const s = pc.iceConnectionState;
+          if (s === 'failed' || s === 'closed') scheduleListenerRetry();
+          else if (s === 'disconnected') {
+            setTimeout(() => { if (gen === listenerGen && pc.iceConnectionState === 'disconnected') scheduleListenerRetry(); }, 4000);
+          }
+        };
+        try {
+          await negotiateListener(pc, remoteSid, trackName, withOffer);
+          return;
+        } catch (err) {
+          try { pc.close(); } catch (e) {}
+          if (listenerPC === pc) listenerPC = null;
+        }
+      }
+      if (gen === listenerGen) { showError('Canlı yayın bağlantısı kuruluyor…'); scheduleListenerRetry(); }
     }
 
     function stopListening() {
-      if (listenerPC) { listenerPC.close(); listenerPC = null; }
-      listenerSessionId = null;
-      if (webrtcAudio) {
-        webrtcAudio.pause();
-        webrtcAudio.srcObject = null;
-      }
+      listenerGen++;
+      clearTimeout(listenerRetryTimer);
+      closeListenerPC();
+      if (audio.srcObject) { audio.pause(); audio.srcObject = null; }
     }
 
-    function applyBroadcastState(live, sessionId, trackName) {
-      isLiveBroadcast = live;
-
+    // ==================== CANLI YAYIN DURUMU ====================
+    function applyLive(live, sessionId, trackName, title) {
       if (live && sessionId && trackName) {
-        // CANLI YAYIN AKTİF -> SOHBET AÇIK
-        if (statusDot) statusDot.className = "w-2 h-2 rounded-full bg-red-500 animate-ping";
-        if (stationStatusText) {
-          stationStatusText.textContent = "🔴 CANLI YAYIN (ON AIR)";
-          stationStatusText.className = "text-[11px] font-bold text-red-500";
-        }
-        if (stationLogo) {
-          stationLogo.className = "w-10 h-10 rounded-xl bg-gradient-to-br from-red-600 to-amber-600 flex items-center justify-center font-extrabold text-white text-lg shadow-lg shadow-red-600/30 transition-all";
-        }
-        if (nowPlayingTitle) nowPlayingTitle.textContent = "VOM Canlı Yayın";
-        if (nowPlayingArtist) nowPlayingArtist.textContent = "Stüdyo Kesintisiz Yayında (Calls SFU)";
-        if (marqueeBadge) {
-          marqueeBadge.className = "text-xs bg-red-600 text-white font-bold px-2 py-0.5 rounded mr-3 shrink-0 uppercase tracking-wider text-[10px] animate-pulse";
-          marqueeBadge.textContent = "CANLI YAYIN";
-        }
-        if (marqueeContent) {
-          marqueeContent.textContent = "🔴 CANLI YAYIN: DJ Stüdyodan Yayında · Cloudflare Calls SFU Ultra Düşük Gecikme · VOM Radyo";
-        }
-        
-        // Sohbeti Aç
-        if (chatLiveBadge) {
-          chatLiveBadge.textContent = "● Canlı Açık";
-          chatLiveBadge.className = "text-[10px] font-mono text-emerald-400 font-bold";
-        }
-        if (chatClosedNotice) chatClosedNotice.style.display = "none";
-        if (chatForm) {
-          chatForm.className = "p-3 border-t border-zinc-800 bg-zinc-950 opacity-100 pointer-events-auto";
-        }
-        if (senderName) senderName.disabled = false;
-        if (senderMessage) {
-          senderMessage.disabled = false;
-          senderMessage.placeholder = "Mesajınız...";
-        }
-        if (chatSendBtn) {
-          chatSendBtn.disabled = false;
-          chatSendBtn.className = "w-full bg-gradient-to-r from-orange-600 to-amber-500 hover:from-orange-500 hover:to-amber-400 text-white font-semibold py-2.5 rounded-xl text-sm active:scale-95 transition-all cursor-pointer";
-        }
+        const same = liveState.live && liveState.sessionId === sessionId && liveState.trackName === trackName;
+        if (title) liveState.title = title;
+        if (same) { refreshAll(); return; }
 
-        audio.pause();
-        if (!publisherPC) {
-          startListening(sessionId, trackName);
+        liveState = { live: true, sessionId, trackName, title: title || '' };
+
+        if (isPublisher && sessionId === publisherSessionId) {
+          mode = 'live-publisher';
+          if (publisherSource === 'mic') { audio.pause(); }
+        } else {
+          mode = 'live-listener';
+          errCount = 0;
+          showLiveAlert();            // "CANLI YAYIN BAŞLADI ▶ DİNLE"
+          startListening();
         }
+        refreshAll();
       } else {
-        // BULUT YAYIN AKTİF -> SOHBET KAPALI
-        if (mobileLiveAlert) mobileLiveAlert.classList.add("hidden");
-        if (statusDot) statusDot.className = "w-2 h-2 rounded-full bg-emerald-500 animate-pulse";
-        if (stationStatusText) {
-          stationStatusText.textContent = "7/24 BULUT YAYINDA";
-          stationStatusText.className = "text-[11px] font-semibold text-emerald-400";
-        }
-        if (stationLogo) {
-          stationLogo.className = "w-10 h-10 rounded-xl bg-gradient-to-br from-orange-500 to-amber-600 flex items-center justify-center font-extrabold text-white text-lg shadow-lg shadow-orange-600/30 transition-all";
-        }
-        const t = PLAYLIST[currentTrackIdx];
-        if (nowPlayingTitle && t) nowPlayingTitle.textContent = t.title;
-        if (nowPlayingArtist && t) nowPlayingArtist.textContent = t.artist;
-        if (marqueeBadge) {
-          marqueeBadge.className = "text-xs bg-orange-600 text-white font-bold px-2 py-0.5 rounded mr-3 shrink-0 uppercase tracking-wider text-[10px]";
-          marqueeBadge.textContent = "YAYIN AKIŞI";
-        }
-        if (t) updateTopMarquee(t.title);
-
-        // Sohbeti Kapat
-        if (chatLiveBadge) {
-          chatLiveBadge.textContent = "● Sadece Canlı Yayında Açık";
-          chatLiveBadge.className = "text-[10px] font-mono text-amber-500 font-bold";
-        }
-        if (chatClosedNotice) chatClosedNotice.style.display = "block";
-        if (chatForm) {
-          chatForm.className = "p-3 border-t border-zinc-800 bg-zinc-950 opacity-40 pointer-events-none";
-        }
-        if (senderName) senderName.disabled = true;
-        if (senderMessage) {
-          senderMessage.disabled = true;
-          senderMessage.placeholder = "Sohbet kapalı...";
-        }
-        if (chatSendBtn) {
-          chatSendBtn.disabled = true;
-          chatSendBtn.className = "w-full bg-zinc-800 text-zinc-400 font-semibold py-2.5 rounded-xl text-sm cursor-not-allowed";
-        }
-
+        if (!liveState.live && mode === 'cloud') { refreshAll(); return; }
+        liveState = { live: false, sessionId: null, trackName: null, title: '' };
+        mode = 'cloud';
         stopListening();
-        audio.play().then(() => {
-          isPlaying = true;
-          if (mainPlayBtn) mainPlayBtn.textContent = "⏸";
-        }).catch(() => {});
-      }
-    }
-
-    function handleIncomingPayload(payload) {
-      const action = payload.action || payload.type;
-      if (action === "SET_LIVE") {
-        applyBroadcastState(payload.live, payload.sessionId, payload.trackName);
-      } else if (action === "INIT_STATE") {
-        if (payload.listenerCount !== undefined) {
-          const el = document.getElementById("live-listener-count");
-          if (el) el.textContent = payload.listenerCount;
-        }
-        if (payload.state && payload.state.isLive) {
-          applyBroadcastState(true, payload.state.sessionId, payload.state.trackName);
-        }
-      } else if (action === "CLEAR_CHAT") {
-        if (chatMessages) chatMessages.innerHTML = '<div class="p-4 rounded-xl bg-zinc-950/80 border border-zinc-800 text-center"><p class="font-bold text-zinc-300">Sohbet Temizlendi</p></div>';
-      } else if (action === "LISTENER_COUNT" && payload.count !== undefined) {
-        const el = document.getElementById("live-listener-count");
-        if (el) el.textContent = payload.count;
-      } else if (action === "message" || action === "CHAT_MESSAGE") {
-        const item = payload.item || payload;
-        renderIncomingMessage(item.name || "Dinleyici", item.msg || item.text || "", item.time || "");
-      }
-    }
-
-    async function togglePlay() {
-      unlockAppleAudio();
-      hideError();
-
-      if (isLiveBroadcast) {
-        if (isPlaying) {
-          webrtcAudio.pause();
-          isPlaying = false;
-          if (mainPlayBtn) mainPlayBtn.textContent = "▶";
-          if (audioStateIndicator) audioStateIndicator.textContent = "Durduruldu";
-        } else {
-          try {
-            await webrtcAudio.play();
-            isPlaying = true;
-            if (mainPlayBtn) mainPlayBtn.textContent = "⏸";
-            if (audioStateIndicator) audioStateIndicator.textContent = "Canlı ●";
-          } catch(err) {
-            showError("Ses izni bekleniyor.");
-          }
-        }
-      } else {
-        if (isPlaying) {
-          audio.pause();
-          isPlaying = false;
-          if (mainPlayBtn) mainPlayBtn.textContent = "▶";
-          if (audioStateIndicator) audioStateIndicator.textContent = "Durduruldu";
-        } else {
-          try {
-            if (!audio.src) selectTrack(currentTrackIdx);
-            await audio.play();
-            isPlaying = true;
-            if (mainPlayBtn) mainPlayBtn.textContent = "⏸";
-            if (audioStateIndicator) audioStateIndicator.textContent = "Yayında ●";
-          } catch(err) {
-            showError("Ses izni bekleniyor. ▶ butonuna dokunun.");
-          }
-        }
-      }
-    }
-
-    if (mainPlayBtn) mainPlayBtn.onclick = togglePlay;
-    function showError(msg) {
-      if (audioErrorBanner && audioErrorText) {
-        audioErrorText.textContent = msg;
-        audioErrorBanner.classList.remove("hidden");
-      }
-    }
-    function hideError() {
-      if (audioErrorBanner) audioErrorBanner.classList.add("hidden");
-    }
-    if (audioRetryBtn) {
-      audioRetryBtn.onclick = () => {
+        hideLiveAlert();
         hideError();
-        if (isLiveBroadcast && listenerSessionId && publishedTrackName) {
-          startListening(listenerSessionId, publishedTrackName);
+        resumeCloud();
+        refreshAll();
+      }
+    }
+
+    function onRemoteLiveEnd() {
+      if (isPublisher) { cleanupPublisher(); }
+      applyLive(false);
+    }
+
+    // ==================== DİNLEYİCİ SAYISI ====================
+    const COUNT_KEYS = ['listenerCount', 'listeners', 'listener_count', 'count', 'online', 'onlineCount', 'clients', 'total', 'viewers', 'connections'];
+    function pickCount(o) {
+      if (!o || typeof o !== 'object') return null;
+      for (const k of COUNT_KEYS) {
+        const v = o[k];
+        if (typeof v === 'number' && isFinite(v) && v >= 0) return v;
+        if (typeof v === 'string' && /^\d+$/.test(v)) return parseInt(v, 10);
+      }
+      return null;
+    }
+    function setCount(n) { if (countEl) countEl.textContent = String(n); }
+
+    // ==================== WEBSOCKET ====================
+    function sendWS(data) {
+      if (ws && ws.readyState === WebSocket.OPEN) { try { ws.send(JSON.stringify(data)); } catch (e) {} }
+    }
+
+    function scheduleWS() {
+      clearTimeout(wsTimer);
+      wsTimer = setTimeout(connectWS, wsBackoff);
+      wsBackoff = Math.min(wsBackoff * 2, 10000);
+    }
+
+    function connectWS() {
+      if (ws && ws.readyState <= 1) return;
+      try { ws = new WebSocket(WS_URL); } catch (e) { scheduleWS(); return; }
+      ws.onopen = () => {
+        wsBackoff = 1000;
+        clearInterval(pingTimer);
+        pingTimer = setInterval(() => sendWS({ action: 'PING' }), 30000);
+        if (isPublisher) announceLive();
+      };
+      ws.onmessage = (ev) => {
+        let d; try { d = JSON.parse(ev.data); } catch (e) { return; }
+        handlePayload(d);
+      };
+      ws.onclose = () => { ws = null; clearInterval(pingTimer); scheduleWS(); };
+      ws.onerror = () => { try { if (ws) ws.close(); } catch (e) {} };
+    }
+
+    function handlePayload(p) {
+      if (!p || typeof p !== 'object') return;
+      const action = p.action || p.type;
+
+      const c = pickCount(p);
+      const c2 = c !== null ? c : pickCount(p.state);
+      if (c2 !== null) setCount(c2);
+
+      if (action === 'SET_LIVE') {
+        if (p.live) applyLive(true, p.sessionId, p.trackName, p.trackTitle || p.title);
+        else onRemoteLiveEnd();
+      } else if (action === 'INIT_STATE') {
+        const st = p.state || {};
+        if (st.isLive || st.live) applyLive(true, st.sessionId, st.trackName, st.trackTitle || st.title);
+        else if (!isPublisher && liveState.live) applyLive(false);
+      }
+    }
+
+    // ==================== YÖNETİCİ PANELİ ====================
+    const passwordModal = $('password-modal');
+    const adminModal = $('admin-modal');
+    const adminPassInput = $('admin-pass-input');
+    const passErrorMsg = $('pass-error-msg');
+
+    function openModal(m) { if (m) { m.classList.remove('hidden'); m.classList.add('flex'); } }
+    function closeModal(m) { if (m) { m.classList.add('hidden'); m.classList.remove('flex'); } }
+
+    $('secret-admin-btn').onclick = () => {
+      if (adminPassInput) adminPassInput.value = '';
+      if (passErrorMsg) passErrorMsg.classList.add('hidden');
+      openModal(passwordModal);
+      setTimeout(() => adminPassInput && adminPassInput.focus(), 50);
+    };
+    $('close-pass-btn').onclick = () => closeModal(passwordModal);
+    $('cancel-pass-btn').onclick = () => closeModal(passwordModal);
+    $('close-admin-modal').onclick = () => closeModal(adminModal);
+    $('close-admin-modal-2').onclick = () => closeModal(adminModal);
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape') { closeModal(passwordModal); closeModal(adminModal); }
+    });
+
+    $('password-form').onsubmit = (e) => {
+      e.preventDefault();
+      const entered = adminPassInput ? adminPassInput.value.trim() : '';
+      const e2 = entered.toLowerCase();
+      if (e2 === 'vom2026' || e2 === 'admin123') {
+        closeModal(passwordModal);
+        openModal(adminModal);
+        updateAdminBtn();
+      } else if (passErrorMsg) {
+        passErrorMsg.classList.remove('hidden');
+      }
+    };
+
+    toggleBroadcastBtn.onclick = async () => {
+      toggleBroadcastBtn.disabled = true;
+      try {
+        if (!isPublisher) {
+          const ok = await startLive();
+          if (ok) applyLive(true, publisherSessionId, publishedTrackName, liveTitleForPublisher());
         } else {
-          audio.load();
-          togglePlay();
+          await stopLive();
+          setBadge('Hazır');
         }
-      };
-    }
-
-    audio.ontimeupdate = () => {
-      if (currentTimeText) currentTimeText.textContent = formatTime(audio.currentTime);
-      if (audio.duration && isFinite(audio.duration) && audio.duration > 0) {
-        if (totalDurationText) totalDurationText.textContent = formatTime(audio.duration);
-        const pct = Math.min(100, (audio.currentTime / audio.duration) * 100);
-        if (progressBarFill) progressBarFill.style.width = pct + "%";
+      } finally {
+        toggleBroadcastBtn.disabled = false;
+        updateAdminBtn();
       }
     };
 
-    audio.onended = () => playNextTrack();
-    audio.onerror = () => { setTimeout(playNextTrack, 1500); };
-    audio.onplaying = () => {
-      isPlaying = true;
-      hideError();
-      if (mainPlayBtn) mainPlayBtn.textContent = "⏸";
-      if (audioStateIndicator) audioStateIndicator.textContent = "Yayında ●";
+    returnCloudBtn.onclick = async () => {
+      if (isPublisher) await stopLive();
+      else if (liveState.live) { sendWS({ action: 'SET_LIVE', live: false }); applyLive(false); }
+      if (localActive || !audioIsCloud) {
+        userWantsPlay = true; hasPlayed = true;
+        loadCloud(pickNext(), true);
+        renderLocalList();
+      }
+      updateAdminBtn();
     };
 
-    if (progressBarContainer) {
-      progressBarContainer.onclick = (e) => {
-        if (!audio.duration || !isFinite(audio.duration)) return;
-        const rect = progressBarContainer.getBoundingClientRect();
-        const pct = Math.max(0, Math.min(1, (e.clientX - rect.left) / rect.width));
-        audio.currentTime = pct * audio.duration;
-      };
-    }
+    // Yerel dosya sırası
+    const localFileSelector = $('local-file-selector');
+    const localPlaylistBox = $('local-playlist-box');
+    const queueStatusBanner = $('queue-status-banner');
+    const queueCountText = $('queue-count-text');
 
-    if (volumeRange) {
-      volumeRange.oninput = (e) => {
-        const val = parseFloat(e.target.value);
-        audio.volume = val;
-        if (webrtcAudio) webrtcAudio.volume = val;
-      };
-    }
-
-    if (muteBtn) {
-      muteBtn.onclick = () => {
-        audio.muted = !audio.muted;
-        if (webrtcAudio) webrtcAudio.muted = audio.muted;
-        muteBtn.textContent = audio.muted ? "🔇" : "🔊";
-      };
-    }
-
-    if (prevBtn) prevBtn.onclick = playPrevTrack;
-    if (nextBtn) nextBtn.onclick = playNextTrack;
-
-    function playNextTrack() {
-      if (isLocalQueueActive && localTracks.length > 0) {
-        currentLocalTrackIdx = (currentLocalTrackIdx + 1) % localTracks.length;
-        playLocalTrack(currentLocalTrackIdx);
-      } else if (PLAYLIST.length > 0) {
-        selectTrack((currentTrackIdx + 1) % PLAYLIST.length);
+    $('pick-files-btn').onclick = () => localFileSelector.click();
+    localFileSelector.onchange = (e) => {
+      const files = Array.from(e.target.files || []);
+      if (!files.length) return;
+      localTracks.forEach(t => { try { URL.revokeObjectURL(t.url); } catch (err) {} });
+      localTracks = files.map((file, idx) => ({
+        id: 'local_' + idx,
+        name: file.name.replace(/\.[^/.]+$/, ''),
+        url: URL.createObjectURL(file)
+      }));
+      if (queueStatusBanner && queueCountText) {
+        queueCountText.textContent = files.length + ' Şarkı Sıraya Alındı';
+        queueStatusBanner.classList.remove('hidden');
+        queueStatusBanner.classList.add('flex');
       }
+      playLocal(0);
+      const auto = $('auto-live-chk');
+      if (auto && auto.checked && !isPublisher) autoGoLive();
+    };
+
+    function waitPlaying(ms) {
+      return new Promise((resolve) => {
+        if (!audio.paused && audio.readyState >= 3) return resolve();
+        const done = () => { clearTimeout(t); audio.removeEventListener('playing', done); resolve(); };
+        const t = setTimeout(done, ms);
+        audio.addEventListener('playing', done);
+      });
     }
 
-    function playPrevTrack() {
-      if (isLocalQueueActive && localTracks.length > 0) {
-        currentLocalTrackIdx = (currentLocalTrackIdx - 1 + localTracks.length) % localTracks.length;
-        playLocalTrack(currentLocalTrackIdx);
-      } else if (PLAYLIST.length > 0) {
-        selectTrack((currentTrackIdx - 1 + PLAYLIST.length) % PLAYLIST.length);
-      }
+    async function autoGoLive() {
+      const q = $('source-queue');
+      if (q) q.checked = true;
+      await waitPlaying(6000);
+      const ok = await startLive();
+      if (ok) applyLive(true, publisherSessionId, publishedTrackName, liveTitleForPublisher());
+      updateAdminBtn();
     }
 
-    function selectTrack(idx) {
-      if (!PLAYLIST[idx]) return;
-      isLocalQueueActive = false;
-      currentTrackIdx = idx;
-      const t = PLAYLIST[idx];
-
-      if (nowPlayingTitle) nowPlayingTitle.textContent = t.title;
-      if (nowPlayingArtist) nowPlayingArtist.textContent = t.artist;
-      updateTopMarquee(t.title);
-
-      audio.pause();
-      audio.src = t.directUrl;
-      audio.load();
-
-      if (isPlaying) {
-        audio.play().catch(e => {});
-      }
+    function renderLocalList() {
+      if (!localPlaylistBox) return;
+      localPlaylistBox.textContent = '';
+      if (!localTracks.length) { localPlaylistBox.classList.add('hidden'); return; }
+      localPlaylistBox.classList.remove('hidden');
+      localTracks.forEach((t, i) => {
+        const cur = localActive && i === localIdx;
+        const row = document.createElement('div');
+        row.className = 'flex items-center justify-between gap-2 p-2 rounded-lg text-xs ' +
+          (cur ? 'bg-orange-500/20 border border-orange-500 text-white' : 'bg-zinc-900 border border-zinc-800 text-zinc-300');
+        const label = document.createElement('span');
+        label.className = 'truncate';
+        label.textContent = (i + 1) + '. ' + t.name;
+        const btn = document.createElement('button');
+        btn.type = 'button';
+        btn.className = 'px-2 py-1 rounded text-[10px] cursor-pointer shrink-0 ' + (cur ? 'bg-orange-500 text-white' : 'bg-zinc-800');
+        btn.textContent = cur ? '▶' : 'Seç';
+        btn.onclick = () => playLocal(i);
+        row.append(label, btn);
+        localPlaylistBox.appendChild(row);
+      });
     }
+
+    // Sayfa kapanırken yayını temiz kapat
+    function onLeave() {
+      if (isPublisher) sendWS({ action: 'SET_LIVE', live: false });
+    }
+    window.addEventListener('pagehide', onLeave);
+    window.addEventListener('beforeunload', onLeave);
+
+    // ==================== EKOLAYZIR ====================
+    const reduceMotion = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    function sizeCanvas() {
+      if (!canvas) return;
+      const dpr = Math.min(window.devicePixelRatio || 1, 2);
+      const w = Math.max(300, Math.floor(canvas.clientWidth * dpr));
+      const h = Math.floor(48 * dpr);
+      if (canvas.width !== w) canvas.width = w;
+      if (canvas.height !== h) canvas.height = h;
+    }
+    window.addEventListener('resize', sizeCanvas);
+    sizeCanvas();
 
     function drawBars() {
       requestAnimationFrame(drawBars);
       if (!canvas || !canvasCtx) return;
       const w = canvas.width, h = canvas.height;
+      const dpr = h / 48;
       canvasCtx.clearRect(0, 0, w, h);
-      const gradient = canvasCtx.createLinearGradient(0, h, 0, 0);
-      gradient.addColorStop(0, isLiveBroadcast ? "#ef4444" : "#f97316");
-      gradient.addColorStop(1, "#fbbf24");
-
-      for (let i = 0; i < 48; i++) {
-        let barH = 4;
-        if (isPlaying) {
-          const noise = Math.sin(Date.now() / 250 + i * 0.45) * 0.5 + 0.5;
-          barH = 4 + noise * (h - 8);
+      const g = canvasCtx.createLinearGradient(0, h, 0, 0);
+      g.addColorStop(0, liveState.live ? '#ef4444' : '#f97316');
+      g.addColorStop(1, '#fbbf24');
+      canvasCtx.fillStyle = g;
+      const step = 6 * dpr, bw = 3 * dpr;
+      const n = Math.floor(w / step);
+      const active = (isPublisher && publisherSource === 'mic') || (!audio.paused && !buffering);
+      const t = Date.now();
+      for (let i = 0; i < n; i++) {
+        let bh = 4 * dpr;
+        if (active && !reduceMotion) {
+          const a = Math.sin(t / 260 + i * 0.45) * 0.5 + 0.5;
+          const b = Math.sin(t / 410 + i * 0.21) * 0.5 + 0.5;
+          bh = 4 * dpr + (a * 0.6 + b * 0.4) * (h - 8 * dpr);
         }
-        const x = (w - 48 * 4) / 2 + i * 4;
-        canvasCtx.fillStyle = gradient;
-        canvasCtx.fillRect(x, h - barH, 2.5, barH);
+        canvasCtx.fillRect(i * step + (w - n * step) / 2, h - bh, bw, bh);
       }
     }
     drawBars();
 
-    if (pickFilesBtn && localFileSelector) {
-      pickFilesBtn.onclick = () => localFileSelector.click();
-      localFileSelector.onchange = (e) => {
-        const files = Array.from(e.target.files);
-        if (!files.length) return;
-        localTracks = files.map((file, idx) => ({
-          id: 'local_' + idx,
-          name: file.name.replace(/\.[^/.]+$/, ""),
-          url: URL.createObjectURL(file)
-        }));
-        isLocalQueueActive = true;
-        currentLocalTrackIdx = 0;
-        if (queueStatusBanner && queueCountText) {
-          queueCountText.textContent = `${files.length} Şarkı Sıraya Alındı`;
-          queueStatusBanner.classList.remove("hidden");
-        }
-        renderLocalPlaylistUI();
-        playLocalTrack(0);
-        updateAdminModalBtn();
-      };
-    }
+    // ==================== BAŞLANGIÇ ====================
+    setupMediaSession();
+    if (chatLink) chatLink.addEventListener('click', (e) => { if (chatLink.getAttribute('href') === '#') e.preventDefault(); });
+    const isApple = /iP(hone|ad|od)/.test(navigator.userAgent) || (navigator.platform === 'MacIntel' && navigator.maxTouchPoints > 1);
+    const alertSub = $('live-alert-sub');
+    if (isApple && alertSub) alertSub.textContent = 'iPhone/iPad/Mac: sesi açmak için CANLI DİNLE\'ye dokunun';
+    renderStatus();
 
-    function renderLocalPlaylistUI() {
-      if (!localPlaylistBox) return;
-      localPlaylistBox.innerHTML = "";
-      localPlaylistBox.classList.remove("hidden");
-      localTracks.forEach((t, i) => {
-        const isCurrent = isLocalQueueActive && i === currentLocalTrackIdx;
-        const row = document.createElement("div");
-        row.className = `flex items-center justify-between p-2 rounded-lg text-xs ${
-          isCurrent ? "bg-orange-500/20 border border-orange-500 text-white" : "bg-zinc-900 border border-zinc-800 text-zinc-300"
-        }`;
-        row.innerHTML = `<span class="truncate">${i + 1}. ${t.name}</span><button class="play-local-btn px-2 py-1 rounded ${isCurrent ? 'bg-orange-500 text-white' : 'bg-zinc-800'} text-[10px] cursor-pointer">${isCurrent ? '▶' : 'Seç'}</button>`;
-        row.querySelector(".play-local-btn").onclick = () => playLocalTrack(i);
-        localPlaylistBox.appendChild(row);
-      });
+    if (PLAYLIST.length) {
+      buildOrder(null);
+      loadCloud(pickNext(), false);                       // rastgele ilk şarkı hazır
+      // Tarayıcı izin verirse otomatik başlar; vermezse ▶ tuşu / canlı yayın uyarısı devreye girer
+      const p = audio.play();
+      if (p && p.then) p.then(() => { userWantsPlay = true; hasPlayed = true; updatePlayUI(); }).catch(() => {});
     }
-
-    function playLocalTrack(idx) {
-      if (!localTracks || !localTracks[idx]) return;
-      currentLocalTrackIdx = idx;
-      isLocalQueueActive = true;
-      unlockAppleAudio();
-      const track = localTracks[idx];
-      audio.pause();
-      audio.src = track.url;
-      audio.load();
-      audio.play().then(() => {
-        isPlaying = true;
-        if (mainPlayBtn) mainPlayBtn.textContent = "⏸";
-        if (nowPlayingTitle) nowPlayingTitle.textContent = track.name;
-        if (nowPlayingArtist) nowPlayingArtist.textContent = isLiveBroadcast ? "Stüdyo Yayında" : "DJ Yerel Sırası";
-        updateTopMarquee(track.name);
-      }).catch(err => {});
-      renderLocalPlaylistUI();
-    }
-
-    if (secretAdminBtn) {
-      secretAdminBtn.onclick = () => {
-        if (adminPassInput) adminPassInput.value = "";
-        if (passErrorMsg) passErrorMsg.classList.add("hidden");
-        if (passwordModal) {
-          passwordModal.classList.remove("hidden");
-          passwordModal.classList.add("flex");
-        }
-      };
-    }
-    if (closePassBtn) closePassBtn.onclick = () => { passwordModal.classList.add("hidden"); passwordModal.classList.remove("flex"); };
-    if (cancelPassBtn) cancelPassBtn.onclick = () => { passwordModal.classList.add("hidden"); passwordModal.classList.remove("flex"); };
-
-    if (passwordForm) {
-      passwordForm.onsubmit = (e) => {
-        e.preventDefault();
-        const entered = adminPassInput ? adminPassInput.value.trim() : "";
-        if (entered === "vom2026" || entered === "admin123") {
-          passwordModal.classList.add("hidden");
-          passwordModal.classList.remove("flex");
-          if (adminModal) {
-            adminModal.classList.remove("hidden");
-            adminModal.classList.add("flex");
-          }
-          updateAdminModalBtn();
-        } else {
-          if (passErrorMsg) passErrorMsg.classList.remove("hidden");
-        }
-      };
-    }
-
-    function updateAdminModalBtn() {
-      if (!toggleBroadcastBtn || !broadcastBtnText) return;
-      if (isLiveBroadcast) {
-        broadcastBtnText.textContent = "⏹ Canlı Yayını Bitir";
-        toggleBroadcastBtn.className = "py-3 px-4 rounded-xl font-bold text-xs shadow-xl transition-all flex items-center justify-center gap-2 bg-zinc-800 hover:bg-zinc-700 text-white cursor-pointer";
-      } else {
-        broadcastBtnText.textContent = "🔴 CANLI YAYINA GEÇ";
-        toggleBroadcastBtn.className = "py-3 px-4 rounded-xl font-bold text-xs shadow-xl transition-all flex items-center justify-center gap-2 bg-red-600 hover:bg-red-500 text-white cursor-pointer";
-      }
-    }
-
-    if (closeAdminModal) closeAdminModal.onclick = () => { adminModal.classList.add("hidden"); adminModal.classList.remove("flex"); };
-    if (closeAdminModal2) closeAdminModal2.onclick = () => { adminModal.classList.add("hidden"); adminModal.classList.remove("flex"); };
-
-    if (toggleBroadcastBtn) {
-      toggleBroadcastBtn.onclick = async () => {
-        if (!isLiveBroadcast) {
-          await startPublishing();
-          if (publisherSessionId && publishedTrackName) {
-            applyBroadcastState(true, publisherSessionId, publishedTrackName);
-          }
-          updateAdminModalBtn();
-        } else {
-          await stopPublishing();
-          applyBroadcastState(false);
-          updateAdminModalBtn();
-        }
-      };
-    }
-
-    if (returnCloudBtn) {
-      returnCloudBtn.onclick = async () => {
-        await stopPublishing();
-        isLocalQueueActive = false;
-        applyBroadcastState(false);
-        updateAdminModalBtn();
-        if (PLAYLIST.length > 0) selectTrack(currentTrackIdx);
-      };
-    }
-
-    if (localStorage.getItem("vom_user_name") && senderName) {
-      senderName.value = localStorage.getItem("vom_user_name");
-    }
-
-    function renderIncomingMessage(name, text, timeStr) {
-      if (!chatMessages) return;
-      if (chatClosedNotice) chatClosedNotice.style.display = "none";
-      const div = document.createElement("div");
-      div.className = "p-2.5 rounded-xl bg-zinc-950 border border-zinc-800";
-      div.innerHTML = `<span class="text-[10px] text-zinc-500 block mb-0.5 mono">${timeStr}</span><strong class="text-orange-400 font-bold">${name}: </strong><span class="text-zinc-200 break-words">${text}</span>`;
-      chatMessages.appendChild(div);
-      chatMessages.scrollTop = chatMessages.scrollHeight;
-    }
-
-    if (chatForm) {
-      chatForm.onsubmit = (e) => {
-        e.preventDefault();
-        if (!isLiveBroadcast) return;
-        const name = senderName ? senderName.value.trim() : "";
-        const text = senderMessage ? senderMessage.value.trim() : "";
-        if (!name || !text) return;
-        localStorage.setItem("vom_user_name", name);
-        const d = new Date();
-        const timeStr = String(d.getHours()).padStart(2,'0') + ":" + String(d.getMinutes()).padStart(2,'0');
-        renderIncomingMessage(name, text, timeStr);
-        if (senderMessage) senderMessage.value = "";
-        sendWS({ type: "message", msg: text, name: name, time: timeStr });
-      };
-    }
-
-    if (clearChatBtn) {
-      clearChatBtn.onclick = () => {
-        if (!confirm("Tüm dinleyici sohbet mesajlarını silmek istediğinize emin misiniz?")) return;
-        if (chatMessages) {
-          chatMessages.innerHTML = '<div class="p-4 rounded-xl bg-zinc-950/80 border border-zinc-800 text-center"><p class="font-bold text-zinc-300">Sohbet Temizlendi</p></div>';
-        }
-        sendWS({ action: "CLEAR_CHAT" });
-      };
-    }
-
-    // İlk şarkıyı yükle
-    if (PLAYLIST.length > 0) {
-      audio.src = PLAYLIST[0].directUrl;
-      if (nowPlayingTitle) nowPlayingTitle.textContent = PLAYLIST[0].title;
-      if (nowPlayingArtist) nowPlayingArtist.textContent = PLAYLIST[0].artist;
-      updateTopMarquee(PLAYLIST[0].title);
-    }
+    refreshAll();
+    connectWS();
+  })();
   </script>
 </body>
 </html>
