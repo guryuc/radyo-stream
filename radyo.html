@@ -23,11 +23,11 @@
 <script src="/_aistudio-iframe.js?v=1f94f900"></script></head>
 <body class="min-h-screen flex flex-col text-zinc-100 selection:bg-orange-500 selection:text-white">
 
-  <!-- Ana Bulut Çalar ve WebRTC Canlı Ses Çalar (Doğrudan Buluttan 7/24 Kesintisiz) -->
+  <!-- Ana Bulut Çalar ve WebRTC Canlı Ses Çalar (Doğrudan Buluttan 7/24 Kesintisiz)[cite: 1] -->
   <audio id="main-audio-player" preload="metadata" playsinline webkit-playsinline x-webkit-airplay="allow"></audio>
   <audio id="live-webrtc-player" autoplay playsinline webkit-playsinline x-webkit-airplay="allow"></audio>
 
-  <!-- iOS / Mobil Canlı Ses Dokunma Uyarısı -->
+  <!-- iOS / Mobil Canlı Ses Dokunma Uyarısı[cite: 1] -->
   <div id="mobile-live-alert" class="hidden fixed bottom-4 inset-x-4 z-50 p-4 rounded-2xl bg-gradient-to-r from-red-600 via-orange-600 to-amber-600 text-white shadow-2xl flex items-center justify-between border border-white/20 animate-bounce cursor-pointer max-w-lg mx-auto">
     <div class="flex items-center gap-3">
       <span class="text-2xl animate-pulse">🔴</span>
@@ -41,7 +41,7 @@
     </button>
   </div>
 
-  <!-- Üst Bar -->
+  <!-- Üst Bar[cite: 1] -->
   <header class="border-b border-zinc-800 bg-zinc-950/90 backdrop-blur-md sticky top-0 z-40">
     <div class="max-w-6xl mx-auto px-4 py-3 flex items-center justify-between">
       <div class="flex items-center gap-3">
@@ -67,7 +67,7 @@
     </div>
   </header>
 
-  <!-- Kayan Bilgi Bandı -->
+  <!-- Kayan Bilgi Bandı[cite: 1] -->
   <div id="marquee-bar" class="bg-zinc-900/90 border-b border-zinc-800/80 overflow-hidden py-2 px-4 flex items-center">
     <span id="marquee-badge" class="text-xs bg-orange-600 text-white font-bold px-2 py-0.5 rounded mr-3 shrink-0 uppercase tracking-wider text-[10px]">YAYIN AKIŞI</span>
     <div class="overflow-hidden w-full relative">
@@ -75,10 +75,10 @@
     </div>
   </div>
 
-  <!-- Ana İçerik -->
+  <!-- Ana İçerik[cite: 1] -->
   <main class="flex-1 max-w-6xl w-full mx-auto p-4 sm:p-6 grid grid-cols-1 lg:grid-cols-12 gap-6 items-start">
     <div class="lg:col-span-7 space-y-5">
-      <!-- Çalar Kartı -->
+      <!-- Çalar Kartı[cite: 1] -->
       <div class="p-5 sm:p-6 rounded-2xl border border-zinc-800 bg-zinc-900/70 shadow-2xl space-y-5">
         <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-3 pb-4 border-b border-zinc-800">
           <div class="min-w-0 flex-1">
@@ -119,38 +119,26 @@
           <button id="audio-retry-btn" class="bg-red-700 hover:bg-red-600 px-3 py-1 rounded-lg text-white font-bold text-xs cursor-pointer">Yenile</button>
         </div>
       </div>
-
-      <!-- Çalma Listesi Kartı (175 Şarkı + Arama) -->
-      <div class="p-5 rounded-2xl border border-zinc-800 bg-zinc-900/60 shadow-xl space-y-4">
-        <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-2 pb-2 border-b border-zinc-800">
-          <div>
-            <h3 class="text-sm font-bold text-white flex items-center gap-2"><span>🎶</span> <span id="playlist-header-text">VOM RADYO ONAIR</span></h3>
-            <span id="playlist-badge-text" class="text-[11px] text-zinc-400 font-mono">175 Şarkı · Arşiv Yayını</span>
-          </div>
-          <input id="track-search-input" type="text" placeholder="Şarkı veya sanatçı ara..." class="bg-zinc-950 border border-zinc-800 rounded-lg px-2.5 py-1 text-xs text-zinc-200 placeholder-zinc-500 focus:outline-none focus:border-orange-500 w-full sm:w-48" />
-        </div>
-        <div id="tracklist-container" class="space-y-1.5 max-h-80 overflow-y-auto pr-1"></div>
-      </div>
     </div>
 
-    <!-- Dinleyici Sohbeti -->
+    <!-- Dinleyici Sohbeti (Bulut Yayında Kapalı, Yalnızca Canlı Yayında Açık)[cite: 1] -->
     <div class="lg:col-span-5 flex flex-col h-[520px] sm:h-[620px] rounded-2xl border border-zinc-800 bg-zinc-900/80 overflow-hidden shadow-2xl">
       <div class="p-3.5 bg-zinc-950 border-b border-zinc-800 flex items-center justify-between">
         <span class="font-bold text-xs text-white flex items-center gap-1.5"><span>💬</span> Dinleyici Sohbeti</span>
-        <span id="chat-live-badge" class="text-[10px] font-mono text-zinc-400">● Aktif</span>
+        <span id="chat-live-badge" class="text-[10px] font-mono text-amber-500 font-bold">● Sadece Canlı Yayında Açık</span>
       </div>
       <div id="chat-messages" class="flex-1 p-4 overflow-y-auto space-y-2.5 text-xs">
         <div id="chat-closed-notice" class="p-4 rounded-xl bg-zinc-950/80 border border-zinc-800 text-center space-y-2 my-auto">
-          <span class="text-2xl block">📻</span>
-          <p class="font-bold text-zinc-300">VOM Dinleyici Sohbetine Hoş Geldiniz</p>
-          <p class="text-[11px] text-zinc-500 leading-relaxed">Canlı yayında ve bulut yayınında şarkı isteklerinizi paylaşabilirsiniz.</p>
+          <span class="text-2xl block">🔒</span>
+          <p class="font-bold text-zinc-300">Sohbet Şu An Kapalı</p>
+          <p class="text-[11px] text-zinc-500 leading-relaxed">Dinleyici sohbeti yalnızca stüdyodan <b>Canlı Yayın (On Air)</b> başlatıldığında aktifleşir.</p>
         </div>
       </div>
-      <form id="chat-send-form" class="p-3 border-t border-zinc-800 bg-zinc-950">
+      <form id="chat-send-form" class="p-3 border-t border-zinc-800 bg-zinc-950 opacity-40 pointer-events-none">
         <div class="bg-zinc-950/80 rounded-2xl border border-zinc-800 p-3 flex flex-col gap-2">
-          <input id="sender-name" type="text" placeholder="Adınız..." maxlength="20" class="w-full bg-zinc-900 text-zinc-100 placeholder-zinc-500 border border-zinc-800 rounded-xl px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-orange-500/50 font-semibold" required />
-          <textarea id="sender-message" rows="2" placeholder="Mesajınız..." maxlength="280" class="w-full bg-zinc-900 text-zinc-100 placeholder-zinc-500 border border-zinc-800 rounded-xl px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-orange-500/50 resize-none" required></textarea>
-          <button id="chat-send-btn" type="submit" class="w-full bg-gradient-to-r from-orange-600 to-amber-500 hover:from-orange-500 hover:to-amber-400 text-white font-semibold py-2.5 rounded-xl text-sm active:scale-95 transition-all cursor-pointer">Gönder ➤</button>
+          <input id="sender-name" type="text" placeholder="Adınız..." maxlength="20" class="w-full bg-zinc-900 text-zinc-100 placeholder-zinc-500 border border-zinc-800 rounded-xl px-3 py-2 text-sm focus:outline-none font-semibold" disabled required />
+          <textarea id="sender-message" rows="2" placeholder="Sohbet kapalı..." maxlength="280" class="w-full bg-zinc-900 text-zinc-100 placeholder-zinc-500 border border-zinc-800 rounded-xl px-3 py-2 text-sm focus:outline-none resize-none" disabled required></textarea>
+          <button id="chat-send-btn" type="submit" class="w-full bg-zinc-800 text-zinc-400 font-semibold py-2.5 rounded-xl text-sm cursor-not-allowed" disabled>Gönder ➤</button>
         </div>
       </form>
     </div>
@@ -161,7 +149,7 @@
     <button id="secret-admin-btn" title="Yayıncı Masası Girişi" class="text-zinc-600 hover:text-orange-400 transition-colors p-1 cursor-pointer">🔐</button>
   </footer>
 
-  <!-- Yönetici Şifre Modalı -->
+  <!-- Yönetici Şifre Modalı[cite: 1] -->
   <div id="password-modal" class="fixed inset-0 z-50 bg-black/85 backdrop-blur-sm hidden items-center justify-center p-4">
     <div class="max-w-sm w-full bg-zinc-900 border border-zinc-800 rounded-2xl p-6 shadow-2xl space-y-4">
       <div class="flex items-center justify-between pb-2 border-b border-zinc-800">
@@ -182,7 +170,7 @@
     </div>
   </div>
 
-  <!-- Yayıncı Masası Modalı (Cloudflare Calls SFU) -->
+  <!-- Yayıncı Masası Modalı (Cloudflare Calls SFU)[cite: 1] -->
   <div id="admin-modal" class="fixed inset-0 z-50 bg-black/85 backdrop-blur-sm hidden items-center justify-center p-4">
     <div class="max-w-xl w-full bg-zinc-900 border border-zinc-800 rounded-2xl p-6 shadow-2xl space-y-5 max-h-[92vh] overflow-y-auto">
       <div class="flex items-center justify-between pb-3 border-b border-zinc-800">
@@ -196,10 +184,9 @@
           <span id="webrtc-status-badge" class="text-[10px] bg-zinc-800 text-zinc-400 border border-zinc-700 px-2 py-0.5 rounded font-mono">Hazır</span>
         </div>
         <p class="text-[11px] text-zinc-400 leading-relaxed">
-          Canlı yayına geçmek için aşağıdaki butona tıklayın. WebRTC Calls SFU ile sesiniz sıfır gecikmeyle tüm dinleyicilere iletilir.
+          Canlı yayına geçtiğiniz anda dinleyici sohbeti otomatik olarak açılır.
         </p>
 
-        <!-- Ses Kaynağı Seçimi -->
         <div class="flex flex-col gap-1.5 pt-1 text-xs">
           <label class="flex items-center gap-2 text-zinc-300 cursor-pointer">
             <input type="radio" name="broadcast-source" id="source-mic" value="mic" checked class="accent-orange-500" />
@@ -209,7 +196,7 @@
           <label class="flex items-center gap-2 text-zinc-300 cursor-pointer">
             <input type="radio" name="broadcast-source" id="source-queue" value="queue" class="accent-orange-500" />
             <span class="font-semibold text-white">Şarkı / Bilgisayar Sesi (captureStream)</span>
-            <span class="text-[11px] text-zinc-400">(Yerel dosyalar ve CORS proxyli müzikler)</span>
+            <span class="text-[11px] text-zinc-400">(Yerel dosyalar)</span>
           </label>
         </div>
 
@@ -230,11 +217,7 @@
       <div class="p-4 rounded-xl bg-zinc-950 border border-zinc-800 space-y-3">
         <div class="flex items-center justify-between">
           <span class="text-xs font-bold text-orange-400 flex items-center gap-1.5"><span>💻</span> 2. Adım: Bilgisayarımdan Şarkı Çal (Yerel Sıra)</span>
-          <span class="text-[10px] bg-orange-950 text-orange-400 border border-orange-800 px-2 py-0.5 rounded font-mono font-bold">SIFIR CORS</span>
         </div>
-        <p class="text-[11px] text-zinc-400">
-          Yerel bilgisayarınızdan yüklenen şarkılar blob URL oluşturduğu için CORS engeline takılmaz ve captureStream ile sorunsuz yayına aktarılır.
-        </p>
         <input type="file" id="local-file-selector" accept="audio/*" multiple class="hidden" />
         <button id="pick-files-btn" type="button" class="w-full py-2.5 rounded-xl bg-orange-600 hover:bg-orange-500 text-white text-xs font-bold flex items-center justify-center gap-2 shadow-md transition-colors cursor-pointer"><span>📂</span> Şarkıları Seç (Toplu MP3/WAV/AAC)</button>
         <div id="queue-status-banner" class="text-[11px] text-orange-400 font-semibold hidden flex items-center justify-between bg-zinc-900 px-3 py-2 rounded-lg border border-zinc-800">
@@ -266,12 +249,6 @@
       { urls: "stun:stun.cloudflare.com:3478" },
       { urls: "stun:stun.l.google.com:19302" }
     ];
-
-    // ==================== DOĞRUDAN BULUT OYNATMA (SIFIR BAĞIMLILIK) ====================
-    // 175 şarkının tamamı doğrudan Internet Archive bulutundan kesintisiz çalar
-    function getProxiedUrl(rawUrl) {
-      return rawUrl;
-    }
 
     // ==================== 175 ŞARKILIK GERÇEK BULUT LİSTESİ ====================
     const baseURL = "https://archive.org/download/pomme-plus-grands-succes-2021-pomme-greatest-hits-full-album-pomme-best-of-1/";
@@ -447,7 +424,7 @@
       { title: "Sylvie Vartan - La Maritza", file: "Sylvie Vartan - La Maritza-128k.mp3" },
       { title: "SÍLVIA PÉREZ CRUZ - Em moro", file: "SÍLVIA PÉREZ CRUZ - Em moro - Mov.4 El Peso (Directo) ft. Salvador Sobral.mp3" },
       { title: "SÍLVIA PÉREZ CRUZ - Cucurrucucú Paloma", file: "SÍLVIA PÉREZ CRUZ Cucurrucucú Paloma i Raül Fernández.mp3" },
-      { title: "SÍLVIA PÉREZ CRUZ - Mañana", file: "SÍLVIA PÉREZ CRUZ Mañana (Videoclip Oficial).mp3" },
+      { title: "SÍLVIA PÉREZ CRUZ - Mañana", file: "SÍLVIA PÉREZ CRUZ Mañana (Videoclip Oficial).mp3" },
       { title: "kamoroshka - Forever", file: "kamoroshka Forever.mp3" },
       { title: "koshkamoroshka - moroshka cover", file: "koshkamoroshka moroshka cover.mp3" },
       { title: "koshkamoroshka", file: "koshkamoroshka.mp3" },
@@ -477,16 +454,13 @@
     let ws = null, wsConnected = false, wsReconnectTimer = null;
     let isPlaying = false, isLiveBroadcast = false, isLocalQueueActive = false;
     let currentTrackIdx = 0, currentLocalTrackIdx = 0, localTracks = [];
-    let isMuted = false;
     let publisherPC = null, publisherSessionId = null, publishedTrackName = null, activeBroadcastStream = null;
     let listenerPC = null, listenerSessionId = null;
     let audioCtx = null, AudioCtxClass = window.AudioContext || window.webkitAudioContext;
-    let filteredPlaylist = [...PLAYLIST];
 
     const audio = document.getElementById("main-audio-player");
     const webrtcAudio = document.getElementById("live-webrtc-player");
     const clockEl = document.getElementById("live-clock");
-    const tracklistContainer = document.getElementById("tracklist-container");
     const nowPlayingTitle = document.getElementById("now-playing-title");
     const nowPlayingArtist = document.getElementById("now-playing-artist");
     const marqueeContent = document.getElementById("marquee-content");
@@ -505,9 +479,6 @@
     const muteBtn = document.getElementById("mute-btn");
     const audioStateIndicator = document.getElementById("audio-state-indicator");
     const mobileLiveAlert = document.getElementById("mobile-live-alert");
-    const playlistHeaderText = document.getElementById("playlist-header-text");
-    const playlistBadgeText = document.getElementById("playlist-badge-text");
-    const trackSearchInput = document.getElementById("track-search-input");
     const audioErrorBanner = document.getElementById("audio-error-banner");
     const audioErrorText = document.getElementById("audio-error-text");
     const audioRetryBtn = document.getElementById("audio-retry-btn");
@@ -646,60 +617,44 @@
       return await res.json();
     }
 
-    // ==================== YAYINCI (PUBLISH) - HIZLANDIRILMIŞ VE CORS DÜZELTİLMİŞ ====================
     async function startPublishing() {
       if (queueWarnBox) queueWarnBox.classList.add("hidden");
-
       try {
         webrtcStatusBadge.textContent = "Hazırlanıyor...";
-
         let stream = null;
         const useQueue = document.getElementById("source-queue")?.checked;
 
         if (useQueue) {
-          // Eğer şarkı çalmıyorsa kullanıcıyı uyar
           if (!audio.src || audio.paused) {
             if (queueWarnBox) {
               queueWarnBox.textContent = "Şarkı sırası modunda yayın yapabilmek için önce bir şarkıyı çalmaya başlatmalısınız.";
               queueWarnBox.classList.remove("hidden");
             }
-            throw new Error("Şarkı çalmıyor. Lütfen önce şarkıyı çalın veya 'Mikrofon' seçin.");
+            throw new Error("Şarkı çalmıyor.");
           }
-
           try {
             if (audio.captureStream) stream = audio.captureStream();
             else if (audio.mozCaptureStream) stream = audio.mozCaptureStream();
-          } catch(e) {
-            console.warn("captureStream CORS kısıtlamasına takıldı:", e);
-          }
-
+          } catch(e) {}
           if (!stream || stream.getAudioTracks().length === 0) {
-            if (queueWarnBox) {
-              queueWarnBox.textContent = "Çalan şarkı CORS nedeniyle yakalanamadı. Lütfen 'Bilgisayarımdan Şarkı Seç' (Yerel MP3) ile şarkı yükleyin veya Mikrofon modunu seçin.";
-              queueWarnBox.classList.remove("hidden");
-            }
-            throw new Error("Ses yakalanamadı. Yerel dosya yükleyin veya mikrofonu seçin.");
+            throw new Error("Ses yakalanamadı.");
           }
         } else {
-          // Mikrofon yayını
           stream = await navigator.mediaDevices.getUserMedia({
             audio: { echoCancellation: true, noiseSuppression: true, autoGainControl: true }
           });
         }
 
         activeBroadcastStream = stream;
-
         publisherPC = new RTCPeerConnection({ iceServers: ICE_SERVERS });
         stream.getAudioTracks().forEach(track => publisherPC.addTrack(track, stream));
 
-        // HIZLI GEÇİŞ: waitForIce beklemeden offer anında oluşturulur ve SFU'ya iletilir
         const offer = await publisherPC.createOffer({ offerToReceiveAudio: false, offerToReceiveVideo: false });
         await publisherPC.setLocalDescription(offer);
 
         webrtcStatusBadge.textContent = "Oturum Açılıyor...";
         const sessionData = await callsCreateSession();
         publisherSessionId = sessionData.sessionId;
-        if (!publisherSessionId) throw new Error("sessionId alınamadı");
 
         webrtcStatusBadge.textContent = "SFU'ya Ekleniyor...";
         const trackData = await callsAddTrack(
@@ -712,9 +667,7 @@
           await publisherPC.setRemoteDescription(trackData.sessionDescription);
         }
 
-        // SFU requiresImmediateRenegotiation çözümü
         if (trackData.requiresImmediateRenegotiation) {
-          webrtcStatusBadge.textContent = "Renegotiation...";
           if (trackData.sessionDescription && trackData.sessionDescription.type === "offer") {
             const answer = await publisherPC.createAnswer();
             await publisherPC.setLocalDescription(answer);
@@ -741,11 +694,8 @@
 
         webrtcStatusBadge.textContent = "Yayında (Calls SFU) ✓";
         webrtcStatusBadge.className = "text-[10px] bg-red-950 text-red-400 border border-red-800 px-2 py-0.5 rounded font-mono font-bold animate-pulse";
-
       } catch (err) {
-        console.error("Yayın başlatma hatası:", err);
         webrtcStatusBadge.textContent = "Hata: " + err.message;
-        webrtcStatusBadge.className = "text-[10px] bg-red-950 text-red-400 border border-red-800 px-2 py-0.5 rounded font-mono";
       }
     }
 
@@ -759,7 +709,6 @@
       webrtcStatusBadge.className = "text-[10px] bg-zinc-800 text-zinc-400 border border-zinc-700 px-2 py-0.5 rounded font-mono";
     }
 
-    // ==================== DİNLEYİCİ (SUBSCRIBE) - HIZLI BAĞLANTI & RENEGOTIATION ====================
     async function startListening(remoteSessionId, remoteTrackName) {
       if (listenerPC) { listenerPC.close(); listenerPC = null; }
       listenerSessionId = null;
@@ -781,14 +730,11 @@
         };
 
         listenerPC.addTransceiver("audio", { direction: "recvonly" });
-
-        // HIZLI GEÇİŞ: Beklemeden offer gönderilir
         const offer = await listenerPC.createOffer();
         await listenerPC.setLocalDescription(offer);
 
         const sessionData = await callsCreateSession();
         listenerSessionId = sessionData.sessionId;
-        if (!listenerSessionId) throw new Error("Dinleyici oturumu açılamadı");
 
         const subData = await callsAddTrack(
           listenerSessionId,
@@ -796,7 +742,6 @@
           [{ location: "remote", trackName: remoteTrackName, sessionId: remoteSessionId }]
         );
 
-        // SFU requiresImmediateRenegotiation ve Answer Handshake çözümü
         if (subData.sessionDescription) {
           if (subData.sessionDescription.type === "offer") {
             await listenerPC.setRemoteDescription(subData.sessionDescription);
@@ -818,9 +763,7 @@
           const reneg = await callsRenegotiate(listenerSessionId, { type: "offer", sdp: listenerPC.localDescription.sdp });
           if (reneg.sessionDescription) await listenerPC.setRemoteDescription(reneg.sessionDescription);
         }
-
       } catch (err) {
-        console.error("Dinleme hatası:", err);
         showError("Canlı yayın bağlantısı kuruluyor...");
       }
     }
@@ -838,6 +781,7 @@
       isLiveBroadcast = live;
 
       if (live && sessionId && trackName) {
+        // CANLI YAYIN AKTİF -> SOHBET AÇIK
         if (statusDot) statusDot.className = "w-2 h-2 rounded-full bg-red-500 animate-ping";
         if (stationStatusText) {
           stationStatusText.textContent = "🔴 CANLI YAYIN (ON AIR)";
@@ -855,25 +799,32 @@
         if (marqueeContent) {
           marqueeContent.textContent = "🔴 CANLI YAYIN: DJ Stüdyodan Yayında · Cloudflare Calls SFU Ultra Düşük Gecikme · VOM Radyo";
         }
+        
+        // Sohbeti Aç
         if (chatLiveBadge) {
           chatLiveBadge.textContent = "● Canlı Açık";
           chatLiveBadge.className = "text-[10px] font-mono text-emerald-400 font-bold";
         }
         if (chatClosedNotice) chatClosedNotice.style.display = "none";
-        if (chatForm) chatForm.className = "p-3 border-t border-zinc-800 bg-zinc-950 opacity-100";
+        if (chatForm) {
+          chatForm.className = "p-3 border-t border-zinc-800 bg-zinc-950 opacity-100 pointer-events-auto";
+        }
         if (senderName) senderName.disabled = false;
         if (senderMessage) {
           senderMessage.disabled = false;
           senderMessage.placeholder = "Mesajınız...";
         }
-        if (chatSendBtn) chatSendBtn.disabled = false;
+        if (chatSendBtn) {
+          chatSendBtn.disabled = false;
+          chatSendBtn.className = "w-full bg-gradient-to-r from-orange-600 to-amber-500 hover:from-orange-500 hover:to-amber-400 text-white font-semibold py-2.5 rounded-xl text-sm active:scale-95 transition-all cursor-pointer";
+        }
 
         audio.pause();
         if (!publisherPC) {
           startListening(sessionId, trackName);
         }
-
       } else {
+        // BULUT YAYIN AKTİF -> SOHBET KAPALI
         if (mobileLiveAlert) mobileLiveAlert.classList.add("hidden");
         if (statusDot) statusDot.className = "w-2 h-2 rounded-full bg-emerald-500 animate-pulse";
         if (stationStatusText) {
@@ -891,9 +842,24 @@
           marqueeBadge.textContent = "YAYIN AKIŞI";
         }
         if (t) updateTopMarquee(t.title);
+
+        // Sohbeti Kapat
         if (chatLiveBadge) {
-          chatLiveBadge.textContent = "● Aktif";
-          chatLiveBadge.className = "text-[10px] font-mono text-zinc-400";
+          chatLiveBadge.textContent = "● Sadece Canlı Yayında Açık";
+          chatLiveBadge.className = "text-[10px] font-mono text-amber-500 font-bold";
+        }
+        if (chatClosedNotice) chatClosedNotice.style.display = "block";
+        if (chatForm) {
+          chatForm.className = "p-3 border-t border-zinc-800 bg-zinc-950 opacity-40 pointer-events-none";
+        }
+        if (senderName) senderName.disabled = true;
+        if (senderMessage) {
+          senderMessage.disabled = true;
+          senderMessage.placeholder = "Sohbet kapalı...";
+        }
+        if (chatSendBtn) {
+          chatSendBtn.disabled = true;
+          chatSendBtn.className = "w-full bg-zinc-800 text-zinc-400 font-semibold py-2.5 rounded-xl text-sm cursor-not-allowed";
         }
 
         stopListening();
@@ -908,6 +874,14 @@
       const action = payload.action || payload.type;
       if (action === "SET_LIVE") {
         applyBroadcastState(payload.live, payload.sessionId, payload.trackName);
+      } else if (action === "INIT_STATE") {
+        if (payload.listenerCount !== undefined) {
+          const el = document.getElementById("live-listener-count");
+          if (el) el.textContent = payload.listenerCount;
+        }
+        if (payload.state && payload.state.isLive) {
+          applyBroadcastState(true, payload.state.sessionId, payload.state.trackName);
+        }
       } else if (action === "CLEAR_CHAT") {
         if (chatMessages) chatMessages.innerHTML = '<div class="p-4 rounded-xl bg-zinc-950/80 border border-zinc-800 text-center"><p class="font-bold text-zinc-300">Sohbet Temizlendi</p></div>';
       } else if (action === "LISTENER_COUNT" && payload.count !== undefined) {
@@ -936,7 +910,7 @@
             if (mainPlayBtn) mainPlayBtn.textContent = "⏸";
             if (audioStateIndicator) audioStateIndicator.textContent = "Canlı ●";
           } catch(err) {
-            showError("Ses izni bekleniyor. Tekrar dokunun.");
+            showError("Ses izni bekleniyor.");
           }
         }
       } else {
@@ -991,10 +965,7 @@
     };
 
     audio.onended = () => playNextTrack();
-    audio.onerror = () => {
-      console.warn("Parça çalma hatası:", audio.src);
-      setTimeout(playNextTrack, 1500);
-    };
+    audio.onerror = () => { setTimeout(playNextTrack, 1500); };
     audio.onplaying = () => {
       isPlaying = true;
       hideError();
@@ -1034,8 +1005,8 @@
       if (isLocalQueueActive && localTracks.length > 0) {
         currentLocalTrackIdx = (currentLocalTrackIdx + 1) % localTracks.length;
         playLocalTrack(currentLocalTrackIdx);
-      } else if (filteredPlaylist.length > 0) {
-        selectTrack((currentTrackIdx + 1) % filteredPlaylist.length);
+      } else if (PLAYLIST.length > 0) {
+        selectTrack((currentTrackIdx + 1) % PLAYLIST.length);
       }
     }
 
@@ -1043,85 +1014,28 @@
       if (isLocalQueueActive && localTracks.length > 0) {
         currentLocalTrackIdx = (currentLocalTrackIdx - 1 + localTracks.length) % localTracks.length;
         playLocalTrack(currentLocalTrackIdx);
-      } else if (filteredPlaylist.length > 0) {
-        selectTrack((currentTrackIdx - 1 + filteredPlaylist.length) % filteredPlaylist.length);
+      } else if (PLAYLIST.length > 0) {
+        selectTrack((currentTrackIdx - 1 + PLAYLIST.length) % PLAYLIST.length);
       }
     }
 
     function selectTrack(idx) {
-      if (!filteredPlaylist[idx]) return;
+      if (!PLAYLIST[idx]) return;
       isLocalQueueActive = false;
       currentTrackIdx = idx;
-      const t = filteredPlaylist[idx];
+      const t = PLAYLIST[idx];
 
       if (nowPlayingTitle) nowPlayingTitle.textContent = t.title;
       if (nowPlayingArtist) nowPlayingArtist.textContent = t.artist;
       updateTopMarquee(t.title);
 
       audio.pause();
-      // Doğrudan Archive.org URL'si (tarayıcılar arası %100 uyumlu ve gecikmesiz)
       audio.src = t.directUrl;
       audio.load();
-      renderTracklist();
 
       if (isPlaying) {
-        audio.play().catch(e => console.warn("Otomatik çalma engellendi:", e));
+        audio.play().catch(e => {});
       }
-    }
-
-    function renderTracklist() {
-      if (!tracklistContainer) return;
-      tracklistContainer.innerHTML = "";
-
-      if (isLocalQueueActive && localTracks.length > 0) {
-        if (playlistHeaderText) playlistHeaderText.textContent = "Canlı Yayın Şarkı Sırası (DJ)";
-        if (playlistBadgeText) playlistBadgeText.textContent = `${localTracks.length} Şarkı Sırada`;
-
-        localTracks.forEach((t, idx) => {
-          const isCurrent = idx === currentLocalTrackIdx;
-          const row = document.createElement("div");
-          row.className = `p-2.5 rounded-xl border flex items-center justify-between text-xs cursor-pointer transition-all ${
-            isCurrent ? "bg-orange-500/20 border-orange-500 text-white" : "bg-zinc-950/70 border-zinc-800 text-zinc-300 hover:bg-zinc-800/60"
-          }`;
-          row.onclick = () => playLocalTrack(idx);
-          row.innerHTML = `<div class="truncate pr-2"><span class="font-bold block truncate">${t.name}</span><span class="text-[10px] text-zinc-400">DJ Yerel Sırası (Blob URL)</span></div><span class="text-xs ${isCurrent ? 'text-orange-400 font-bold' : 'text-zinc-600'}">${isCurrent ? '▶' : ''}</span>`;
-          tracklistContainer.appendChild(row);
-        });
-      } else {
-        if (playlistHeaderText) playlistHeaderText.textContent = "VOM RADYO ONAIR";
-        if (playlistBadgeText) playlistBadgeText.textContent = `${filteredPlaylist.length} Şarkı · Arşiv Yayını`;
-
-        filteredPlaylist.forEach((t, idx) => {
-          const isCurrent = !isLocalQueueActive && idx === currentTrackIdx;
-          const row = document.createElement("div");
-          row.className = `p-2.5 rounded-xl border flex items-center justify-between text-xs cursor-pointer transition-all ${
-            isCurrent ? "bg-orange-500/15 border-orange-500/50 text-white" : "bg-zinc-950/70 border-zinc-800 text-zinc-300 hover:bg-zinc-800/60"
-          }`;
-          row.onclick = () => selectTrack(idx);
-          row.innerHTML = `
-            <div class="truncate pr-2">
-              <span class="font-bold block truncate ${isCurrent ? 'text-orange-400' : 'text-white'}">${idx + 1}. ${t.title}</span>
-              <span class="text-[11px] text-zinc-400 block truncate">${t.artist}</span>
-            </div>
-            <span class="text-xs shrink-0 ${isCurrent ? 'text-orange-400 font-bold' : 'text-zinc-600'}">${isCurrent ? '▶ Çalıyor' : '▶'}</span>
-          `;
-          tracklistContainer.appendChild(row);
-        });
-      }
-    }
-
-    if (trackSearchInput) {
-      trackSearchInput.oninput = (e) => {
-        const query = e.target.value.toLowerCase().trim();
-        if (!query) {
-          filteredPlaylist = [...PLAYLIST];
-        } else {
-          filteredPlaylist = PLAYLIST.filter(t =>
-            t.title.toLowerCase().includes(query) || t.artist.toLowerCase().includes(query)
-          );
-        }
-        renderTracklist();
-      };
     }
 
     function drawBars() {
@@ -1163,7 +1077,6 @@
           queueStatusBanner.classList.remove("hidden");
         }
         renderLocalPlaylistUI();
-        renderTracklist();
         playLocalTrack(0);
         updateAdminModalBtn();
       };
@@ -1192,7 +1105,6 @@
       unlockAppleAudio();
       const track = localTracks[idx];
       audio.pause();
-      // Yerel blob URL doğrudan verilir (aynı kaynaktır, CORS sorunu sıfırdır)
       audio.src = track.url;
       audio.load();
       audio.play().then(() => {
@@ -1201,9 +1113,8 @@
         if (nowPlayingTitle) nowPlayingTitle.textContent = track.name;
         if (nowPlayingArtist) nowPlayingArtist.textContent = isLiveBroadcast ? "Stüdyo Yayında" : "DJ Yerel Sırası";
         updateTopMarquee(track.name);
-      }).catch(err => console.warn("Yerel parça çalma hatası:", err));
+      }).catch(err => {});
       renderLocalPlaylistUI();
-      renderTracklist();
     }
 
     if (secretAdminBtn) {
@@ -1216,14 +1127,8 @@
         }
       };
     }
-    if (closePassBtn) closePassBtn.onclick = () => {
-      passwordModal.classList.add("hidden");
-      passwordModal.classList.remove("flex");
-    };
-    if (cancelPassBtn) cancelPassBtn.onclick = () => {
-      passwordModal.classList.add("hidden");
-      passwordModal.classList.remove("flex");
-    };
+    if (closePassBtn) closePassBtn.onclick = () => { passwordModal.classList.add("hidden"); passwordModal.classList.remove("flex"); };
+    if (cancelPassBtn) cancelPassBtn.onclick = () => { passwordModal.classList.add("hidden"); passwordModal.classList.remove("flex"); };
 
     if (passwordForm) {
       passwordForm.onsubmit = (e) => {
@@ -1254,14 +1159,8 @@
       }
     }
 
-    if (closeAdminModal) closeAdminModal.onclick = () => {
-      adminModal.classList.add("hidden");
-      adminModal.classList.remove("flex");
-    };
-    if (closeAdminModal2) closeAdminModal2.onclick = () => {
-      adminModal.classList.add("hidden");
-      adminModal.classList.remove("flex");
-    };
+    if (closeAdminModal) closeAdminModal.onclick = () => { adminModal.classList.add("hidden"); adminModal.classList.remove("flex"); };
+    if (closeAdminModal2) closeAdminModal2.onclick = () => { adminModal.classList.add("hidden"); adminModal.classList.remove("flex"); };
 
     if (toggleBroadcastBtn) {
       toggleBroadcastBtn.onclick = async () => {
@@ -1306,6 +1205,7 @@
     if (chatForm) {
       chatForm.onsubmit = (e) => {
         e.preventDefault();
+        if (!isLiveBroadcast) return;
         const name = senderName ? senderName.value.trim() : "";
         const text = senderMessage ? senderMessage.value.trim() : "";
         if (!name || !text) return;
@@ -1328,14 +1228,13 @@
       };
     }
 
-    // İlk şarkıyı yükle (Doğrudan buluttan)
+    // İlk şarkıyı yükle
     if (PLAYLIST.length > 0) {
       audio.src = PLAYLIST[0].directUrl;
       if (nowPlayingTitle) nowPlayingTitle.textContent = PLAYLIST[0].title;
       if (nowPlayingArtist) nowPlayingArtist.textContent = PLAYLIST[0].artist;
       updateTopMarquee(PLAYLIST[0].title);
     }
-    renderTracklist();
   </script>
 </body>
 </html>
