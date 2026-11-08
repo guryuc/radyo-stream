@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="tr">
 <head>
@@ -111,7 +110,15 @@ body.off #btn{background:radial-gradient(120% 120% at 30% 20%,rgba(255,255,255,.
 .lc svg{width:13px;height:13px;fill:none;stroke:var(--lt);stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
 .cp{text-align:center;font-family:var(--dig);font-size:14px;letter-spacing:.2em;color:rgba(195,210,230,.75);margin:22px 0 8px;white-space:nowrap}
 @media (max-width:360px){.clock .t{font-size:21px}.brand p{letter-spacing:.2em}}
-</style></head>
+
+/* Vom Sohbet linki - Dijital gösterge stili */
+.chat-link{text-align:center;margin:16px 0 6px;white-space:nowrap}
+.chat-link a{display:inline-flex;align-items:center;gap:10px;font-family:var(--dig);font-size:18px;letter-spacing:.22em;color:var(--clk);text-shadow:0 0 12px var(--glow);text-decoration:none;padding:10px 24px;border-radius:14px;border:1px solid rgba(142,200,255,.32);background:linear-gradient(160deg,rgba(255,255,255,.09) 0%,rgba(255,255,255,.02) 100%);-webkit-backdrop-filter:blur(16px);backdrop-filter:blur(16px);box-shadow:0 12px 24px -8px rgba(0,0,0,.65),inset 0 1.5px 0 rgba(255,255,255,.35),0 0 20px -4px var(--glow);transition:all .18s ease;user-select:none}
+.chat-link a:hover{color:#fff;border-color:var(--hl);box-shadow:0 14px 28px -6px rgba(0,0,0,.7),inset 0 1.5px 0 rgba(255,255,255,.6),0 0 28px 2px var(--glow);transform:translateY(-1.5px)}
+.chat-link a:active{transform:translateY(1px) scale(.98)}
+.chat-link a .dot{width:8px;height:8px;border-radius:50%;background:var(--accent);box-shadow:0 0 8px var(--accent);animation:p 1.6s ease-in-out infinite}
+body.live .chat-link a{border-color:rgba(255,59,59,.45);box-shadow:0 12px 24px -8px rgba(0,0,0,.65),inset 0 1.5px 0 rgba(255,255,255,.3),0 0 20px -4px rgba(255,70,70,.5)}
+</style><script src="/_aistudio-iframe.js?v=1f94f900"></script></head>
 <body class="off">
 <div class="wrap">
 
@@ -147,7 +154,7 @@ body.off #btn{background:radial-gradient(120% 120% at 30% 20%,rgba(255,255,255,.
   </div>
 </div>
 
-<div class="cp">COPYRIGHT VOM RADYO</div>
+<div class="chat-link"><a href="https://vom-blog.com/sohbet" target="_blank" rel="noopener"><span class="dot"></span><span>VOM SOHBET</span></a></div><div class="cp">COPYRIGHT VOM RADYO</div>
 
 </div>
 <audio id="au" playsinline></audio>
@@ -240,74 +247,78 @@ function render() {
   if (!np.title) setMq(live.isLive ? 'VOM RADYO' : 'YAYIN KAPALI');
 }
 
-/* ---------- ses ---------- */
-async function api(method, path, body) {
-  var r = await fetch(API + path, { method: method, headers: { 'Content-Type': 'application/json' }, body: body ? JSON.stringify(body) : undefined });
-  return r.json();
-}
+/* ---------- ses (Native Audio - Ekran Kararınca Kesilmez) ---------- */
+var STREAM_URL = API + '/stream.mp3';
+
 function stopAudio() {
   clearTimeout(ptimer);
-  if (pc) { try { pc.close(); } catch (e) {} }
-  pc = null; au.srcObject = null; cur = '';
-  detachAnalyser();
+  try { au.pause(); } catch (e) {}
+  au.removeAttribute('src');
+  try { au.load(); } catch (e) {}
+  cur = '';
   $('pd').className = 'pd';
-}
-function failListen(mine, text) {
-  if (pc !== mine) return;
-  setMsg(text);
-  clearTimeout(ptimer);
-  ptimer = setTimeout(function () { if (want) { stopAudio(); syncAudio(); } }, 5000);
-}
-async function listen(pubSession, trackName) {
-  var key = pubSession + '/' + trackName;
-  if (key === cur && pc) return;
-  stopAudio(); cur = key;
-  setMsg('Bağlanıyor...');
-  var mine = new RTCPeerConnection({ iceServers: [{ urls: 'stun:stun.cloudflare.com:3478' }], bundlePolicy: 'max-bundle' });
-  pc = mine;
-  try {
-    mine.ontrack = function (e) {
-      var ms = new MediaStream([e.track]);
-      au.srcObject = ms;
-      au.play().catch(function () { setMsg('Sese başlamak için ekrana dokunun'); });
-      attachAnalyser(ms);
-    };
-    mine.onconnectionstatechange = function () {
-      if (pc !== mine) return;
-      var s = mine.connectionState;
-      if (s === 'connected') { setMsg('Canlı dinliyorsunuz'); $('pd').className = 'pd on'; }
-      else if (s === 'connecting') setMsg('Bağlanıyor...');
-      else if (s === 'disconnected' || s === 'failed' || s === 'closed') {
-        setMsg('Bağlantı koptu, yeniden bağlanıyor...');
-        clearTimeout(ptimer);
-        ptimer = setTimeout(function () {
-          if (pc === mine && mine.connectionState !== 'connected' && want) { stopAudio(); syncAudio(); }
-        }, s === 'disconnected' ? 4000 : 1500);
-      }
-    };
-    var s = await api('POST', '/calls/session/new');
-    if (pc !== mine) return;
-    if (!s.sessionId) { failListen(mine, 'Oturum açılamadı, tekrar deneniyor...'); return; }
-    var r = await api('POST', '/calls/tracks/new', { sessionId: s.sessionId, tracks: [{ location: 'remote', sessionId: pubSession, trackName: trackName }] });
-    if (pc !== mine) return;
-    var tr = r.tracks && r.tracks[0];
-    if (r.errorCode || (tr && tr.errorCode) || !r.sessionDescription) {
-      failListen(mine, 'Abonelik başlamadı, tekrar deneniyor...');
-      return;
-    }
-    await mine.setRemoteDescription(r.sessionDescription);
-    var ans = await mine.createAnswer();
-    await mine.setLocalDescription(ans);
-    var rn = await api('PUT', '/calls/renegotiate', { sessionId: s.sessionId, sessionDescription: { type: 'answer', sdp: ans.sdp } });
-    if (rn.errorCode) failListen(mine, 'Bağlantı hatası, tekrar deneniyor...');
-  } catch (e) { failListen(mine, 'Hata, tekrar deneniyor...'); }
-}
-function syncAudio() {
-  if (!want) return;
-  if (live.isLive) listen(live.sessionId, live.trackName);
-  else { stopAudio(); setMsg('Şu an yayın yok'); }
+  if ('mediaSession' in navigator) navigator.mediaSession.playbackState = 'paused';
 }
 
+function listen() {
+  if (!want) return;
+  setMsg('Yayın akışı açılıyor...');
+  $('pd').className = 'pd on';
+  var target = STREAM_URL + '?t=' + Date.now();
+  if (au.src !== target) {
+    au.src = target;
+  }
+  var p = au.play();
+  if (p && p.catch) {
+    p.catch(function (err) {
+      console.warn('Oynatma gecikti:', err);
+      setMsg('Dinlemek için dokunun');
+    });
+  }
+  updateMediaSession();
+}
+
+function syncAudio() {
+  if (!want) return;
+  if (live.isLive) {
+    listen();
+  } else {
+    stopAudio();
+    setMsg('Şu an yayın yok');
+  }
+}
+
+function updateMediaSession() {
+  if (!('mediaSession' in navigator)) return;
+  try {
+    navigator.mediaSession.metadata = new MediaMetadata({
+      title: np.title || (live.isLive ? 'Vom Radyo Yayında' : 'Vom Radyo'),
+      artist: 'Vom Radyo',
+      album: 'Vom Blog Dijital Radyo'
+    });
+    navigator.mediaSession.playbackState = (want && !au.paused) ? 'playing' : 'paused';
+    navigator.mediaSession.setActionHandler('play', function () { want = true; render(); listen(); });
+    navigator.mediaSession.setActionHandler('pause', function () { want = false; render(); stopAudio(); setMsg('Durduruldu'); });
+    navigator.mediaSession.setActionHandler('stop', function () { want = false; render(); stopAudio(); setMsg('Durduruldu'); });
+  } catch (e) {}
+}
+
+au.addEventListener('playing', function () {
+  setMsg('Canlı dinliyorsunuz');
+  $('pd').className = 'pd on';
+  if ('mediaSession' in navigator) navigator.mediaSession.playbackState = 'playing';
+});
+
+au.addEventListener('waiting', function () {
+  setMsg('Arabelleğe alınıyor...');
+});
+
+au.addEventListener('error', function () {
+  if (!want) return;
+  setMsg('Yayın akışı bekleniyor...');
+  clearTimeout(ptimer);
+  ptimer = setTimeout(function () { if (want) syncAudio(); }, 3500);
+});
 /* ---------- nokta matrisi VU ---------- */
 var IOS = /iPad|iPhone|iPod/.test(navigator.userAgent) || (navigator.platform === 'MacIntel' && navigator.maxTouchPoints > 1);
 var AC = null, analyser = null, asrc = null, fdata = null, realSince = 0, realSeen = false;
@@ -437,16 +448,22 @@ function connectWs() {
 }
 
 $('btn').onclick = function () {
-  if (want) { want = false; stopAudio(); try { au.pause(); } catch (e) {} setMsg('Durduruldu'); render(); return; }
-  want = true; render();
-  try { var C = window.AudioContext || window.webkitAudioContext; if (C && !AC) AC = new C(); if (AC && AC.state === 'suspended') AC.resume(); } catch (e) {}
-  au.src = SILENT;
-  au.play().catch(function () {});
+  if (want) {
+    want = false;
+    stopAudio();
+    setMsg('Durduruldu');
+    render();
+    return;
+  }
+  want = true;
+  render();
   connectWs();
   syncAudio();
 };
 document.addEventListener('click', function () {
-  if (want && au.srcObject && au.paused) au.play().catch(function () {});
+  if (want && au.paused && au.src) {
+    au.play().catch(function () {});
+  }
 });
 window.addEventListener('online', function () { clearTimeout(rtimer); connectWs(); });
 document.addEventListener('visibilitychange', function () { if (!document.hidden) connectWs(); });
