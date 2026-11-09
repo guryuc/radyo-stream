@@ -270,6 +270,7 @@ function stopAudio() {
   playing = false;
   $('pd').className = 'pd';
   try { au.pause(); } catch (e) {}
+  if ('mediaSession' in navigator) { try { navigator.mediaSession.playbackState = 'paused'; } catch (e) {} }
   au.removeAttribute('src');
   try { au.load(); } catch (e) {}
 }
@@ -320,8 +321,13 @@ au.addEventListener('pause', function () {
   if (Date.now() < internalUntil || !want) return;
   var s = au.getAttribute('src');
   if (!s || s === SILENT) return;
-  // kilit ekranı / kulaklık düğmesinden durdurulduysa
-  want = false; stopAudio(); setMsg('Durduruldu'); render();
+  // Kullanıcı durdurması mediaSession 'pause' işleyicisinden gelir. Buraya düşen pause'u
+  // sistem (ekran kapanması, bildirim, ağ) yapmıştır: oturumu bitirme, devam etmeyi dene.
+  setTimeout(function () {
+    if (!want || !au.paused) return;
+    var p = au.play();
+    if (p && p.catch) p.catch(function () { playing = false; startAudio(); });
+  }, 300);
 });
 /* Ses akmıyorsa (takılma) yeniden bağlan */
 setInterval(function () {
@@ -440,7 +446,16 @@ document.addEventListener('click', function () {
   if (want && playing && au.paused) au.play().catch(function () {});
 });
 window.addEventListener('online', function () { clearTimeout(rtimer); connectWs(); if (want) scheduleReconnect(500); });
-document.addEventListener('visibilitychange', function () { if (!document.hidden) connectWs(); });
+/* Ekran açılınca / sayfa öne gelince: ses durmuşsa yeniden başlat */
+function wake() {
+  connectWs();
+  if (!want || !live.isLive) return;
+  var s = au.getAttribute('src');
+  if (!s || s === SILENT || au.paused || au.ended || au.error) { playing = false; startAudio(); }
+}
+document.addEventListener('visibilitychange', function () { if (!document.hidden) wake(); });
+window.addEventListener('pageshow', wake);
+window.addEventListener('focus', wake);
 
 setInterval(tickClock, 1000); tickClock();
 setInterval(tickProgress, 250);
