@@ -16,7 +16,7 @@
   --blue:#2f8cff; --blue-soft:#7fa6cf; --blue-dim:#3d5a7d;
   --hl:#4da3ff; --clk:#8ec8ff; --soft:#8190a3; --lt:#a3afbf; --glow:rgba(110,180,255,.5);
   --red:#ff3b3b; --gray:#6a7584; --gray-dim:#454e5b;
-  --accent:var(--blue); --txt:var(--blue-soft);
+  --accent:var(--gray); --txt:var(--gray);
   --dig:'SEVEN','DSEG7','Courier New',monospace;
 }
 *{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
@@ -32,21 +32,20 @@ body{
   display:flex;justify-content:center;align-items:flex-start;
   padding:max(18px,env(safe-area-inset-top)) 16px max(24px,env(safe-area-inset-bottom));
 }
-body.cloud{--accent:var(--blue);--soft:#8db4de;--lt:#b4d4f7;--glow:rgba(110,180,255,.5)}
+body.cloud{--accent:var(--blue);--soft:#8db4de;--lt:#b4d4f7}
 body.live{--accent:var(--red);--hl:#ff4545;--clk:#ff8f8f;--soft:#ff9b9b;--lt:#ffbcbc;--glow:rgba(255,70,70,.5)}
-body.off{--accent:var(--gray);--soft:#7b8796;--lt:#8f9ba8;--glow:none}
 .wrap{width:100%;max-width:430px}
 
-/* ---------- ÜST KISIM ---------- */
+/* ---------- üst: marka + saat ---------- */
 .top{display:flex;justify-content:space-between;align-items:flex-start;gap:10px;margin:4px 2px 18px}
 .brand h1{margin:0;font-size:clamp(25px,8vw,34px);font-weight:800;letter-spacing:.06em;line-height:1;white-space:nowrap;text-shadow:0 2px 0 rgba(0,0,0,.5),0 0 22px var(--glow)}
 .brand h1 .v,.brand h1 .r{color:var(--hl)}
 .brand p{margin:7px 0 0;font-size:10.5px;letter-spacing:.32em;color:var(--soft);white-space:nowrap}
 .clock{display:flex;flex-direction:column;align-items:stretch;font-family:var(--dig);white-space:nowrap}
-.clock .d{display:flex;justify-content:space-between;font-size:15px;color:var(--lt);margin-top:5px}
+.clock .d{display:flex;justify-content:space-between;gap:6px;font-size:12px;color:var(--lt);margin-top:5px}
 .clock .t{display:block;font-size:clamp(23px,7vw,30px);color:var(--clk);text-shadow:0 0 10px var(--glow);letter-spacing:0}
 
-/* ---------- CAM OYNATICI ---------- */
+/* ---------- cam player ---------- */
 .glass{
   position:relative;border-radius:30px;padding:20px 18px 18px;overflow:hidden;
   background:linear-gradient(155deg,rgba(255,255,255,.16) 0%,rgba(255,255,255,.05) 38%,rgba(255,255,255,.03) 62%,rgba(255,255,255,.09) 100%);
@@ -84,19 +83,19 @@ body.off .tk span{color:#7b8796;text-shadow:none}
 .row3{display:flex;justify-content:space-between;align-items:center;font-family:var(--dig);font-size:15px;white-space:nowrap}
 .row3 .tm{color:var(--lt);text-shadow:0 0 8px var(--glow)}
 body.off .row3 .tm{text-shadow:none}
-.row3 .md{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',system-ui,sans-serif;font-size:9px;font-weight:600;letter-spacing:.12em;color:var(--accent);opacity:.7}
-body.live .row3 .md{opacity:.9}
+.row3 .md{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',system-ui,sans-serif;font-size:9px;font-weight:600;letter-spacing:.12em;color:var(--accent);opacity:.5}
+body.live .row3 .md{opacity:.75}
 
 .spec{display:block;width:100%;height:58px;margin:16px 0 4px}
 
 .ctl{display:flex;justify-content:center;margin:12px 0 4px}
 #btn{
   width:76px;height:76px;border-radius:50%;border:1px solid rgba(255,255,255,.35);cursor:pointer;color:#fff;padding:0;
-  background:radial-gradient(120% 120% at 30% 20%,rgba(255,255,255,.55),rgba(255,255,255,.10) 45%,rgba(255,255,255,.04) 70%),linear-gradient(160deg,var(--accent),var(--accent));
+  background:radial-gradient(120% 120% at 30% 20%,rgba(255,255,255,.55),rgba(255,255,255,.10) 45%,rgba(255,255,255,.04) 70%),linear-gradient(160deg,color-mix(in srgb,var(--accent) 70%,#fff),var(--accent));
   box-shadow:0 14px 26px -6px rgba(0,0,0,.7),0 0 26px -4px var(--accent),inset 0 2px 1px rgba(255,255,255,.7),inset 0 -6px 10px rgba(0,0,0,.28);
   display:flex;align-items:center;justify-content:center;transition:transform .08s,box-shadow .08s;
 }
-body.off #btn{background:radial-gradient(120% 120% at 30% 20%,rgba(255,255,255,.35),rgba(255,255,255,.06) 50%),linear-gradient(160deg,#6d7888,#3e4755);box-shadow:0 14px 26px -6px rgba(0,0,0,.7)}
+body.off #btn{background:radial-gradient(120% 120% at 30% 20%,rgba(255,255,255,.35),rgba(255,255,255,.06) 50%),linear-gradient(160deg,#6d7888,#3e4755);box-shadow:0 14px 26px -6px rgba(0,0,0,.7),inset 0 2px 1px rgba(255,255,255,.4),inset 0 -6px 10px rgba(0,0,0,.3)}
 #btn:active{transform:translateY(3px) scale(.97)}
 #btn svg{width:30px;height:30px;fill:#fff;filter:drop-shadow(0 2px 2px rgba(0,0,0,.4))}
 #btn .ps{display:none}
@@ -109,19 +108,16 @@ body.off #btn{background:radial-gradient(120% 120% at 30% 20%,rgba(255,255,255,.
 #msg{letter-spacing:.03em;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;padding-right:10px}
 .lc{display:flex;align-items:center;gap:5px;font-family:var(--dig);font-size:14px;color:var(--lt);white-space:nowrap}
 .lc svg{width:13px;height:13px;fill:none;stroke:var(--lt);stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
-
-/* ---------- VOM SOHBET LİNKİ ---------- */
-.chat-link{text-align:center;margin:16px 0 6px;white-space:nowrap}
-.chat-link a{display:inline-flex;align-items:center;gap:10px;font-family:var(--dig);font-size:18px;letter-spacing:.22em;color:var(--clk);text-shadow:0 0 12px var(--glow);text-decoration:none;padding:10px 24px;border-radius:14px;border:1px solid rgba(142,200,255,.32);background:linear-gradient(160deg,rgba(255,255,255,.09) 0%,rgba(255,255,255,.02) 100%);-webkit-backdrop-filter:blur(16px);backdrop-filter:blur(16px);box-shadow:0 12px 24px -8px rgba(0,0,0,.65),inset 0 1.5px 0 rgba(255,255,255,.35),0 0 20px -4px var(--glow);transition:all .18s ease;user-select:none}
-.chat-link a:hover{color:#fff;border-color:var(--hl);box-shadow:0 14px 28px -6px rgba(0,0,0,.7),inset 0 1.5px 0 rgba(255,255,255,.6),0 0 28px 2px var(--glow);transform:translateY(-1.5px)}
-.chat-link a:active{transform:translateY(1px) scale(.98)}
-.chat-link a .dot{width:8px;height:8px;border-radius:50%;background:var(--accent);box-shadow:0 0 8px var(--accent)}
-body.live .chat-link a{border-color:rgba(255,59,59,.45);box-shadow:0 12px 24px -8px rgba(0,0,0,.65),0 0 20px -4px rgba(255,70,70,.5)}
-
 .cp{text-align:center;font-family:var(--dig);font-size:14px;letter-spacing:.2em;color:rgba(195,210,230,.75);margin:22px 0 8px;white-space:nowrap}
-</style>
-<script src="/_aistudio-iframe.js?v=1f94f900"></script></head>
-<body class="cloud">
+.chat{display:flex;align-items:center;justify-content:center;gap:12px;margin:16px 0 0;padding:14px 16px;border-radius:18px;text-decoration:none;font-family:var(--dig);font-size:22px;letter-spacing:.14em;color:#6f7b8b;border:1px solid rgba(255,255,255,.12);background:linear-gradient(155deg,rgba(255,255,255,.07),rgba(255,255,255,.02));pointer-events:none;opacity:.6;white-space:nowrap}
+.chat .cd{width:8px;height:8px;border-radius:50%;background:currentColor;flex:none}
+.chat.on{pointer-events:auto;opacity:1;color:#ffd27a;border-color:rgba(255,205,100,.6);text-shadow:0 0 12px rgba(255,185,70,.65);background:linear-gradient(155deg,rgba(255,200,90,.20),rgba(255,160,40,.06));box-shadow:0 10px 24px -10px rgba(255,170,50,.6),inset 0 1px 0 rgba(255,255,255,.35)}
+.chat.on .cd{box-shadow:0 0 10px currentColor,0 0 20px currentColor;animation:blink 1.2s ease-in-out infinite}
+.chat.on:active{transform:translateY(2px)}
+.chint{text-align:center;font-size:10px;letter-spacing:.2em;color:var(--lt);opacity:.7;margin-top:8px}
+@media (max-width:360px){.clock .t{font-size:21px}.brand p{letter-spacing:.2em}}
+</style></head>
+<body class="off">
 <div class="wrap">
 
 <div class="top">
@@ -137,9 +133,9 @@ body.live .chat-link a{border-color:rgba(255,59,59,.45);box-shadow:0 12px 24px -
 
   <div class="banner"><span class="dot"></span><span>VOM RADYO CANLI YAYINDA</span><span class="oa">ON AIR</span></div>
 
-  <div class="mq" id="mq"><div class="tk" id="tk"><span>VOM RADYO BULUT YAYINI</span></div></div>
+  <div class="mq" id="mq"><div class="tk" id="tk"><span>YAYIN KAPALI</span></div></div>
   <div class="prog"><i id="bar"></i></div>
-  <div class="row3"><span class="tm" id="el">00:00</span><span class="md" id="md">BULUT YAYIN MODU</span><span class="tm" id="tt">04:00</span></div>
+  <div class="row3"><span class="tm" id="el">00:00</span><span class="md" id="md">YAYIN KAPALI</span><span class="tm" id="tt">00:00</span></div>
 
   <canvas class="spec" id="spec"></canvas>
 
@@ -151,12 +147,13 @@ body.live .chat-link a{border-color:rgba(255,59,59,.45);box-shadow:0 12px 24px -
   </div>
 
   <div class="foot">
-    <span class="mw"><i class="pd" id="pd"></i><span id="msg">Bulut yayını hazır, dinlemek için ▶ basın</span></span>
-    <span class="lc" title="Dinleyici"><svg viewBox="0 0 24 24"><path d="M4 15v-3a8 8 0 0 1 16 0v3"/><rect x="3" y="14" width="4" height="6" rx="1.5"/><rect x="17" y="14" width="4" height="6" rx="1.5"/></svg><b id="cnt" style="font-weight:400">1</b></span>
+    <span class="mw"><i class="pd" id="pd"></i><span id="msg">Hazır</span></span>
+    <span class="lc" title="Dinleyici"><svg viewBox="0 0 24 24"><path d="M4 15v-3a8 8 0 0 1 16 0v3"/><rect x="3" y="14" width="4" height="6" rx="1.5"/><rect x="17" y="14" width="4" height="6" rx="1.5"/></svg><b id="cnt" style="font-weight:400">-</b></span>
   </div>
+  <a id="chat" class="chat" target="_blank" rel="noopener" aria-disabled="true"><i class="cd"></i><span>SOHBETE KATIL</span></a>
+  <div class="chint" id="chint">CANLI YAYINDA AÇILIR</div>
 </div>
 
-<div class="chat-link"><a href="https://vom-blog.com/sohbet" target="_blank" rel="noopener"><span class="dot"></span><span>VOM SOHBET</span></a></div>
 <div class="cp">COPYRIGHT VOM RADYO</div>
 
 </div>
@@ -166,29 +163,29 @@ body.live .chat-link a{border-color:rgba(255,59,59,.45);box-shadow:0 12px 24px -
 var HOST = 'radyo-yayin.guryuc.workers.dev';
 var API = 'https://' + HOST;
 var WSURL = 'wss://' + HOST + '/ws';
-var STREAM_URL = API + '/stream.mp3';
+var CHAT_URL = 'https://vom-blog.com/sohbet';
 
-var ws = null, want = false;
-var live = { isLive: true, mode: 'cloud' };
-var np = { title: 'VOM RADYO BULUT YAYINI', duration: 240, start: Date.now() };
-var retry = 0, rtimer = null;
-
+var SILENT = 'data:audio/wav;base64,UklGRiQAAABXQVZFZm10IBAAAAABAAEAQB8AAEAfAAABAAgAZGF0YQAAAAA=';
+var ws = null, want = false, playing = false, internalUntil = 0;
+var live = { isLive: false, mode: 'cloud' };
+var np = { title: '', duration: 0, start: 0 };
+var retry = 0, rtimer = null, ctimer = null, lastT = -1, stall = 0;
 function $(id) { return document.getElementById(id); }
 var au = $('au');
-
 function setMsg(t) { $('msg').textContent = t; }
 function pad2(n) { n = Math.floor(n); return (n < 10 ? '0' : '') + n; }
 function fmtT(s) { s = Math.max(0, Math.floor(s)); return pad2(s / 60) + ':' + pad2(s % 60); }
 
+/* Dijital ekran: yazı tipinde olmayan Türkçe harfleri sadeleştir */
 function dig(t) {
   var m = { 'ğ':'g','Ğ':'G','ş':'s','Ş':'S','ı':'i','İ':'I','ö':'o','Ö':'O','ü':'u','Ü':'U','ç':'c','Ç':'C' };
-  return String(t).replace(/[ğĞşŞıİöÖüÜçÇ]/g, function (c) { return m[c] || c; }).replace(/['`´’]/g, ' ').replace(/[–—]/g, '-').toUpperCase();
+  return String(t).replace(/[ğĞşŞıİöÖüÜçÇ]/g, function (c) { return m[c]; }).replace(/[’'`´]/g, ' ').replace(/[–—]/g, '-').toUpperCase();
 }
 
+/* Saat + kısa tarih (Türkiye saati) */
 var tf = null;
 try { tf = new Intl.DateTimeFormat('en-GB', { timeZone: 'Europe/Istanbul', day: '2-digit', month: '2-digit', year: 'numeric', hour: '2-digit', minute: '2-digit', second: '2-digit', hourCycle: 'h23' }); } catch (e) {}
 var MONTHS = ['OCAK','SUBAT','MART','NISAN','MAYIS','HAZIRAN','TEMMUZ','AGUSTOS','EYLUL','EKIM','KASIM','ARALIK'];
-
 function tickClock() {
   var d = new Date();
   var o = { day: d.getDate(), month: d.getMonth() + 1, year: d.getFullYear(), hour: d.getHours(), minute: d.getMinutes(), second: d.getSeconds() };
@@ -202,7 +199,7 @@ function tickClock() {
   $('dt').innerHTML = '<span>' + o.day + '</span><span>' + MONTHS[o.month - 1] + '</span><span>' + o.year + '</span>';
 }
 
-var mqText = 'VOM RADYO BULUT YAYINI';
+var mqText = 'YAYIN KAPALI';
 function layoutMq() {
   var mq = $('mq'), tk = $('tk');
   tk.textContent = '';
@@ -222,132 +219,130 @@ function setMq(text) {
 if (document.fonts && document.fonts.ready) document.fonts.ready.then(layoutMq);
 window.addEventListener('resize', layoutMq);
 
-function setNow(title, duration, elapsed) {
-  if (!title || title === 'YAYIN KAPALI' || title === 'SU AN YAYIN YOK') {
-    title = (live.mode === 'live' ? 'VOM RADYO CANLI YAYINDA' : 'VOM RADYO BULUT YAYINI');
-  }
-  np.title = title;
-  np.duration = Number(duration) || (live.mode === 'live' ? 0 : 240);
-  np.start = Date.now() - (Number(elapsed) || 0) * 1000;
-  setMq(np.title);
-  updateMediaSession();
-  tickProgress();
+function updateSession() {
+  if (!('mediaSession' in navigator) || typeof MediaMetadata === 'undefined') return;
+  try {
+    navigator.mediaSession.metadata = new MediaMetadata({
+      title: np.title || 'VOM Radyo',
+      artist: 'VOM Radyo',
+      album: live.mode === 'live' ? 'Canlı Yayın' : 'Bulut Yayını'
+    });
+  } catch (e) {}
 }
 
+function setNow(title, duration, elapsed) {
+  np.title = title || '';
+  np.duration = Number(duration) || 0;
+  np.start = Date.now() - (Number(elapsed) || 0) * 1000;
+  if (np.title) setMq(np.title);
+  else setMq(live.isLive ? 'VOM RADYO' : 'YAYIN KAPALI');
+  tickProgress();
+  updateSession();
+}
 function tickProgress() {
-  if (live.mode === 'live') {
-    var elLive = Math.max(0, (Date.now() - np.start) / 1000);
-    $('el').textContent = fmtT(elLive);
-    $('tt').textContent = 'CANLI';
-    $('bar').style.width = '100%';
-  } else {
-    var dur = np.duration > 0 ? np.duration : 240;
-    var el = Math.min(dur, Math.max(0, (Date.now() - np.start) / 1000));
+  if (np.title && np.duration > 0) {
+    var el = Math.min(np.duration, Math.max(0, (Date.now() - np.start) / 1000));
     $('el').textContent = fmtT(el);
-    $('tt').textContent = fmtT(dur);
-    $('bar').style.width = (el / dur * 100).toFixed(1) + '%';
+    $('tt').textContent = fmtT(np.duration);
+    $('bar').style.width = (el / np.duration * 100).toFixed(1) + '%';
+  } else {
+    $('el').textContent = '00:00';
+    $('tt').textContent = '00:00';
+    $('bar').style.width = '0';
   }
 }
 
 function render() {
-  var mode = (live.mode === 'live') ? 'live' : 'cloud';
+  var mode = live.isLive ? (live.mode === 'live' ? 'live' : 'cloud') : 'off';
   document.body.className = mode;
-  $('md').textContent = mode === 'live' ? 'CANLI YAYIN MODU' : 'BULUT YAYIN MODU';
+  $('md').textContent = mode === 'live' ? 'CANLI YAYIN MODU' : (mode === 'cloud' ? 'BULUT YAYIN MODU' : 'YAYIN KAPALI');
   $('btn').className = want ? 'on' : '';
-  if (!np.title || np.title === 'YAYIN KAPALI' || np.title === 'SU AN YAYIN YOK') {
-    setMq(mode === 'live' ? 'VOM RADYO CANLI YAYINDA' : 'VOM RADYO BULUT YAYINI');
-  }
+  var ch = $('chat');
+  if (mode === 'live') { ch.className = 'chat on'; ch.setAttribute('href', CHAT_URL); ch.removeAttribute('aria-disabled'); $('chint').textContent = 'CANLI YAYIN SOHBETİ AÇIK'; }
+  else { ch.className = 'chat'; ch.removeAttribute('href'); ch.setAttribute('aria-disabled', 'true'); $('chint').textContent = 'CANLI YAYINDA AÇILIR'; }
+  if (!np.title) setMq(live.isLive ? 'VOM RADYO' : 'YAYIN KAPALI');
 }
 
-/* ---------- SES AKIŞI (Yerel Audio - Ekran Kararınca Kesilmez) ---------- */
+/* ---------- ses: normal HTML5 <audio> (ekran kapanınca da çalar) ---------- */
 function stopAudio() {
+  clearTimeout(ctimer);
+  internalUntil = Date.now() + 800;
+  playing = false;
+  $('pd').className = 'pd';
   try { au.pause(); } catch (e) {}
   au.removeAttribute('src');
   try { au.load(); } catch (e) {}
-  $('pd').className = 'pd';
-  if ('mediaSession' in navigator) navigator.mediaSession.playbackState = 'paused';
 }
-
-function listen() {
+function scheduleReconnect(ms) {
+  clearTimeout(ctimer);
+  ctimer = setTimeout(function () { if (want) startAudio(); }, ms || 2500);
+}
+async function startAudio() {
   if (!want) return;
-  setMsg(live.mode === 'live' ? 'Canlı yayın akışı açılıyor...' : 'Bulut yayını açılıyor...');
-  $('pd').className = 'pd on';
-  au.src = STREAM_URL + '?t=' + Date.now();
-  var p = au.play();
-  if (p && p.catch) {
-    p.catch(function (err) {
-      console.warn('Oynatma gecikti:', err);
-      setMsg('Dinlemek için ▶ düğmesine dokunun');
-    });
-  }
-  updateMediaSession();
+  if (!live.isLive) { stopAudio(); setMsg('Şu an yayın yok'); return; }
+  clearTimeout(ctimer);
+  setMsg('Bağlanıyor...');
+  try {
+    var r = await fetch(API + '/token');
+    var j = await r.json();
+    if (!j.t) throw new Error('token');
+    if (!want) return;
+    au.src = API + '/stream.mp3?t=' + encodeURIComponent(j.t);
+    var p = au.play();
+    if (p && p.catch) p.catch(function () { setMsg('Sese başlamak için ekrana dokunun'); });
+  } catch (e) { setMsg('Bağlanılamadı, tekrar deneniyor...'); scheduleReconnect(3000); }
 }
-
 function syncAudio() {
   if (!want) return;
-  listen();
+  if (!live.isLive) { stopAudio(); setMsg('Şu an yayın yok'); return; }
+  var s = au.getAttribute('src');
+  if (!s || s === SILENT) startAudio();
 }
-
-function updateMediaSession() {
-  if (!('mediaSession' in navigator)) return;
-  try {
-    navigator.mediaSession.metadata = new MediaMetadata({
-      title: np.title || (live.mode === 'live' ? 'Vom Radyo Canlı Yayında' : 'Vom Radyo Bulut Yayını'),
-      artist: 'Vom Radyo',
-      album: 'Vom-Vomitorium Kültür Sanat',
-      artwork: [
-        { src: 'https://vom-blog.com/radyo-icon.png', sizes: '512x512', type: 'image/png' }
-      ]
-    });
-    navigator.mediaSession.playbackState = (want && !au.paused) ? 'playing' : 'paused';
-    navigator.mediaSession.setActionHandler('play', function () { want = true; render(); listen(); });
-    navigator.mediaSession.setActionHandler('pause', function () { want = false; render(); stopAudio(); setMsg('Durduruldu'); });
-    navigator.mediaSession.setActionHandler('stop', function () { want = false; render(); stopAudio(); setMsg('Durduruldu'); });
-  } catch (e) {}
-}
-
 au.addEventListener('playing', function () {
-  setMsg(live.mode === 'live' ? 'Canlı yayını dinliyorsunuz' : 'Bulut yayını dinleniyor');
+  var s = au.getAttribute('src') || '';
+  if (s === SILENT) return;
+  playing = true;
+  setMsg('Canlı dinliyorsunuz');
   $('pd').className = 'pd on';
-  if ('mediaSession' in navigator) navigator.mediaSession.playbackState = 'playing';
+  if ('mediaSession' in navigator) { try { navigator.mediaSession.playbackState = 'playing'; } catch (e) {} }
 });
-
-au.addEventListener('waiting', function () {
-  setMsg('Arabelleğe alınıyor...');
-});
-
-au.addEventListener('ended', function () {
-  // Şarkı bitince sıradaki parçaya otomatik geç
-  if (want && live.mode === 'cloud') {
-    setTimeout(listen, 500);
-  }
-});
-
+au.addEventListener('waiting', function () { if (want && playing) setMsg('Bağlantı zayıf, bekleniyor...'); });
+au.addEventListener('stalled', function () { if (want && playing) setMsg('Bağlantı zayıf, bekleniyor...'); });
+au.addEventListener('ended', function () { if (want && au.getAttribute('src') && au.getAttribute('src') !== SILENT) { playing = false; setMsg('Bağlantı koptu, yeniden bağlanıyor...'); scheduleReconnect(1500); } });
 au.addEventListener('error', function () {
-  if (!want) return;
-  setMsg('Yayın akışı bekleniyor...');
-  setTimeout(function () { if (want) listen(); }, 3500);
+  var s = au.getAttribute('src');
+  if (!want || !s || s === SILENT) return;
+  playing = false; $('pd').className = 'pd';
+  setMsg('Bağlantı koptu, yeniden bağlanıyor...');
+  scheduleReconnect(2500);
 });
+au.addEventListener('pause', function () {
+  if (Date.now() < internalUntil || !want) return;
+  var s = au.getAttribute('src');
+  if (!s || s === SILENT) return;
+  // kilit ekranı / kulaklık düğmesinden durdurulduysa
+  want = false; stopAudio(); setMsg('Durduruldu'); render();
+});
+/* Ses akmıyorsa (takılma) yeniden bağlan */
+setInterval(function () {
+  if (!want || !live.isLive || !playing) { stall = 0; lastT = -1; return; }
+  if (au.currentTime === lastT) stall++; else stall = 0;
+  lastT = au.currentTime;
+  if (stall >= 3) { stall = 0; playing = false; setMsg('Bağlantı yenileniyor...'); startAudio(); }
+}, 4000);
 
-/* ---------- NOKTA MATRİSİ VU SPEKTRUM ---------- */
+/* ---------- nokta matrisi VU (süs animasyonu) ---------- */
 var cv = $('spec'), cx = cv.getContext('2d');
 var NB = 26, NR = 7, lv = new Array(NB).fill(0), pk = new Array(NB).fill(0);
-
 function sizeCanvas() {
   var r = cv.getBoundingClientRect(), dpr = Math.min(window.devicePixelRatio || 1, 3);
   cv.width = Math.max(10, Math.round(r.width * dpr));
   cv.height = Math.max(10, Math.round(r.height * dpr));
 }
-
 function accentColor() {
   var m = document.body.className;
   return m === 'live' ? [255, 59, 59] : (m === 'cloud' ? [47, 140, 255] : [106, 117, 132]);
 }
-
-function playingNow() {
-  return want && !au.paused;
-}
-
 function fakeLevel(i, t) {
   var x = i / NB;
   var beat = 0.55 + 0.45 * Math.sin(t * 4.1 + Math.sin(t * 0.7) * 2);
@@ -355,22 +350,19 @@ function fakeLevel(i, t) {
   v *= (1 - x * 0.45) * (0.6 + 0.5 * beat);
   return Math.max(0.06, Math.min(1, v));
 }
-
 function drawSpec() {
   requestAnimationFrame(drawSpec);
   var W = cv.width, H = cv.height;
   if (!W) return;
   cx.clearRect(0, 0, W, H);
-  var on = playingNow(), t = Date.now() / 1000;
+  var on = playing && !au.paused, t = Date.now() / 1000;
   var col = accentColor();
   var cw = W / NB, ch = H / NR, r = Math.min(cw, ch) * 0.28;
-
   for (var i = 0; i < NB; i++) {
     var s = on ? fakeLevel(i, t) : 0;
     lv[i] += (s - lv[i]) * (s > lv[i] ? 0.5 : 0.1);
     pk[i] = Math.max(pk[i] - 0.014, lv[i]);
     var lit = Math.round(lv[i] * NR), pkRow = Math.min(NR - 1, Math.round(pk[i] * NR));
-
     for (var j = 0; j < NR; j++) {
       var cxp = i * cw + cw / 2, cyp = H - (j * ch + ch / 2);
       var isLit = j < lit, isPk = on && j === pkRow && pkRow >= lit && pk[i] > 0.1;
@@ -391,7 +383,7 @@ function drawSpec() {
 window.addEventListener('resize', sizeCanvas);
 sizeCanvas(); drawSpec();
 
-/* ---------- WEBSOCKET BAĞLANTISI (CANLI & BULUT SENKRONİZASYONU) ---------- */
+/* ---------- şarkı adı / canlı durumu / dinleyici sayısı (WebSocket) ---------- */
 function connectWs() {
   if (ws && ws.readyState <= 1) return;
   var w = new WebSocket(WSURL);
@@ -400,28 +392,23 @@ function connectWs() {
   w.onmessage = function (e) {
     var d; try { d = JSON.parse(e.data); } catch (x) { return; }
     if (d.action === 'INIT_STATE') {
-      $('cnt').textContent = d.listenerCount || 1;
+      $('cnt').textContent = d.listenerCount;
       var st = d.state || {};
-      var isLiveStream = (st.mode === 'live') || (st.isLive === true && st.mode !== 'cloud');
-      live = { isLive: true, mode: isLiveStream ? 'live' : 'cloud' };
-      if (d.now && d.now.title && d.now.title !== 'YAYIN KAPALI') setNow(d.now.title, d.now.duration, d.now.elapsed);
-      else setNow(isLiveStream ? 'VOM RADYO CANLI YAYINDA' : 'VOM RADYO BULUT YAYINI', 240, 0);
+      live = { isLive: !!st.isLive, mode: st.mode || 'cloud' };
+      if (d.now) setNow(d.now.title, d.now.duration, d.now.elapsed); else setNow('', 0, 0);
       render();
-      if (!want) setMsg('Bulut yayını hazır, dinlemek için ▶ basın');
+      if (!want) setMsg(live.isLive ? 'Yayın var, ▶ düğmesine basın' : 'Şu an yayın yok');
+      syncAudio();
     } else if (d.action === 'LISTENER_COUNT') {
-      $('cnt').textContent = d.count || 1;
+      $('cnt').textContent = d.count;
     } else if (d.action === 'NOW_PLAYING') {
-      if (d.title && d.title !== 'YAYIN KAPALI') setNow(d.title, d.duration, d.elapsed);
+      setNow(d.title, d.duration, d.elapsed);
     } else if (d.action === 'SET_LIVE') {
-      var prevMode = live.mode;
-      var isLiveStream = (d.mode === 'live') || (d.live === true && d.mode !== 'cloud');
-      live = { isLive: true, mode: isLiveStream ? 'live' : 'cloud' };
-      if (d.now && d.now.title && d.now.title !== 'YAYIN KAPALI') setNow(d.now.title, d.now.duration, d.now.elapsed);
-      else setNow(isLiveStream ? 'VOM RADYO CANLI YAYINDA' : 'VOM RADYO BULUT YAYINI', 240, 0);
+      live = { isLive: !!d.live, mode: d.mode || 'cloud' };
+      if (!live.isLive) setNow('', 0, 0);
       render();
-      if (want && prevMode !== live.mode) {
-        listen();
-      }
+      updateSession();
+      syncAudio();
     }
   };
   w.onclose = function () {
@@ -434,25 +421,25 @@ function connectWs() {
 }
 
 $('btn').onclick = function () {
-  if (want) {
-    want = false;
-    stopAudio();
-    setMsg('Durduruldu');
-    render();
-    return;
-  }
-  want = true;
-  render();
+  if (want) { want = false; stopAudio(); setMsg('Durduruldu'); render(); return; }
+  want = true; render();
+  /* iOS: tarayıcı ses çalmaya yalnızca dokunma anında izin verir, bu yüzden önce sessiz bir ses başlatılır */
+  au.src = SILENT;
+  var p = au.play(); if (p && p.catch) p.catch(function () {});
   connectWs();
-  listen();
+  startAudio();
 };
-
+if ('mediaSession' in navigator) {
+  try {
+    navigator.mediaSession.setActionHandler('play', function () { if (!want) $('btn').onclick(); });
+    navigator.mediaSession.setActionHandler('pause', function () { if (want) $('btn').onclick(); });
+    navigator.mediaSession.setActionHandler('stop', function () { if (want) $('btn').onclick(); });
+  } catch (e) {}
+}
 document.addEventListener('click', function () {
-  if (want && au.paused && au.src) {
-    au.play().catch(function () {});
-  }
+  if (want && playing && au.paused) au.play().catch(function () {});
 });
-window.addEventListener('online', function () { clearTimeout(rtimer); connectWs(); });
+window.addEventListener('online', function () { clearTimeout(rtimer); connectWs(); if (want) scheduleReconnect(500); });
 document.addEventListener('visibilitychange', function () { if (!document.hidden) connectWs(); });
 
 setInterval(tickClock, 1000); tickClock();
@@ -460,5 +447,4 @@ setInterval(tickProgress, 250);
 render();
 connectWs();
 </script>
-</body>
-</html>
+</body></html>
